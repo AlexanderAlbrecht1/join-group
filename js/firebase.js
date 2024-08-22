@@ -5,24 +5,33 @@ function getPath(table) {
     let path=url+project+table+".json";
     return path;
 }
-
-/* 
-    Same as Above
+/**
+ * fetch action
+ * 
+ * @param {string} table   - name of table or key
+ * @param {object} options - get / put / UFT-8
+ * @returns {object} - answer with content of file
 */
-function getPathInOneLine() {
-    let url="https://myproject-749a6-default-rtdb.europe-west1.firebasedatabase.app/join-group/user.json";
-    return url;
+async function fetchUrl(table,options) {
+    let url=getPath(table);
+    if (options != null) {
+        response = await fetch(url,options);
+    } else  {
+        response = await fetch(url);
+    }
+    return response;
 }
 
+/**
+ * fetch an url, translate to a json and give it back
+ * @param {string} table   - name of table or key
+ * @param {object} options - get / put / UFT-8
+ * @returns - json array, false, if fails 
+ */
 async function getResponse(table,options) {
-    let url=getPath(table);
     try {
-        if (options != null) {
-            response = await fetch(url,options);
-        } else  {
-            response = await fetch(url);
-        }
-        if (response.ok) { // 404 = Seite nicht vorhanden, OK = 2XX = OK
+        response=await fetchUrl(table,options);
+        if (response.ok) { // 404 = page does not exist, 2XX = OK 
             return response.json();
         } else {
             throw new Error(`Response status: ${response.status}`);
@@ -31,10 +40,13 @@ async function getResponse(table,options) {
         console.error(error.message);
         return false;
     }
-    return false;
-
 }
 
+/**
+ * Userinterface for fetching Data
+ * 
+ * @returns {object} - JSON arrary of data
+ */
 async function loadData() {
     let options={
         method: "GET",
@@ -45,7 +57,13 @@ async function loadData() {
     return await getResponse(options);
 }
  
-
+/**
+ * Userinterface for saving Data overwrite
+ * 
+ * @param {string} table - table or key
+ * @param {object} data  - json array
+ * @returns {object} - false if failes, true if succes
+ */
 async function saveData(table,data = {}) {
     let options=  {
         method: "PUT",

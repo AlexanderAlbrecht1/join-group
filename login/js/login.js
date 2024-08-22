@@ -37,8 +37,13 @@ async function isLoginCorrect(user,password) {
 }
 
 
+
 function rememberMe() {
     if (document.getElementById("remember-me").checked) {
+        let userRow=getSavedUserFromLocalStorage();
+        
+
+
         console.log("has checked");
     };
 }

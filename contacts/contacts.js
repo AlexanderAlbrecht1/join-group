@@ -1,31 +1,33 @@
 let contacts = [
-    { name: "Zoe", lastname: "Zimmerman", email: "zoe.zimmerman@example.com" },
-    { name: "Anna", lastname: "Anderson", email: "anna.anderson@example.com" },
-    { name: "Ben", lastname: "Baker", email: "ben.baker@example.com" },
-    { name: "Clara", lastname: "Carter", email: "clara.carter@example.com" },
-    { name: "David", lastname: "Dawson", email: "david.dawson@example.com" },
-    { name: "Emma", lastname: "Evans", email: "emma.evans@example.com" },
-    { name: "Felix", lastname: "Foster", email: "felix.foster@example.com" },
-    { name: "Greta", lastname: "Gibson", email: "greta.gibson@example.com" },
-    { name: "Hans", lastname: "Hansen", email: "hans.hansen@example.com" },
-    { name: "Iris", lastname: "Irving", email: "iris.irving@example.com" },
-    { name: "Julia", lastname: "Jones", email: "julia.jones@example.com" },
-    { name: "Karl", lastname: "King", email: "karl.king@example.com" },
-    { name: "Lena", lastname: "Lewis", email: "lena.lewis@example.com" },
-    { name: "Max", lastname: "Miller", email: "max.miller@example.com" },
-    { name: "Nina", lastname: "Nelson", email: "nina.nelson@example.com" },
-    { name: "Oliver", lastname: "Owen", email: "oliver.owen@example.com" },
-    { name: "Paula", lastname: "Parker", email: "paula.parker@example.com" },
-    { name: "Yara", lastname: "Young", email: "yara.young@example.com" },
-    { name: "Quinn", lastname: "Quincy", email: "quinn.quincy@example.com" },
-    { name: "Rita", lastname: "Roberts", email: "rita.roberts@example.com" },
-    { name: "Sam", lastname: "Smith", email: "sam.smith@example.com" },
-    { name: "Tina", lastname: "Thompson", email: "tina.thompson@example.com" },
-    { name: "Uwe", lastname: "Ulrich", email: "uwe.ulrich@example.com" },
-    { name: "Vera", lastname: "Vaughn", email: "vera.vaughn@example.com" },
-    { name: "Walter", lastname: "Wilson", email: "walter.wilson@example.com" },
-    { name: "Xenia", lastname: "Xander", email: "xenia.xander@example.com" },
+    { name: "Zoe", lastname: "Zimmerman", email: "zoe.zimmerman@example.com", phone: "+49 143 679 865 34" },
+    { name: "Anna", lastname: "Anderson", email: "anna.anderson@example.com", phone: "+49 143 679 865 34"},
+    { name: "Ben", lastname: "Baker", email: "ben.baker@example.com", phone: "+49 143 679 865 34" },
+    { name: "Clara", lastname: "Carter", email: "clara.carter@example.com", phone: "+49 143 679 865 34" },
+    { name: "David", lastname: "Dawson", email: "david.dawson@example.com", phone: "+49 143 679 865 34" },
+    { name: "Emma", lastname: "Evans", email: "emma.evans@example.com", phone: "+49 143 679 865 34" },
+    { name: "Felix", lastname: "Foster", email: "felix.foster@example.com", phone: "+49 143 679 865 34" },
+    { name: "Greta", lastname: "Gibson", email: "greta.gibson@example.com", phone: "+49 143 679 865 34" },
+    { name: "Hans", lastname: "Hansen", email: "hans.hansen@example.com", phone: "+49 143 679 865 34" },
+    { name: "Iris", lastname: "Irving", email: "iris.irving@example.com", phone: "+49 143 679 865 34" },
+    { name: "Julia", lastname: "Jones", email: "julia.jones@example.com", phone: "+49 143 679 865 34" },
+    { name: "Karl", lastname: "King", email: "karl.king@example.com", phone: "+49 143 679 865 34" },
+    { name: "Lena", lastname: "Lewis", email: "lena.lewis@example.com", phone: "+49 143 679 865 34" },
+    { name: "Max", lastname: "Miller", email: "max.miller@example.com", phone: "+49 143 679 865 34" },
+    { name: "Nina", lastname: "Nelson", email: "nina.nelson@example.com", phone: "+49 143 679 865 34" },
+    { name: "Oliver", lastname: "Owen", email: "oliver.owen@example.com", phone: "+49 143 679 865 34" },
+    { name: "Paula", lastname: "Parker", email: "paula.parker@example.com", phone: "+49 143 679 865 34" },
+    { name: "Yara", lastname: "Young", email: "yara.young@example.com", phone: "+49 143 679 865 34" },
+    { name: "Quinn", lastname: "Quincy", email: "quinn.quincy@example.com", phone: "+49 143 679 865 34" },
+    { name: "Rita", lastname: "Roberts", email: "rita.roberts@example.com", phone: "+49 143 679 865 34" },
+    { name: "Sam", lastname: "Smith", email: "sam.smith@example.com", phone: "+49 143 679 865 34" },
+    { name: "Tina", lastname: "Thompson", email: "tina.thompson@example.com", phone: "+49 143 679 865 34" },
+    { name: "Uwe", lastname: "Ulrich", email: "uwe.ulrich@example.com", phone: "+49 143 679 865 34" },
+    { name: "Vera", lastname: "Vaughn", email: "vera.vaughn@example.com", phone: "+49 143 679 865 34" },
+    { name: "Walter", lastname: "Wilson", email: "walter.wilson@example.com", phone: "+49 143 679 865 34" },
+    { name: "Xenia", lastname: "Xander", email: "xenia.xander@example.com", phone: "+49 143 679 865 34" },
   ];
+
+  let splittedName = [];
 
   function loadContacts() {
     document.getElementById('showContacts').innerHTML = '';
@@ -60,7 +62,30 @@ let contacts = [
         if (x > y) {return 1;}
         return 0;
       });
-    console.log(contacts);
-
   }
+
+ function addToContact() {
+    let newName = document.getElementById('name').value;
+    let newEmail = document.getElementById('email').value;
+    let newPhone = document.getElementById('phone').value;
+    splitName(newName);
+    let newFirstname = splittedName[0];
+    let newLastname = splittedName[1];
+    let newContact = {
+        name: newFirstname,
+        lastname: newLastname,
+        email: newEmail,
+        phone: newPhone
+    };
+    contacts.push(newContact);
+    // load contacts nur zur testzwecken um push zu überprüfen
+    loadContacts();
+ }
+
+ function splitName(name) {
+    let fullname = name;
+    splittedName = fullname.split(" ")
+    
+    
+ }
   

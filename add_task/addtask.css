@@ -1,0 +1,69 @@
+.multiselect {
+  width: 250px;
+  position: relative;
+}
+
+.selectBox {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.selectBox select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  appearance: none;
+  font-size: 1em;
+  cursor: pointer;
+  color: #333;
+}
+
+.selectBox::after {
+  content: "\25BC"; /* Downward arrow */
+  font-size: 0.9em;
+  color: #777;
+  position: absolute;
+  right: 10px;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #fff;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+#checkboxes label {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  font-size: 0.9em;
+  color: #333;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+#checkboxes label:hover {
+  background-color: #f0f0f0;
+}
+
+#checkboxes input {
+  margin-right: 10px;
+  transform: scale(1.2);
+  cursor: pointer;
+}

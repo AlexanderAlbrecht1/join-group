@@ -9,8 +9,10 @@ function addNewTask() {
     let selectedPrio = document.querySelector('input[name="prio"]:checked');
     let category = document.getElementById('category');
 
-    tasks.push({title: title.value, description: description.value, assignedTo: assignedTo, dueDate: dueDate.value, prio: selectedPrio.value, category: category.value});
-
+    tasks.push({id: tasks.length +1, title: title.value, description: description.value, assignedTo: assignedTo, dueDate: dueDate.value, prio: selectedPrio.value, category: category.value});
+    saveData('taskstorage', tasks);
+    clearTaskInputs();
+    
 }
 
 
@@ -22,3 +24,17 @@ function clearTaskInputs() {
     document.querySelectorAll('input[name="prio"]').forEach(radio => radio.checked = false);
     document.getElementById("category").selectedIndex = 0;
 }
+
+
+let expanded = false;
+
+    function showCheckboxes() {
+        let checkboxes = document.getElementById("checkboxes");
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
+    }

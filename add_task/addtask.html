@@ -7,6 +7,7 @@
     <title>Add Task</title>
     <link rel="stylesheet" href="addtask.css">
     <script src="js/addtask.js"></script>
+    <script src="/js/firebase.js"></script>
 </head>
 
 <body>
@@ -18,18 +19,22 @@
         <label for="description">Description</label>
         <textarea id="description"></textarea>
 
-        <fieldset>
-            <legend>Assigned to</legend>
-            <label>
-                <input type="checkbox" name="assign" value="Name1">Name1
-            </label>
-            <label>
-                <input type="checkbox" name="assign" value="Name2">Name2
-            </label>
-            <label>
-                <input type="checkbox" name="assign" value="Name3">Name3
-            </label>
-        </fieldset>
+        <h2>Assigned to</h2>
+        <div class="multiselect">
+            <div class="selectBox" onclick="showCheckboxes()">
+                <select>
+                    <option style="display:none;">Select contacts to assign</option>
+                </select>
+                <div class="overSelect"></div>
+            </div>
+            <div id="checkboxes">
+                <label><input type="checkbox" name="assign" value="Kontakt 1" /> Kontakt 1</label>
+                <label><input type="checkbox" name="assign" value="Kontakt 2" /> Kontakt 2</label>
+                <label><input type="checkbox" name="assign" value="Kontakt 3" /> Kontakt 3</label>
+                <label><input type="checkbox" name="assign" value="Kontakt 4" /> Kontakt 4</label>
+                <!-- Weitere Kontakte hier hinzufügen -->
+            </div>
+        </div>
 
         <label for="due-date">Due Date</label>
         <input type="date" id="due-date" required>

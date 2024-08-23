@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,42 +8,60 @@
     <link rel="stylesheet" href="addtask.css">
     <script src="js/addtask.js"></script>
 </head>
+
 <body>
     <h1>Add Task</h1>
-
+    <form onsubmit="addNewTask(); return false;">
         <label for="title">Title</label>
         <input type="text" id="title" required>
+
         <label for="description">Description</label>
         <textarea id="description"></textarea>
-        <label for="assigned-to">Assigned to</label>
-        <select id="assigned-to">
-            <option value=" ">Select contacts to assign</option>
-            <option value="Name2">Name2</option>
-            <option value="Name3">Name3</option>
-            <option value="Name4">Name4</option>
-        </select>
+
+        <fieldset>
+            <legend>Assigned to</legend>
+            <label>
+                <input type="checkbox" name="assign" value="Name1">Name1
+            </label>
+            <label>
+                <input type="checkbox" name="assign" value="Name2">Name2
+            </label>
+            <label>
+                <input type="checkbox" name="assign" value="Name3">Name3
+            </label>
+        </fieldset>
+
         <label for="due-date">Due Date</label>
         <input type="date" id="due-date" required>
 
         <br>
 
-        <label for="prio">Prio</label><br>
-        <input type="radio" id="urgent" name="prio" value="urgent">
-        <label for="urgent">Urgent</label>
-        <input type="radio" id="medium" name="prio" value="medium">
-        <label for="medium">Medium</label>
-        <input type="radio" id="low" name="prio" value="low">
-        <label for="low">Low</label>
+        <fieldset>
+            <legend>Priority</legend>
+            <label for="urgent">
+                <input type="radio" id="urgent" name="prio" value="urgent">Urgent
+            </label>
+            <label for="medium">
+                <input type="radio" id="medium" name="prio" value="medium">Medium
+            </label>
+            <label for="low">
+                <input type="radio" id="low" name="prio" value="low">Low
+            </label>
+        </fieldset>
 
-<select id="category">
-    <option value=" ">Select task category</option>
-    <option value="to-do">to Do</option>
-    <option value="in-progress">In progress</option>
-    <option value="await-feedback">Await feedback</option>
-    <option value="done">Done</option>
-</select>
-<button onclick="clearTaskInputs()">Clear</button>
-<button onclick="addNewTask()">Create Task "icon"</button>
-    
+        <label for="category">Category</label>
+        <select id="category">
+            <option value="" disabled selected>Select task category</option>
+            <option value="to-do">To Do</option>
+            <option value="in-progress">In Progress</option>
+            <option value="await-feedback">Await Feedback</option>
+            <option value="done">Done</option>
+        </select>
+
+        <button type="button" onclick="clearTaskInputs()">Clear</button>
+        <input type="submit" value="Create Task">
+    </form>
+
 </body>
+
 </html>

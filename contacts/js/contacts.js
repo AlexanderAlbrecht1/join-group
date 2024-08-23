@@ -19,7 +19,7 @@ let contacts = [
     { id: 18, name: "Yara", lastname: "Young", email: "yara.young@example.com", phone: "+49 143 679 865 34" },
     { id: 19, name: "Jennifer", lastname: "Quincy", email: "quinn.quincy@example.com", phone: "+49 143 679 865 34" },
     { id: 20, name: "Rita", lastname: "Roberts", email: "rita.roberts@example.com", phone: "+49 143 679 865 34" },
-    { id: 21, name: "Sam", lastname: "Smith", email: "sam.smith@example.com", phone: "+49 143 679 865 34" },
+    { id: 21, name: "Sam", lastname: "Bath", email: "sam.smith@example.com", phone: "+49 143 679 865 34" },
     { id: 22, name: "Ulrich", lastname: "Thompson", email: "tina.thompson@example.com", phone: "+49 143 679 865 34" },
     { id: 23, name: "Uwe", lastname: "Ulrich", email: "uwe.ulrich@example.com", phone: "+49 143 679 865 34" },
     { id: 24, name: "Uta", lastname: "Vaughn", email: "vera.vaughn@example.com", phone: "+49 143 679 865 34" },
@@ -31,38 +31,40 @@ let splittedName = [];
 
 function loadContacts() {
     document.getElementById('showContacts').innerHTML = '';
-    groupContacts();
-    sortContacts();
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        let name = contact.name;
-        let lastname = contact.lastname;
-        let mail = contact.email
-        let initial1 = Array.from(name)[0];
-        let initial2 = Array.from(lastname)[0];
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
 
-        document.getElementById('showContacts').innerHTML += `
-        <div class="contact" id="contact${i}">
-            <div class="icon${i}">
-                <span>${initial1}${initial2}</span>
+    let groupedContacts = contacts.reduce((groups, contact) => {
+        const firstLetter = contact.name[0].toUpperCase();
+        if (!groups[firstLetter]) {
+            groups[firstLetter] = [];
+        }
+        groups[firstLetter].push(contact);
+        return groups;
+    }, {});
+
+    for (let [letter, contacts] of Object.entries(groupedContacts)) {
+        document.getElementById('showContacts').innerHTML += `\n${letter}`;
+        for (let i = 0; i < contacts.length; i++) {
+            let contact = contacts[i];
+            let name = contact.name;
+            let lastname = contact.lastname;
+            let mail = contact.email
+            let initial1 = Array.from(name)[0];
+            let initial2 = Array.from(lastname)[0];
+    
+            document.getElementById('showContacts').innerHTML += `
+            <div class="contact" id="contact${i}">
+                <div class="icon${i}">
+                    <span>${initial1}${initial2}</span>
+                </div>
+                <div class="nameAndMail" id=""nameAndMail{i}"">
+                    <span>${name} ${lastname}</span>
+                    <span>${mail}</span>
+                </div>
             </div>
-            <div class="nameAndMail" id=""nameAndMail{i}"">
-                <span>${name} ${lastname}</span>
-                <span>${mail}</span>
-            </div>
-        </div>
-        `;
+            `;
+        };
     }
-}
-
-function sortContacts() {
-    contacts.sort(function (a, b) {
-        let x = a.name.toLowerCase();
-        let y = b.name.toLowerCase();
-        if (x < y) { return -1; }
-        if (x > y) { return 1; }
-        return 0;
-    });
 }
 
 function addToContact() {
@@ -80,7 +82,7 @@ function addToContact() {
     };
     contacts.push(newContact);
     clearInput(newName, newEmail, newPhone);
-    /*saveData('Contacts',contacts); */
+    /*saveData('Contacts',contacts); */ // push to Firebase
     loadContacts();
 }
 
@@ -95,10 +97,6 @@ function clearInput(newName, newEmail, newPhone) {
     newPhone.value = "";
 }
 
-function groupContacts() {
-let result = Object.groupBy(contacts, ({ name }) => name);
-    console.log(result);
-}
 
 
 

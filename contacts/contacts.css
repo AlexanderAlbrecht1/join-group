@@ -1,3 +1,7 @@
+body {
+    display: flex;
+}
+
 .contact {
     display: flex;
     flex-direction: row;
@@ -9,4 +13,38 @@
 .nameAndMail {
     display: flex;
     flex-direction: column;
+}
+
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 64px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    align-items: flex-start;
+    width: 60vw;
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.name {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.fullName {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+}
+
+.buttons {
+    display: flex;
 }

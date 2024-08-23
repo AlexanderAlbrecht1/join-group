@@ -48,12 +48,13 @@ function loadContacts() {
             let contact = contacts[i];
             let name = contact.name;
             let lastname = contact.lastname;
-            let mail = contact.email
+            let mail = contact.email;
+            let phone = contact.phone;
             let initial1 = Array.from(name)[0];
             let initial2 = Array.from(lastname)[0];
     
             document.getElementById('showContacts').innerHTML += `
-            <div class="contact" id="contact${i}">
+            <div onclick="openContact('${initial1}','${initial2}','${name}','${lastname}','${mail}','${phone}')" class="contact" id="contact${i}">
                 <div class="icon${i}">
                     <span>${initial1}${initial2}</span>
                 </div>
@@ -95,6 +96,29 @@ function clearInput(newName, newEmail, newPhone) {
     newName.value = "";
     newEmail.value = "";
     newPhone.value = "";
+}
+
+function openContact(initial1,initial2,name,lastname,mail,phone) {
+    document.getElementById('contactDetail').innerHTML = '';
+    document.getElementById('contactDetail').innerHTML += `
+    <div class="name">
+        <span>${initial1}${initial2}</span>
+        <div class="fullName">
+          <span>${name} ${lastname}</span>
+          <div class="buttons">
+            <button>Edit</button>
+            <button>Delete</button>
+          </div>
+        </div>
+      </div>
+      <h3>Contact Information</h3>
+      <h3><strong>Email</strong></h3>
+      <span>${mail}</span>
+      <h3><strong>Phone</strong></h3>
+      <span>${phone}</span>
+
+    </div>
+    `;
 }
 
 

@@ -9,7 +9,7 @@ function addNewTask() {
     let selectedPrio = document.querySelector('input[name="prio"]:checked');
     let category = document.getElementById('category');
 
-    tasks.push({id: tasks.length +1, title: title.value, description: description.value, assignedTo: assignedTo, dueDate: dueDate.value, prio: selectedPrio.value, category: category.value});
+    tasks.push({id: tasks.length, title: title.value, description: description.value, assignedTo: assignedTo, dueDate: dueDate.value, prio: selectedPrio.value, category: category.value});
     saveData('taskstorage', tasks);
     clearTaskInputs();
     

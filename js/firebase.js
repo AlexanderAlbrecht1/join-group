@@ -47,14 +47,14 @@ async function getResponse(table,options) {
  * 
  * @returns {object} - JSON arrary of data
  */
-async function loadData() {
+async function loadData(table) {
     let options={
         method: "GET",
         header: {
             'Content-type': 'application/json; charset=UTF-8',
-        }
+        },
     };
-    return await getResponse(options);
+    return await getResponse(table,options);
 }
  
 /**

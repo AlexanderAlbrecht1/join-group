@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./dashboard.css">
+    <script src="../js/firebase.js"></script>
+    <script src="./js/dashboard.js"></script>
+</head>
+<body onload="init()">
+    <div id="wrapper" class="wrapper">
+
+        <div>
+            <h2>To Do</h2>
+            <div class="containers" id="todo-container" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+            </div>
+        </div>
+
+        <div>
+            <h2>In progress</h2>
+            <div class="containers" id="in-progress-container" ondrop="drop(event, 'in-progress')" ondragover="allowDrop(event)">
+            </div>
+        </div>
+
+        <div>
+            <h2>Await feedback</h2>
+            <div class="containers" id="await-feedback-container" ondrop="drop(event, 'await-feedback')" ondragover="allowDrop(event)">
+            </div>
+        </div>
+
+        <div>
+            <h2>Done</h2>
+            <div class="containers" id="done-container" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

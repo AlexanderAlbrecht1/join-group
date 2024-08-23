@@ -26,15 +26,18 @@ function clearTaskInputs() {
 }
 
 
+// Hinweis miot document.getElemebtById.syle.display == "none" oder "block" abfragen 
+// dann spart man sich die globale Variable
+
 let expanded = false;
 
-    function showCheckboxes() {
-        let checkboxes = document.getElementById("checkboxes");
-        if (!expanded) {
-            checkboxes.style.display = "block";
-            expanded = true;
-        } else {
-            checkboxes.style.display = "none";
-            expanded = false;
-        }
+function showCheckboxes() {
+    let checkboxes = document.getElementById("checkboxes");
+    if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+    } else {
+        checkboxes.style.display = "none";
+        expanded = false;
     }
+}

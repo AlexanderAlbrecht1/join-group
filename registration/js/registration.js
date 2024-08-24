@@ -21,11 +21,11 @@ function msgBox(msg) {
  */
 function isEqualPassword() {
     let password=document.getElementById("password");
-    let confirmPassword=getElementById("confirm-password");
-    if (password != confirmPassword) {
+    let confirmPassword=document.getElementById("confirm-password");;
+    if (password.value != confirmPassword.value) {
         msgBox("passwords are different");
     }
-    return password == confirmPassword;   
+    return password.value == confirmPassword.value;   
 }
 
 /**
@@ -38,7 +38,7 @@ function isEqualPassword() {
 function existUser(userList) {
     let email=document.getElementById("email").value;
     let index=userList.findIndex(element =>  element.email == email);
-    if (index == -1) {
+    if (index != -1) {
         msgBox(`E-mail already exist. Please choose another e-mail. <br>${email}, <a href="../login/login.html">login at your existing account ?`);
     }
     return index != -1;
@@ -53,7 +53,7 @@ async function addUserToList(userList) {
     let password=document.getElementById("password");
     let email=document.getElementById("email"); 
     let user=document.getElementById("user");
-    userList.add({user:user.value,password: password.value,email: email.value});
+    userList.push({user:user.value,password: password.value,email: email.value});
     await saveData("user",userList);
 }
 
@@ -65,7 +65,7 @@ async function register() {
     if (!isEqualPassword()) return;
 
     let userList=await getUserList();
-    if (!existUser(userList)) return;
+    if (existUser(userList)) return;
 
     await addUserToList(userList);
     openDashboard(); // autologin move to the page we need to go and exit here

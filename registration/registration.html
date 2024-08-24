@@ -5,22 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="registration.css">
   <script src="./js/registration.js"></script>
+  <script src="../login/js/events.js"></script>
+  <script src="../login/js/login.js"></script>
+  
   <title>Registration</title>
 </head>
-<body>
+<body onload="init()">
   <div>
     <h2>Registration</h2>
     <div id="errorBox"></div>
     <form>
       <label for="email">Email:</label>
       <input type="email" id="email" required>
-      <label for="usern">Username:</label>
+      <label for="user">Username:</label>
       <input type="text" id="user" required>
       <label for="password">Password:</label>
       <input type="password" id="password" required>
-      <label for="confirm password">Confirm Password:</label>
+      <label for="confirm-password">Confirm Password:</label>
       <input type="password" id="confirm-password" required>
-      <button type="submit">Register</button>
+      <button id="submit" type="submit">Register</button>
       <label>
         <input type="checkbox" id="privacy-policy" required>
         I hereby confirm that I have read the <a href="/legal_information/privacy_policy/privacy_policy.html">privacy policy</a>.

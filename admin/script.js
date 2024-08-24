@@ -13,7 +13,7 @@ function reset() {
 function saveUser() {
     let ul = [
         {user:"guest",password:"",email:"donotrespond@nodomain.tld"},
-        {user:"Joerg",password:"abc",email:"donotrespond@nodomain.tld"}
+        {user:"Joerg",password:"abc",email:"mail@joergdeymann.de"}
     ]; // Create Guest User 1
     saveData("user",ul); //Create Userlist
 }

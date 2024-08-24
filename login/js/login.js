@@ -8,10 +8,10 @@ let msg="";
  */
 async function login() {
     let password=document.getElementById("password");
-    let user=document.getElementById("user");
+    let email=document.getElementById("email");
 
-    if (await isLoginCorrect(user.value,password.value)) {
-        sessionSave(PROJECT,{user:user,password:password});
+    if (await isLoginCorrect(email.value,password.value)) {
+        sessionSave(PROJECT,{email:email.value,password:password.value});
         rememberMe();
         openDashboard();
     }
@@ -24,8 +24,8 @@ async function login() {
  */
 function logout() {
     let password=document.getElementById("password");
-    let user=document.getElementById("user");
-    user.value="";
+    let email=document.getElementById("email");
+    email.value="";
     password.value="";
     sessionDestroy(PROJECT);
 }
@@ -49,22 +49,22 @@ function openPage(url) {
 /**
  * Check if given Login has success
  * 
- * @param {string} user      - user that tries to login
+ * @param {string} email     - email from the user who tries to login
  * @param {string} password  - the password that belongs to the user
  * @param {bool} showmsg   - true if user should get information, false = no feedbak
  * @returns - true if user and password are OK otherwise false
  */
 // Jörg regelt JS
-async function isLoginCorrect(user,password,showmsg=true) {
+async function isLoginCorrect(email,password,showmsg=true) {
     let userList=await getUserList();
-    let msg="User and password is correct";
+    let msg="E-Mail and password is correct";
     let focus=null;  
     let found=-1;
-    if (userList != null) found=userList.findIndex((element) => element.user == user);
+    if (userList != null) found=userList.findIndex((element) => element.email == email);
     
     if (found == -1) {
-        msg="User not found";
-        focus="user";
+        msg="E-Mail not found";
+        focus="email";
     } else 
     if (userList[found].password != password) {
         msg="You chose a wrong password";
@@ -98,9 +98,9 @@ async function getUserList() {
 async function loadUserFromLocalStorage() {
     let userRow=loadFromLocalStorage(PROJECT);
     if (userRow != null) {
-        if (await isLoginCorrect(userRow.user, userRow.password,false)) {
+        if (await isLoginCorrect(userRow.email, userRow.password,false)) {
     
-            putLoginToValue(userRow.user,userRow.password);
+            putLoginToValue(userRow.email,userRow.password);
             openDashboard(); // Exit from here
             return true;
         }
@@ -111,12 +111,12 @@ async function loadUserFromLocalStorage() {
 /** 
  * put in Mask to have it later again, do we need it ?
  * 
- * @param {string} user 
+ * @param {string} email 
  * @param {password} pw 
  */
-function putLoginToValue(user,pw) {
+function putLoginToValue(email,pw) {
     document.getElementById("password").value=pw;
-    document.getElementById("user").value=user;
+    document.getElementById("email").value=email;
 }
 
 /** 
@@ -124,7 +124,7 @@ function putLoginToValue(user,pw) {
  */
 function clearLogin() {    
     document.getElementById("password").value="";
-    document.getElementById("user").value="";
+    document.getElementById("email").value="";
     document.getElementById("remember-me").checked=false;
 }
 
@@ -135,8 +135,8 @@ function clearLogin() {
  */
 function saveUserToLocalStorage() {
     let password=document.getElementById("password");
-    let user=document.getElementById("user");
-    saveToLocalStorage(PROJECT,{user:user.value, password:password.value});
+    let email=document.getElementById("email");
+    saveToLocalStorage(PROJECT,{email:email.value, password:password.value});
 }
 
 /**
@@ -163,8 +163,16 @@ function rememberMe() {
  * Some Data is also prepared
  */
 function guestLogin() {
-    putLoginToValue("guest","");
+    putLoginToValue("donotrespond@nodomain.tld","");
     document.getElementById("remember-me").checked=false;
     login();
+}
+
+/**
+ * Init the Eventlistener for doing input checks for the Login
+ */
+function initEventListenerLogin() {
+    let list=["email","password"];
+    initEventListener(list);
 }
 

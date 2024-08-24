@@ -31,3 +31,56 @@ ftp://f016cb6a@join-326.developerakademie.net/index.htm
 Einbindung der Session in jedem html:
 <script src="../js/session.js">
 <body onload="isLogged()">
+
+Aufgaben:
+Julian: 
+    Führung der Startphase
+    Erste Grundstrucktur (Dirty View) der HTML
+
+Jörg:
+    Gundlegede Datentanbankanbindung der Firebase, localStorage und sessionStorage
+    Firebase angelegt und geshared geshared
+    Dokumentation, und Strucktur
+
+
+Jörg + Julian: Pairprogramming
+    Login und Registrierung der Nutzer
+    - Einloggen
+    - Ausloggen
+    - Fehleingaben
+    - Gastlogin
+    - Remember Funktion
+    - Löschen eines Accounts
+
+    Einstelen von Firebase
+
+
+
+Julian + Firat
+
+Alexander
+    Sein Trello Bord zur Verfügung gestellt und mit uns geteilt
+    Erstes Brainstorming eingebracht
+    Git-Resposity erstellt und mit uns geshared
+    ? Anlegen der Grundstrucktur unserer Programmierung ?
+    
+
+Firat 
+    Erster Dirty HTML Code für Kontakte und Tasks
+    
+    Tasks
+    - Erstellen der Tasks
+    - Verschieben der Tasks
+    - Dropdownliste mit Checkboxen
+    - Die Möglichkeit geschaffen neue Tasks anzulegen
+
+    
+    Contacts
+    - Erstellen einer Liste mit Kontakten
+    - Speicher der Kontakte ind der Firebase
+    - Verschieben der Tasks
+    - Dropdownliste mit Checkboxen
+
+
+
+

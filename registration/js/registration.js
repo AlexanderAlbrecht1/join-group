@@ -1,3 +1,10 @@
+/*
+    REQUIRES: 
+    events.js
+    login.js
+    
+*/
+
 /**
  * msgBox Send a messag to the Interface
  * 
@@ -8,29 +15,69 @@ function msgBox(msg) {
 }
 
 /**
+ * Checks if 2 passwords of the interface are equal
+ * 
+ * @returns - true if passwords are the same otherwise false
+ */
+function isEqualPassword() {
+    let password=document.getElementById("password");
+    let confirmPassword=getElementById("confirm-password");
+    if (password != confirmPassword) {
+        msgBox("passwords are different");
+    }
+    return password == confirmPassword;   
+}
+
+/**
+ * Look if the User already exist
+ * 
+ * @param {object} userList - The List of the user
+ * @param {string} email    - The Login email
+ * @returns - true if user exist, otherwise false
+ */
+function existUser(userList) {
+    let email=document.getElementById("email").value;
+    let index=userList.findIndex(element =>  element.email == email);
+    if (index == -1) {
+        msgBox(`E-mail already exist. Please choose another e-mail. <br>${email}, <a href="../login/login.html">login at your existing account ?`);
+    }
+    return index != -1;
+}
+
+/**
+ * Add a User width all information to the table
+ * 
+ * @param {object} userList  List of Users 
+ */
+async function addUserToList(userList) {
+    let password=document.getElementById("password");
+    let email=document.getElementById("email"); 
+    let user=document.getElementById("user");
+    userList.add({user:user.value,password: password.value,email: email.value});
+    await saveData("user",userList);
+}
+
+/**
  * Register new User 
  * input: password, user, email
  */
 async function register() {
-    let password=document.getElementById("password");
-    let user=document.getElementById("user");
-    let email=document.getElementById("email");    
+    if (!isEqualPassword()) return;
+
     let userList=await getUserList();
-    if (userList.findIndex(element =>  element.user == user.value)  == -1) {
-        userList.add({user:user.value,password: password.value,email: email.value});
-        await saveData("user",userList);
-        openDashboard(); // autologin move to the page we need to go and exit here
-    } else {
-        msgBox(`User already exist. Please choose another name. <br>{user.value}, <a href="../login/login.html">login at your existing account ?`);
-    }
+    if (!existUser(userList)) return;
+
+    await addUserToList(userList);
+    openDashboard(); // autologin move to the page we need to go and exit here
 }
+
 /**
  * removeUser
  * Remove all information of a user
  * - in database, localstorage, session
  * 
- * @param {*} userList 
- * @param {*} index 
+ * @param {object} userList - List aof all Users
+ * @param {integer} index    - the found index from index search
  */
 async function removeUser(userList,index) {
     userList.splice(index,1); // Remove User self 
@@ -50,7 +97,7 @@ async function removeUser(userList,index) {
 function passwordValidationOK(passwordOfList)  {
     let password=document.getElementById("password");
     if (passwordOfList != password.value) {
-        msgBox("The user-password validation failed !");
+        msgBox("The mail-password validation failed !");
     }
 }
 
@@ -60,13 +107,13 @@ function passwordValidationOK(passwordOfList)  {
  * redirect to Login at least
  */
 async function unregister() {
-    let user=document.getElementById("user");
+    let email=document.getElementById("email");
     let userList=await getUserList();
-    let index= userList.findIndex(element =>  element.user == user.value);
+    let index= userList.findIndex(element =>  element.email == email.value);
     if (index != -1) {
         if (passwordValidationOK(userList[index].password)) {
-            removeTasksOf(user.value);    // Remove all Tasks of the user
-            removeUser(userList,index);   // remove all Userinformation and cleanup
+            removeTasksOf(email.value);    // Remove all Tasks of the user
+            removeUser(userList,index);    // remove all Userinformation and cleanup
             openPage("../login/login.html");
         }
     } else {
@@ -74,3 +121,19 @@ async function unregister() {
     }
 }
 
+/**
+ * Init the Eventlistener for doing input checks for the registration
+ */
+function initEventListenerRegister() {
+    let list=["email","user","password","confirm-password","privacy-policy"];
+    initEventListener(list);
+
+}
+
+/**
+ * First initialation of document
+ */
+function init() {
+    initEventListenerRegister() ;
+    //isLogged();
+}

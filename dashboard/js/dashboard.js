@@ -11,14 +11,14 @@ function init() {
     
     if (tasks) {
         console.log("Aufgaben erfolgreich geladen:", tasks);
+        getTodoData(tasks);
+        getInProgressData(tasks);
+        getAwaitFeedbackData(tasks);
+        getDoneData(tasks);
     } else {
-        console.error("Fehler beim Laden der Aufgaben.");
+        console.log("Es sind keine Aufgaben vorhanden");
     }
 
-    getTodoData(tasks);
-    getInProgressData(tasks);
-    getAwaitFeedbackData(tasks);
-    getDoneData(tasks);
 }
 
   

@@ -1,5 +1,3 @@
-const PROJECT="join2024-326";
-
 let msg="";
 /**
  * run this after given user and password
@@ -121,6 +119,15 @@ function putLoginToValue(user,pw) {
     document.getElementById("user").value=user;
 }
 
+/** 
+ * Clear all Login fields ?
+ */
+function clearLogin() {    
+    document.getElementById("password").value="";
+    document.getElementById("user").value="";
+    document.getElementById("remember-me").checked=false;
+}
+
 /**
  * run this after login
  * 
@@ -160,3 +167,4 @@ function guestLogin() {
     document.getElementById("remember-me").checked=false;
     login();
 }
+

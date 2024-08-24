@@ -1,10 +1,16 @@
+/*
+    global variables for all 
+*/
+const PROJECT="join2024-326";
+
 /**
  * Remove the content of a key in the session
  * 
  * @param {string} key 
  */
-function sessionDestroy(key) {
-    sessionStorage.removeItem(key);
+function sessionDestroy(key = null) {
+    if (key == null) sessionStorage.clear()
+    else sessionStorage.removeItem(key);
 }
 
 /**
@@ -24,4 +30,15 @@ function sessionLoad(key) {
  */
 function sessionSave(key,value={}) {
     sessionStorage.setItem(key,JSON.stringify(value));
+}
+
+/**
+ * Redirect to login, if not Logged
+ * add it to every init() {isLogged()} 
+ * or body onload="isLogged()"
+ */
+function isLogged() {
+    if(sessionLoad(PROJECT) == null) {
+        openPage('../login.html');  // or as Pop Up
+    };
 }

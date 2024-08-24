@@ -13,9 +13,23 @@ async function login() {
     let user=document.getElementById("user");
 
     if (await isLoginCorrect(user.value,password.value)) {
+        sessionSave(PROJECT,{user:user,password:password});
         rememberMe();
         openDashboard();
     }
+}
+
+/**
+ * Logout user
+ * reset inputfields
+ * destry the session info
+ */
+function logout() {
+    let password=document.getElementById("password");
+    let user=document.getElementById("user");
+    user.value="";
+    password.value="";
+    sessionDestroy(PROJECT);
 }
 
 /**
@@ -25,8 +39,6 @@ function openDashboard() {
     openPage("../dashboard/dashboard.html");
 }
 
-/**
- */
 /**
  * load next HTML, geneerell alias
  * 
@@ -68,9 +80,15 @@ async function isLoginCorrect(user,password,showmsg=true) {
     return focus == null;
 }
 
+/**
+ * Alias to have better reading to get the Userlist
+ * 
+ * @returns JSON array wth all user information
+ */
 async function getUserList() {
     return await loadData("user");
 }
+
 /**
  * run this before we enter user and passowrd
  * 
@@ -91,7 +109,6 @@ async function loadUserFromLocalStorage() {
     }
     return false;
 }
-
 
 /** 
  * put in Mask to have it later again, do we need it ?
@@ -133,6 +150,11 @@ function rememberMe() {
         clearLocalStorage();
     };
 }
+
+/**
+ * Guest Login no need to enter user or Password
+ * Some Data is also prepared
+ */
 function guestLogin() {
     putLoginToValue("guest","");
     document.getElementById("remember-me").checked=false;

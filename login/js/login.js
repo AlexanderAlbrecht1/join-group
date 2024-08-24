@@ -2,22 +2,27 @@ const PROJECT="join2024-326";
 
 let msg="";
 /**
+ * run this after given user and password
+ * 
  * login()
  * input form HTML input field
  * output err to HTML output field 
  */
-function login() {
+async function login() {
     let password=document.getElementById("password");
     let user=document.getElementById("user");
 
-    if (isLoginCorrect(user,password)) openDashboard();
+    if (await isLoginCorrect(user.value,password.value)) {
+        rememberMe();
+        openDashboard();
+    }
 }
 
 /**
  * load next HTML, login success
  */
 function openDashboard() {
-    openPage("./dashbord/index.html");
+    openPage("../dashboard/dashboard.html");
 }
 
 /**
@@ -42,9 +47,10 @@ function openPage(url) {
 // Jörg regelt JS
 async function isLoginCorrect(user,password,showmsg=true) {
     let userList=await getUserList();
-    let found=userList.findIndex((element) => element.user == user);
     let msg="User and password is correct";
     let focus=null;  
+    let found=-1;
+    if (userList != null) found=userList.findIndex((element) => element.user == user);
     
     if (found == -1) {
         msg="User not found";
@@ -57,22 +63,28 @@ async function isLoginCorrect(user,password,showmsg=true) {
 
     if (showmsg) {
         if (focus != null) document.getElementById(focus).focus();
-        document.getElementById("login-msg").innerHTML=msg;
+        document.getElementById("msg-box").innerHTML=msg;
     }
     return focus == null;
 }
 
-
+async function getUserList() {
+    return await loadData("user");
+}
 /**
+ * run this before we enter user and passowrd
+ * 
  * - Load User and Passwort from Local Stroage if remembered
  * - Compare width Database if still available
  * - if everything OK Open next HTML 
  * @returns - false if User was not loaded
  */
 async function loadUserFromLocalStorage() {
-    let userRow=await getSavedUserFromLocalStorage(PROJECT);
+    let userRow=loadFromLocalStorage(PROJECT);
     if (userRow != null) {
-        if (isLoginCorrect(userRow.user, userRow.password,false)) {
+        if (await isLoginCorrect(userRow.user, userRow.password,false)) {
+    
+            putLoginToValue(userRow.user,userRow.password);
             openDashboard(); // Exit from here
             return true;
         }
@@ -80,13 +92,27 @@ async function loadUserFromLocalStorage() {
     return false;
 }
 
+
+/** 
+ * put in Mask to have it later again, do we need it ?
+ * 
+ * @param {string} user 
+ * @param {password} pw 
+ */
+function putLoginToValue(user,pw) {
+    document.getElementById("password").value=pw;
+    document.getElementById("user").value=user;
+}
+
 /**
+ * run this after login
+ * 
  * prepare user / password and to save to local storage
  */
 function saveUserToLocalStorage() {
     let password=document.getElementById("password");
     let user=document.getElementById("user");
-    saveToLocalStorage(PROJECT,{user,password});
+    saveToLocalStorage(PROJECT,{user:user.value, password:password.value});
 }
 
 /**
@@ -96,7 +122,6 @@ function clearLocalStorage() {
     removeKeyInLocalStorage(PROJECT);
 }
 
-
 /**
  * if checked save user data to the local storage, get it back later
  * else we clear the loclstorage 
@@ -105,16 +130,11 @@ function rememberMe() {
     if (document.getElementById("remember-me").checked) {
         saveUserToLocalStorage();
     } else {
-        emptyLocalStorage();
+        clearLocalStorage();
     };
 }
-
-
-
-
-function register() {
-    let password=document.getElementById("password");
-    let user=document.getElementById("user");
-    // let email
-
+function guestLogin() {
+    putLoginToValue("guest","");
+    document.getElementById("remember-me").checked=false;
+    login();
 }

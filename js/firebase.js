@@ -75,3 +75,17 @@ async function saveData(table,data = {}) {
     };
     return await getResponse(table,options);    
 }
+
+/**
+ * 
+ * @param {object} data JSON Arra width Data that contains id 
+ * @returns 
+ */
+function getNewId(data) {
+    if (data.length == 0) return -1;
+    let max=0;
+    for (let i=0;i<data.length;i++) {
+        if (data.id>max) max=+data.id;
+    }
+    return max+1;
+}

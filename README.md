@@ -15,3 +15,15 @@ Ideen
 =======
 - Auswahlbuttons für Deseihns
 - eine Lock Funktion einbauen für Multiuserbetrieb (Gleichzeitige Nutzung auf die Firebase Tabelle)
+
+
+Admin Bereich 
+pfad: https://join-326.developerakademie.net/admin/index.html
+Login: TeamJoin
+Passwort: TJ2024
+
+Direkter Link:
+https://TeamJoin:TJ2024@join-326.developerakademie.net/admin/index.html
+
+FTP:
+ftp://f016cb6a@join-326.developerakademie.net/index.htm

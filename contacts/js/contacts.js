@@ -50,8 +50,8 @@ function loadContacts() {
             let lastname = contact.lastname;
             let mail = contact.email;
             let phone = contact.phone;
-            let initial1 = Array.from(name)[0];
-            let initial2 = Array.from(lastname)[0];
+            let initial1 = Array.from(name)[0].toUpperCase();
+            let initial2 = Array.from(lastname)[0].toUpperCase();
     
             document.getElementById('showContacts').innerHTML += `
             <div onclick="openContact('${initial1}','${initial2}','${name}','${lastname}','${mail}','${phone}')" class="contact" id="contact${i}">
@@ -120,7 +120,3 @@ function openContact(initial1,initial2,name,lastname,mail,phone) {
     </div>
     `;
 }
-
-
-
-

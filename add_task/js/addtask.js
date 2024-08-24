@@ -26,8 +26,23 @@ function clearTaskInputs() {
 }
 
 
-// Hinweis miot document.getElemebtById.syle.display == "none" oder "block" abfragen 
+
+
+// Hinweis mit document.getElemebtById.syle.display == "none" oder "block" abfragen 
 // dann spart man sich die globale Variable
+
+// optimised code: maybe call it better toggleCheckboxes
+/*
+function toggleCheckboxes() {
+    let checkboxes = document.getElementById("checkboxes");
+    if (checkboxes.style.display == "none") {
+        checkboxes.style.display = "block";
+    } else {
+        checkboxes.style.display = "none";
+    }
+}
+*/
+
 
 let expanded = false;
 

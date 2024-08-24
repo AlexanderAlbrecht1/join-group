@@ -31,6 +31,7 @@ let splittedName = [];
 
 function loadContacts() {
     document.getElementById('showContacts').innerHTML = '';
+    document.getElementById('contactDetail').innerHTML = '';
     contacts.sort((a, b) => a.name.localeCompare(b.name));
 
     let groupedContacts = contacts.reduce((groups, contact) => {
@@ -39,6 +40,8 @@ function loadContacts() {
             groups[firstLetter] = [];
         }
         groups[firstLetter].push(contact);
+
+
         return groups;
     }, {});
 
@@ -52,9 +55,9 @@ function loadContacts() {
             let phone = contact.phone;
             let initial1 = Array.from(name)[0].toUpperCase();
             let initial2 = Array.from(lastname)[0].toUpperCase();
-    
+
             document.getElementById('showContacts').innerHTML += `
-            <div onclick="openContact('${initial1}','${initial2}','${name}','${lastname}','${mail}','${phone}')" class="contact" id="contact${i}">
+            <div onclick="openContact(${i},'${initial1}','${initial2}','${name}','${lastname}','${mail}','${phone}')" class="contact" id="contact${i}">
                 <div class="icon${i}">
                     <span>${initial1}${initial2}</span>
                 </div>
@@ -98,7 +101,8 @@ function clearInput(newName, newEmail, newPhone) {
     newPhone.value = "";
 }
 
-function openContact(initial1,initial2,name,lastname,mail,phone) {
+function openContact(i, initial1, initial2, name, lastname, mail, phone) {
+    console.log()
     document.getElementById('contactDetail').innerHTML = '';
     document.getElementById('contactDetail').innerHTML += `
     <div class="name">
@@ -107,7 +111,7 @@ function openContact(initial1,initial2,name,lastname,mail,phone) {
           <span>${name} ${lastname}</span>
           <div class="buttons">
             <button>Edit</button>
-            <button>Delete</button>
+            <button onclick="deleteContact('${mail}')">Delete</button>
           </div>
         </div>
       </div>
@@ -120,3 +124,21 @@ function openContact(initial1,initial2,name,lastname,mail,phone) {
     </div>
     `;
 }
+
+function deleteContact(i) {
+    contacts.splice(findContact(`${i}`), 1);
+    loadContacts();
+}
+
+function findContact(name) {
+    for (let i = 0; i < contacts.length; i++) {
+        if (contacts[i].email === name) {
+            return [i]
+        }
+    }
+    return null;
+}
+
+
+
+

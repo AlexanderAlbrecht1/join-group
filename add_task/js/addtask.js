@@ -10,9 +10,11 @@ async function addNewTask() {
   let selectedPrio = document.querySelector('input[name="prio"]:checked');
   let category = document.getElementById("category");
   
-  if (!loadData("taskstorage")) {
-    tasks = await loadData("taskstorage");
-  } else {
+  tasks = await loadData("taskstorage");
+
+    if (tasks === null) {
+      tasks = [];
+    }
     tasks.push({
       id: tasks.length,
       title: title.value,
@@ -24,7 +26,7 @@ async function addNewTask() {
     });
     saveData("taskstorage", tasks);
     clearTaskInputs();
-  }
+  
 }
 
 function clearTaskInputs() {

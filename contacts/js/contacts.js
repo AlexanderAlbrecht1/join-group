@@ -113,7 +113,7 @@ function openContact(i, initial1, initial2, name, lastname, mail, phone) {
         <div class="fullName">
           <span>${name} ${lastname}</span>
           <div class="buttons">
-            <button>Edit</button>
+            <button onclick="openEditContactDialog('${mail}')">Edit</button>
             <button onclick="deleteContact('${mail}')">Delete</button>
           </div>
         </div>
@@ -131,6 +131,7 @@ function openContact(i, initial1, initial2, name, lastname, mail, phone) {
 function deleteContact(i) {
     contacts.splice(findContact(`${i}`), 1);
     loadContacts();
+    closeContactCreation();
 }
 
 //return contacts.findIndex(e => e.email === name); sollte auch gehen :), dann ist der NOT Found wert -1  (Jörg)
@@ -159,7 +160,7 @@ function openCreateContactDialog() {
         <form onsubmit="addToContact();return false;">
             <input required id="name" type="text" placeholder="name" />
             <input required id="email" type="email" placeholder="e-mail" />
-            <input id="phone" type="number" placeholder="phone number" />
+            <input id="phone" type="text" placeholder="phone number" />
             <button type="submit">Add new contact "icon"</button>
         </form>
     </div>
@@ -273,4 +274,37 @@ async function initContactList() {
     // isLogged();
     let contacts=await loadSortedContactList();
     renderContactList(contacts);
+}
+
+function openEditContactDialog(mail) {
+    let index = findContact(`${mail}`);
+    let name = contacts[index].name;
+    let lastname = contacts[index].lastname;
+    let phone = contacts[index].phone;
+    let dialogBackground = document.getElementById('dialogBackground');
+    document.getElementById('body').classList.add('overflowHidden')
+    dialogBackground.classList.remove('displayNone');
+    dialogBackground.innerHTML = '';
+    dialogBackground.innerHTML = `
+         
+    <div class="addContact" onclick="dontClose(event)">
+    
+            <input required id="name" type="text" placeholder="name" />
+            <input required id="email" type="email" placeholder="e-mail" />
+            <input id="phone" type="text" placeholder="phone number" />
+            <button onclick="deleteContact('${mail}')">delete</button>
+            <button>Save"icon"</button>
+        
+    </div>
+
+    `; // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
+
+    document.getElementById('name').value = name + ' ' + lastname;
+    document.getElementById('email').value = mail;
+    document.getElementById('phone').value = phone;
+    
+
+    console.log(findContact(`${mail}`));
+    
+    
 }

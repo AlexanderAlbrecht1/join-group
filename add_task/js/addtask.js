@@ -69,3 +69,9 @@ function showCheckboxes() {
     expanded = false;
   }
 }
+
+function init() {
+  // isLogged();
+  initContactList(contacts);
+}
+

@@ -6,7 +6,7 @@ function reset() {
         <li>Create a ContactList for the Guest User ...done</li>
     `
     saveUser();
-    //saveContacts();
+    saveContacts();
     //saveTasks();
 }
 
@@ -50,6 +50,7 @@ function saveContacts() {
     
     saveData("Contacts",contacts); //Create Userlist
 }
+
 function saveTasks() {
     let tasks = [
     ];

@@ -102,6 +102,8 @@ function clearInput(newName, newEmail, newPhone) {
     newPhone.value = "";
 }
 
+// Das werden die anmeckern mit sovielen Parametern
+// Meine Idee die Variabelen all in ein JSON zu packen (Jörg)
 function openContact(i, initial1, initial2, name, lastname, mail, phone) {
     console.log()
     document.getElementById('contactDetail').innerHTML = '';
@@ -131,6 +133,7 @@ function deleteContact(i) {
     loadContacts();
 }
 
+//return contacts.findIndex(e => e.email === name); sollte auch gehen :), dann ist der NOT Found wert -1  (Jörg)
 function findContact(name) {
     for (let i = 0; i < contacts.length; i++) {
         if (contacts[i].email === name) {
@@ -165,9 +168,99 @@ function closeContactCreation() {
     document.getElementById('body').classList.remove('overflowHidden');
 }
 
-function dontClose() {
+function dontClose(event) {
     event.stopPropagation();
 }
 
+/**
+ * 
+ * returns the monogram of a Name
+ * 
+ * @param {string} name first name and last name split by " " 
+ * @returns the first characters of the 2 first Names in uppercase
+ */
+function getMonogram(name) {
+    let na=name.toUpperCase().split(" ",2);
+    return na[0][0]+na[1][0];
+}
 
 
+/**
+ * 
+ * Compare 2 Contacts by last name and name
+ * 
+ * @param {string} a - first name to compare 
+ * @param {string} b - second name to compare
+ * @returns - true if Contact 1 is earlier in alphabet than Contact 2 
+ */
+function compareContactNames(a,b) {
+    if (a == null) return 1;
+    if (b == null) return -1;
+    const c = a.name.localeCompare(b.name);
+    if (c === 0) {
+        return a.lastname.localeCompare(b.lastname);
+    }    
+    return c;
+}
+
+/**
+ * 
+ * Sorts the contact list by last name and name 
+ * 
+ * @param {object} contacts - object list of contacts
+ * @returns - sorted object
+ */
+function sortContacts(contacts)  {
+    return contacts.sort((a, b) => compareContactNames(a,b));
+}
+
+/**
+ * 
+ * @param {object} contact - put one contact to the dropdown
+ * @returns 
+ */
+function getHTMLContactSelection(contact) {
+    let name=contact.name + " " + contact.lastname;
+    return `
+    <label>${getMonogram(name)} ${name}<input type="checkbox" name="assign" value="${contact.id}" /></label>    
+    `
+}
+
+
+/**
+ * 
+ * load and Sort Contactlist
+ * 
+ * @returns Contactlist
+ */
+async function loadSortedContactList() {
+    let c=await loadData("Contacts");
+    if (c != null) {
+        return sortContacts(c);
+    }
+    return null;
+}
+
+
+/**
+ * 
+ * if contactlist has data load contactlist otherwise do nothing
+ */
+function renderContactList(contacts) {
+    if (contacts == null) return;
+    let html="";
+    for(let contact of contacts) {
+        html+=getHTMLContactSelection(contact);
+    }
+    document.getElementById("checkboxes").innerHTML=html;
+}
+
+
+/**
+ * first initialisation of contact list 
+ */
+async function initContactList() {
+    // isLogged();
+    let contacts=await loadSortedContactList();
+    renderContactList(contacts);
+}

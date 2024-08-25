@@ -41,7 +41,12 @@ async function getResponse(table,options) {
     try {
         response=await fetchUrl(table,options);
         if (response.ok) { // 404 = page does not exist, 2XX = OK 
-            return response.json();
+            const data= response.json();
+            if (Array.isArray(data)) {
+                return data.filter(item => item !== null); // Filtere `null`-Werte
+            } else {
+                return data; // Bei Objekten, die möglicherweise nicht als Array vorliegen
+            }
         } else {
             throw new Error(`Response status: ${response.status}`);
         }
@@ -60,7 +65,7 @@ async function getResponse(table,options) {
 async function loadData(table) {
     let options={
         method: "GET",
-        header: {
+        headers: {
             'Content-type': 'application/json; charset=UTF-8',
         }
     };
@@ -78,7 +83,7 @@ async function loadData(table) {
 async function saveData(table,data = {}) {
     let options=  {
         method: "PUT",
-        header: {
+        headers: {
             'Content-type': 'application/json; charset=UTF-8'
         },
         body: JSON.stringify(data)

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: login/js/events.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,81 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: login/js/events.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Design the Submit button 
+ * and give it the possiblility of Press or not (enable/disable)
+ * 
+ * @param {bool} submit - element form interface
+ */
+function disableCheck(submit) {
+    let button=document.getElementById("submit")
+    if (submit) {
+        button.disabled=false;
+        button.classList.remove("disable");
+        button.style.color="";
+    } else 
+    if (!button.disabled) {
+        button.disabled=true;
+        button.classList.add("disable");
+        button.style.color="yellow";
+    }
+
+}
+
+/**
+ * Check fields if they could be sent, 
+ * so all flields ust be valid
+ * 
+ * @param {array} list - List of ids of the interface 
+ * @returns -true if all fields are valid and ready to work width
+ */
+function inputFilled(list) {
+    for (let item of list) {
+        let d=document.getElementById(item);
+        if (d.type == "checkbox" &amp;&amp; d.checked == false) {
+            return false;
+        }
+        if (!d.validity.valid ) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/**
+ * 1. check if all fields are valid
+ * 2. if valid Submit Button is enabled otherwise disabled an greyed out
+ * 
+ * @param {array} list - List of ids in the interface 
+ */
+function sendButton(list) {
+    let submit = inputFilled(list);
+    disableCheck(submit);
+}
 
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * Init the Eventlistener for doing input checks 
+ */
+function initEventListener(list) {
+    for (let item of list) {
+        document.getElementById(item).addEventListener("input",() => sendButton(list));
+    }
+    sendButton(list);
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

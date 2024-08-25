@@ -26,30 +26,49 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const PROJECT="join2024-326";
-
-let msg="";
+            <pre class="prettyprint source linenums"><code>let msg="";
 /**
+ * run this after given user and password
+ * 
  * login()
  * input form HTML input field
  * output err to HTML output field 
  */
-function login() {
+async function login() {
     let password=document.getElementById("password");
-    let user=document.getElementById("user");
+    let email=document.getElementById("email");
 
-    if (isLoginCorrect(user,password)) openDashboard();
+    if (await isLoginCorrect(email.value,password.value)) {
+        sessionSave(PROJECT,{email:email.value,password:password.value});
+        rememberMe();
+        openDashboard();
+    }
+}
+
+/**
+ * Logout user
+ * reset inputfields
+ * destry the session info
+ */
+function logout() {
+    let password=document.getElementById("password");
+    let email=document.getElementById("email");
+    email.value="";
+    password.value="";
+    sessionDestroy(PROJECT);
 }
 
 /**
  * load next HTML, login success
  */
 function openDashboard() {
-    openPage("./dashbord/index.html");
+    openPage("../dashboard/dashboard.html");
 }
 
 /**
  * load next HTML, geneerell alias
+ * 
+ * @param {url} url - open a HTML and exit from here
  */
 function openPage(url) {
     window.location = url;
@@ -58,21 +77,22 @@ function openPage(url) {
 /**
  * Check if given Login has success
  * 
- * @param {string} user      - user that tries to login
+ * @param {string} email     - email from the user who tries to login
  * @param {string} password  - the password that belongs to the user
  * @param {bool} showmsg   - true if user should get information, false = no feedbak
  * @returns - true if user and password are OK otherwise false
  */
 // Jörg regelt JS
-async function isLoginCorrect(user,password,showmsg=true) {
+async function isLoginCorrect(email,password,showmsg=true) {
     let userList=await getUserList();
-    let found=userList.findIndex((element) => element.user == user);
-    let msg="User and password is correct";
+    let msg="E-Mail and password is correct";
     let focus=null;  
+    let found=-1;
+    if (userList != null) found=userList.findIndex((element) => element.email == email);
     
     if (found == -1) {
-        msg="User not found";
-        focus="user";
+        msg="E-Mail not found";
+        focus="email";
     } else 
     if (userList[found].password != password) {
         msg="You chose a wrong password";
@@ -81,22 +101,34 @@ async function isLoginCorrect(user,password,showmsg=true) {
 
     if (showmsg) {
         if (focus != null) document.getElementById(focus).focus();
-        document.getElementById("login-msg").innerHTML=msg;
+        document.getElementById("msg-box").innerHTML=msg;
     }
     return focus == null;
 }
 
+/**
+ * Alias to have better reading to get the Userlist
+ * 
+ * @returns JSON array wth all user information
+ */
+async function getUserList() {
+    return await loadData("user");
+}
 
 /**
+ * run this before we enter user and passowrd
+ * 
  * - Load User and Passwort from Local Stroage if remembered
  * - Compare width Database if still available
  * - if everything OK Open next HTML 
  * @returns - false if User was not loaded
  */
 async function loadUserFromLocalStorage() {
-    let userRow=await getSavedUserFromLocalStorage(PROJECT);
+    let userRow=loadFromLocalStorage(PROJECT);
     if (userRow != null) {
-        if (isLoginCorrect(userRow.user, userRow.password,false)) {
+        if (await isLoginCorrect(userRow.email, userRow.password,false)) {
+    
+            putLoginToValue(userRow.email,userRow.password);
             openDashboard(); // Exit from here
             return true;
         }
@@ -104,13 +136,35 @@ async function loadUserFromLocalStorage() {
     return false;
 }
 
+/** 
+ * put in Mask to have it later again, do we need it ?
+ * 
+ * @param {string} email 
+ * @param {password} pw 
+ */
+function putLoginToValue(email,pw) {
+    document.getElementById("password").value=pw;
+    document.getElementById("email").value=email;
+}
+
+/** 
+ * Clear all Login fields ?
+ */
+function clearLogin() {    
+    document.getElementById("password").value="";
+    document.getElementById("email").value="";
+    document.getElementById("remember-me").checked=false;
+}
+
 /**
+ * run this after login
+ * 
  * prepare user / password and to save to local storage
  */
 function saveUserToLocalStorage() {
     let password=document.getElementById("password");
-    let user=document.getElementById("user");
-    saveToLocalStorage(PROJECT,{user,password});
+    let email=document.getElementById("email");
+    saveToLocalStorage(PROJECT,{email:email.value, password:password.value});
 }
 
 /**
@@ -120,7 +174,6 @@ function clearLocalStorage() {
     removeKeyInLocalStorage(PROJECT);
 }
 
-
 /**
  * if checked save user data to the local storage, get it back later
  * else we clear the loclstorage 
@@ -129,19 +182,29 @@ function rememberMe() {
     if (document.getElementById("remember-me").checked) {
         saveUserToLocalStorage();
     } else {
-        emptyLocalStorage();
+        clearLocalStorage();
     };
 }
 
+/**
+ * Guest Login no need to enter user or Password
+ * Some Data is also prepared
+ */
+function guestLogin() {
+    putLoginToValue("donotrespond@nodomain.tld","");
+    document.getElementById("remember-me").checked=false;
+    login();
+}
 
+/**
+ * Init the Eventlistener for doing input checks for the Login
+ */
+function initEventListenerLogin() {
+    let list=["email","password"];
+    initEventListener(list);
+}
 
-
-function register() {
-    let password=document.getElementById("password");
-    let user=document.getElementById("user");
-    // let email
-
-}</code></pre>
+</code></pre>
         </article>
     </section>
 
@@ -151,13 +214,13 @@ function register() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#clearLocalStorage">clearLocalStorage</a></li><li><a href="global.html#fetchUrl">fetchUrl</a></li><li><a href="global.html#getResponse">getResponse</a></li><li><a href="global.html#isLoginCorrect">isLoginCorrect</a></li><li><a href="global.html#loadData">loadData</a></li><li><a href="global.html#loadFromLocalStorage">loadFromLocalStorage</a></li><li><a href="global.html#loadUserFromLocalStorage">loadUserFromLocalStorage</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#openDashboard">openDashboard</a></li><li><a href="global.html#openPage">openPage</a></li><li><a href="global.html#rememberMe">rememberMe</a></li><li><a href="global.html#removeKeyInLocalStorage">removeKeyInLocalStorage</a></li><li><a href="global.html#saveData">saveData</a></li><li><a href="global.html#saveToLocalStorage">saveToLocalStorage</a></li><li><a href="global.html#saveUserToLocalStorage">saveUserToLocalStorage</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addUserToList">addUserToList</a></li><li><a href="global.html#clearLocalStorage">clearLocalStorage</a></li><li><a href="global.html#clearLogin">clearLogin</a></li><li><a href="global.html#disableCheck">disableCheck</a></li><li><a href="global.html#existUser">existUser</a></li><li><a href="global.html#fetchUrl">fetchUrl</a></li><li><a href="global.html#getNewId">getNewId</a></li><li><a href="global.html#getPath">getPath</a></li><li><a href="global.html#getResponse">getResponse</a></li><li><a href="global.html#getUserList">getUserList</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initEventListener">initEventListener</a></li><li><a href="global.html#initEventListenerLogin">initEventListenerLogin</a></li><li><a href="global.html#initEventListenerRegister">initEventListenerRegister</a></li><li><a href="global.html#inputFilled">inputFilled</a></li><li><a href="global.html#isEqualPassword">isEqualPassword</a></li><li><a href="global.html#isLogged">isLogged</a></li><li><a href="global.html#isLoginCorrect">isLoginCorrect</a></li><li><a href="global.html#loadData">loadData</a></li><li><a href="global.html#loadFromLocalStorage">loadFromLocalStorage</a></li><li><a href="global.html#loadUserFromLocalStorage">loadUserFromLocalStorage</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#msgBox">msgBox</a></li><li><a href="global.html#openDashboard">openDashboard</a></li><li><a href="global.html#openPage">openPage</a></li><li><a href="global.html#passwordValidationOK">passwordValidationOK</a></li><li><a href="global.html#putLoginToValue">putLoginToValue</a></li><li><a href="global.html#register">register</a></li><li><a href="global.html#rememberMe">rememberMe</a></li><li><a href="global.html#removeKeyInLocalStorage">removeKeyInLocalStorage</a></li><li><a href="global.html#removeUser">removeUser</a></li><li><a href="global.html#saveData">saveData</a></li><li><a href="global.html#saveToLocalStorage">saveToLocalStorage</a></li><li><a href="global.html#saveUserToLocalStorage">saveUserToLocalStorage</a></li><li><a href="global.html#sendButton">sendButton</a></li><li><a href="global.html#sessionDestroy">sessionDestroy</a></li><li><a href="global.html#sessionLoad">sessionLoad</a></li><li><a href="global.html#sessionSave">sessionSave</a></li><li><a href="global.html#unregister">unregister</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Aug 22 2024 23:35:52 GMT+0200 (Mitteleuropäische Sommerzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sat Aug 24 2024 23:44:46 GMT+0200 (Mitteleuropäische Sommerzeit)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -10,11 +10,15 @@ function disableCheck(submit) {
         button.disabled=false;
         button.classList.remove("disable");
         button.style.color="";
+        button.style.filter="";
+        button.style.cursor="pointer";
     } else 
     if (!button.disabled) {
         button.disabled=true;
         button.classList.add("disable");
-        button.style.color="yellow";
+        button.style.filter="greyscale(100%) brightness(1.5)";
+        button.style.cursor="not-allowed";
+
     }
 
 }
@@ -46,10 +50,22 @@ function inputFilled(list) {
  * 
  * @param {array} list - List of ids in the interface 
  */
-function sendButton(list) {
+function sendButton(event,list) {
     let submit = inputFilled(list);
     disableCheck(submit);
+    addValidationMessage(event.target);
 }
+
+function addValidationMessage(element) {
+    let msg=document.getElementById(element.id+"-msg");
+    if (msg) {
+        if (!element.checkValidity()) {
+            msg.innerHTML = element.validationMessage;
+        } else {
+            msg.innerHTML = "";
+        }    
+    }
+}    
 
 
 /**
@@ -57,7 +73,8 @@ function sendButton(list) {
  */
 function initEventListener(list) {
     for (let item of list) {
-        document.getElementById(item).addEventListener("input",() => sendButton(list));
+        document.getElementById(item).addEventListener("input",(event) => sendButton(event,list));
     }
-    sendButton(list);
+    let submit = inputFilled(list);
+    disableCheck(submit);
 }

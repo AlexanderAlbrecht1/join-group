@@ -1,3 +1,9 @@
+/**
+ * Returns the full path of the table in the firebase
+ * 
+ * @param {object} table 
+ * @returns - full path of the table in the firebase
+ */
 function getPath(table) {
     let url="https://join-group-10487-default-rtdb.europe-west1.firebasedatabase.app/";
     let project="join-group/";
@@ -5,6 +11,8 @@ function getPath(table) {
     let path=url+project+table+".json";
     return path;
 }
+
+
 /**
  * fetch action
  * 
@@ -21,6 +29,7 @@ async function fetchUrl(table,options) {
     }
     return response;
 }
+
 
 /**
  * fetch an url, translate to a json and give it back
@@ -42,6 +51,7 @@ async function getResponse(table,options) {
     }
 }
 
+
 /**
  * Userinterface for fetching Data
  * 
@@ -52,11 +62,12 @@ async function loadData(table) {
         method: "GET",
         header: {
             'Content-type': 'application/json; charset=UTF-8',
-        },
+        }
     };
     return await getResponse(table,options);
 }
  
+
 /**
  * Userinterface for saving Data overwrite
  * 
@@ -70,16 +81,17 @@ async function saveData(table,data = {}) {
         header: {
             'Content-type': 'application/json; charset=UTF-8'
         },
-
         body: JSON.stringify(data)
     };
     return await getResponse(table,options);    
 }
 
+
 /**
+ * Returns the next available ID of a Table
  * 
  * @param {object} data JSON Arra width Data that contains id 
- * @returns 
+ * @returns - highest ID + 1
  */
 function getNewId(data) {
     if (data.length == 0) return -1;

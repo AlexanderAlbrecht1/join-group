@@ -176,3 +176,7 @@ function initEventListenerLogin() {
     initEventListener(list);
 }
 
+function init() {
+    loadUserFromLocalStorage();
+    initEventListenerLogin();
+}

@@ -26,13 +26,21 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>function getPath(table) {
+            <pre class="prettyprint source linenums"><code>/**
+ * Returns the full path of the table in the firebase
+ * 
+ * @param {object} table 
+ * @returns - full path of the table in the firebase
+ */
+function getPath(table) {
     let url="https://join-group-10487-default-rtdb.europe-west1.firebasedatabase.app/";
     let project="join-group/";
 
     let path=url+project+table+".json";
     return path;
 }
+
+
 /**
  * fetch action
  * 
@@ -49,6 +57,7 @@ async function fetchUrl(table,options) {
     }
     return response;
 }
+
 
 /**
  * fetch an url, translate to a json and give it back
@@ -70,21 +79,23 @@ async function getResponse(table,options) {
     }
 }
 
+
 /**
  * Userinterface for fetching Data
  * 
  * @returns {object} - JSON arrary of data
  */
-async function loadData() {
+async function loadData(table) {
     let options={
         method: "GET",
         header: {
             'Content-type': 'application/json; charset=UTF-8',
         }
     };
-    return await getResponse(options);
+    return await getResponse(table,options);
 }
  
+
 /**
  * Userinterface for saving Data overwrite
  * 
@@ -98,10 +109,25 @@ async function saveData(table,data = {}) {
         header: {
             'Content-type': 'application/json; charset=UTF-8'
         },
-
         body: JSON.stringify(data)
     };
     return await getResponse(table,options);    
+}
+
+
+/**
+ * Returns the next available ID of a Table
+ * 
+ * @param {object} data JSON Arra width Data that contains id 
+ * @returns - highest ID + 1
+ */
+function getNewId(data) {
+    if (data.length == 0) return -1;
+    let max=0;
+    for (let i=0;i&lt;data.length;i++) {
+        if (data.id>max) max=+data.id;
+    }
+    return max+1;
 }
 </code></pre>
         </article>
@@ -113,13 +139,13 @@ async function saveData(table,data = {}) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#clearLocalStorage">clearLocalStorage</a></li><li><a href="global.html#fetchUrl">fetchUrl</a></li><li><a href="global.html#getResponse">getResponse</a></li><li><a href="global.html#isLoginCorrect">isLoginCorrect</a></li><li><a href="global.html#loadData">loadData</a></li><li><a href="global.html#loadFromLocalStorage">loadFromLocalStorage</a></li><li><a href="global.html#loadUserFromLocalStorage">loadUserFromLocalStorage</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#openDashboard">openDashboard</a></li><li><a href="global.html#openPage">openPage</a></li><li><a href="global.html#rememberMe">rememberMe</a></li><li><a href="global.html#removeKeyInLocalStorage">removeKeyInLocalStorage</a></li><li><a href="global.html#saveData">saveData</a></li><li><a href="global.html#saveToLocalStorage">saveToLocalStorage</a></li><li><a href="global.html#saveUserToLocalStorage">saveUserToLocalStorage</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addUserToList">addUserToList</a></li><li><a href="global.html#clearLocalStorage">clearLocalStorage</a></li><li><a href="global.html#clearLogin">clearLogin</a></li><li><a href="global.html#disableCheck">disableCheck</a></li><li><a href="global.html#existUser">existUser</a></li><li><a href="global.html#fetchUrl">fetchUrl</a></li><li><a href="global.html#getNewId">getNewId</a></li><li><a href="global.html#getPath">getPath</a></li><li><a href="global.html#getResponse">getResponse</a></li><li><a href="global.html#getUserList">getUserList</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initEventListener">initEventListener</a></li><li><a href="global.html#initEventListenerLogin">initEventListenerLogin</a></li><li><a href="global.html#initEventListenerRegister">initEventListenerRegister</a></li><li><a href="global.html#inputFilled">inputFilled</a></li><li><a href="global.html#isEqualPassword">isEqualPassword</a></li><li><a href="global.html#isLogged">isLogged</a></li><li><a href="global.html#isLoginCorrect">isLoginCorrect</a></li><li><a href="global.html#loadData">loadData</a></li><li><a href="global.html#loadFromLocalStorage">loadFromLocalStorage</a></li><li><a href="global.html#loadUserFromLocalStorage">loadUserFromLocalStorage</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#msgBox">msgBox</a></li><li><a href="global.html#openDashboard">openDashboard</a></li><li><a href="global.html#openPage">openPage</a></li><li><a href="global.html#passwordValidationOK">passwordValidationOK</a></li><li><a href="global.html#putLoginToValue">putLoginToValue</a></li><li><a href="global.html#register">register</a></li><li><a href="global.html#rememberMe">rememberMe</a></li><li><a href="global.html#removeKeyInLocalStorage">removeKeyInLocalStorage</a></li><li><a href="global.html#removeUser">removeUser</a></li><li><a href="global.html#saveData">saveData</a></li><li><a href="global.html#saveToLocalStorage">saveToLocalStorage</a></li><li><a href="global.html#saveUserToLocalStorage">saveUserToLocalStorage</a></li><li><a href="global.html#sendButton">sendButton</a></li><li><a href="global.html#sessionDestroy">sessionDestroy</a></li><li><a href="global.html#sessionLoad">sessionLoad</a></li><li><a href="global.html#sessionSave">sessionSave</a></li><li><a href="global.html#unregister">unregister</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Aug 22 2024 23:35:52 GMT+0200 (Mitteleuropäische Sommerzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sat Aug 24 2024 23:44:46 GMT+0200 (Mitteleuropäische Sommerzeit)
 </footer>
 
 <script> prettyPrint(); </script>

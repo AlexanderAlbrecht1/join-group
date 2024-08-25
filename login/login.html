@@ -10,8 +10,10 @@
         <script src="../js/localStorage.js"></script>
         <script src="../js/session.js"></script>
         <script src="./js/login.js"></script>
+        <script src="./js/events.js"></script>
+        
     </head>
-    <body onload="loadUserFromLocalStorage()">
+    <body onload="init()">
 
         <div>
             <h2>Login</h2>
@@ -19,8 +21,10 @@
             <form onsubmit="login();return false;">
                 <label for="email">e-mail:</label>
                 <input type="email" id="email" required>
+                <div id="email-msg" class="msg-red"></div>
                 <label for="password">Password:</label>
                 <input type="password" id="password" required>
+                <div id="password-msg" class="msg-red"></div>
                 <button id="submit" type="submit">Login</button>
                 <label>
                     <input type="checkbox" id="remember-me">

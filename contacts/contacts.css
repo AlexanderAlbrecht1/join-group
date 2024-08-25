@@ -1,5 +1,6 @@
 body {
     display: flex;
+    flex-direction: column;
 }
 
 .contact {
@@ -21,7 +22,7 @@ body {
     flex: 1;
     padding: 64px;
     position: fixed;
-    top: 0;
+    top: 64px;
     right: 0;
     align-items: flex-start;
     width: 60vw;
@@ -48,3 +49,33 @@ body {
 .buttons {
     display: flex;
 }
+
+.displayNone {
+    display: none;
+}
+
+.overflowHidden {
+    overflow: hidden;
+}
+
+.dialogBackground {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 500;
+}
+
+.addContact {
+    background-color: grey;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;    
+    height: 50vh;
+}
+

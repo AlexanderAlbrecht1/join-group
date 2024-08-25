@@ -87,6 +87,7 @@ function addToContact() {
     contacts.push(newContact);
     clearInput(newName, newEmail, newPhone);
     /*saveData('Contacts',contacts); */ // push to Firebase
+    closeContactCreation();
     loadContacts();
 }
 
@@ -139,6 +140,34 @@ function findContact(name) {
     return null;
 }
 
+function openCreateContactDialog() {
+    let dialogBackground = document.getElementById('dialogBackground');
+    document.getElementById('body').classList.add('overflowHidden')
+    dialogBackground.classList.remove('displayNone');
+    dialogBackground.innerHTML = '';
+    dialogBackground.innerHTML = `
+            
+    <div class="addContact" onclick="dontClose(event)">
+        <form onsubmit="addToContact();return false;">
+            <input required id="name" type="text" placeholder="name" />
+            <input required id="email" type="email" placeholder="e-mail" />
+            <input id="phone" type="number" placeholder="phone number" />
+            <button type="submit">Add new contact "icon"</button>
+        </form>
+    </div>
+
+    `;
+    
+}
+
+function closeContactCreation() {
+    document.getElementById('dialogBackground').classList.add('displayNone');
+    document.getElementById('body').classList.remove('overflowHidden');
+}
+
+function dontClose() {
+    event.stopPropagation();
+}
 
 
 

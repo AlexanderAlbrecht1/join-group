@@ -39,7 +39,7 @@ function existUser(userList) {
     let email=document.getElementById("email").value;
     let index=userList.findIndex(element =>  element.email == email);
     if (index != -1) {
-        msgBox(`E-mail already exist. Please choose another e-mail. <br>${email}, <a href="../login/login.html">login at your existing account ?`);
+        msgBox(`E-mail already exist. Please choose another e-mail. <br>${email}, <a href="./login.html">login at your existing account ?`);
     }
     return index != -1;
 }
@@ -56,6 +56,7 @@ async function addUserToList(userList) {
     userList.push({user:user.value,password: password.value,email: email.value});
     await saveData("user",userList);
 }
+
 
 /**
  * Register new User 
@@ -114,7 +115,7 @@ async function unregister() {
         if (passwordValidationOK(userList[index].password)) {
             removeTasksOf(email.value);    // Remove all Tasks of the user
             removeUser(userList,index);    // remove all Userinformation and cleanup
-            openPage("../login/login.html");
+            openPage("./login.html");
         }
     } else {
         msgBox(`User doesn't exist`);

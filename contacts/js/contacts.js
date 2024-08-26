@@ -29,6 +29,8 @@ let contacts = [
 
 let splittedName = [];
 
+let currentContact = [];
+
 function loadContacts() {
     document.getElementById('showContacts').innerHTML = '';
     document.getElementById('contactDetail').innerHTML = '';
@@ -54,10 +56,10 @@ function loadContacts() {
             let mail = contact.email;
             let phone = contact.phone;
             let initial1 = Array.from(name)[0].toUpperCase();
-            let initial2 = Array.from(lastname)[0].toUpperCase();
+            let initial2 = Array.from(lastname)[0].toUpperCase(); 
 
             document.getElementById('showContacts').innerHTML += `
-            <div onclick="openContact(${i},'${initial1}','${initial2}','${name}','${lastname}','${mail}','${phone}')" class="contact" id="contact${i}">
+            <div onclick="openContact(${i},'${initial1}','${initial2}','${name}','${lastname}','${mail}','${phone}'), getCurrentContact('${contact}')" class="contact" id="contact${i}">
                 <div class="icon${i}">
                     <span>${initial1}${initial2}</span>
                 </div>
@@ -66,8 +68,19 @@ function loadContacts() {
                     <span>${mail}</span>
                 </div>
             </div>
-            `;
+            `;  
         };
+    }
+}
+// Object erstellen und Übergeben für Aufruf einzelne Userdaten
+function getCurrentContact(contact) {
+    currentContact = {
+        "name": contact.name,
+        "lastname": contact.lastname,
+        "mail": contact.email,
+        "phone" :contact.phone,
+        "initial1" : Array.from(contact.name)[0].toUpperCase(),
+        "initial2" : Array.from(contact.lastname)[0].toUpperCase(),
     }
 }
 
@@ -166,7 +179,7 @@ function openCreateContactDialog() {
     </div>
 
     `;
-    
+
 }
 
 function closeContactCreation() {
@@ -187,8 +200,8 @@ function dontClose(event) {
  * @returns the first characters of the 2 first Names in uppercase
  */
 function getMonogram(name) {
-    let na=name.toUpperCase().split(" ",2);
-    return na[0][0]+na[1][0];
+    let na = name.toUpperCase().split(" ", 2);
+    return na[0][0] + na[1][0];
 }
 
 
@@ -200,13 +213,13 @@ function getMonogram(name) {
  * @param {string} b - second name to compare
  * @returns - true if Contact 1 is earlier in alphabet than Contact 2 
  */
-function compareContactNames(a,b) {
+function compareContactNames(a, b) {
     if (a == null) return 1;
     if (b == null) return -1;
     const c = a.name.localeCompare(b.name);
     if (c === 0) {
         return a.lastname.localeCompare(b.lastname);
-    }    
+    }
     return c;
 }
 
@@ -218,8 +231,8 @@ function compareContactNames(a,b) {
  * @param {object} contacts - object list of contacts
  * @returns - sorted object
  */
-function sortContacts(contacts)  {
-    return contacts.sort((a, b) => compareContactNames(a,b));
+function sortContacts(contacts) {
+    return contacts.sort((a, b) => compareContactNames(a, b));
 }
 
 
@@ -231,7 +244,7 @@ function sortContacts(contacts)  {
  * @returns - a line of contact in html
  */
 function getHTMLContactSelection(contact) {
-    let name=contact.name + " " + contact.lastname;
+    let name = contact.name + " " + contact.lastname;
     return `
     <label>${getMonogram(name)} ${name}<input type="checkbox" name="assign" value="${contact.id}" /></label>    
     `
@@ -245,7 +258,7 @@ function getHTMLContactSelection(contact) {
  * @returns - contact list
  */
 async function loadSortedContactList() {
-    let c=await loadData("Contacts");
+    let c = await loadData("Contacts");
     if (c != null) {
         return sortContacts(c);
     }
@@ -259,11 +272,11 @@ async function loadSortedContactList() {
  */
 function renderContactList(contacts) {
     if (contacts == null) return;
-    let html="";
-    for(let contact of contacts) {
-        html+=getHTMLContactSelection(contact);
+    let html = "";
+    for (let contact of contacts) {
+        html += getHTMLContactSelection(contact);
     }
-    document.getElementById("checkboxes").innerHTML=html;
+    document.getElementById("checkboxes").innerHTML = html;
 }
 
 
@@ -272,7 +285,7 @@ function renderContactList(contacts) {
  */
 async function initContactList() {
     // isLogged();
-    let contacts=await loadSortedContactList();
+    let contacts = await loadSortedContactList();
     renderContactList(contacts);
 }
 
@@ -302,9 +315,9 @@ function openEditContactDialog(mail) {
     document.getElementById('name').value = name + ' ' + lastname;
     document.getElementById('email').value = mail;
     document.getElementById('phone').value = phone;
-    
+
 
     console.log(findContact(`${mail}`));
-    
-    
+
+
 }

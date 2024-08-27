@@ -208,17 +208,17 @@ async function deleteContact(index) {
    // await loadContacts();
    contacts.splice(index, 1);
    // contacts.splice(findContact(`${i}`), 1);
-   saveContacts();
+   await saveContacts();
    displayContacts();
    closeContactCreation();
 }
 
 //return contacts.findIndex(e => e.email === name); sollte auch gehen :), dann ist der NOT Found wert -1  (Jörg)
 
-function findContact(name) {
+function findContact(id) {
    for (let i = 0; i < contacts.length; i++) {
-      if (contacts[i].email === name) {
-         return [i];
+      if (contacts[i].id === id) {
+         return i;
       }
    }
    return null;
@@ -354,7 +354,7 @@ function openEditContactDialog(index) {
    let lastname = contacts[index].lastname;
    let mail = contacts[index].email;
    let phone = contacts[index].phone;
-   
+
    let dialogBackground = document.getElementById('dialogBackground');
    document.getElementById('body').classList.add('overflowHidden');
    dialogBackground.classList.remove('displayNone');

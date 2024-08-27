@@ -31,7 +31,7 @@ async function displayContacts() {
          let initial2 = Array.from(lastname)[0].toUpperCase();
 
          document.getElementById("showContacts").innerHTML += `
-            <div onclick="getId(${ID}), getCurrentContact(${i}), openContact(${i},'${initial1}','${initial2}','${name}','${lastname}','${mail}','${phone}')" class="contact" id="contact${i}">
+            <div onclick="getId(${ID}), getCurrentContact(${ID}), openContact()" class="contact" id="contact${i}">
                 <div class="icon${i}">
                     <span>${initial1}${initial2}</span>
                 </div>
@@ -50,8 +50,9 @@ function getId(ID) {
    
 }
 
-function getCurrentContact(i) {
-   let contact = contacts[i];
+function getCurrentContact(id) {
+   let index = findContact(id);
+   let contact = contacts[index];
    currentContact = [];
          currentContact = {
             "id" : contact.id,
@@ -124,8 +125,14 @@ function clearInput(newName, newEmail, newPhone) {
 
 // Das werden die anmeckern mit sovielen Parametern
 // Meine Idee die Variabelen all in ein JSON zu packen (Jörg)
-function openContact(i, initial1, initial2, name, lastname, mail, phone) {
-   console.log();
+function openContact() {
+   console.log(currentContact);
+         let name = currentContact.name;
+         let lastname = currentContact.lastname;
+         let mail = currentContact.email;
+         let phone = currentContact.phone;
+         let initial1 = Array.from(name)[0].toUpperCase();
+         let initial2 = Array.from(lastname)[0].toUpperCase();
    document.getElementById("contactDetail").innerHTML = "";
    document.getElementById("contactDetail").innerHTML = `
     <div class="name">
@@ -133,7 +140,7 @@ function openContact(i, initial1, initial2, name, lastname, mail, phone) {
         <div class="fullName">
           <span>${name} ${lastname}</span>
           <div class="buttons">
-            <button onclick="openEditContactDialog('${mail}')">Edit</button>
+            <button onclick="openEditContactDialog()">Edit</button>
             <button onclick="deleteContact('${mail}')">Delete</button>
           </div>
         </div>
@@ -158,9 +165,9 @@ async function deleteContact(i) {
 }
 
 //return contacts.findIndex(e => e.email === name); sollte auch gehen :), dann ist der NOT Found wert -1  (Jörg)
-function findContact(name) {
+function findContact(id) {
    for (let i = 0; i < contacts.length; i++) {
-      if (contacts[i].email === name) {
+      if (contacts[i].id === id) {
          return [i];
       }
    }
@@ -294,11 +301,12 @@ async function initContactList() {
 }
 
 
-function openEditContactDialog(mail) {
-   let index = findContact(mail);
-   let name = contacts[index].name;
-   let lastname = contacts[index].lastname;
-   let phone = contacts[index].phone;
+function openEditContactDialog(id) {
+   
+   let name = currentContact.name;
+   let lastname = currentContact.lastname;
+   let mail = currentContact.email;
+   let phone = currentContact.phone;
    let dialogBackground = document.getElementById('dialogBackground');
    document.getElementById('body').classList.add('overflowHidden');
    dialogBackground.classList.remove('displayNone');
@@ -310,7 +318,7 @@ function openEditContactDialog(mail) {
            <input required id="name" type="text" placeholder="name" />
            <input required id="email" type="email" placeholder="e-mail" />
            <input id="phone" type="text" placeholder="phone number" />
-           <button onclick="deleteContact('${mail}')">delete</button>
+           <button onclick="deleteContact(${id})">delete</button>
            <button>Save"icon"</button>
        
    </div>

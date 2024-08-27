@@ -1,5 +1,6 @@
 let contacts = []
 let splittedName = [];
+let currentContact = [];
 
 async function displayContacts() {
    contacts=await loadContacts();
@@ -21,6 +22,7 @@ async function displayContacts() {
       document.getElementById("showContacts").innerHTML += `\n${letter}`;
       for (let i = 0; i < contacts.length; i++) {
          let contact = contacts[i];
+         let ID = contact.id;
          let name = contact.name;
          let lastname = contact.lastname;
          let mail = contact.email;
@@ -29,7 +31,7 @@ async function displayContacts() {
          let initial2 = Array.from(lastname)[0].toUpperCase();
 
          document.getElementById("showContacts").innerHTML += `
-            <div onclick="openContact(${i},'${initial1}','${initial2}','${name}','${lastname}','${mail}','${phone}')" class="contact" id="contact${i}">
+            <div onclick="getId(${ID}), getCurrentContact(${i}), openContact(${i},'${initial1}','${initial2}','${name}','${lastname}','${mail}','${phone}')" class="contact" id="contact${i}">
                 <div class="icon${i}">
                     <span>${initial1}${initial2}</span>
                 </div>
@@ -41,6 +43,23 @@ async function displayContacts() {
             `;
       }
    }
+}
+
+function getId(ID) {
+   console.log(ID);
+   
+}
+
+function getCurrentContact(i) {
+   let contact = contacts[i];
+   currentContact = [];
+         currentContact = {
+            "id" : contact.id,
+            "name": contact.name,
+            "lastname" : contact.lastname,
+            "email" : contact.email,
+            "phone" : contact.phone,
+         }
 }
 
 async function loadContacts(table="Contacts") {
@@ -108,7 +127,7 @@ function clearInput(newName, newEmail, newPhone) {
 function openContact(i, initial1, initial2, name, lastname, mail, phone) {
    console.log();
    document.getElementById("contactDetail").innerHTML = "";
-   document.getElementById("contactDetail").innerHTML += `
+   document.getElementById("contactDetail").innerHTML = `
     <div class="name">
         <span>${initial1}${initial2}</span>
         <div class="fullName">

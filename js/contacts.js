@@ -1,5 +1,4 @@
 let contacts = [];
-let splittedName = [];
 
 async function displayContacts() {
    contacts = await loadContacts();
@@ -116,7 +115,8 @@ async function addNewContact() {
    let newName = document.getElementById("name");
    let newEmail = document.getElementById("email");
    let newPhone = document.getElementById("phone");
-   splitName(newName.value);
+   let fullname = newName.value;
+   let splittedName = fullname.split(' ');
    let newFirstname = splittedName[0];
    let newLastname = splittedName[1];
    let color = generateDarkColor();
@@ -155,11 +155,6 @@ function getNewId(contacts) {
    }, 0);
 
    return maxId + 1; // Erhöhe die höchste ID um 1
-}
-
-function splitName(name) {
-   let fullname = name;
-   splittedName = fullname.split(' ');
 }
 
 function clearInput(newName, newEmail, newPhone) {
@@ -388,7 +383,8 @@ async function saveEditedContact(id) {
    let newName = document.getElementById("name");
    let newEmail = document.getElementById("email");
    let newPhone = document.getElementById("phone");
-   splitName(newName.value);
+   let fullname = newName.value;
+   let splittedName = fullname.split(' ');
    let newFirstname = splittedName[0];
    let newLastname = splittedName[1];
    let newContact = {

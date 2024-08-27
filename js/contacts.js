@@ -116,23 +116,6 @@ saveContacts("Contacts/" + id)
 contacts=loadContacts("Contacts/" + id)
 */ 
 
-async function getHighestId(table) {
-   let setupContact=await loadData(`tablesetup/${table}`);
-   if (setupContact == null) return 0;
-   return setupContact.lastId;
-}
-
-async function setHighestId(table,id) {
-   let row={lastId:id};
-   await saveData(`tablesetup/${table}`,row);
-   return;
-}
-
-async function getIncrementedId(table) {
-   let id=await getHighestId(table)+1;
-   await setHighestId(table,id);
-   return id;
-}
 
 
 /**
@@ -149,8 +132,8 @@ async function addNewContact() {
    let newFirstname = splittedName[0];
    let newLastname = splittedName[1];
    let color = generateDarkColor();
-   let newID = getNewId(contacts);
-   console.log('Generated ID:', newID);
+   // let newID = getNewId(contacts);
+   console.log('Generated ID:', id);
    let newContact = {
       id: id,
       name: newFirstname,

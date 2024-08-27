@@ -93,7 +93,7 @@ async function saveData(table,data = {}) {
 
 
 /**
- * Returns the next available ID of a Table
+ * Returns the next available ID of a Table by iterating
  * 
  * @param {object} data JSON Arra width Data that contains id 
  * @returns - highest ID + 1
@@ -106,3 +106,54 @@ function getNewId(data) {
     }
     return max+1;
 }
+
+
+/**
+ * 
+ * Returns the saved Highes Id of a database table
+ * the higest id we store in a seperate File
+ * 
+ * @param {string} table - the name of the table the id we use from
+ * @returns -  the saved Highes Id of a database table
+ */
+async function getHighestId(table) {
+    let setupContact=await loadData(`tablesetup/${table}`);
+    if (setupContact == null) return 0;
+    return setupContact.lastId;
+ }
+ 
+
+/**
+ * 
+ * saves the new id in the setuptable
+ * @param {string} table 
+ * @param {integer} id 
+ * @returns 
+ */
+ async function setHighestId(table,id) {
+    let row={lastId:id};
+    await saveData(`tablesetup/${table}`,row);
+    return;
+ }
+ 
+
+/**
+ * 
+ * increments the Id of a table and gives back th highest id + 1
+ * then we returns the ne id  
+ * the higest id we store in a seperate File
+ * 
+ * @param {string} table - the name of the table the id we use from
+ * @returns -  the saved Highes Id of a database table 
+ */
+async function getIncrementedId(table) {
+    let id=await getHighestId(table)+1;
+    await setHighestId(table,id);
+    return id;
+ }
+ 
+
+ async function getDatasetById(table,id) {
+    let content=loadData(table+"/"+id);
+
+ }

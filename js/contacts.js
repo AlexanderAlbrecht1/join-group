@@ -189,8 +189,8 @@ function showSingleContact(id) {
         <div class="fullName">
           <span>${name} ${lastname}</span>
           <div class="buttons">
-            <button onclick="openEditContactDialog(${index})">Edit</button>
-            <button onclick="deleteContact(${index})">Delete</button>
+            <button onclick="openEditContactDialog(${id})">Edit</button>
+            <button onclick="deleteContact(${id})">Delete</button>
           </div>
         </div>
       </div>
@@ -204,7 +204,8 @@ function showSingleContact(id) {
     `;
 }
 
-async function deleteContact(index) {
+async function deleteContact(id) {
+   let index = getCurrentContact(id);
    // await loadContacts();
    contacts.splice(index, 1);
    // contacts.splice(findContact(`${i}`), 1);
@@ -349,7 +350,8 @@ async function initContactList() {
    let contacts = await loadSortedContactList();
    renderContactList(contacts);
 }
-function openEditContactDialog(index) {
+function openEditContactDialog(id) {
+   let index = getCurrentContact(id);
    let name = contacts[index].name;
    let lastname = contacts[index].lastname;
    let mail = contacts[index].email;
@@ -366,7 +368,7 @@ function openEditContactDialog(index) {
       <input required id="name" type="text" placeholder="name" />
       <input required id="email" type="email" placeholder="e-mail" />
       <input id="phone" type="text" placeholder="phone number" />
-      <button onclick="deleteContact(${index})">delete</button>
+      <button onclick="deleteContact(${id})">delete</button>
       <button>Save"icon"</button>
        
    </div>

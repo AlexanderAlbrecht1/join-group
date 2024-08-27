@@ -1,11 +1,20 @@
-let contacts = []
+let contacts = [];
 let splittedName = [];
 let currentContact = [];
 
 async function displayContacts() {
-   contacts=await loadContacts();
-   document.getElementById("showContacts").innerHTML = "";
-   document.getElementById("contactDetail").innerHTML = "";
+   contacts = await loadContacts();
+   contacts = contacts.filter(
+      (contact) =>
+         contact &&
+         contact.id &&
+         contact.name &&
+         contact.lastname &&
+         contact.email &&
+         contact.phone
+   );
+   document.getElementById('showContacts').innerHTML = '';
+   document.getElementById('contactDetail').innerHTML = '';
    contacts.sort((a, b) => a.name.localeCompare(b.name));
 
    let groupedContacts = contacts.reduce((groups, contact) => {
@@ -19,7 +28,7 @@ async function displayContacts() {
    }, {});
 
    for (let [letter, contacts] of Object.entries(groupedContacts)) {
-      document.getElementById("showContacts").innerHTML += `\n${letter}`;
+      document.getElementById('showContacts').innerHTML += `\n${letter}`;
       for (let i = 0; i < contacts.length; i++) {
          let contact = contacts[i];
          let ID = contact.id;
@@ -30,8 +39,8 @@ async function displayContacts() {
          let initial1 = Array.from(name)[0].toUpperCase();
          let initial2 = Array.from(lastname)[0].toUpperCase();
 
-         document.getElementById("showContacts").innerHTML += `
-            <div onclick="getId(${ID}), getCurrentContact(${i}), openContact(${i},'${initial1}','${initial2}','${name}','${lastname}','${mail}','${phone}')" class="contact" id="contact${i}">
+         document.getElementById('showContacts').innerHTML += `
+            <div onclick="getId(${ID}), getCurrentContact(${i}), openContact(${i},'${initial1}','${initial2}','${name}','${lastname}','${mail}','${phone}')" class="contact" id="contact${i} style="background-color: ${contact.color};">
                 <div class="icon${i}">
                     <span>${initial1}${initial2}</span>
                 </div>
@@ -47,27 +56,49 @@ async function displayContacts() {
 
 function getId(ID) {
    console.log(ID);
-   
 }
 
 function getCurrentContact(i) {
    let contact = contacts[i];
    currentContact = [];
-         currentContact = {
-            "id" : contact.id,
-            "name": contact.name,
-            "lastname" : contact.lastname,
-            "email" : contact.email,
-            "phone" : contact.phone,
-         }
+   currentContact = {
+      id: contact.id,
+      name: contact.name,
+      lastname: contact.lastname,
+      email: contact.email,
+      phone: contact.phone,
+   };
 }
 
-async function loadContacts(table="Contacts") {
-   return await loadData(table);
+async function loadContacts(table = 'Contacts') {
+   let loadedContacts = await loadData(table);
+
+   // Überprüfen, ob die Antwort null oder undefined ist
+   if (!loadedContacts) {
+      return []; // Gibt ein leeres Array zurück, wenn keine Kontakte vorhanden sind
+   }
+
+   // Wenn die Daten als Array oder Objekt vorliegen, konvertiere sie in ein Array
+   if (Array.isArray(loadedContacts)) {
+      return loadedContacts.filter((contact) => contact !== null); // Null-Werte entfernen
+   } else if (typeof loadedContacts === 'object' && loadedContacts !== null) {
+      return Object.values(loadedContacts).filter(
+         (contact) => contact !== null
+      );
+   }
+
+   return []; // Falls nichts geladen wurde, leeres Array zurückgeben
 }
 
-async function saveContacts(table="Contacts") {
-   return await saveData(table,contacts);  // push to Firebase}
+async function saveContacts(table = 'Contacts') {
+   return await saveData(table, contacts); // push to Firebase}
+}
+
+function generateDarkColor() {
+   const r = Math.floor(Math.random() * 129); // R=0-128
+   const g = Math.floor(Math.random() * 129); // G=0-128
+   const b = Math.floor(Math.random() * 129); // B=0-128
+   return `rgb(${r}, ${g}, ${b})`;
 }
 
 /*
@@ -83,25 +114,33 @@ for (contact of contacts) {
 
 saveContacts("Contacts/" + id)
 contacts=loadContacts("Contacts/" + id)
-*/ 
-
+*/
 
 /**
  * Neuen Kontakt erstellen
  */
 async function addNewContact() {
-   await loadContacts();
-   let newName = document.getElementById("name");
-   let newEmail = document.getElementById("email");
-   let newPhone = document.getElementById("phone");
+   contacts = await loadContacts();
+   console.log('Loaded contacts:', contacts);
+   contacts.forEach((contact, index) => {
+      console.log(`Contact ${index}:`, contact);
+   });
+   let newName = document.getElementById('name');
+   let newEmail = document.getElementById('email');
+   let newPhone = document.getElementById('phone');
    splitName(newName.value);
    let newFirstname = splittedName[0];
    let newLastname = splittedName[1];
+   let color = generateDarkColor();
+   let newID = getNewId(contacts);
+   console.log('Generated ID:', newID);
    let newContact = {
+      id: newID,
       name: newFirstname,
       lastname: newLastname,
       email: newEmail.value,
       phone: newPhone.value,
+      color: color,
    };
    contacts.push(newContact);
    saveContacts();
@@ -111,23 +150,39 @@ async function addNewContact() {
    displayContacts();
 }
 
+function getNewId(contacts) {
+   if (contacts.length === 0) {
+      return 1; // Startet bei 1, wenn keine Kontakte vorhanden sind
+   }
+
+   let maxId = contacts.reduce((max, contact) => {
+      // Prüfe, ob die ID gültig ist und größer als der aktuelle maxId
+      if (contact && typeof contact.id === 'number' && contact.id > max) {
+         return contact.id;
+      }
+      return max;
+   }, 0);
+
+   return maxId + 1; // Erhöhe die höchste ID um 1
+}
+
 function splitName(name) {
    let fullname = name;
-   splittedName = fullname.split(" ");
+   splittedName = fullname.split(' ');
 }
 
 function clearInput(newName, newEmail, newPhone) {
-   newName.value = "";
-   newEmail.value = "";
-   newPhone.value = "";
+   newName.value = '';
+   newEmail.value = '';
+   newPhone.value = '';
 }
 
 // Das werden die anmeckern mit sovielen Parametern
 // Meine Idee die Variabelen all in ein JSON zu packen (Jörg)
 function openContact(i, initial1, initial2, name, lastname, mail, phone) {
    console.log();
-   document.getElementById("contactDetail").innerHTML = "";
-   document.getElementById("contactDetail").innerHTML = `
+   document.getElementById('contactDetail').innerHTML = '';
+   document.getElementById('contactDetail').innerHTML = `
     <div class="name">
         <span>${initial1}${initial2}</span>
         <div class="fullName">
@@ -154,7 +209,6 @@ async function deleteContact(i) {
    saveContacts();
    displayContacts();
    closeContactCreation();
-
 }
 
 //return contacts.findIndex(e => e.email === name); sollte auch gehen :), dann ist der NOT Found wert -1  (Jörg)
@@ -172,10 +226,10 @@ function findContact(name) {
  * creates a contact form
  */
 function openCreateContactDialog() {
-   let dialogBackground = document.getElementById("dialogBackground");
-   document.getElementById("body").classList.add("overflowHidden");
-   dialogBackground.classList.remove("displayNone");
-   dialogBackground.innerHTML = "";
+   let dialogBackground = document.getElementById('dialogBackground');
+   document.getElementById('body').classList.add('overflowHidden');
+   dialogBackground.classList.remove('displayNone');
+   dialogBackground.innerHTML = '';
    dialogBackground.innerHTML = `
             
     <div class="addContact" onclick="dontClose(event)">
@@ -191,8 +245,8 @@ function openCreateContactDialog() {
 }
 
 function closeContactCreation() {
-   document.getElementById("dialogBackground").classList.add("displayNone");
-   document.getElementById("body").classList.remove("overflowHidden");
+   document.getElementById('dialogBackground').classList.add('displayNone');
+   document.getElementById('body').classList.remove('overflowHidden');
 }
 
 function dontClose(event) {
@@ -207,7 +261,7 @@ function dontClose(event) {
  * @returns the first characters of the 2 first Names in uppercase
  */
 function getMonogram(name) {
-   let na = name.toUpperCase().split(" ", 2);
+   let na = name.toUpperCase().split(' ', 2);
    return na[0][0] + na[1][0];
 }
 
@@ -248,12 +302,13 @@ function sortContacts(contacts) {
  * @returns - a line of contact in html
  */
 function getHTMLContactSelection(contact) {
-   let name = contact.name + " " + contact.lastname;
+   let name = contact.name + ' ' + contact.lastname;
    return `
     <label>${getMonogram(
-      name
-   )} ${name}<input type="checkbox" name="assign" value="${contact.id
-      }" /></label>    
+       name
+    )} ${name}<input type="checkbox" name="assign" value="${
+      contact.id
+   }" /></label>    
     `;
 }
 
@@ -264,7 +319,7 @@ function getHTMLContactSelection(contact) {
  * @returns - contact list
  */
 async function loadSortedContactList() {
-   let c = await loadData("Contacts");
+   let c = await loadData('Contacts');
    if (c != null) {
       return sortContacts(c);
    }
@@ -277,11 +332,11 @@ async function loadSortedContactList() {
  */
 function renderContactList(contacts) {
    if (contacts == null) return;
-   let html = "";
+   let html = '';
    for (let contact of contacts) {
       html += getHTMLContactSelection(contact);
    }
-   document.getElementById("checkboxes").innerHTML = html;
+   document.getElementById('checkboxes').innerHTML = html;
 }
 
 /**
@@ -292,7 +347,6 @@ async function initContactList() {
    let contacts = await loadSortedContactList();
    renderContactList(contacts);
 }
-
 
 function openEditContactDialog(mail) {
    let index = findContact(mail);
@@ -314,15 +368,11 @@ function openEditContactDialog(mail) {
            <button>Save"icon"</button>
        
    </div>
-   `
-   ; // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
+   `; // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
 
    document.getElementById('name').value = name + ' ' + lastname;
    document.getElementById('email').value = mail;
    document.getElementById('phone').value = phone;
 
-
    console.log(findContact(mail));
-
-
 }

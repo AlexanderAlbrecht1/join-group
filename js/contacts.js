@@ -66,11 +66,31 @@ saveContacts("Contacts/" + id)
 contacts=loadContacts("Contacts/" + id)
 */ 
 
+async function getHighestId(table) {
+   let setupContact=await loadData(`tablesetup/${table}`);
+   if (setupContact == null) return 0;
+   return setupContact.lastId;
+}
+
+async function setHighestId(table,id) {
+   let row={lastId:id};
+   await saveData(`tablesetup/${table}`,row);
+   return;
+}
+
+async function getIncrementedId(table) {
+   let id=await getHighestId(table)+1;
+   await setHighestId(table,id);
+   return id;
+}
+
 
 /**
  * Neuen Kontakt erstellen
  */
 async function addNewContact() {
+   let id=await getIncrementedId("contact");
+
    await loadContacts();
    let newName = document.getElementById("name");
    let newEmail = document.getElementById("email");
@@ -79,6 +99,7 @@ async function addNewContact() {
    let newFirstname = splittedName[0];
    let newLastname = splittedName[1];
    let newContact = {
+      id: id,
       name: newFirstname,
       lastname: newLastname,
       email: newEmail.value,
@@ -86,6 +107,9 @@ async function addNewContact() {
    };
    contacts.push(newContact);
    saveContacts();
+   // saveContacts(id,newContact);
+
+
 
    clearInput(newName, newEmail, newPhone);
    closeContactCreation();

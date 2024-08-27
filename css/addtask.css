@@ -67,3 +67,19 @@
   transform: scale(1.2);
   cursor: pointer;
 }
+
+.subtask-container {
+  width: 220px;
+  position: relative;
+}
+
+#add-subtask {
+  align-items: center;
+  position: absolute;
+  right: 50px;
+}
+
+#add-subtask:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}

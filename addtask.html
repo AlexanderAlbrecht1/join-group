@@ -57,12 +57,23 @@
 
         <label for="category">Category</label>
         <select id="category">
-            <option value="to-do" disabled selected>Select task category</option>
-            <option value="to-do">To Do</option>
-            <option value="in-progress">In Progress</option>
-            <option value="await-feedback">Await Feedback</option>
-            <option value="done">Done</option>
+            <option value="" disabled selected>Select task category</option>
+            <option value="technical-task">Technical Task</option>
+            <option value="user-story">User Story</option>
         </select>
+
+
+
+        <div class="subtask-container">
+
+            <label for="subtasks">Subtasks</label>
+            <input type="text" id="subtasks">
+            <button type="button" onclick="addSubtasks()" id="add-subtask">+</button>
+            <ul id="subtask-list">
+                
+            </ul>
+
+        </div>
 
         <button type="button" onclick="clearTaskInputs()">Clear</button>
         <input type="submit" value="Create Task">

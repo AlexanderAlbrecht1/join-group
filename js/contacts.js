@@ -1,9 +1,8 @@
 let contacts = []
 let splittedName = [];
-let currentContact = [];
 
 async function displayContacts() {
-   contacts=await loadContacts();
+   contacts = await loadContacts();
    document.getElementById("showContacts").innerHTML = "";
    document.getElementById("contactDetail").innerHTML = "";
    contacts.sort((a, b) => a.name.localeCompare(b.name));
@@ -26,12 +25,11 @@ async function displayContacts() {
          let name = contact.name;
          let lastname = contact.lastname;
          let mail = contact.email;
-         let phone = contact.phone;
          let initial1 = Array.from(name)[0].toUpperCase();
          let initial2 = Array.from(lastname)[0].toUpperCase();
 
          document.getElementById("showContacts").innerHTML += `
-            <div onclick="getId(${ID}), getCurrentContact(${ID}), openContact()" class="contact" id="contact${i}">
+            <div onclick="showSingleContact(${ID})" class="contact" id="contact${i}">
                 <div class="icon${i}">
                     <span>${initial1}${initial2}</span>
                 </div>
@@ -45,30 +43,18 @@ async function displayContacts() {
    }
 }
 
-function getId(ID) {
-   console.log(ID);
-   
-}
-
 function getCurrentContact(id) {
    let index = findContact(id);
-   let contact = contacts[index];
-   currentContact = [];
-         currentContact = {
-            "id" : contact.id,
-            "name": contact.name,
-            "lastname" : contact.lastname,
-            "email" : contact.email,
-            "phone" : contact.phone,
-         }
+   console.log(index);
+   return index;
 }
 
-async function loadContacts(table="Contacts") {
+async function loadContacts(table = "Contacts") {
    return await loadData(table);
 }
 
-async function saveContacts(table="Contacts") {
-   return await saveData(table,contacts);  // push to Firebase}
+async function saveContacts(table = "Contacts") {
+   return await saveData(table, contacts);  // push to Firebase}
 }
 
 /*
@@ -84,7 +70,7 @@ for (contact of contacts) {
 
 saveContacts("Contacts/" + id)
 contacts=loadContacts("Contacts/" + id)
-*/ 
+*/
 
 
 /**
@@ -125,14 +111,14 @@ function clearInput(newName, newEmail, newPhone) {
 
 // Das werden die anmeckern mit sovielen Parametern
 // Meine Idee die Variabelen all in ein JSON zu packen (Jörg)
-function openContact() {
-   console.log(currentContact);
-         let name = currentContact.name;
-         let lastname = currentContact.lastname;
-         let mail = currentContact.email;
-         let phone = currentContact.phone;
-         let initial1 = Array.from(name)[0].toUpperCase();
-         let initial2 = Array.from(lastname)[0].toUpperCase();
+function showSingleContact(id) {
+   let index = getCurrentContact(id);
+   let name = contacts[index].name;
+   let lastname = contacts[index].lastname;
+   let mail = contacts[index].email;
+   let phone = contacts[index].phone;
+   let initial1 = Array.from(name)[0].toUpperCase();
+   let initial2 = Array.from(lastname)[0].toUpperCase();
    document.getElementById("contactDetail").innerHTML = "";
    document.getElementById("contactDetail").innerHTML = `
     <div class="name">
@@ -140,8 +126,8 @@ function openContact() {
         <div class="fullName">
           <span>${name} ${lastname}</span>
           <div class="buttons">
-            <button onclick="openEditContactDialog()">Edit</button>
-            <button onclick="deleteContact('${mail}')">Delete</button>
+            <button onclick="openEditContactDialog(${index})">Edit</button>
+            <button onclick="deleteContact(${index})">Delete</button>
           </div>
         </div>
       </div>
@@ -155,9 +141,9 @@ function openContact() {
     `;
 }
 
-async function deleteContact(i) {
+async function deleteContact(index) {
    // await loadContacts();
-   contacts.splice(findContact(`${i}`), 1);
+   contacts.splice(index, 1);
    saveContacts();
    displayContacts();
    closeContactCreation();
@@ -301,12 +287,11 @@ async function initContactList() {
 }
 
 
-function openEditContactDialog(id) {
-   
-   let name = currentContact.name;
-   let lastname = currentContact.lastname;
-   let mail = currentContact.email;
-   let phone = currentContact.phone;
+function openEditContactDialog(index) {
+      let name = contacts[index].name;
+      let lastname = contacts[index].lastname;
+      let mail = contacts[index].email;
+      let phone = contacts[index].phone;
    let dialogBackground = document.getElementById('dialogBackground');
    document.getElementById('body').classList.add('overflowHidden');
    dialogBackground.classList.remove('displayNone');
@@ -318,12 +303,12 @@ function openEditContactDialog(id) {
            <input required id="name" type="text" placeholder="name" />
            <input required id="email" type="email" placeholder="e-mail" />
            <input id="phone" type="text" placeholder="phone number" />
-           <button onclick="deleteContact(${id})">delete</button>
+           <button onclick="deleteContact(${index})">delete</button>
            <button>Save"icon"</button>
        
    </div>
    `
-   ; // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
+      ; // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
 
    document.getElementById('name').value = name + ' ' + lastname;
    document.getElementById('email').value = mail;
@@ -334,3 +319,4 @@ function openEditContactDialog(id) {
 
 
 }
+

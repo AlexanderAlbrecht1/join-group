@@ -1,81 +1,79 @@
 body {
-    display: flex;
-    flex-direction: column;
+   display: flex;
+   flex-direction: column;
 }
 
 .contact {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
-    margin: 16px;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   gap: 16px;
+   margin: 16px;
 }
 
 .nameAndMail {
-    display: flex;
-    flex-direction: column;
+   display: flex;
+   flex-direction: column;
 }
 
 .rightSide {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: 64px;
-    position: fixed;
-    top: 64px;
-    right: 0;
-    align-items: flex-start;
-    width: 60vw;
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+   padding: 64px;
+   position: fixed;
+   top: 64px;
+   right: 0;
+   align-items: flex-start;
+   width: 60vw;
 }
 
 .heading {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+   display: flex;
+   align-items: center;
+   gap: 16px;
 }
 
 .name {
-    display: flex;
-    flex-direction: row;
-    
+   display: flex;
+   flex-direction: row;
 }
 
 .fullName {
-    display: flex;
-    flex-direction: column;
-    margin-left: 16px;
+   display: flex;
+   flex-direction: column;
+   margin-left: 16px;
 }
 
 .buttons {
-    display: flex;
+   display: flex;
 }
 
 .displayNone {
-    display: none;
+   display: none;
 }
 
 .overflowHidden {
-    overflow: hidden;
+   overflow: hidden;
 }
 
 .dialogBackground {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 500;
+   position: absolute;
+   top: 0;
+   right: 0;
+   left: 0;
+   bottom: 0;
+   background-color: rgba(0, 0, 0, 0.3);
+   z-index: 500;
 }
 
 .addContact {
-    background-color: grey;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50vw;    
-    height: 50vh;
+   background-color: grey;
+   margin: auto;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 50vw;
+   height: 50vh;
 }
-

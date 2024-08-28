@@ -4,10 +4,10 @@
  * @param {object} table 
  * @returns - full path of the table in the firebase
  */
-function getPath(table) {
+function getPath(table,id=null) {
     let url='https://join-group-10487-default-rtdb.europe-west1.firebasedatabase.app/';
     let project='join-group/';
-    let where=`?orderBy="$value"&equalTo="Peter"`;
+    let where= id==null?"":`?orderBy="id"&equalTo=${id}`;
     let path=url+project+table+".json"+where;// +`?orderBy="id"&id=10`;
     return path;
 }
@@ -20,8 +20,8 @@ function getPath(table) {
  * @param {object} options - get / put / UFT-8
  * @returns {object} - answer with content of file
 */
-async function fetchUrl(table,options) {
-    let url=getPath(table);
+async function fetchUrl(table,options,id=null) {
+    let url=getPath(table,id);
     if (options != null) {
         response = await fetch(url,options);
     } else  {
@@ -37,9 +37,9 @@ async function fetchUrl(table,options) {
  * @param {object} options - get / put / UFT-8
  * @returns - json array, false, if fails 
  */
-async function getResponse(table,options) {
+async function getResponse(table,options,id=null) {
     try {
-        response=await fetchUrl(table,options);
+        response=await fetchUrl(table,options,id);
         if (response.ok) { // 404 = page does not exist, 2XX = OK 
             const data= response.json();
             return data; // Bei Objekten, die möglicherweise nicht als Array vorliegen
@@ -58,14 +58,14 @@ async function getResponse(table,options) {
  * 
  * @returns {object} - JSON arrary of data
  */
-async function loadData(table) {
+async function loadData(table,id=null) {
     let options={
         method: "GET",
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         }
     };
-    return await getResponse(table,options);
+    return await getResponse(table,options,id);
 }
  
 
@@ -76,7 +76,7 @@ async function loadData(table) {
  * @param {object} data  - json array
  * @returns {object} - false if failes, true if succes
  */
-async function saveData(table,data = {}) {
+async function saveData(table,data = {},id=null) {
     let options=  {
         method: "PUT",
         headers: {
@@ -84,7 +84,7 @@ async function saveData(table,data = {}) {
         },
         body: JSON.stringify(data)
     };
-    return await getResponse(table,options);    
+    return await getResponse(table,options,id);    
 }
 
 
@@ -154,12 +154,33 @@ async function getIncrementedId(table) {
 
  }
 
-async function saveObjectData(table,data,id=null) {
-    saveData(table,await arrayToObject(data));
+ async function saveObjectData(table,data,id=null) {
+    await saveData(table,arrayToObject(data),id);
+} 
+
+async function saveObjectDataById(table,data) {
+    promises=[];
+    for (let d of data) {
+        promises.push(saveData(`${table}/${d.id}`,d));
+    }
+    await Promise.all(promises);
+
+
+/*    
+    table+=`/${id}`;
+    console.log(data[0]);
+    
+    await saveData(table,data[0]);
+*/
+    
 } 
 
 async function loadObjectData(table,id=null) {
     return Object.values(await loadData(table));
+} 
+
+async function loadObjectDataById(table,id=null) {
+    return Object.values(await loadData(table,id));
 } 
 
 function arrayToObject(array) {  

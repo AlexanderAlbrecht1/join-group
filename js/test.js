@@ -5,7 +5,17 @@ async function x() {
         { id: 10, vorname: "Sandra", nachname: "Quast" }
      ];
 
-     saveObjectData("test",b);
+     await saveObjectData("test",b);
+
+     let c=await loadObjectData("test");
+     console.log(c); 
+
+     let d=await loadObjectDataById("test",5);
+     console.log(d);
+     
+     d[0].vorname="Jens";
+     await saveObjectDataById("test",d,5);
+ 
 
 
     //    let d=await loadData("Contacts");

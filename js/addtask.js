@@ -1,21 +1,22 @@
 let tasks = [];
+let subtasks = [];
 
 async function addNewTask() {
-  let title = document.getElementById("title");
-  let description = document.getElementById("description");
-  let assignedTo = Array.from(
-    document.querySelectorAll('input[name="assign"]:checked')
-  ).map((checkbox) => checkbox.value);
-  let dueDate = document.getElementById("due-date");
-  let selectedPrio = document.querySelector('input[name="prio"]:checked');
-  let category = document.getElementById("category");
-  
-  tasks = await loadData("taskstorage");
+   let title = document.getElementById("title");
+   let description = document.getElementById("description");
+   let assignedTo = Array.from(
+      document.querySelectorAll('input[name="assign"]:checked')
+   ).map((checkbox) => checkbox.value);
+   let dueDate = document.getElementById("due-date");
+   let selectedPrio = document.querySelector('input[name="prio"]:checked');
+   let category = document.getElementById("category");
 
-    if (tasks === null) {
+   tasks = await loadData("taskstorage");
+
+   if (tasks === null) {
       tasks = [];
-    }
-    tasks.push({
+   }
+   tasks.push({
       id: tasks.length,
       title: title.value,
       description: description.value,
@@ -23,23 +24,31 @@ async function addNewTask() {
       dueDate: dueDate.value,
       prio: selectedPrio.value,
       category: category.value,
-    });
-    saveData("taskstorage", tasks);
-    clearTaskInputs();
-  
+      status: "to-do",
+      subtasks: subtasks,
+   });
+   saveData("taskstorage", tasks);
+   clearTaskInputs();
 }
 
 function clearTaskInputs() {
-  document.getElementById("title").value = "";
-  document.getElementById("description").value = "";
-  document
-    .querySelectorAll('input[name="assign"]')
-    .forEach((checkbox) => (checkbox.checked = false));
-  document.getElementById("due-date").value = "";
-  document
-    .querySelectorAll('input[name="prio"]')
-    .forEach((radio) => (radio.checked = false));
-  document.getElementById("category").selectedIndex = 0;
+   document.getElementById("title").value = "";
+   document.getElementById("description").value = "";
+   document
+      .querySelectorAll('input[name="assign"]')
+      .forEach((checkbox) => (checkbox.checked = false));
+   document.getElementById("due-date").value = "";
+   document.querySelectorAll('input[name="prio"]').forEach((radio) => {
+      if (radio.id == "medium") {
+         radio.checked = true;
+      } else {
+         radio.checked = false;
+      }
+   });
+
+   document.getElementById("category").selectedIndex = 0;
+   subtasks = [];
+   document.getElementById("subtask-list").innerHTML = "";
 }
 
 // Hinweis mit document.getElemebtById.syle.display == "none" oder "block" abfragen
@@ -60,18 +69,34 @@ function toggleCheckboxes() {
 let expanded = false;
 
 function showCheckboxes() {
-  let checkboxes = document.getElementById("checkboxes");
-  if (!expanded) {
-    checkboxes.style.display = "block";
-    expanded = true;
-  } else {
-    checkboxes.style.display = "none";
-    expanded = false;
-  }
+   let checkboxes = document.getElementById("checkboxes");
+   if (!expanded) {
+      checkboxes.style.display = "block";
+      expanded = true;
+   } else {
+      checkboxes.style.display = "none";
+      expanded = false;
+   }
 }
 
 function init() {
-  // isLogged();
-  initContactList(contacts);
+   // isLogged();
+   initContactList(contacts);
 }
 
+function addSubtasks() {
+   let subtaskInput = document.getElementById("subtasks");
+   let subtaskList = document.getElementById("subtask-list");
+
+   if (subtaskInput.value !== "") {
+      subtaskList.innerHTML = "";
+      subtasks.push(subtaskInput.value);
+
+      for (let i = 0; i < subtasks.length; i++) {
+         subtaskList.innerHTML += `<li>${subtasks[i]}</li>`;
+      }
+      subtaskInput.value = "";
+   } else {
+      return;
+   }
+}

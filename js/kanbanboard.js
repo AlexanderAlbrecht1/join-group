@@ -21,7 +21,7 @@ async function fetchTasks() {
 }
 
 function getTodoData(tasks) {
-   let task = tasks.filter((t) => t["category"] == "to-do");
+   let task = tasks.filter((t) => t["status"] == "to-do");
    let todoContainer = document.getElementById("todo-container");
    todoContainer.innerHTML = "";
 
@@ -31,7 +31,7 @@ function getTodoData(tasks) {
 }
 
 function getInProgressData(tasks) {
-   let inProgress = tasks.filter((t) => t["category"] == "in-progress");
+   let inProgress = tasks.filter((t) => t["status"] == "in-progress");
    let inProgressContainer = document.getElementById("in-progress-container");
    inProgressContainer.innerHTML = "";
 
@@ -41,7 +41,7 @@ function getInProgressData(tasks) {
 }
 
 function getAwaitFeedbackData(tasks) {
-   let awaitFeedback = tasks.filter((t) => t["category"] == "await-feedback");
+   let awaitFeedback = tasks.filter((t) => t["status"] == "await-feedback");
    let awaitFeedbackContainer = document.getElementById(
       "await-feedback-container"
    );
@@ -53,7 +53,7 @@ function getAwaitFeedbackData(tasks) {
 }
 
 function getDoneData(tasks) {
-   let done = tasks.filter((t) => t["category"] == "done");
+   let done = tasks.filter((t) => t["status"] == "done");
    let doneContainer = document.getElementById("done-container");
    doneContainer.innerHTML = "";
 
@@ -70,13 +70,13 @@ function drag(ev) {
    ev.dataTransfer.setData("text", ev.target.id);
 }
 
-function drop(ev, category) {
+function drop(ev, status) {
    ev.preventDefault();
    let data = ev.dataTransfer.getData("text");
    let id = data.split("-");
    let convertedId = Number(id[1]);
 
-   tasks[convertedId].category = category;
+   tasks[convertedId].status = status;
    saveData("taskstorage", tasks);
    if (ev.target.classList.contains("containers")) {
       ev.target.appendChild(document.getElementById(data));

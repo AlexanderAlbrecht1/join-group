@@ -1,5 +1,4 @@
 let contacts = [];
-let splittedName = [];
 
 async function displayContacts() {
    contacts = await loadContacts();
@@ -116,7 +115,8 @@ async function addNewContact() {
    let newName = document.getElementById("name");
    let newEmail = document.getElementById("email");
    let newPhone = document.getElementById("phone");
-   splitName(newName.value);
+   let fullname = newName.value;
+   let splittedName = fullname.split(' ');
    let newFirstname = splittedName[0];
    let newLastname = splittedName[1];
    let color = generateDarkColor();
@@ -157,11 +157,6 @@ function getNewId(contacts) {
    return maxId + 1; // Erhöhe die höchste ID um 1
 }
 
-function splitName(name) {
-   let fullname = name;
-   splittedName = fullname.split(' ');
-}
-
 function clearInput(newName, newEmail, newPhone) {
    newName.value = '';
    newEmail.value = '';
@@ -189,8 +184,8 @@ function showSingleContact(id) {
         <div class="fullName">
           <span>${name} ${lastname}</span>
           <div class="buttons">
-            <button onclick="openEditContactDialog(${index})">Edit</button>
-            <button onclick="deleteContact(${index})">Delete</button>
+            <button onclick="openEditContactDialog(${id})">Edit</button>
+            <button onclick="deleteContact(${id})">Delete</button>
           </div>
         </div>
       </div>
@@ -204,10 +199,10 @@ function showSingleContact(id) {
     `;
 }
 
-async function deleteContact(index) {
+async function deleteContact(id) {
+   let index = getCurrentContact(id);
    // await loadContacts();
    contacts.splice(index, 1);
-   // contacts.splice(findContact(`${i}`), 1);
    await saveContacts();
    displayContacts();
    closeContactCreation();
@@ -349,7 +344,8 @@ async function initContactList() {
    let contacts = await loadSortedContactList();
    renderContactList(contacts);
 }
-function openEditContactDialog(index) {
+function openEditContactDialog(id) {
+   let index = getCurrentContact(id);
    let name = contacts[index].name;
    let lastname = contacts[index].lastname;
    let mail = contacts[index].email;
@@ -366,8 +362,8 @@ function openEditContactDialog(index) {
       <input required id="name" type="text" placeholder="name" />
       <input required id="email" type="email" placeholder="e-mail" />
       <input id="phone" type="text" placeholder="phone number" />
-      <button onclick="deleteContact(${index})">delete</button>
-      <button>Save"icon"</button>
+      <button onclick="deleteContact(${id})">delete</button>
+      <button onclick="saveEditedContact(${id})">Save"icon"</button>
        
    </div>
    `; // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
@@ -377,4 +373,31 @@ function openEditContactDialog(index) {
    document.getElementById('phone').value = phone;
 
    console.log(findContact(mail));
+}
+
+async function saveEditedContact(id) {
+   let index = getCurrentContact(id);
+   let color = contacts[index].color;
+   contacts.splice(index, 1);
+   await saveContacts();
+   let newName = document.getElementById("name");
+   let newEmail = document.getElementById("email");
+   let newPhone = document.getElementById("phone");
+   let fullname = newName.value;
+   let splittedName = fullname.split(' ');
+   let newFirstname = splittedName[0];
+   let newLastname = splittedName[1];
+   let newContact = {
+      id: id,
+      name: newFirstname,
+      lastname: newLastname,
+      email: newEmail.value,
+      phone: newPhone.value,
+      color: color,
+   };
+   contacts.push(newContact);
+   await saveContacts();
+   clearInput(newName, newEmail, newPhone);
+   closeContactCreation();
+   displayContacts();
 }

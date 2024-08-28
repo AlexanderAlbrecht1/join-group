@@ -37,11 +37,11 @@ async function displayContacts() {
          let initial2 = Array.from(lastname)[0].toUpperCase();
 
          document.getElementById('showContacts').innerHTML += `
-            <div onclick="showSingleContact(${ID})" class="contact" id="contact${i}">
+            <div onclick="showSingleContact(${ID})" class="contact">
                  <div class="icon${i}">
                     <span>${initial1}${initial2}</span>
                 </div>
-                <div class="nameAndMail" id=""nameAndMail{i}"">
+                <div class="nameAndMail">
                     <span>${name} ${lastname}</span>
                     <span>${mail}</span>
                 </div>

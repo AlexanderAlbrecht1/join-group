@@ -1,6 +1,14 @@
 body {
    display: flex;
-   flex-direction: column;
+   flex-direction: row;
+   overflow: hidden;
+   margin: 0;
+   height: 100vh;
+}
+
+a {
+   color: white;
+   text-decoration: none;
 }
 
 .contact {
@@ -20,11 +28,10 @@ body {
    display: flex;
    flex-direction: column;
    flex: 1;
-   padding: 64px;
    position: fixed;
    top: 64px;
    right: 0;
-   align-items: flex-start;
+   align-items: center;
    width: 60vw;
 }
 
@@ -76,4 +83,35 @@ body {
    align-items: center;
    width: 50vw;
    height: 50vh;
+}
+
+.contactBook {
+   display: flex;
+   flex-direction: column;
+}
+
+header {
+   display: flex;
+   
+}
+
+nav {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   width: 232px;
+   align-items: center;
+   background-color: rgba(42, 54, 71, 1);
+   padding: 64px 0 64px 0;
+}
+
+.mainLinks,
+.adviceLinks {
+   display: flex;
+   flex-direction: column;
+}
+
+.workingArea {
+   display: flex;
+   flex-direction: column;
 }

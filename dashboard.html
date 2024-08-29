@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="dashboard.js"></script>
-</head>
-<body onload="window.location=`/kanbanboard.html`;">
-</body>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <script src="./js/dashboard.js"></script>
+      <script src="./js/firebase.js"></script>
+   </head>
+   <body></body>
+   <div class="dashboard">
+      <h1>Willkommen, <span id="user-name"></span></h1>
+      <div class="dashboard-stats">
+         <div>
+            <h3>To-Do</h3>
+            <p id="todo-count">0</p>
+         </div>
+         <div>
+            <h3>Done</h3>
+            <p id="done-count">0</p>
+         </div>
+         <div>
+            <h3>In Progress</h3>
+            <p id="in-progress-count">0</p>
+         </div>
+         <div>
+            <h3>Awaiting Feedback</h3>
+            <p id="awaiting-feedback-count">0</p>
+         </div>
+         <div>
+            <h3>Gesamtanzahl Aufgaben</h3>
+            <p id="total-count">0</p>
+         </div>
+      </div>
+   </div>
 </html>

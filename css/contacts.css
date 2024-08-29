@@ -133,6 +133,26 @@ header span {
    height: 32px;
 }
 
+.contactBook {
+   width: 456px;
+}
+
+button {
+   background-color: rgba(42, 54, 71, 1);
+   border: 1px rgba(42, 54, 71, 1) ;
+   color: rgba(255, 255, 255, 1);
+   border-radius: 10px;
+   width: 255px;
+   height: 56px;
+   padding:12px, 16px, 12px, 16px;
+   font-size: 21px;
+   font-weight: 700;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 16px;
+}
+
 nav {
    display: flex;
    flex-direction: column;

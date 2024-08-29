@@ -9,76 +9,80 @@
     <script src="./js/addtask.js"></script>
     <script src="./js/firebase.js"></script>
     <script src="./js/contacts.js"></script>
+    <script src="./js/session.js"></script>
 </head>
 
 <body onload="init();">
     <h1>Add Task</h1>
-    <form onsubmit="addNewTask(); return false;">
-        <label for="title">Title</label>
-        <input type="text" id="title" required>
+    <div class="add-task-container">
+        <div class="add-task-left">
+            <form onsubmit="addNewTask(); return false;">
+                <label for="title">Title</label>
+                <input type="text" id="title" required>
 
-        <label for="description">Description</label>
-        <textarea id="description"></textarea>
+                <label for="description">Description</label>
+                <textarea id="description"></textarea>
 
-        <h2>Assigned to</h2>
-        <div class="multiselect">
-            <div class="selectBox" onclick="showCheckboxes()">
-                <select>
-                    <option style="display:none;">Select contacts to assign</option>
-                </select>
-                <div class="overSelect"></div>
-            </div>
-            <div id="checkboxes">
-                <label><input type="checkbox" name="assign" value="Kontakt 1" /> Kontakt 1</label>
-                <label><input type="checkbox" name="assign" value="Kontakt 2" /> Kontakt 2</label>
-                <label><input type="checkbox" name="assign" value="Kontakt 3" /> Kontakt 3</label>
-                <label><input type="checkbox" name="assign" value="Kontakt 4" /> Kontakt 4</label>
-                <!-- Weitere Kontakte hier hinzufügen -->
-            </div>
+                <h2>Assigned to</h2>
+                <div class="multiselect">
+                    <div class="selectBox" onclick="showCheckboxes()">
+                        <select>
+                            <option style="display:none;">Select contacts to assign</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div id="checkboxes">
+                        <label><input type="checkbox" name="assign" value="Kontakt 1" /> Kontakt 1</label>
+                        <label><input type="checkbox" name="assign" value="Kontakt 2" /> Kontakt 2</label>
+                        <label><input type="checkbox" name="assign" value="Kontakt 3" /> Kontakt 3</label>
+                        <label><input type="checkbox" name="assign" value="Kontakt 4" /> Kontakt 4</label>
+                        <!-- Weitere Kontakte hier hinzufügen -->
+                    </div>
+                </div>
         </div>
+        <div class="add-task-right">
+            <label for="due-date">Due Date</label>
+            <input type="date" id="due-date" required>
 
-        <label for="due-date">Due Date</label>
-        <input type="date" id="due-date" required>
+            <br>
 
-        <br>
+            <div class="button-group">
+                <legend>Priority</legend>
+                <input type="radio" id="urgent" name="prio" value="urgent">
+                <label for="urgent" class="button-label urgent">Urgent<img src="./assets/img/desktop/prio_urgent_red.svg"></label>
 
-        <fieldset>
-            <legend>Priority</legend>
-            <label for="urgent">
-                <input type="radio" id="urgent" name="prio" value="urgent">Urgent
-            </label>
-            <label for="medium">
-                <input type="radio" id="medium" name="prio" value="medium" checked>Medium
-            </label>
-            <label for="low">
-                <input type="radio" id="low" name="prio" value="low">Low
-            </label>
-        </fieldset>
+                <input type="radio" id="medium" name="prio" value="medium" checked>
+                <label for="medium" class="button-label medium">Medium</label>
 
-        <label for="category">Category</label>
-        <select id="category">
-            <option value="" disabled selected>Select task category</option>
-            <option value="technical-task">Technical Task</option>
-            <option value="user-story">User Story</option>
-        </select>
+                <input type="radio" id="low" name="prio" value="low">
+                <label for="low" class="button-label low">Low</label>
+            </div>
 
+            <label for="category">Category</label>
+            <select id="category">
+                <option value="" disabled selected>Select task category</option>
+                <option value="technical-task">Technical Task</option>
+                <option value="user-story">User Story</option>
+            </select>
 
 
-        <div class="subtask-container">
 
-            <label for="subtasks">Subtasks</label>
-            <input type="text" id="subtasks">
-            <button type="button" onclick="addSubtasks()" id="add-subtask">+</button>
-            <ul id="subtask-list">
-                
-            </ul>
+            <div class="subtask-container">
 
+                <label for="subtasks">Subtasks</label>
+                <input type="text" id="subtasks">
+                <button type="button" onclick="addSubtasks()" id="add-subtask">+</button>
+                <ul id="subtask-list">
+
+                </ul>
+
+            </div>
+
+            <button type="button" onclick="clearTaskInputs()">Clear</button>
+            <input type="submit" value="Create Task">
+            </form>
         </div>
-
-        <button type="button" onclick="clearTaskInputs()">Clear</button>
-        <input type="submit" value="Create Task">
-    </form>
-
+    </div>
 </body>
 
 </html>

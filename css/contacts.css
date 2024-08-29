@@ -2,8 +2,10 @@ body {
    display: flex;
    flex-direction: row;
    overflow: hidden;
-   margin: 0;
+   margin: auto;
    height: 100vh;
+   max-height: 1024px;
+   max-width: 1440px;
 }
 
 a {
@@ -99,13 +101,29 @@ nav {
    display: flex;
    flex-direction: column;
    justify-content: space-between;
-   width: 232px;
    align-items: center;
+   width: 232px;
    background-color: rgba(42, 54, 71, 1);
    padding: 64px 0 64px 0;
 }
 
-.mainLinks,
+.mainLinks {
+   display: flex;
+   flex-direction: column;
+   height: 229px;
+   gap: 15px;
+}
+
+.mainLinks a {
+   height: 46px;
+   gap: 20px;
+   font-size: 16px;
+   font-weight: 400;
+   color: rgba(205, 205, 205, 1);
+   align-items: center;
+   display: flex;
+}
+
 .adviceLinks {
    display: flex;
    flex-direction: column;

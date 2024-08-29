@@ -154,8 +154,8 @@ async function getIncrementedId(table) {
 
  }
 
- async function saveObjectData(table,data,id=null) {
-    await saveData(table,arrayToObject(data),id);
+ async function saveObjectData(table,data) {
+    await saveData(table,arrayToObject(data));
 } 
 
 async function saveObjectDataById(table,data) {
@@ -164,18 +164,9 @@ async function saveObjectDataById(table,data) {
         promises.push(saveData(`${table}/${d.id}`,d));
     }
     await Promise.all(promises);
-
-
-/*    
-    table+=`/${id}`;
-    console.log(data[0]);
-    
-    await saveData(table,data[0]);
-*/
-    
 } 
 
-async function loadObjectData(table,id=null) {
+async function loadObjectData(table) {
     return Object.values(await loadData(table));
 } 
 

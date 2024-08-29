@@ -3,11 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kanban Project Management Tool</title>
-    <link rel="stylesheet" href="./css/fonts.css" />
-    <link rel="stylesheet" href="./css/general-style.css" />
-    <script src="./style.css"></script>
+    <title>Kanban Project Management Tool Join</title>
+    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="./css/stdio.css" />
     <script src="./js/firebase.js"></script>
+    <script src="./js/localStorage.js"></script>
+    <script src="./js/session.js"></script>
+    <script src="./js/loginInit.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/events.js"></script>
   </head>
-  <body></body>
+  <body onload="init()">
+    <div class="body">
+      <div class="relative">
+        <div class="absolute">
+          <div id="login-card" class="login-card">
+            <div class="login-headline">
+              <span>Log in</span>
+              <div></div>
+            </div>
+            <div class="input-area">
+              <div>
+
+                <div class="input-field-container">
+                  <div> <!-- Inputfield area widthout msg -->
+                    <div> <!-- justified content input / images --> 
+                      <input type="text">
+                      <a img="">XXXX</a> 
+                    </div>
+                  </div>
+                  <span>Fehler</span>
+                </div>
+
+                <div class="input-field-container">
+                  <div> <!-- Inputfield area widthout msg -->
+                    <div> <!-- justified content input / images --> 
+                      <input type="text">
+                      <a img="">XXXX</a> 
+                    </div>
+                  </div>
+                  <div>
+                  </div>
+                </div>
+              </div> 
+
+            </div>
+          </div>
+        </div>
+
+        <img id="main-logo" class="main-logo" src="./assets/img/desktop/join-logo.svg">
+      </div>
+    </div>
+  </body>
 </html>

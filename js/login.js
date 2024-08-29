@@ -169,3 +169,9 @@ function guestLogin() {
    document.getElementById("remember-me").checked = false;
    login();
 }
+
+
+function init() {
+   document.getElementById("login-card").classList.add("dawn");
+   document.getElementById("main-logo").classList.add("logo-position");
+}

@@ -80,8 +80,9 @@ function showCheckboxes() {
 }
 
 function init() {
-   // isLogged();
-   initContactList(contacts);
+   if (isLogged()) {
+      initContactList(contacts);
+   }
 }
 
 function addSubtasks() {

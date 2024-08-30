@@ -35,7 +35,7 @@ async function updateDashboard() {
       const doneCount = await countTasksByStatus('done');
       const inProgressCount = await countTasksByStatus('in-progress');
       const awaitingFeedbackCount = await countTasksByStatus(
-         'awaiting-feedback'
+         'await-feedback'
       );
       const totalCount = await countAllTasks();
       const userName = await loadCurrentUserName();

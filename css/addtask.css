@@ -166,7 +166,7 @@ textarea {
    display: flex;
    flex-direction: row;
    justify-content: center;
-   gap: 160px;
+   gap: 40px;
 }
 
 .add-task-left {

@@ -17,13 +17,16 @@
     <div class="add-task-container">
         <div class="add-task-left">
             <form onsubmit="addNewTask(); return false;">
-                <label for="title">Title</label>
-                <input type="text" id="title" required>
-
-                <label for="description">Description</label>
-                <textarea id="description"></textarea>
-
-                <h2>Assigned to</h2>
+                <div class="label-input-con">
+                    <label for="title">Title<span class="required-asterisk">*</span></label>
+                    <input type="text" id="title" placeholder="Enter a title" required>
+                </div>
+                <div class="label-input-con">
+                    <label for="description">Description</label>
+                    <textarea id="description" placeholder="Enter a Description"></textarea>
+                </div>
+                <div class="label-input-con">
+                <label>Assigned to</label>
                 <div class="multiselect">
                     <div class="selectBox" onclick="showCheckboxes()">
                         <select>
@@ -39,44 +42,53 @@
                         <!-- Weitere Kontakte hier hinzufügen -->
                     </div>
                 </div>
+            </div>
         </div>
+
+        <div class="vertical-line"></div>
+
         <div class="add-task-right">
-            <label for="due-date">Due Date</label>
-            <input type="date" id="due-date" required>
+            <div class="label-input-con">
+            <label for="due-date">Due Date<span class="required-asterisk">*</span></label>
+            <input type="date" id="due-date" required></div>
 
             <br>
 
             <div class="button-group">
                 <legend>Priority</legend>
                 <input type="radio" id="urgent" name="prio" value="urgent">
-                <label for="urgent" class="button-label urgent">Urgent<img id="urgent-icon" src="./assets/img/desktop/prio_urgent_red.svg"></label>
+                <label for="urgent" class="button-label urgent">Urgent<img id="urgent-icon"
+                        src="./assets/img/desktop/prio_urgent_red.svg"></label>
 
                 <input type="radio" id="medium" name="prio" value="medium" checked>
-                <label for="medium" class="button-label medium">Medium<img id="medium-icon" src="./assets/img/desktop/prio_urgent_red.svg"></label>
+                <label for="medium" class="button-label medium">Medium<img id="medium-icon"
+                        src="./assets/img/desktop/prio_medium_yellow.svg"></label>
 
                 <input type="radio" id="low" name="prio" value="low">
-                <label for="low" class="button-label low">Low <img id="low-icon" src="./assets/img/desktop/prio_urgent_red.svg"></label>
+                <label for="low" class="button-label low">Low <img id="low-icon"
+                        src="./assets/img/desktop/prio_low_green.svg"></label>
             </div>
 
-            <label for="category">Category</label>
-            <select id="category">
+            <label for="category">Category<span class="required-asterisk">*</span></label>
+            <div class="selectBox">
+            <select id="category" required>
                 <option value="" disabled selected>Select task category</option>
                 <option value="technical-task">Technical Task</option>
                 <option value="user-story">User Story</option>
             </select>
+            </div>
 
 
 
             <div class="subtask-container">
-
                 <label for="subtasks">Subtasks</label>
                 <input type="text" id="subtasks">
-                <button type="button" onclick="addSubtasks()" id="add-subtask">+</button>
+                <button type="button" onclick="addSubtasks()" id="add-subtask"><img src="./assets/img/desktop/add_subtask.svg" alt=""></button>
                 <ul id="subtask-list">
 
                 </ul>
 
-            </div>
+        </div>
 
             <button type="button" onclick="clearTaskInputs()">Clear</button>
             <input type="submit" value="Create Task">

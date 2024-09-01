@@ -26,7 +26,11 @@ async function displayContacts() {
    }, {});
 
    for (let [letter, contacts] of Object.entries(groupedContacts)) {
-      document.getElementById('showContacts').innerHTML += `\n${letter}`;
+      document.getElementById('showContacts').innerHTML += `
+      <div class="groupLetter">
+         <span>\n${letter}</span>
+      </div>
+      `;
       for (let i = 0; i < contacts.length; i++) {
          let contact = contacts[i];
          let ID = contact.id;

@@ -6,6 +6,7 @@ body {
    height: 100vh;
    max-height: 1024px;
    max-width: 1440px;
+   background-color: rgba(246, 247, 248, 1);
 }
 
 a {
@@ -29,18 +30,40 @@ a {
 .rightSide {
    display: flex;
    flex-direction: column;
-   flex: 1;
+   width: 569px;
    position: fixed;
    top: 64px;
-   right: 0;
+   margin-left: 511px;
    align-items: center;
-   width: 60vw;
+   
 }
 
 .heading {
    display: flex;
    align-items: center;
    gap: 16px;
+   height: 73px;
+   margin-top: 110px;
+   margin-left: 55px;
+}
+
+.heading h1 {
+   margin: 0;
+   margin-block: 0;
+   font-size: 61px;
+   font-weight: 700;
+}
+
+.heading div {
+   border-right: 3px solid rgba(41, 171, 226, 1);
+   height: 59px;  
+}
+
+.heading span {
+   font-size: 27px;
+   font-weight: 400;
+   height: 32px;
+   width: 235px;
 }
 
 .name {
@@ -90,6 +113,23 @@ a {
 .contactBook {
    display: flex;
    flex-direction: column;
+   width: 400px;
+   height: 928px;
+   background-color: rgba(255, 255, 255, 1);
+   padding: 32px 24px;
+   overflow-y: scroll;
+}
+
+.contactsOverview {
+   
+}
+
+.groupLetter {
+   height: 58px;
+   padding: 17px 36px;
+   gap: 8px;
+   display: flex;
+   align-items: center;
 }
 
 header {
@@ -102,6 +142,8 @@ header {
    justify-content: space-between;
    align-items: center;
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+   background-color:rgba(255, 255, 255, 1);
+   ;
 }
 
 header span {
@@ -133,24 +175,22 @@ header span {
    height: 32px;
 }
 
-.contactBook {
-   width: 456px;
-}
-
-button {
+.addNewContactButton {
    background-color: rgba(42, 54, 71, 1);
    border: 1px rgba(42, 54, 71, 1) ;
    color: rgba(255, 255, 255, 1);
    border-radius: 10px;
-   width: 255px;
+   width: 352px;
    height: 56px;
-   padding:12px, 16px, 12px, 16px;
+   padding:12px 16px;
    font-size: 21px;
    font-weight: 700;
    display: flex;
    justify-content: center;
    align-items: center;
    gap: 16px;
+   position: sticky;
+   top: 0px
 }
 
 nav {

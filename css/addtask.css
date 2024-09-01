@@ -107,49 +107,46 @@ input[type="radio"] {
    transition: background-color 0.1s;
    font-size: 21px;
    line-height: 25.2px;
+   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 input[type="radio"]:checked + .button-label.urgent {
    background-color: #ff3d00;
    color: #ffffff;
    font-weight: 700;
+   box-shadow: none;
+}
+
+input[type="radio"]:checked + .button-label.urgent img {
+   content: url("/assets/img/desktop/prio_urgent_white.svg");
+}
+
+input[type="radio"]:checked + .button-label.low img {
+   content: url("/assets/img/desktop/prio_urgent_white.svg");
+}
+
+input[type="radio"]:checked + .button-label.medium img {
+   content: url("/assets/img/desktop/prio_urgent_white.svg");
 }
 
 input[type="radio"]:checked + .button-label.medium {
    background-color: #ffc107;
    color: #ffffff;
    font-weight: 700;
+   box-shadow: none;
 }
 
 input[type="radio"]:checked + .button-label.low {
    background-color: #4caf50;
    color: #ffffff;
    font-weight: 700;
+   box-shadow: none;
 }
 
-input[type="radio"]:hover:not(:checked) + .button-label.low {
-   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+input[type="radio"]:hover:not(:checked) + .button-label {
+   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25)
 }
 
-input[type="radio"]:hover:not(:checked) + .button-label.medium {
-   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-input[type="radio"]:hover:not(:checked) + .button-label.urgent {
-   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-input[type="radio"]:not(:hover):not(:checked) + .button-label.urgent {
-   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-}
-
-input[type="radio"]:not(:hover):not(:checked) + .button-label.medium {
-   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-}
-
-input[type="radio"]:not(:hover):not(:checked) + .button-label.low {
-   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-}
 
 textarea {
   resize: none;
@@ -162,7 +159,8 @@ textarea {
   height: 100vh;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 160px;
 }
 
 .add-task-left {
@@ -180,3 +178,4 @@ textarea {
   justify-content: flex-start;
   flex-direction: column;
 }
+

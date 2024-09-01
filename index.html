@@ -1,67 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kanban Project Management Tool Join</title>
-    <link rel="stylesheet" href="./css/login.css" />
-    <link rel="stylesheet" href="./css/stdio.css" />
-    <script src="./js/firebase.js"></script>
-    <script src="./js/localStorage.js"></script>
-    <script src="./js/session.js"></script>
-    <script src="./js/loginInit.js"></script>
-    <script src="./js/login.js"></script>
-    <script src="./js/events.js"></script>
-  </head>
-  <body onload="init()">
-    <div class="body">
-      <div class="relative">
-        <div class="absolute">
-          <div id="login-card" class="login-card">
-            <div class="login-headline">
-              <span>Log in</span>
-              <div></div>
-            </div>
-            <div class="input-area">
-              <div>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Kanban Project Management Tool Join</title>
+      <link rel="stylesheet" href="./assets/font/inter.css" />
+      <link rel="stylesheet" href="./styles.css" />
+      <link rel="stylesheet" href="./css/stdio.css" />
+      <link rel="stylesheet" href="./css/login.css" />
+      <link rel="stylesheet" href="./css/customCheckbox.css" />
+      <link rel="stylesheet" href="./css/inputField.css" />
 
-                <div class="input-field-container">
-                  <div> <!-- Inputfield area widthout msg -->
-                    <div> <!-- justified content input / images --> 
-                      <input type="text">
-                      <a img="">XXXX</a> 
-                    </div>
+      <script src="./js/firebase.js"></script>
+      <script src="./js/localStorage.js"></script>
+      <script src="./js/session.js"></script>
+      <script src="./js/loginInit.js"></script>
+      <script src="./js/login.js"></script>
+      <script src="./js/events.js"></script>
+   </head>
+   <body onload="init()">
+      <div class="body">
+         <div class="relative">
+            <div class="absolute">
+               <div id="login-card" class="login-card">
+                  <div class="login-headline">
+                     
+                     <span>Log in</span>
+                     <div></div>
                   </div>
-                  <span>Fehler</span>
-                </div>
+                  <div class="input-area">
+                     <div>
 
-                <div class="input-field-container">
-                  <div> <!-- Inputfield area widthout msg -->
-                    <div> <!-- justified content input / images --> 
-                      <input type="text">
-                      <a img="">XXXX</a> 
-                    </div>
-                  </div>
-                  <div>
-                  </div>
-                </div>
-              </div> 
+                        <div class="input-field-container">
+                           <div> <!-- Inputfield area widthout msg -->
+                              <div> <!-- justified content input / images -->
+                                 <input type="email" required placeholder="your e-mail">
+                                 <img class="letter" src="./assets/img/desktop/letter.svg">
+                              </div>
+                           </div>
+                           <span>Fehler</span>
+                        </div>
 
-              <div class="remember"><!-- Remember Me area-->
+
+                        <div class="password input-field-container">
+                           <div> <!-- Inputfield area widthout msg -->
+                              <div> <!-- justified content input / images -->
+                                 <input type="password" required placeholder="your password">
+                                 <img src="./assets/img/desktop/lock.svg" onClick="togglePasswordView()">
+                              </div>
+                           </div>
+                           <div>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="remember"><!-- Remember Me area-->
+                        <label class="custom-checkbox">
+                           <input type="checkbox" id="custom-checkbox">
+                           <span class="checkbox-image"></span>
+                        </label>
+
+                        <!--
                 <div class="checkbox-container">
                   <input type="checkbox" id="custom-checkbox">
                   <label for="custom-checkbox"></label>
                 </div>
-                <!-- input type="checkbox" id="remember-me"-->
-                <span>Remember Me</span>
-              </div>
+-->
+                        <!-- input type="checkbox" id="remember-me"-->
+                        <span>Remember Me</span>
+                     </div>
 
+                  </div>
+               </div>
             </div>
-          </div>
-        </div>
 
-        <img id="main-logo" class="main-logo" src="./assets/img/desktop/join-logo.svg">
+            <img id="main-logo" class="main-logo" src="./assets/img/desktop/join-logo.svg">
+         </div>
       </div>
-    </div>
-  </body>
+   </body>
 </html>

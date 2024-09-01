@@ -119,7 +119,7 @@ body {
     width: 652px;
     height: 493px;
     max-width: calc(100% - 32px); /* Siehe Handy ansicht 32px? */
-    padding: 48px 115px 48px 115px;
+    padding: 48px min(115px,calc((100% - 300px) / 2));
     gap: 32px;
     border-radius: 30px;
     opacity: 0px;
@@ -158,8 +158,8 @@ body {
 }
 .login-card .input-area {
     gap:20px;
-    width: 422px;
-    max-width: calc(100% - 16px);
+    /* width: 422px; */
+    /* max-width: calc(100% - 16px); */
     display:flex;
     flex-direction: column;
 }
@@ -171,65 +171,6 @@ body {
     flex: 1;
 }
 
-.input-field-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    border: unset;
-    /* outline: 1px solid rgba(0,222,0,0.3); */
-    gap: 8px;
-    box-sizing: border-box;
-}
-
-/* .input-field-content */
-.input-field-container>div:first-of-type {
-    display: flex; 
-    flex:1;
-    padding: 12px 21px 12px 21px;
-    gap: 10px;
-    border-radius: 10px;
-    border: 1px;
-    border: 1px solid rgba(209, 209, 209, 1);
-    background: rgba(255, 255, 255, 1);   
-}
-
-.input-field-container>div:first-of-type>div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 24px;
-    width: 100%;
-    gap: 0;
-} 
-
-.input-field-container>div:first-of-type>div>a {
-    height:24px;
-    object-fit:contain;
-    color: rgba(0, 0, 0, 0.3);
-    text-decoration: none;
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-} 
-
-.input-field-container>div:first-of-type input {
-    outline: unset;
-    border: unset;
-    padding:0px;
-    margin:0px;
-    flex:1;
-}
-
-.input-field-container>span:last-of-type {
-    font-family: Poppins;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 14.4px;
-    text-align: left;
-    color: red;
-    margin-left: 0px;
-}
 
 
 

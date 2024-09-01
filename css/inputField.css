@@ -1,0 +1,95 @@
+.input-field-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border: unset;
+    /* outline: 1px solid rgba(0,222,0,0.3); */
+    gap: 8px;
+    box-sizing: border-box;
+    max-width: calc(100% - 18px);
+    margin: auto;    
+}
+
+/* .input-field-content */
+.input-field-container>div:first-of-type {
+    display: flex; 
+    flex:1;
+    padding: 12px 21px 12px 21px;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(209, 209, 209, 1);
+    background: rgba(255, 255, 255, 1);   
+}
+
+.input-field-container>div:first-of-type>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 24px;
+    width: 100%;
+    gap: 0;
+} 
+
+.input-field-container>div:first-of-type>div>a {
+    height:24px;
+    object-fit:contain;
+    color: rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+} 
+
+.input-field-container input {
+    outline: unset;
+    border: unset;
+    padding:0px;
+    margin:0px;
+    flex:1;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    width: calc(100% - 24px);
+}
+
+
+.input-field-container input::placeholder {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+
+input::placeholder {
+    color: black;
+
+}
+.input-field-container>span:last-of-type {
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    text-align: left;
+    color: red;
+    margin-left: 0px;
+}
+
+.password.input-field-container input + img {
+    content: url("../assets/img/desktop/lock.svg");
+}
+
+.password.input-field-container input:focus + img {
+    content: url("../assets/img/desktop/eye-no.svg");
+}
+
+.passwordvisible.input-field-container input:focus + img {
+    content: url("../assets/img/desktop/eye.svg");
+}
+
+.Xletter {
+    content: url("../assets/img/desktop/eye.svg");
+}
+

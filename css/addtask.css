@@ -67,12 +67,15 @@
 }
 
 .subtask-container {
+   position: relative;
    width: 440px;
 }
 
 #add-subtask {
    all: unset;
-   align-items: center;
+   position: absolute;
+   top: 40%;
+   right: 16px;
 }
 
 #add-subtask:hover {

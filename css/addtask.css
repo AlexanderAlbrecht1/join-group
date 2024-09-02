@@ -1,12 +1,12 @@
 .multiselect {
-   width: 250px;
    position: relative;
+   width: 100%;
 }
 
 .selectBox {
    position: relative;
    border: 1px solid #ccc;
-   border-radius: 4px;
+   border-radius: 10px;
    background-color: #fff;
    cursor: pointer;
    padding: 5px 10px;
@@ -21,17 +21,15 @@
    border: none;
    background: transparent;
    appearance: none;
-   font-size: 1em;
    cursor: pointer;
    color: #333;
 }
 
 .selectBox::after {
-   content: "\25BC"; /* Downward arrow */
-   font-size: 0.9em;
-   color: #777;
+   content: url("/assets/img/desktop/assign_to_arrow.svg"); /* Downward arrow */
+   color: #2a3647;
    position: absolute;
-   right: 10px;
+   right: 20px;
 }
 
 #checkboxes {
@@ -69,20 +67,30 @@
 }
 
 .subtask-container {
-   width: 220px;
    position: relative;
+   width: 440px;
 }
 
 #add-subtask {
-   align-items: center;
+   all: unset;
    position: absolute;
-   right: 50px;
+   top: 40%;
+   right: 16px;
 }
 
 #add-subtask:hover {
    cursor: pointer;
-   background-color: lightgray;
 }
+
+.subtask-container input {
+   width: 396px;
+   padding: 12px 21px 12px 21px;
+   gap: 10px;
+   border-radius: 10px;
+   border: 1px solid #d1d1d1;
+   opacity: 0px;
+}
+
 
 .button-group {
    display: flex;
@@ -122,11 +130,11 @@ input[type="radio"]:checked + .button-label.urgent img {
 }
 
 input[type="radio"]:checked + .button-label.low img {
-   content: url("/assets/img/desktop/prio_urgent_white.svg");
+   content: url("/assets/img/desktop/prio_low_white.svg");
 }
 
 input[type="radio"]:checked + .button-label.medium img {
-   content: url("/assets/img/desktop/prio_urgent_white.svg");
+   content: url("/assets/img/desktop/prio_medium_white.svg");
 }
 
 input[type="radio"]:checked + .button-label.medium {
@@ -144,38 +152,55 @@ input[type="radio"]:checked + .button-label.low {
 }
 
 input[type="radio"]:hover:not(:checked) + .button-label {
-   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25)
+   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-
 textarea {
-  resize: none;
-  width: 440px;
-  height: 120px;
+   resize: none;
+   width: 396px;
+   height: 120px;
 }
 
 .add-task-container {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 160px;
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   gap: 40px;
 }
 
 .add-task-left {
-  width: 440px;
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
+   width: 440px;
+   display: flex;
+   justify-content: flex-start;
+   flex-direction: column;
 }
 
 .add-task-right {
-  width: 440px;
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
+   width: 440px;
+   display: flex;
+   justify-content: flex-start;
+   flex-direction: column;
+}
+.vertical-line {
+   border-left: 1px solid #d1d1d1;
+   height: 424px;
 }
 
+.label-input-con {
+   display: flex;
+   flex-direction: column;
+}
+
+.label-input-con input,
+textarea {
+   padding: 12px 21px 12px 21px;
+   gap: 10px;
+   border-radius: 10px;
+   border: 1px solid #d1d1d1;
+   opacity: 0px;
+}
+
+.required-asterisk {
+   color: #ff8190;
+}

@@ -175,3 +175,18 @@ function init() {
    document.getElementById("login-card").classList.add("dawn");
    document.getElementById("main-logo").classList.add("logo-position");
 }
+
+function togglePasswordView(event,container) {
+   let passwordContainer = document.getElementById(container);
+   let passwordInput = document.getElementById(container + "-input");
+   if (document.activeElement !== passwordInput) {
+      return;
+   }
+   let isVisible = passwordContainer.classList.toggle("passwordvisible");   
+   passwordContainer.classList.toggle("password", !isVisible);
+   passwordInput.type = isVisible ? "text" : "password";
+   passwordInput.focus();
+
+   event.preventDefault();
+   event.stopPropagation();
+}

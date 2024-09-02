@@ -6,16 +6,17 @@
     /* outline: 1px solid rgba(0,222,0,0.3); */
     gap: 8px;
     box-sizing: border-box;
-    max-width: calc(100% - 18px);
-    margin: auto;    
+    /* max-width: calc(100% - 18px); */
+    /* margin: auto;   */ 
 }
+
 
 /* .input-field-content */
 .input-field-container>div:first-of-type {
     display: flex; 
-    flex:1;
+    /* flex:1; */
     padding: 12px 21px 12px 21px;
-    gap: 10px;
+    /* gap: 10px; */
     border-radius: 10px;
     border: 1px solid rgba(209, 209, 209, 1);
     background: rgba(255, 255, 255, 1);   
@@ -52,7 +53,8 @@
     font-weight: 400;
     line-height: 24px;
     text-align: left;
-    width: calc(100% - 24px);
+    width: 100%; /* width: calc(100% - 24px); */
+    display: flex;
 }
 
 
@@ -77,19 +79,36 @@ input::placeholder {
     margin-left: 0px;
 }
 
-.password.input-field-container input + img {
+.password.input-field-container input + div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.password.input-field-container input + div>img {
     content: url("../assets/img/desktop/lock.svg");
+    cursor: pointer;
+    object-fit:cover;
+    height: 24px;
+    display: flex;
+    margin-right: 2px;
+    
 }
 
-.password.input-field-container input:focus + img {
+.password.input-field-container input:focus + div>img {
     content: url("../assets/img/desktop/eye-no.svg");
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transform: translate(2px,2px); 
 }
 
-.passwordvisible.input-field-container input:focus + img {
+.passwordvisible.input-field-container input:focus + div>img {
     content: url("../assets/img/desktop/eye.svg");
-}
-
-.Xletter {
-    content: url("../assets/img/desktop/eye.svg");
+    height: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 

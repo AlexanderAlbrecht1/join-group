@@ -20,39 +20,42 @@
                 <div class="label-input-con">
                     <label for="title">Title<span class="required-asterisk">*</span></label>
                     <input type="text" id="title" placeholder="Enter a title" required>
+                    <span class="required-text">This field is required</span>
                 </div>
                 <div class="label-input-con">
                     <label for="description">Description</label>
                     <textarea id="description" placeholder="Enter a Description"></textarea>
                 </div>
                 <div class="label-input-con">
-                <label>Assigned to</label>
-                <div class="multiselect">
-                    <div class="selectBox" onclick="showCheckboxes()">
-                        <select>
-                            <option style="display:none;">Select contacts to assign</option>
-                        </select>
-                        <div class="overSelect"></div>
-                    </div>
-                    <div id="checkboxes">
-                        <label><input type="checkbox" name="assign" value="Kontakt 1" /> Kontakt 1</label>
-                        <label><input type="checkbox" name="assign" value="Kontakt 2" /> Kontakt 2</label>
-                        <label><input type="checkbox" name="assign" value="Kontakt 3" /> Kontakt 3</label>
-                        <label><input type="checkbox" name="assign" value="Kontakt 4" /> Kontakt 4</label>
-                        <!-- Weitere Kontakte hier hinzufügen -->
+                    <label>Assigned to</label>
+                    <div class="multiselect">
+                        <div class="selectBox" onclick="showCheckboxes()">
+                            <select>
+                                <option style="display:none;">Select contacts to assign</option>
+                            </select>
+                            <div class="overSelect"></div>
+                        </div>
+                        <div id="checkboxes">
+                            <label><input type="checkbox" name="assign" value="Kontakt 1" /> Kontakt 1</label>
+                            <label><input type="checkbox" name="assign" value="Kontakt 2" /> Kontakt 2</label>
+                            <label><input type="checkbox" name="assign" value="Kontakt 3" /> Kontakt 3</label>
+                            <label><input type="checkbox" name="assign" value="Kontakt 4" /> Kontakt 4</label>
+                            <!-- Weitere Kontakte hier hinzufügen -->
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
 
         <div class="vertical-line"></div>
 
         <div class="add-task-right">
             <div class="label-input-con">
-            <label for="due-date">Due Date<span class="required-asterisk">*</span></label>
-            <input type="date" id="due-date" required></div>
+                <label for="due-date">Due Date<span class="required-asterisk">*</span></label>
+                <input type="date" id="due-date" required>
+                <span class="required-text">This field is required</span>
+            </div>
 
-            <br>
+
 
             <div class="button-group">
                 <legend>Priority</legend>
@@ -71,27 +74,29 @@
 
             <label for="category">Category<span class="required-asterisk">*</span></label>
             <div class="selectBox">
-            <select id="category" required>
-                <option value="" disabled selected>Select task category</option>
-                <option value="technical-task">Technical Task</option>
-                <option value="user-story">User Story</option>
-            </select>
+                <select id="category" required>
+                    <option value="" disabled selected>Select task category</option>
+                    <option value="technical-task">Technical Task</option>
+                    <option value="user-story">User Story</option>
+                </select>
             </div>
+            <span class="required-text">This field is required</span>
 
 
 
             <div class="subtask-container">
                 <label for="subtasks">Subtasks</label>
                 <input type="text" id="subtasks">
-                <button type="button" onclick="addSubtasks()" id="add-subtask"><img src="./assets/img/desktop/add_subtask.svg" alt=""></button>
+                <button type="button" onclick="addSubtasks()" id="add-subtask"><img id="subtask-icon"
+                        src="./assets/img/desktop/add_subtask.svg"></button>
                 <ul id="subtask-list">
-
                 </ul>
 
-        </div>
-
-            <button type="button" onclick="clearTaskInputs()">Clear</button>
-            <input type="submit" value="Create Task">
+            </div>
+            <div class="button-con">
+                <button id="clear-button" type="button" onclick="clearTaskInputs()">Clear <img src="./assets/img/desktop/clear-task-icon.svg"></button>
+                <button type="submit" value="Create Task">Create Task <img src="./assets/img/desktop/create-task-check.svg"></button>
+            </div>
             </form>
         </div>
     </div>

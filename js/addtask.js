@@ -44,27 +44,14 @@ function clearTaskInputs() {
       } else {
          radio.checked = false;
       }
-   });
-
+   }
+)
    document.getElementById("category").selectedIndex = 0;
    subtasks = [];
    document.getElementById("subtask-list").innerHTML = "";
+   return;
 }
 
-// Hinweis mit document.getElemebtById.syle.display == "none" oder "block" abfragen
-// dann spart man sich die globale Variable
-
-// optimised code: maybe call it better toggleCheckboxes
-/*
-function toggleCheckboxes() {
-    let checkboxes = document.getElementById("checkboxes");
-    if (checkboxes.style.display == "none") {
-        checkboxes.style.display = "block";
-    } else {
-        checkboxes.style.display = "none";
-    }
-}
-*/
 
 let expanded = false;
 
@@ -101,3 +88,5 @@ function addSubtasks() {
       return;
    }
 }
+
+

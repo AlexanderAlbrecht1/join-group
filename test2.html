@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>    
+<style>
+
+
+</style>
+
+
+<script>
+    document.getElementById('password').addEventListener('input', function() {
+        const container = document.getElementById('password-container');
+        
+        if (this.validity.valid) {
+            container.classList.remove('invalid');
+        } else {
+            container.classList.add('invalid');
+        }
+    });   
+</script>      
+
+</head>
+   <body>
+      <div class="input-container">
+         <input id="password" type="password" placeholder="Password">
+         <span class="icon" onclick="togglePasswordView()">👁️</span>
+     </div>
+   </body>
+</html>

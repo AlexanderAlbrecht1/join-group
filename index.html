@@ -46,7 +46,7 @@
                            <div class="input-field-container">
                               <div> <!-- Inputfield area widthout msg -->
                                  <div> <!-- justified content input / images -->
-                                    <input type="email" required placeholder="Email">
+                                    <input id="email" type="email" required placeholder="Email">
                                     <img class="letter" src="./assets/img/desktop/letter.svg">
                                  </div>
                               </div>
@@ -54,14 +54,14 @@
                            </div>
 
 
-                           <div id="login-password" class="password input-field-container">
+                           <div id="password-container" class="password input-field-container">
                               <div> <!-- Inputfield area widthout msg -->
                                  <div> <!-- justified content input / images -->
-                                    <input id="login-password-input" type="password" required placeholder="Password">
+                                    <input id="password" type="password" required placeholder="Password">
                                     <div>
 
                                        <img src="./assets/img/desktop/lock.svg"
-                                          onmousedown="togglePasswordView(event,'login-password')">
+                                          onmousedown="togglePasswordView(event,'password')">
                                     </div>
                                  </div>
                               </div>
@@ -72,7 +72,7 @@
 
                         <div class="remember"><!-- Remember Me area-->
                            <label class="custom-checkbox">
-                              <input type="checkbox" id="custom-checkbox">
+                              <input type="checkbox" id="remember-me">
                               <span class="checkbox-image"></span>
                            </label>
 

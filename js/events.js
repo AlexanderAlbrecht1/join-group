@@ -70,6 +70,8 @@ function addValidationMessage(element) {
 
 /**
  * Init the Eventlistener for doing input checks 
+ * 
+ * @param {*} list - ist a list of the ids of the input-fields we use
  */
 function initEventListener(list) {
     for (let item of list) {

@@ -15,7 +15,17 @@ a {
    text-decoration: none;
 }
 
+.displayNone {
+   display: none;
+}
 
+.overflowHidden {
+   overflow: hidden;
+}
+
+/*
+******right floating detailed contact******
+*/
 
 .rightSide {
    display: flex;
@@ -56,9 +66,35 @@ a {
    width: 235px;
 }
 
+/*
+******contact details******
+*/
+
+.contactDetail {
+   width: 461px;
+   height: 364px;
+   gap: 21px;
+}
+
 .name {
    display: flex;
    flex-direction: row;
+   width: 461px;
+   height: 120px;
+   gap: 54px;
+}
+
+.name span {
+   height: 120px;
+   width: 120px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-family: Inter;
+   font-size: 47px;
+   font-weight: 500;
+   color: rgba(255, 255, 255, 1);
+   border-radius: 70px;
 }
 
 .fullName {
@@ -71,23 +107,9 @@ a {
    display: flex;
 }
 
-.displayNone {
-   display: none;
-}
 
-.overflowHidden {
-   overflow: hidden;
-}
 
-.dialogBackground {
-   position: absolute;
-   top: 0;
-   right: 0;
-   left: 0;
-   bottom: 0;
-   background-color: rgba(0, 0, 0, 0.3);
-   z-index: 500;
-}
+
 
 /*
 ******contactbook area******
@@ -200,6 +222,28 @@ a {
 }
 
 
+.addNewContactButton {
+   background-color: rgba(42, 54, 71, 1);
+   border: 1px rgba(42, 54, 71, 1);
+   color: rgba(255, 255, 255, 1);
+   border-radius: 10px;
+   width: 352px;
+   height: 56px;
+   padding: 12px 16px;
+   font-size: 21px;
+   font-weight: 700;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 16px;
+   position: sticky;
+   top: 0px
+}
+
+/*
+******header******
+*/
+
 
 header {
    position: absolute;
@@ -242,24 +286,6 @@ header span {
 .helparea img:hover {
    width: 32px;
    height: 32px;
-}
-
-.addNewContactButton {
-   background-color: rgba(42, 54, 71, 1);
-   border: 1px rgba(42, 54, 71, 1);
-   color: rgba(255, 255, 255, 1);
-   border-radius: 10px;
-   width: 352px;
-   height: 56px;
-   padding: 12px 16px;
-   font-size: 21px;
-   font-weight: 700;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap: 16px;
-   position: sticky;
-   top: 0px
 }
 
 /*
@@ -329,4 +355,18 @@ nav {
    display: flex;
    align-items: center;
    justify-content: flex-start;
+}
+
+/*
+******dialog window******
+*/
+
+.dialogBackground {
+   position: absolute;
+   top: 0;
+   right: 0;
+   left: 0;
+   bottom: 0;
+   background-color: rgba(0, 0, 0, 0.3);
+   z-index: 500;
 }

@@ -178,15 +178,12 @@ function showSingleContact(id) {
    let phone = contacts[index].phone;
    let initial1 = Array.from(name)[0].toUpperCase();
    let initial2 = Array.from(lastname)[0].toUpperCase();
-
-   // Das werden die anmeckern mit sovielen Parametern
-   // Meine Idee die Variabelen all in ein JSON zu packen (Jörg)
-   // function openContact(i, initial1, initial2, name, lastname, mail, phone) {
+   let backgroundColor = contacts[index].color;
 
    document.getElementById('contactDetail').innerHTML = '';
    document.getElementById('contactDetail').innerHTML = `
     <div class="name">
-        <span>${initial1}${initial2}</span>
+        <span style="background-color: ${backgroundColor}">${initial1}${initial2}</span>
         <div class="fullName">
           <span>${name} ${lastname}</span>
           <div class="buttons">
@@ -203,6 +200,9 @@ function showSingleContact(id) {
 
     </div>
     `;
+
+    console.log(id);
+    
 }
 
 async function deleteContact(id) {

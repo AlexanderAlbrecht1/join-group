@@ -30,6 +30,7 @@ async function displayContacts() {
       <div class="groupLetter">
          <span>\n${letter}</span>
       </div>
+      <div class="breakingLine"></div>
       `;
       for (let i = 0; i < contacts.length; i++) {
          let contact = contacts[i];
@@ -39,15 +40,16 @@ async function displayContacts() {
          let mail = contact.email;
          let initial1 = Array.from(name)[0].toUpperCase();
          let initial2 = Array.from(lastname)[0].toUpperCase();
+         let backgroundColor = contact.color;
 
          document.getElementById('showContacts').innerHTML += `
             <div onclick="showSingleContact(${ID})" class="contact">
-                 <div class="icon${i}">
+                 <div class="icon" style="background-color: ${backgroundColor}">
                     <span>${initial1}${initial2}</span>
                 </div>
                 <div class="nameAndMail">
-                    <span>${name} ${lastname}</span>
-                    <span>${mail}</span>
+                    <span class="nameOverviev">${name} ${lastname}</span>
+                    <span class="mailOverview">${mail}</span>
                 </div>
             </div>
             `;

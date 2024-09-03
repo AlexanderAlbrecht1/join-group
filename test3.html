@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>    
       <script src="./js/date.js"></script>
+      <script src="./js/events.js"></script>
 <style>
 
 body {
@@ -78,11 +79,16 @@ body {
 .error-msg.visible {
     visibility: visible; /* Show error message */
 }
+form {
+    display: flex;
+    width: 100%;
+}
 
 </style>
 <script>
     function init() {
         console.log(getGreeting());
+        removeFormEvents();
         let passwordContainer=document.getElementById('password-container');
         // passwordContainer=document.querySelector('.password-container');
         let childs=passwordContainer.children;
@@ -94,6 +100,14 @@ body {
             }
         });
     }
+        /*
+        https://www.mediaevent.de/javascript/formulare.html
+        
+    Namen          /^([ \u00c0-\u01ffa-zA-Z\.' \-]{3,})+$/;
+Telefonnummern /^([0-9\.-\/ ()]{7,})$/;
+Email          /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+URL            /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
+*/
 
     /*
     passwordContainer=document.getElementById('password-container');
@@ -113,10 +127,13 @@ body {
 </script>      
    </head>
    <body onLoad="init()">
+    <form onload="removeEvent()" id="login-form">
     <div id="password-container" class="input-container">
-        <input id="password" type="email" placeholder="Password">
+        <input id="password" type="email" required placeholder="Password">
         <span class="icon" onclick="togglePasswordView()">👁️</span>
         <span id="password-msg" class="error-msg visible">Fehler</span>
     </div>
+    <button type="submit">Los</button>
+    </form>
    </body>
 </html>

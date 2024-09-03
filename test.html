@@ -1,79 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>    
-<style>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Formular</title>
+</head>
+<body>
 
-.input-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 50%; /* Adjust based on the desired width of the input field */
-}
+<form id="login-form">
+    <div id="password-container" class="input-container">
+        <input id="password" type="email" required placeholder="Password">
+        <span class="icon" onclick="togglePasswordView()">👁️</span>
+        <span id="password-msg" class="error-msg visible">Fehler</span>
+    </div>
+    <button type="submit">Los</button>
+</form>
 
-.input-container input {
-    width: 100%; /* Makes the input take up the full width of the container */
-    padding: 12px 57px 12px 21px; /* 8px padding on left, right padding adjusted for the icon */
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    background-color: blue;
-    display: flex;
-    align-items: center;
-}
-
-.input-container .icon {
-    position: absolute;
-    right: 8px; /* Position the icon with 8px padding from the right edge */
-    top: 50%; /* Position the icon relative to the top of the input */
-    transform: translateY(-50%); /* Move the icon up by 50% of its height to center it vertically */
-    cursor: pointer;
-    font-size: 1.2em; /* Adjust icon size as needed */
-    color: #666;
-    background: green;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.input-container input:focus {
-    border-color: #007BFF; /* Change border color on focus */
-    outline: none;
-}
-
-.input-container input:invalid  {
-    border-color: red; /* Change border color on focus */
-    outline: none;
-}
-
-.input-container .icon:hover {
-    background-color: #007BFF; /* Change icon color on hover */
-}
-
-.error-msg {
-    min-height: 20px;
-    margin-top: 5px; /* Space between input field and error message */
-    color: red;
-    font-size: 0.9em;
-    visibility: hidden; /* Hide error message when not needed */
-}
-
-.error-msg.visible {
-    visibility: visible; /* Show error message */
-}
-</style>
 <script>
-   
-</script>      
-   </head>
-   <body>
-      <div class="input-container">
-         <input id="password" type="email" placeholder="Password">
-         <span class="icon" onclick="togglePasswordView()">👁️</span>
-         <span class="msg">Error</span> 
-     </div>
-     <span>Hallo</span>
-   </body>
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("login-form");
+        console.log(form);
+
+        // Entferne die HTML5-Formularvalidierung.
+        form.addEventListener("submit", event => {
+            event.preventDefault();
+            
+            // Hier könnte eigene Validierungslogik eingefügt werden, falls gewünscht.
+            alert("Hier");
+        });
+    });
+</script>
+
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

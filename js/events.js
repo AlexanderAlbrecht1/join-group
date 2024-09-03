@@ -80,3 +80,16 @@ function initEventListener(list) {
     let submit = inputFilled(list);
     disableCheck(submit);
 }
+
+function removeFormEvents() {
+    
+    forms=document.getElementsByTagName("form");
+    for (form of forms) {
+        form=document.getElementById("login-form");
+        console.log(form);
+        form.addEventListener("submit",event => {
+            event.target.preventDefault();
+            alert("Hier");
+        });
+    }
+}

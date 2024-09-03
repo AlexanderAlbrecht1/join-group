@@ -5,28 +5,65 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>    
 <style>
-
-
+    *:invalid {
+  box-shadow: 0 0 5px 1px red;
+}
 </style>
-
-
 <script>
-    document.getElementById('password').addEventListener('input', function() {
-        const container = document.getElementById('password-container');
-        
-        if (this.validity.valid) {
-            container.classList.remove('invalid');
-        } else {
-            container.classList.add('invalid');
+    function f1() {
+        alert("XXDX");
+        document.getElementById('myForm').onsubmit = function (evt) { 	
+            let input = document.getElementById('name').value; 
+            alert("Her");
+            if (input.length < 3) {
+                msg.innerHTML = '»Name« bitte ausfüllen'
+                evt.preventDefault();
+            } 
         }
-    });   
-</script>      
+    }
+    function f2() {
+        document.getElementById('myForm').addEventListener (
+            "invalid", 
+            function (evt) {
+                console.log("Hallo Test");
+                // Eingaben nicht korrekt
+                evt.preventDefault();
+                //
+        });
+    }
+
+    function f3(event) {
+        console.log("Invalid");
+        alert("invalid");
+    }
+    function f4(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if(document.getElementById("text").validity.valid) {
+            console.log("Valid");
+        } else {
+            console.log("invalid");
+        }
+        
+        if(document.getElementById("myForm").validity.valid) {
+            console.log("Valid");
+        } else {
+            console.log("invalid");
+        }
+        console.log("Submit");
+        alert("Submit");
+        
+    }
+</script>
+
+
 
 </head>
-   <body>
-      <div class="input-container">
-         <input id="password" type="password" placeholder="Password">
-         <span class="icon" onclick="togglePasswordView()">👁️</span>
-     </div>
-   </body>
+
+<body onload="f2()">
+    <form  id="myForm" oninvalid="f3();return false" onsubmit="f4();return false">
+        <input id="text" type="text" size="20" required />
+        <input type="submit" value="Absenden" />
+    </form>
+</body>
 </html>

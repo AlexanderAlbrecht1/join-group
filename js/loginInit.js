@@ -7,6 +7,9 @@ function initEventListenerLogin() {
     initEventListener(list);
 }
 
+/*
+         ACHTUNG wird in LOGIN.js überschrieben
+*/
 function init() {
     loadUserFromLocalStorage();
     // initEventListenerLogin();

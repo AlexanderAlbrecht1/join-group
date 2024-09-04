@@ -74,7 +74,7 @@
 #add-subtask {
    all: unset;
    position: absolute;
-   top: 40%;
+   top: 2em;
    right: 16px;
 }
 

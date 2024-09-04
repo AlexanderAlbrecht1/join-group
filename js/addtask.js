@@ -27,8 +27,9 @@ async function addNewTask() {
       status: "to-do",
       subtasks: subtasks,
    });
-   saveData("taskstorage", tasks);
+   await saveData("taskstorage", tasks);
    clearTaskInputs();
+   openKanbanboard();
 }
 
 function clearTaskInputs() {
@@ -89,4 +90,9 @@ function addSubtasks() {
    }
 }
 
-
+function openKanbanboard() {
+   setTimeout(() => {
+      window.location = ("./kanbanboard.html");
+    }, 2000);
+     
+   }

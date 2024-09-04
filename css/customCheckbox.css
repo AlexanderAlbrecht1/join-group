@@ -1,4 +1,5 @@
 .custom-checkbox {
+    border-radius: 50% !important;
     position: relative;
     display: inline-block;
     cursor: pointer;
@@ -9,19 +10,21 @@
 }
 
 .checkbox-image {
+    margin: 0;
     box-sizing: border-box;
+    border-radius: 50% !important;
     width: 24px;
     height: 24px;
-    padding:8px;
+    padding: 2px;
     background-image: url('../assets/img/desktop/unchecked.svg'); /* Bild für die nicht aktivierte Checkbox */
-    background-size: cover;
+    background-size: contain;
     transition:200ms linear;
-    transition-property: background,transform; 
+    transition-property: background,transform;
 }
 
 .custom-checkbox:hover .checkbox-image {
     background-color: rgba(209, 209, 209, 0.5);
-    border-radius: 50%;
+    border-radius: 50% !important;
     width: 24px; 
     height: 24px;
     transform: translate(-1px,-1px);

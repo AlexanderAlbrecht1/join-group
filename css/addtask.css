@@ -1,3 +1,21 @@
+* {
+   margin: 0;
+   font-family: InterVariable;
+   font-style: normal;
+}
+
+.add-task-wrapper {
+   margin: 128px;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+}
+
+h1 {
+   margin-bottom: 24px;
+   padding-left: 20px;
+}
+
 .multiselect {
    position: relative;
    width: 100%;
@@ -224,52 +242,39 @@ textarea {
    gap: 16px;
 }
 
-.button-con button {
-      box-sizing: border-box;
-   font-size: 21px;
-   background-color: #2A3647;
-   color: white;
-   font-weight: 700;
-   cursor: pointer;
-   border: none;
-   padding: 16px;
-   gap: 4px;
-   border-radius: 10px;
-}
 
-.button-con button:hover {
-   background-color: #29ABE2;
-   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.button-con button:active {
-   background-color: #091931;
-}
-
-#clear-button {
-   border-radius: 10px;
-   font-weight: 400;
-   border: 1px solid #2A3647;
-   background-color: white;
-   color: black;
-}
-
-#clear-button:hover {
-   border: 2px solid #29ABE2;
-   color: #29ABE2;
-}
-
-#clear-button:active {
-   border: 1px solid #091931;
-   color: #091931;
-}
-
-#clear-button:hover>img {
+.whitebutton:hover>img {
    content: url('/assets/img/desktop/clear-task-icon-blue.svg');
 }
 
-#clear-button:active>img {
+.whitebutton:active>img {
    content: url('/assets/img/desktop/clear-task-icon-black.svg');
+}
+
+.contact-checkbox {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   flex-direction: row;
+   gap: 8px;
+   overflow: hidden;
+}
+
+.contact-checkbox>div {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+}
+
+.icon {
+   width: 42px;
+   height: 42px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-radius: 50%;
+   border: 2px solid rgba(255, 255, 255, 1);
+   color: white;
 }
 
 

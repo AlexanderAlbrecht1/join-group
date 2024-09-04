@@ -308,10 +308,14 @@ function sortContacts(contacts) {
 function getHTMLContactSelection(contact) {
    let name = contact.name + ' ' + contact.lastname;
    return `
-    <label>${getMonogram(
-      name
-   )} ${name}<input type="checkbox" name="assign" value="${contact.id
-      }" /></label>    
+         <div class="contact-checkbox">
+         <div>
+            <div class="icon" style="background-color: ${contact.color}">
+            ${getMonogram(name)}
+            </div>
+             ${name}</div>
+    <label class="custom-checkbox"><input type="checkbox" name="assign" value="${contact.id
+      }" /><span class="checkbox-image"></span></label></div>
     `;
 }
 

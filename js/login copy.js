@@ -177,12 +177,13 @@ function init() {
 }
 
 function togglePasswordView(event,container) {
-   let passwordContainer=event.target.parentElement;
-   let passwordInput=event.target.previousElementSibling;
+   let passwordContainer = document.getElementById(container);
+   let passwordInput = document.getElementById(container + "-input");
    if (document.activeElement !== passwordInput) {
       return;
    }
-   let isVisible = passwordContainer.classList.toggle("visible");   
+   let isVisible = passwordContainer.classList.toggle("passwordvisible");   
+   passwordContainer.classList.toggle("password", !isVisible);
    passwordInput.type = isVisible ? "text" : "password";
    passwordInput.focus();
 

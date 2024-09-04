@@ -9,5 +9,6 @@ function initEventListenerLogin() {
 
 function init() {
     loadUserFromLocalStorage();
-    initEventListenerLogin();
+    // initEventListenerLogin();
+    addFormListener('#login-card');
 }

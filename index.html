@@ -32,7 +32,8 @@
                </div>
 
                <div>
-                  <form onsubmit="login();return false;" id="login-card" class="login-card">
+                  <form onsubmit="login();return false;" onload="removeEvent();return false" id="login-card" class="login-card">
+                     <!-- form onsubmit="login();return false;" id="login-card" class="login-card" -->
                      <div class="login-headline">
 
                         <span>Log in</span>
@@ -43,31 +44,20 @@
                      <div  class="input-area">
                         <div>
 
-                           <div class="input-field-container">
-                              <div> <!-- Inputfield area widthout msg -->
-                                 <div> <!-- justified content input / images -->
-                                    <input id="email" type="email" required placeholder="Email">
-                                    <img class="letter" src="./assets/img/desktop/letter.svg">
-                                 </div>
-                              </div>
-                              <span id="email-msg" class="msg-red"></span>
-                           </div>
+                           
 
-
-                           <div id="password-container" class="password input-field-container">
-                              <div> <!-- Inputfield area widthout msg -->
-                                 <div> <!-- justified content input / images -->
-                                    <input id="password" type="password" required placeholder="Password">
-                                    <div>
-
-                                       <img src="./assets/img/desktop/lock.svg"
-                                          onmousedown="togglePasswordView(event,'password')">
-                                    </div>
-                                 </div>
-                              </div>
-                              <span id="password-msg" class="msg-red"></span>
-
-                           </div>
+                           <div id="input-field-container" class="input-container">
+                              <input type="email" required placeholder="Email">
+                              <span class="icon"  ><img src="./assets/img/desktop/letter.svg"></span>
+                              <span class="error-msg visible"></span>
+                          </div>
+                      
+                           <div id="password-container" class="input-container password">
+                              <input id="password" type="email" required placeholder="Password">
+                              <span class="icon" onmousedown="togglePasswordView(event)">👁️</span>
+                              <span id="password-msg" class="error-msg visible"></span>
+                          </div>
+                      
                         </div>
 
                         <div class="remember"><!-- Remember Me area-->

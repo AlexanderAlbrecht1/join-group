@@ -73,6 +73,7 @@ function addValidationMessage(element) {
  * 
  * @param {*} list - ist a list of the ids of the input-fields we use
  */
+/*
 function initEventListener(list) {
     for (let item of list) {
         document.getElementById(item).addEventListener("input",(event) => sendButton(event,list));
@@ -80,8 +81,13 @@ function initEventListener(list) {
     let submit = inputFilled(list);
     disableCheck(submit);
 }
+*
 
-function removeFormEvents() {
+/*
+    Das soll die Eventlistener Killen von Formms 
+    funktioniert aber nicht
+*/
+function XremoveFormEvents() {
     
     forms=document.getElementsByTagName("form");
     for (form of forms) {
@@ -93,3 +99,60 @@ function removeFormEvents() {
         });
     }
 }
+
+/* -------------------------------- */
+/* 
+    Neu
+*/
+function addFormListener(formSelector, styleObject) {
+    let form = document.querySelector(formSelector);
+    if (!form) return false;
+
+    let inputs = form.querySelectorAll('input');
+    inputs.forEach(input => {
+        styleElement(input, styleObject);
+        input.addEventListener('input', eventErrorMsg);
+        input.addEventListener("invalid", e => e.preventDefault());
+    });
+}
+
+function styleElement(node, styles) {
+    if (styles == null) return;
+    for (let [key, value] of Object.entries(styles)) {
+        node.style[key] = value;
+    }
+}            // Beispiel: Anwendung der Funktion
+
+
+function customErrorMsg(id=null,customMsg=null) {
+    if (typeof(id) !== "string" || typeof(customMsg) !== "string") return;
+    let inputSibling=document.getElementById(id);
+    let sibling=inputSibling;
+    sibling.setCustomValidity(customMsg);
+    while (sibling.nextElementSibling && sibling.nextElementSibling.tagName == 'SPAN') {
+        sibling = sibling.nextElementSibling;
+    }
+    sibling.innerHTML = inputSibling.validity.valid?"":inputSibling.validationMessage;
+}
+
+function eventErrorMsg(e) {
+    sibling=this;
+    while (sibling.nextElementSibling && sibling.nextElementSibling.tagName == 'SPAN') {
+        sibling = sibling.nextElementSibling;
+    }
+    sibling.innerHTML=this.validity.valid?"":this.validationMessage;
+}
+
+function togglePasswordView(event,container) {
+    let passwordContainer=event.target.parentElement;
+    let passwordInput=event.target.previousElementSibling;
+    if (document.activeElement !== passwordInput) {
+       return;
+    }
+    let isVisible = passwordContainer.classList.toggle("visible");   
+    passwordInput.type = isVisible ? "text" : "password";
+    passwordInput.focus();
+ 
+    event.preventDefault();
+    event.stopPropagation();
+ }

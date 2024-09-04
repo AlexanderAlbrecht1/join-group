@@ -1,69 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>    
-<style>
-    *:invalid {
-  box-shadow: 0 0 5px 1px red;
-}
-</style>
-<script>
-    function f1() {
-        alert("XXDX");
-        document.getElementById('myForm').onsubmit = function (evt) { 	
-            let input = document.getElementById('name').value; 
-            alert("Her");
-            if (input.length < 3) {
-                msg.innerHTML = '»Name« bitte ausfüllen'
-                evt.preventDefault();
-            } 
-        }
-    }
-    function f2() {
-        document.getElementById('myForm').addEventListener (
-            "invalid", 
-            function (evt) {
-                console.log("Hallo Test");
-                // Eingaben nicht korrekt
-                evt.preventDefault();
-                //
-        });
-    }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            .x:invalid {
+                box-shadow: 0 0 5px 1px red;
+            }
+        </style>
+        <script>
+            function f2() {
+                addFormListener('#myForm');
+            }
 
-    function f3(event) {
-        console.log("Invalid");
-        alert("invalid");
-    }
-    function f4(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        if(document.getElementById("text").validity.valid) {
-            console.log("Valid");
-        } else {
-            console.log("invalid");
-        }
-        
-        if(document.getElementById("myForm").validity.valid) {
-            console.log("Valid");
-        } else {
-            console.log("invalid");
-        }
-        console.log("Submit");
-        alert("Submit");
-        
-    }
-</script>
+            /* 
+                 Neu
+            */
+            function addFormListener(formSelector, styleObject) {
+                let form = document.querySelector(formSelector);
+                if (!form) return false;
+
+                let inputs = form.querySelectorAll('input');
+                inputs.forEach(input => {
+                    styleElement(input, styleObject);
+                    input.addEventListener('input', eventErrorMsg);
+                    input.addEventListener("invalid", e => e.preventDefault());
+                });
+            }
+
+            function styleElement(node, styles) {
+                if (styles == null) return;
+                for (let [key, value] of Object.entries(styles)) {
+                    node.style[key] = value;
+                }
+            }            // Beispiel: Anwendung der Funktion
 
 
+            function customErrorMsg(id=null,customMsg=null) {
+                if (typeof(id) !== "string" || typeof(customMsg) !== "string") return;
+                let inputSibling=document.getElementById(id);
+                let sibling=inputSibling;
+                sibling.setCustomValidity(customMsg);
+                while (sibling.nextElementSibling && sibling.nextElementSibling.tagName == 'SPAN') {
+                    sibling = sibling.nextElementSibling;
+                }
+                sibling.innerHTML = inputSibling.validity.valid?"":inputSibling.validationMessage;
+            }
 
-</head>
+            function eventErrorMsg(e) {
+                sibling=this;
+                while (sibling.nextElementSibling && sibling.nextElementSibling.tagName == 'SPAN') {
+                    sibling = sibling.nextElementSibling;
+                }
+                sibling.innerHTML=this.validity.valid?"":this.validationMessage;
+            }
 
-<body onload="f2()">
-    <form  id="myForm" oninvalid="f3();return false" onsubmit="f4();return false">
-        <input id="text" type="text" size="20" required />
-        <input type="submit" value="Absenden" />
-    </form>
-</body>
+        </script>
+
+
+
+    </head>
+
+    <body onload="f2()">
+        <form id="myForm" onsubmit="return false">
+            
+            <input id="text" type="email" size="20" required />
+            <span>Text der geändert wird</span>
+            
+            <input type="submit" value="Absenden" />
+            <input type="button" onclick="customErrorMsg('text','Dein Eigener Fehler')" value="Absenden" />
+        </form>
+    </body>
 </html>

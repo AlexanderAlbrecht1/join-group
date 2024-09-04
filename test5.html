@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>    
+      <script src="./js/date.js"></script>
+      <script src="./js/events.js"></script>
+<style>
+
+body {
+    justify-content: center;
+    display: flex;
+    margin:0;
+
+}
 .input-container {
     --padding-vertical: 12px;
     --border-color: rgba(209, 209, 209, 1);
@@ -5,7 +21,7 @@
     position: relative;
     display: flex;
     flex-direction: column; /* Stack input and error message */
-    /* margin-bottom: 20px; /* Margin below the entire input-container */
+    margin-bottom: 20px; /* Margin below the entire input-container */
     width: 100%;
     
 }
@@ -107,8 +123,44 @@
 .error-msg.visible {
     visibility: visible; /* Show error message */
 }
-
 form {
     display: flex;
     width: 100%;
 }
+
+</style>
+<script>
+    function init() {
+        addFormListener('#login-form');
+    }
+    
+/*
+    
+    passwordContainer=document.getElementById('password-container');
+    childs=passwordContainer.children();
+    // debug;
+
+    document.getElementById('password').addEventListener('input', function() {
+        const container = document.getElementById('password-container');
+        
+        if (this.validity.valid) {
+            container.classList.remove('invalid');
+        } else {
+            container.classList.add('invalid');
+        }
+    });
+*/
+
+</script>      
+   </head>
+   <body onLoad="init()">
+    <form onload="removeEvent()" id="login-form">
+        <div id="password-container" class="input-container password">
+        <input id="password" type="email" required placeholder="Password">
+        <span class="icon" onmousedown="togglePasswordView(event)">👁️</span>
+        <span id="password-msg" class="error-msg visible">XFehler</span>
+    </div>
+    <button type="submit">Los</button>
+    </form>
+   </body>
+</html>

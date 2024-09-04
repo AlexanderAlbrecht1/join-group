@@ -22,7 +22,7 @@ body {
     display: flex;
     flex-direction: column; /* Stack input and error message */
     margin-bottom: 20px; /* Margin below the entire input-container */
-    width: 50%;
+    width: 100%;
     
 }
 
@@ -88,7 +88,8 @@ form {
 <script>
     function init() {
         console.log(getGreeting());
-        removeFormEvents();
+        // removeFormEvents();
+        
         let passwordContainer=document.getElementById('password-container');
         // passwordContainer=document.querySelector('.password-container');
         let childs=passwordContainer.children;
@@ -101,15 +102,6 @@ form {
         });
     }
     
-    /* novalidate start direkt das script */
-        /*
-        https://www.mediaevent.de/javascript/formulare.html
-
-    Namen          /^([ \u00c0-\u01ffa-zA-Z\.' \-]{3,})+$/;
-Telefonnummern /^([0-9\.-\/ ()]{7,})$/;
-Email          /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-URL            /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
-*/
 
     /*
     passwordContainer=document.getElementById('password-container');
@@ -129,13 +121,13 @@ URL            /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
 </script>      
    </head>
    <body onLoad="init()">
-    <form onload="removeEvent()" id="login-form">
-    <div id="password-container" class="input-container">
-        <input id="password" type="email" required placeholder="Password">
-        <span class="icon" onclick="togglePasswordView()">👁️</span>
-        <span id="password-msg" class="error-msg visible">Fehler</span>
-    </div>
-    <button type="submit">Los</button>
+    <form id="login-form">
+        <div id="password-container" class="input-container">
+            <input id="password" type="email" required placeholder="Password">
+            <span class="icon" onclick="togglePasswordView()">👁️</span>
+            <span id="password-msg" class="error-msg visible">Fehler</span>
+        </div>
+        <button type="submit">Los</button>
     </form>
    </body>
 </html>

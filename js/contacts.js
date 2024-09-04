@@ -233,16 +233,28 @@ function openCreateContactDialog() {
    let dialogBackground = document.getElementById('dialogBackground');
    document.getElementById('body').classList.add('overflowHidden');
    dialogBackground.classList.remove('displayNone');
+   dialogBackground.classList.add('displayFlex');
    dialogBackground.innerHTML = '';
-   dialogBackground.innerHTML = `
+   dialogBackground.innerHTML = /*html*/ `
             
     <div class="addContact" onclick="dontClose(event)">
+      <div class="addContactLogoContainer">
+         <div>
+            <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
+            <h1>Add contact</h1>
+            <span>Tasks are better with a team!</span>
+            <div class="vector5"></div>
+            <div class="contactLogo"></div>
+         </div>
+      </div>
+      <div class="addContactInputContainer">
         <form onsubmit="addNewContact();return false;">
             <input required id="name" type="text" placeholder="name" />
             <input required id="email" type="email" placeholder="e-mail" />
             <input id="phone" type="number" placeholder="phone number" />
             <button type="submit">Add new contact "icon"</button>
         </form>
+      </div>
     </div>
 
     `;
@@ -250,6 +262,7 @@ function openCreateContactDialog() {
 
 function closeContactCreation() {
    document.getElementById('dialogBackground').classList.add('displayNone');
+   document.getElementById('dialogBackground').classList.remove('displayFlex');
    document.getElementById('body').classList.remove('overflowHidden');
 }
 

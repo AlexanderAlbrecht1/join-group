@@ -121,17 +121,6 @@ a {
    flex-direction: column;
 }
 
-.addContact {
-   background-color: grey;
-   margin: auto;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   width: 50vw;
-   height: 50vh;
-}
-
 .contactBook {
    display: flex;
    flex-direction: column;
@@ -191,7 +180,7 @@ a {
 }
 
 .icon {
-   width: 42px;
+   min-width: 42px;
    height: 42px;
    display: flex;
    align-items: center;
@@ -361,6 +350,10 @@ nav {
 ******dialog window******
 */
 
+.displayFlex {
+   display: flex;
+}
+
 .dialogBackground {
    position: absolute;
    top: 0;
@@ -369,4 +362,67 @@ nav {
    bottom: 0;
    background-color: rgba(0, 0, 0, 0.3);
    z-index: 500;
+}
+
+.addContact {
+   margin: auto;
+   display: flex;
+   align-items: center;
+   width: 1212px;
+   height: 592px;
+   border-radius: 30px;
+   background-color: rgba(255, 255, 255, 1);
+}
+
+.addContactLogoContainer {
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 66px 48px; 
+   width: 467px;
+   height: 594px;
+   background-color: rgba(42, 54, 71, 1);
+   border-radius: 30px 0 0 30px;
+   color: rgba(255, 255, 255, 1);
+}
+
+.addContactLogoContainer>div {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
+.contactLogo {
+   width: 55.6px;
+   height: 66.48px;
+}
+
+.addContactLogoContainer h1 {
+   font-size: 61px;
+   font-weight: 700;
+   font-family: Inter;
+   margin: 0;
+}
+
+.addContactLogoContainer span {
+   font-family: Inter;
+   font-size: 27px;
+   font-weight: 400;
+}
+
+.vector5 {
+   width: 90px;
+   border-bottom: 3px solid rgba(41, 171, 226, 1);
+}
+
+
+
+
+
+
+form {
+   display: flex;
+   flex-direction: column;
 }

@@ -72,10 +72,6 @@
 }
 
 
-.input-container input:focus {
-   border-color: rgba(41, 171, 226, 1);
-    outline: none;
-}
 
 /* Per JS hinzufuegen nach dem Senden*/
 .input-container.invalid input:invalid {
@@ -83,10 +79,14 @@
 }
 
 .input-container input:valid {
-    border-color: rgba(41, 171, 226, 1);
+    border: 1px solid var(--border-color);
 }
 
-
+.input-container input:focus {
+    border-color: rgba(41, 171, 226, 1);
+     outline: none;
+ }
+ 
 .input-container .icon:hover {
     border-color: rgba(41, 171, 226, 1);
 }

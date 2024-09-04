@@ -100,6 +100,16 @@ function XremoveFormEvents() {
     }
 }
 
+
+function disableFormEvents(formid) {
+    let form=document.getElementById(formid);
+    inputs = form.querySelectorAll('input');
+    inputs.forEach(element => {
+        element.addEventListener("invalid", e => e.preventDefault());
+        element.addEventListener("submit", e => e.preventDefault());
+    });
+ }
+
 /* -------------------------------- */
 /* 
     Neu
@@ -112,7 +122,17 @@ function addFormListener(formSelector, styleObject) {
     inputs.forEach(input => {
         styleElement(input, styleObject);
         input.addEventListener('input', eventErrorMsg);
-        input.addEventListener("invalid", e => e.preventDefault());
+        // input.addEventListener("invalid", e => e.preventDefault());
+        input.addEventListener("input", e => {  // focusout
+            // console.log(document.activeElement);
+            e.target.setCustomValidity(``);
+            setErrorMsg(e.target);
+            // eventErrorMsg(e);
+            e.preventDefault();
+        } ); // XX
+
+        input.addEventListener("focusin",e => removeAllCustomMsg(formSelector)); // to be able te re Submit
+        input.addEventListener("blur",e => removeAllCustomMsg(formSelector)); // to be able te re Submit
     });
 }
 
@@ -126,21 +146,24 @@ function styleElement(node, styles) {
 
 function customErrorMsg(id=null,customMsg=null) {
     if (typeof(id) !== "string" || typeof(customMsg) !== "string") return;
-    let inputSibling=document.getElementById(id);
-    let sibling=inputSibling;
+    let sibling=document.getElementById(id);
     sibling.setCustomValidity(customMsg);
-    while (sibling.nextElementSibling && sibling.nextElementSibling.tagName == 'SPAN') {
-        sibling = sibling.nextElementSibling;
-    }
-    sibling.innerHTML = inputSibling.validity.valid?"":inputSibling.validationMessage;
+    // setErrorMsg(sibling);
 }
 
-function eventErrorMsg(e) {
-    sibling=this;
+function eventErrorMsg(event) {
+//     // this.setCustomValidity(``);
+//     setErrorMsg(this).setCustomValidity(``);
+    setErrorMsg(this);
+}
+
+function setErrorMsg(element) {
+    sibling=element;
     while (sibling.nextElementSibling && sibling.nextElementSibling.tagName == 'SPAN') {
         sibling = sibling.nextElementSibling;
     }
-    sibling.innerHTML=this.validity.valid?"":this.validationMessage;
+    sibling.innerHTML=element.validity.valid?"":element.validationMessage;
+    return sibling;
 }
 
 function togglePasswordView(event,container) {
@@ -156,3 +179,15 @@ function togglePasswordView(event,container) {
     event.preventDefault();
     event.stopPropagation();
  }
+
+
+function removeAllCustomMsg(formid) {
+    let form = document.querySelector(formid);
+    // let form = document.getElementByIdquerySelector("#"+formid);
+    if (!form) return false;
+
+    let inputs = form.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.setCustomValidity('');
+    })
+}

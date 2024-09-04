@@ -47,13 +47,13 @@
                            
 
                            <div id="input-field-container" class="input-container">
-                              <input type="email" required placeholder="Email">
+                              <input id="email" type="email" required placeholder="Email">
                               <span class="icon"  ><img src="./assets/img/desktop/letter.svg"></span>
                               <span class="error-msg visible"></span>
                           </div>
                       
                            <div id="password-container" class="input-container password">
-                              <input id="password" type="email" required placeholder="Password">
+                              <input id="password" type="password" required placeholder="Password">
                               <span class="icon" onmousedown="togglePasswordView(event)">👁️</span>
                               <span id="password-msg" class="error-msg visible"></span>
                           </div>
@@ -71,7 +71,7 @@
 
                      </div>
                      <div class="login-buttons">
-                        <button id="submit" type="submit" class="darkbutton">Login</button>
+                        <button onmousedown="activateFormErrors('login-card')" id="submit" type="submit" class="darkbutton">Login</button>
                         <button type="sumbmit" class="whitebutton">Guest Login</button>
                      </div>
                   </form>

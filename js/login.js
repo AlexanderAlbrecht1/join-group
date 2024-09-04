@@ -54,7 +54,6 @@ function openPage(url) {
  * @param {bool} showmsg   - true if user should get information, false = no feedbak
  * @returns - true if user and password are OK otherwise false
  */
-// Jörg regelt JS
 async function isLoginCorrect(email, password, showmsg = true) {
    let userList = await getUserList();
    let msg = "E-Mail and password is correct";
@@ -73,7 +72,10 @@ async function isLoginCorrect(email, password, showmsg = true) {
 
    if (showmsg) {
       if (focus != null) document.getElementById(focus).focus();
-      document.getElementById("msg-box").innerHTML = msg;
+      customErrorMsg("password",msg);
+      customErrorMsg("email",msg);
+      activateFormErrors('login-card');
+      // document.getElementById("msg-box").innerHTML = msg;
    }
    return focus == null;
 }
@@ -174,6 +176,10 @@ function guestLogin() {
 function init() {
    document.getElementById("login-card").classList.add("dawn");
    document.getElementById("main-logo").classList.add("logo-position");
+
+   loadUserFromLocalStorage();
+   addFormListener('#login-card');
+
 }
 
 function togglePasswordView(event,container) {
@@ -188,4 +194,17 @@ function togglePasswordView(event,container) {
 
    event.preventDefault();
    event.stopPropagation();
+}
+
+function activateFormErrors(formid) {
+   // let passwordContainer=event.target.parentElement;
+   let form=document.getElementById(formid);
+   inputs = form.querySelectorAll('input');
+   inputs.forEach(element => {
+      element.parentElement.classList.add("invalid");
+      //element.checkValidity();
+      setErrorMsg(element);
+
+   });
+   disableFormEvents(formid);
 }

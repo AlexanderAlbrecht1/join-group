@@ -229,6 +229,10 @@ a {
    top: 0px
 }
 
+.addNewContactButton:hover {
+   cursor:pointer
+}
+
 /*
 ******header******
 */
@@ -347,7 +351,7 @@ nav {
 }
 
 /*
-******dialog window******
+******dialog window general******
 */
 
 .displayFlex {
@@ -363,6 +367,10 @@ nav {
    background-color: rgba(0, 0, 0, 0.3);
    z-index: 500;
 }
+
+/*
+******dialog window add contact******
+*/
 
 .addContact {
    margin: auto;
@@ -416,6 +424,57 @@ nav {
    width: 90px;
    border-bottom: 3px solid rgba(41, 171, 226, 1);
 }
+
+.cancelButton {
+   box-sizing: border-box;
+   display: flex;
+   width: 126px;
+   height: 56px;
+   border-radius: 10px;
+   border: 1px solid black;
+   padding: 16px;
+   gap: 4px;
+   justify-content: center;
+   align-items: center;
+}
+
+.cancelButton:hover {
+   cursor: pointer;
+   border: 1px solid rgba(41, 171, 266, 1);
+   color: rgba(41, 171, 226, 1);
+   }
+
+.cancelButton:hover .imgContainer {
+   background: url('/assets/img/desktop/close_blue.svg');
+   background-size: 10px 10px;
+   background-repeat: no-repeat;
+   background-position: center;
+}
+
+
+.cancelButton>span {
+   width: 66px;
+   height: 24px;
+   font-family: Inter;
+   font-size: 20px;
+   font-weight: 400;
+}
+
+.imgContainer {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 24px;
+   height: 24px;
+   background: url('/assets/img/desktop/close.svg');
+   background-size: 10px 10px;
+   background-repeat: no-repeat;
+   background-position: center;
+}
+
+
+
+
 
 
 

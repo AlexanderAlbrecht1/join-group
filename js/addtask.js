@@ -1,7 +1,13 @@
 let tasks = [];
 let subtasks = [];
 
-async function addNewTask() {
+ async function addNewTask() {
+    showRequiredText();
+
+   if (!showRequiredText()) {
+      return;
+   }
+
    let title = document.getElementById("title");
    let description = document.getElementById("description");
    let assignedTo = Array.from(
@@ -15,6 +21,7 @@ async function addNewTask() {
 
    if (tasks === null) {
       tasks = [];
+
    }
    tasks.push({
       id: tasks.length,
@@ -30,6 +37,7 @@ async function addNewTask() {
    await saveData("taskstorage", tasks);
    clearTaskInputs();
    openKanbanboard();
+
 }
 
 function clearTaskInputs() {
@@ -96,3 +104,40 @@ function openKanbanboard() {
     }, 2000);
      
    }
+
+
+
+   function showRequiredText() {
+      let title = document.getElementById("title");
+      let titleSpan = document.getElementById('title-span'); // Achte darauf, dass das span-Element die richtige ID hat.
+      let dueDate = document.getElementById("due-date");
+      let dueDateSpan = document.getElementById("due-date-span"); // Achte darauf, dass das span-Element die richtige ID hat.
+      let category = document.getElementById("category");
+      let categorySpan = document.getElementById("category-span"); // Achte darauf, dass das span-Element die richtige ID hat.
+   
+      if (!title.value) {
+        titleSpan.classList.remove('d-none');
+        return;
+      } else {
+          titleSpan.classList.add('d-none');
+      }
+   
+      if (!dueDate.value) {
+           dueDateSpan.classList.remove('d-none');
+           return;
+      } else {
+         dueDateSpan.classList.add('d-none');
+      }
+   
+      if (!category.value) {
+          categorySpan.classList.remove('d-none');
+          return;
+      } else {
+         categorySpan.classList.add('d-none');
+      }
+ 
+      // Falls alle Felder gefüllt, geht es weiter
+      return true;
+
+   }
+   

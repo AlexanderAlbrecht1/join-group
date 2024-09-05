@@ -175,7 +175,7 @@ a {
 
 .contact:hover {
    background-color: rgba(42, 54, 71, 1);
-   color: rgba(255, 255, 255, 1) ;
+   color: rgba(255, 255, 255, 1);
    cursor: pointer;
 }
 
@@ -230,7 +230,7 @@ a {
 }
 
 .addNewContactButton:hover {
-   cursor:pointer
+   cursor: pointer
 }
 
 /*
@@ -382,13 +382,17 @@ nav {
    background-color: rgba(255, 255, 255, 1);
 }
 
+/*
+******left side logo container******
+*/
+
 .addContactLogoContainer {
    box-sizing: border-box;
    display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   padding: 66px 48px; 
+   padding: 66px 48px;
    width: 467px;
    height: 594px;
    background-color: rgba(42, 54, 71, 1);
@@ -425,6 +429,69 @@ nav {
    border-bottom: 3px solid rgba(41, 171, 226, 1);
 }
 
+/*
+******right side inout container******
+*/
+
+.addContactInputContainer {
+   display: flex;
+   flex: 1;
+   justify-content: flex-end;
+}
+
+.emptyMonogram {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.emptyMonogram>img {
+   width: 120px;
+   height: 120px;
+}
+
+.addContactInputContainer2 {
+   width: 422px;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+   gap: 32px;
+}
+
+form {
+   gap: 32px;
+}
+
+.close {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 32px;
+   height: 32px;
+   border-radius: 56px;
+}
+
+.close:hover {
+   cursor: pointer;
+   background-color: rgba(217, 217, 217, 1);
+}
+
+.close>img {
+   width: 13px;
+   height: 13px;
+}
+
+/*
+******buttons******
+*/
+
+.buttons {
+   display: flex;
+   width: 364px;
+   height: 57px;
+   gap: 24px;
+}
+
 .cancelButton {
    box-sizing: border-box;
    display: flex;
@@ -440,11 +507,19 @@ nav {
 
 .cancelButton:hover {
    cursor: pointer;
-   border: 1px solid rgba(41, 171, 266, 1);
+   border: 2px solid rgba(41, 171, 266, 1);
    color: rgba(41, 171, 226, 1);
-   }
+   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
 
-.cancelButton:hover .imgContainer {
+.cancelButton:focus {
+   border: px solid rgba(9, 25, 49, 1);
+   color: rgba(9, 25, 49, 1);
+   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+
+.cancelButton:hover .cancelSVGContainer {
    background: url('/assets/img/desktop/close_blue.svg');
    background-size: 10px 10px;
    background-repeat: no-repeat;
@@ -460,7 +535,7 @@ nav {
    font-weight: 400;
 }
 
-.imgContainer {
+.cancelSVGContainer {
    display: flex;
    align-items: center;
    justify-content: center;
@@ -468,6 +543,50 @@ nav {
    height: 24px;
    background: url('/assets/img/desktop/close.svg');
    background-size: 10px 10px;
+   background-repeat: no-repeat;
+   background-position: center;
+}
+
+.createContactButton {
+   box-sizing: border-box;
+   display: flex;
+   width: 214px;
+   height: 57px;
+   border-radius: 10px;
+   padding: 16px;
+   gap: 4px;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba(42, 54, 71, 1);
+   color: rgba(255, 255, 255, 1);
+   border: none;
+}
+
+.createContactButton:hover {
+   cursor: pointer;
+   background-color: rgba(41, 171, 226, 1);
+   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.createContactButton:focus {
+   background-color: rgba(9, 25, 49, 1);
+   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.createContactButton>span {
+   font-family: Inter;
+   font-weight: 700;
+   font-size: 21px;
+}
+
+.checkSVGContainer {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 24px;
+   height: 24px;
+   background: url('/assets/img/desktop/check.svg');
+   background-size: 15px 11px;
    background-repeat: no-repeat;
    background-position: center;
 }

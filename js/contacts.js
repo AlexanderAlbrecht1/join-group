@@ -248,37 +248,49 @@ function openCreateContactDialog() {
          </div>
       </div>
       <div class="addContactInputContainer">
-        <form onsubmit="addNewContact();return false;">
-
-            <div id="input-field-container" class="input-container">
-               <input id="name" type="text" required placeholder="Name">
-               <span class="icon"  ><img src="./assets/img/desktop/person.svg"></span>
-               <span class="error-msg visible"></span>
+         <div class="emptyMonogram">
+            <img src="./assets/img/desktop/empty_user.svg" alt="">
+         </div>
+         <div class="addContactInputContainer2">
+            <div class="close" onclick="closeContactCreation()">
+               <img src="/assets/img/desktop/close.svg" alt="">
             </div>
 
-            <div id="input-field-container" class="input-container">
-               <input id="email" type="email" required placeholder="Email">
-               <span class="icon"  ><img src="./assets/img/desktop/letter.svg"></span>
-               <span class="error-msg visible"></span>
-            </div>
-            
-            <div id="input-field-container" class="input-container">
-               <input id="phone" type="number" required placeholder="Phone">
-               <span class="icon"  ><img src="./assets/img/desktop/phone.svg"></span>
-               <span class="error-msg visible"></span>
-            </div>
+            <form onsubmit="addNewContact();return false;">
 
-            <div>
-               <div class="cancelButton">
-                  <span>Cancel </span>
-                  <div class="imgContainer"></div>
-               
+               <div id="input-field-container" class="input-container">
+                  <input id="name" type="text" required placeholder="Name">
+                  <span class="icon"  ><img src="./assets/img/desktop/person.svg"></span>
+                  
+               </div>
+
+               <div id="input-field-container" class="input-container">
+                  <input id="email" type="email" required placeholder="Email">
+                  <span class="icon"  ><img src="./assets/img/desktop/letter.svg"></span>
+                  
                </div>
             
+               <div id="input-field-container" class="input-container">
+                  <input id="phone" type="number" required placeholder="Phone">
+                  <span class="icon"  ><img src="./assets/img/desktop/phone.svg"></span>
+                  
+               </div>
 
-            <button type="submit">Create contact</button>
-            </div>
-        </form>
+               <div class="buttons">
+                  <div class="cancelButton" onclick="closeContactCreation()">
+                     <span>Cancel </span>
+                     <div class="cancelSVGContainer">
+                     </div>    
+                  </div>
+
+                  <button class="createContactButton" type="submit">
+                     <span>Create contact</span>
+                     <div class="checkSVGContainer">
+                     </div>
+                  </button>
+               </div>
+            </form>
+         </div>
       </div>
     </div>
 

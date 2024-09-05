@@ -17,6 +17,7 @@ async function login() {
    }
 }
 
+
 /**
  * Logout user
  * reset inputfields
@@ -30,15 +31,23 @@ function logout() {
    sessionDestroy(PROJECT);
 }
 
+
 /**
+ * 
+ * @public - from HTML
+ * 
  * load next HTML, login success
+ * 
  */
 function openDashboard() {
    openPage("./dashboard.html");
 }
 
+
 /**
  * load next HTML, geneerell alias
+ * 
+ * @public - called from any js
  *
  * @param {url} url - open a HTML and exit from here
  */
@@ -46,8 +55,12 @@ function openPage(url) {
    window.location = url;
 }
 
+
 /**
+ * 
  * Check if given Login has success
+ * 
+ * @private - called fom login
  *
  * @param {string} email     - email from the user who tries to login
  * @param {string} password  - the password that belongs to the user
@@ -56,29 +69,93 @@ function openPage(url) {
  */
 async function isLoginCorrect(email, password, showmsg = true) {
    let userList = await getUserList();
-   let msg = "E-Mail and password is correct";
-   let focus = null;
-   let found = -1;
-   if (userList != null)
-      found = userList.findIndex((element) => element.email == email);
+   let { err, msg, focus } = validateUser(userList, email, password);
 
-   if (found == -1) {
-      msg = "E-Mail not found";
-      focus = "email";
-   } else if (userList[found].password != password) {
-      msg = "You chose a wrong password";
-      focus = "password";
-   }
-
-   if (showmsg) {
-      if (focus != null) document.getElementById(focus).focus();
-      customErrorMsg("password",msg);
-      customErrorMsg("email",msg);
-      activateFormErrors('login-card');
-      // document.getElementById("msg-box").innerHTML = msg;
-   }
-   return focus == null;
+   if (showmsg && err) handleErrors(msg, focus);
+   
+   return !err;
 }
+
+
+/**
+ * 
+ * Checks if the current Password ist correct
+ * 
+ * @private - used from: isLoginCorrect
+ * 
+ * @param {object} userList - the whole Userlist of the db
+ * @param {string} email    - the login mail to check
+ * @param {string} password - the password that must be valid
+ * @returns - true if user found and password ist valid otherwise false
+ */
+function isPasswordCorrect(userList, email, password) {
+   let user = userList.find(user => user.email == email);
+   return user && user.password === password;
+}
+
+
+/**
+ * 
+ * add some customised Messages to the board and sets the focus
+ * 
+ * @private - used from isLoginCorrect
+ * 
+ * @param {*} msg 
+ * @param {*} focus 
+ */
+function handleErrors(msg, focus) {
+   if (focus) document.getElementById(focus)?.focus(); 
+   customErrorMsg("password", msg);
+   customErrorMsg("email", msg);
+   activateFormErrors('login-card');
+}
+
+
+/**
+ * 
+ * Gives Back the Errormessage as invalid Field
+ * 
+ * @private - called from isLoginCorrect
+ * 
+ * @param {object} userList - the whole Userlist of the db
+ * @param {string} email    - the login mail to check
+ * @param {string} password - the password that must be valid
+ * @returns 
+ * - err: true if user found and password ist valid otherwise false
+ * - focus: returns the filed to focus if we have an error
+ * - msg: Returns a msg Failed or OK
+ */
+function validateUser(userList, email, password) {
+   let focus = null, msg = "Email and Password are correct", err = false;
+   
+   if (!userExists(userList, email)) { // wrong Mail
+       msg = "Combination of Email and Password  is not valid";
+       focus = "email";
+       err = true;
+   } else if (!isPasswordCorrect(userList, email, password)) { // wrong password
+       msg = "Combination of Email and Password  is not valid";
+       focus = "email"; 
+       err = true;
+   }
+   
+   return { err, msg, focus };
+}
+
+
+/**
+ * 
+ * Checks if mail is found in userlist
+ * 
+ * @private - called from isLoginCorrect
+ * 
+ * @param {object} userList - the whole Userlist of the db
+ * @param {string} email    - the login mail to check
+ * @returns -true if email found otherwise false
+ */
+function userExists(userList, email) {
+   return userList?.findIndex(user => user.email == email) !== -1;
+}
+
 
 /**
  * Alias to have better reading to get the Userlist
@@ -88,6 +165,7 @@ async function isLoginCorrect(email, password, showmsg = true) {
 async function getUserList() {
    return await loadData("user");
 }
+
 
 /**
  * run this before we enter user and passowrd
@@ -109,6 +187,7 @@ async function loadUserFromLocalStorage() {
    return false;
 }
 
+
 /**
  * put in Mask to have it later again, do we need it ?
  *
@@ -120,6 +199,7 @@ function putLoginToValue(email, pw) {
    document.getElementById("email").value = email;
 }
 
+
 /**
  * Clear all Login fields ?
  */
@@ -128,6 +208,7 @@ function clearLogin() {
    document.getElementById("email").value = "";
    document.getElementById("remember-me").checked = false;
 }
+
 
 /**
  * run this after login
@@ -143,12 +224,14 @@ function saveUserToLocalStorage() {
    });
 }
 
+
 /**
  * clear  user / password in storage
  */
 function clearLocalStorage() {
    removeKeyInLocalStorage(PROJECT);
 }
+
 
 /**
  * if checked save user data to the local storage, get it back later
@@ -162,7 +245,9 @@ function rememberMe() {
    }
 }
 
+
 /**
+ * 
  * Guest Login no need to enter user or Password
  * Some Data is also prepared
  */
@@ -173,6 +258,13 @@ function guestLogin() {
 }
 
 
+/**
+ * 
+ * Initiates Dawn and logo Movement
+ * Loads the User from local Storage
+ * adds all needed Listeners for the Inputfields
+ * 
+ */
 function init() {
    document.getElementById("login-card").classList.add("dawn");
    document.getElementById("main-logo").classList.add("logo-position");
@@ -182,7 +274,16 @@ function init() {
 
 }
 
-function togglePasswordView(event,container) {
+
+/**
+ * 
+ * changes the password field to text so we can see the password
+ * also displays an eye or strikethrough eye
+ * 
+ * @param {event} event - the event = of the icon
+ * @returns 
+ */
+function togglePasswordView(event) {
    let passwordContainer=event.target.parentElement;
    let passwordInput=event.target.previousElementSibling;
    if (document.activeElement !== passwordInput) {
@@ -196,8 +297,15 @@ function togglePasswordView(event,container) {
    event.stopPropagation();
 }
 
+
+/**
+ * 
+ * Activates Errors while in input field and red border
+ * 
+ * @private - called form handleErrors
+ * @param {*} formid - the id of the form we want no to errors and border live 
+ */
 function activateFormErrors(formid) {
-   // let passwordContainer=event.target.parentElement;
    let form=document.getElementById(formid);
    inputs = form.querySelectorAll('input');
    inputs.forEach(element => {

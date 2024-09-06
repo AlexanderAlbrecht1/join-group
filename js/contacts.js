@@ -201,8 +201,8 @@ function showSingleContact(id) {
     </div>
     `;
 
-    console.log(id);
-    
+   console.log(id);
+
 }
 
 async function deleteContact(id) {
@@ -235,7 +235,7 @@ function openCreateContactDialog() {
    document.getElementById('body').classList.add('overflowHidden');
    dialogBackground.classList.remove('displayNone');
    dialogBackground.classList.add('displayFlex');
-   
+
    addContactContainer.innerHTML = '';
    addContactContainer.innerHTML = /*html*/ `
             
@@ -302,9 +302,13 @@ function openCreateContactDialog() {
 }
 
 function closeContactCreation() {
-   document.getElementById('dialogBackground').classList.add('displayNone');
-   document.getElementById('dialogBackground').classList.remove('displayFlex');
-   document.getElementById('body').classList.remove('overflowHidden');
+   addContactContainer.style.cssText = 'animation: slideOut .5s ease; animation-fill-mode: forwards;';
+   setTimeout(() => {
+      document.getElementById('dialogBackground').classList.add('displayNone');
+      document.getElementById('dialogBackground').classList.remove('displayFlex');
+      document.getElementById('body').classList.remove('overflowHidden');
+   }, 500);
+
 }
 
 function dontClose(event) {

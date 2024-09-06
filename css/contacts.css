@@ -372,6 +372,15 @@ nav {
    }
 }
 
+@keyframes slideOut {
+  0% {
+      transform: translateX(0);
+   }
+   100% {
+      transform: translateX(110%);
+   }
+}
+
 
 /*
 ******dialog window add contact******

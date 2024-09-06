@@ -44,7 +44,7 @@ async function displayContacts() {
 
          document.getElementById('showContacts').innerHTML += `
             <div onclick="showSingleContact(${ID})" class="contact">
-                 <div class="icon" style="background-color: ${backgroundColor}">
+                 <div class="monogrammicon" style="background-color: ${backgroundColor}">
                     <span>${initial1}${initial2}</span>
                 </div>
                 <div class="nameAndMail">
@@ -360,7 +360,7 @@ function getHTMLContactSelection(contact) {
    return `
          <div class="contact-checkbox">
          <div>
-            <div class="icon" style="background-color: ${contact.color}">
+            <div class="monogrammicon" style="background-color: ${contact.color}">
             ${getMonogram(name)}
             </div>
              ${name}</div>

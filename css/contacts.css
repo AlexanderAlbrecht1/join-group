@@ -358,9 +358,18 @@ nav {
    bottom: 0;
    background-color: rgba(0, 0, 0, 0.3);
    z-index: 500;
-
+   
   
 
+}
+
+@keyframes slideIn {
+   0% {
+      transform: translateX(100%);
+   }
+   100% {
+      transform: translateX(0);
+   }
 }
 
 
@@ -376,8 +385,10 @@ nav {
    height: 592px;
    border-radius: 30px;
    background-color: rgba(255, 255, 255, 1);
-
+   transform: translateX(100%)
 }
+
+
 
 
 

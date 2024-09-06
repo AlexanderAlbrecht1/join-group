@@ -231,13 +231,15 @@ function findContact(id) {
  */
 function openCreateContactDialog() {
    let dialogBackground = document.getElementById('dialogBackground');
+   let addContactContainer = document.getElementById('addContactContainer');
    document.getElementById('body').classList.add('overflowHidden');
    dialogBackground.classList.remove('displayNone');
    dialogBackground.classList.add('displayFlex');
-   dialogBackground.innerHTML = '';
-   dialogBackground.innerHTML = /*html*/ `
+   
+   addContactContainer.innerHTML = '';
+   addContactContainer.innerHTML = /*html*/ `
             
-    <div class="addContact" onclick="dontClose(event)">
+    
       <div class="addContactLogoContainer">
          <div>
             <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
@@ -292,9 +294,11 @@ function openCreateContactDialog() {
             </form>
          </div>
       </div>
-    </div>
+
 
     `;
+   addContactContainer.style.cssText = 'animation: slideIn .5s ease; animation-fill-mode: forwards;';
+   //dialogBackground.style.cssText = 'animation: slideIn .5s ease; animation-fill-mode: forwards;';
 }
 
 function closeContactCreation() {

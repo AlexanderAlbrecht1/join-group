@@ -113,24 +113,27 @@ function openKanbanboard() {
       let dueDate = document.getElementById("due-date");
       let dueDateSpan = document.getElementById("due-date-span"); // Achte darauf, dass das span-Element die richtige ID hat.
       let category = document.getElementById("category");
+      let categoryBox = document.getElementById('select-box');
       let categorySpan = document.getElementById("category-span"); // Achte darauf, dass das span-Element die richtige ID hat.
    
       if (!title.value) {
         titleSpan.classList.remove('d-none');
-        return;
+        title.style.border = "1px solid red";
       } else {
           titleSpan.classList.add('d-none');
+          title.style.border = '1px solid #d1d1d1';
       }
    
       if (!dueDate.value) {
            dueDateSpan.classList.remove('d-none');
-           return;
+           dueDate.style.border = "1px solid red";
       } else {
          dueDateSpan.classList.add('d-none');
       }
    
       if (!category.value) {
           categorySpan.classList.remove('d-none');
+          categoryBox.style.border = '1px solid red';
           return;
       } else {
          categorySpan.classList.add('d-none');

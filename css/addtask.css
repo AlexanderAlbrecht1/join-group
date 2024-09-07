@@ -12,7 +12,13 @@
 }
 
 h1 {
-   
+   font-size: 61px;
+   font-weight: 700;
+}
+
+label, span, input, textarea, select {
+   font-weight: 400;
+   font-size: 20px;
 }
 
 .multiselect {
@@ -101,7 +107,7 @@ select, input {
 #add-subtask {
    all: unset;
    position: absolute;
-   top: 2em;
+   top: 3em;
    right: 16px;
    outline: none;
 }
@@ -122,12 +128,6 @@ select, input {
    border-radius: 10px;
    border: 1px solid #d1d1d1;
    opacity: 0px;
-}
-
-
-.button-group {
-   display: flex;
-   gap: 10px;
 }
 
 input[type="radio"] {
@@ -232,13 +232,13 @@ textarea {
 .label-input-con {
    display: flex;
    flex-direction: column;
-   margin-bottom: 8px;
+   margin-top: 48px;
+   gap: 8px;
 }
 
 .label-input-con input,
 textarea {
    padding: 12px 21px 12px 21px;
-   gap: 10px;
    border-radius: 10px;
    border: 1px solid #d1d1d1;
    opacity: 0px;
@@ -313,3 +313,7 @@ textarea {
 }
 
 
+.d-flex {
+   display: flex;
+   gap: 16px;
+}

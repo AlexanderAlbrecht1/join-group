@@ -1,0 +1,11 @@
+
+@media screen and (max-height:1050px) {
+    .logo-position {
+        transform:none;
+        width: 68px; /* calc(274px / 4); */
+        height: 83px; /* calc(334px / 4); */
+        left: 20px;
+        top: 20px;
+    }
+    
+}

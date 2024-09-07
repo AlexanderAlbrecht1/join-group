@@ -4,30 +4,36 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Kanban Project Management Tool Join</title>
+      <link rel="shortcut icon" href="/favicon.svg">
       <link rel="stylesheet" href="./assets/font/inter.css" />
       <link rel="stylesheet" href="./assets/font/poppins.css" />
       <link rel="stylesheet" href="./styles.css" />
       <link rel="stylesheet" href="./css/stdio.css" />
       <link rel="stylesheet" href="./css/login.css" />
+      <link rel="stylesheet" href="./css/loginAnimation.css" />
       <link rel="stylesheet" href="./css/customCheckbox.css" />
       <link rel="stylesheet" href="./css/inputField.css" />
       <link rel="stylesheet" href="./css/customButton.css" />
+      <link rel="stylesheet" href="./css/login-media.css" />
+      
 
       <script src="./js/firebase.js"></script>
       <script src="./js/localStorage.js"></script>
       <script src="./js/session.js"></script>
       <script src="./js/loginInit.js"></script>
       <script src="./js/login.js"></script>
+      <script src="./js/autentification.js"></script>
+
       <script src="./js/events.js"></script>
    </head>
    <body onload="init()">
       <div class="body">
          <div class="relative">
-            <div class="absolute login-master">
+            <div id="login-master" class="absolute login-master">
                <div>
                   <div>
                      <span>Not a Join user ?</span>
-                     <button class="darkbutton px16">Sign up</button>
+                     <button onclick="openSignup()" class="darkbutton fs16">Sign up</button>
                   </div>
                </div>
 
@@ -47,19 +53,20 @@
                            
 
                            <div id="input-field-container" class="input-container">
-                              <input id="email" type="email" required placeholder="Email">
+                              <input id="email" type="email" required placeholder="Email" autocomplete="email">
                               <span class="icon"  ><img src="./assets/img/desktop/letter.svg"></span>
                               <span class="error-msg visible"></span>
                           </div>
                       
                            <div id="password-container" class="input-container password">
-                              <input id="password" type="password" required placeholder="Password">
+                              <input id="password" type="password" required placeholder="Password" autocomplete="current-password">
                               <span class="icon" onmousedown="togglePasswordView(event)">👁️</span>
                               <span id="password-msg" class="error-msg visible"></span>
                           </div>
                       
                         </div>
 
+      
                         <div class="remember"><!-- Remember Me area-->
                            <label class="custom-checkbox">
                               <input type="checkbox" id="remember-me">
@@ -72,10 +79,16 @@
                      </div>
                      <div class="login-buttons">
                         <button onmousedown="activateFormErrors('login-card')" id="submit" type="submit" class="darkbutton">Login</button>
-                        <button type="sumbmit" class="whitebutton">Guest Login</button>
+                        <button onclick="guestLogin(event)" type="submit" class="whitebutton">Guest Login</button>
                      </div>
                   </form>
                </div>
+
+               <div class="signup-small">
+                  <span>Not a Join user ?</span>
+                  <button onclick="openSignup()" class="darkbutton fs16">Sign up</button>
+               </div>
+
                <div>
                   <div>
                      <a class="link" href="">Privacy Policy</a>
@@ -85,7 +98,9 @@
                </div>
 
             </div>
+            
             <img id="main-logo" class="main-logo" src="./assets/img/desktop/join-logo.svg">
+            
          </div>
       </div>
    </body>

@@ -11,7 +11,7 @@
  * @param {string} msg - Display message in the Password Box 
  */
 function msgBox(msg) {
-    document.getElementById("msg-box").innerHTML=msg;
+    // document.getElementById("msg-box").innerHTML=msg;
 }
 
 /**
@@ -20,10 +20,10 @@ function msgBox(msg) {
  * @returns - true if passwords are the same otherwise false
  */
 function isEqualPassword() {
-    let password=document.getElementById("password");
+    let password=document.getElementById("sign-password");
     let confirmPassword=document.getElementById("confirm-password");;
     if (password.value != confirmPassword.value) {
-        msgBox("passwords are different");
+        customErrorMsg("confirm-password","passwords are different");
     }
     return password.value == confirmPassword.value;   
 }
@@ -39,7 +39,7 @@ function existUser(userList) {
     let email=document.getElementById("email").value;
     let index=userList.findIndex(element =>  element.email == email);
     if (index != -1) {
-        msgBox(`E-mail already exist. Please choose another e-mail. <br>${email}, <a href="./login.html">login at your existing account ?`);
+        customErrorMsg("email",`E-mail already exist. Please choose another e-mail. <br>${email}, <a href="./index.html">login at your existing account ?`);
     }
     return index != -1;
 }
@@ -50,7 +50,7 @@ function existUser(userList) {
  * @param {object} userList  List of Users 
  */
 async function addUserToList(userList) {
-    let password=document.getElementById("password");
+    let password=document.getElementById("sign-password");
     let email=document.getElementById("email"); 
     let user=document.getElementById("user");
     userList.push({user:user.value,password: password.value,email: email.value});
@@ -63,13 +63,14 @@ async function addUserToList(userList) {
  * input: password, user, email
  */
 async function register() {
+    if (!isFormValid) return;
     if (!isEqualPassword()) return;
 
     let userList=await getUserList();
     if (existUser(userList)) return;
 
     await addUserToList(userList);
-    openDashboard(); // autologin move to the page we need to go and exit here
+    openLogin(); // autologin move to the page we need to go and exit here
 }
 
 /**
@@ -93,12 +94,12 @@ async function removeUser(userList,index) {
  * passwordValidationOK
  * validate the interface with the given Password
  * 
- * @param {*} passwordOfList 
+ * @param {array} passwordOfList 
  */
 function passwordValidationOK(passwordOfList)  {
-    let password=document.getElementById("password");
+    let password=document.getElementById("sign-password");
     if (passwordOfList != password.value) {
-        msgBox("The mail-password validation failed !");
+        customErrorMsg("confirm-password","The mail-password validation failed !");
     }
 }
 
@@ -115,26 +116,27 @@ async function unregister() {
         if (passwordValidationOK(userList[index].password)) {
             removeTasksOf(email.value);    // Remove all Tasks of the user
             removeUser(userList,index);    // remove all Userinformation and cleanup
-            openPage("./login.html");
+            openPage("./index.html");
         }
     } else {
         msgBox(`User doesn't exist`);
     }
 }
 
-/**
- * Init the Eventlistener for doing input checks for the registration
- */
-function initEventListenerRegister() {
-    let list=["email","user","password","confirm-password","privacy-policy"];
-    initEventListener(list);
 
-}
 
-/**
- * First initialation of document
- */
-function init() {
-    initEventListenerRegister() ;
-    //isLogged();
-}
+function isFormValid(formqs) {
+    let form = document.querySelector(formqs);
+    if (!form) return false;
+ 
+    let inputs = form.querySelectorAll('input');
+    let status = Array.from(inputs).findIndex(input => !input.checkValidity()) == -1;
+    let cb = form.querySelector("#remember-me").checked;
+ 
+    /* if (!status || !cb) {
+        disableCheck(!status || !cb);
+    }*/
+    // let err=Array.from(inputs).findIndex(input =>input.validity.valid===false);
+    return status && cb;
+ } 
+ 

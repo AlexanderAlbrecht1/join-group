@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
     <link rel="stylesheet" href="./css/addtask.css">
+    <link rel="stylesheet" href="./css/contacts.css">
     <link rel="stylesheet" href="./css/customButton.css">
     <link rel="stylesheet" href="./css/customCheckbox.css">
     <link rel="stylesheet" href="./assets/font/inter.css">
+    <link rel="shortcut icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon">
     <script src="./js/addtask.js"></script>
     <script src="./js/firebase.js"></script>
     <script src="./js/contacts.js"></script>
@@ -17,6 +19,33 @@
 </head>
 
 <body onload="init();">
+
+
+    <header>
+        <div class="max-width">
+        <span>Kanban Project Management Tool</span>
+        <div class="headerHelpUser">
+            <div class="helparea">
+                <a href=""><img src="/assets/img/desktop/question_mark.svg" alt="Question Mark"></a>
+            </div>
+            <div>Usermonogram</div>
+        </div>
+    </div>
+    </header>
+    
+    <nav>
+        <img src="/assets\img\desktop\join-logo_navbar.svg" alt="Join-Logo">
+        <div class="mainLinks">
+            <a href="/dashboard.html"><img src="/assets/img/desktop/summary_logo.svg" alt="Summary Logo">Summary</a>
+            <a href="/addtask.html" style=" background-color: rgba(9, 25, 49, 1);"><img src="/assets/img/desktop/logo_add_task.svg" alt="Add task Logo">Add task</a>
+            <a href="/kanbanboard.html"><img src="/assets/img/desktop/board_logo.svg" alt="Board Logo">Board</a>
+            <a href="/contacts.html"><img src="/assets/img/desktop/contact_logo.svg" alt="Contacts Logo">Contact</a>
+        </div>
+        <div class="adviceLinks">
+            <a href="">Privacy Policy</a>
+            <a href="">Legal Notice</a>
+        </div>
+    </nav>
     <div class="add-task-wrapper">
 
         <div class="add-task-container">
@@ -110,12 +139,14 @@
                   
 
                     <div class="button-con">
+                        <p><span class="required-asterisk">*</span>this field is required</p>
+                        <div>
                         <button class="whitebutton" id="clear-button" type="button" onclick="clearTaskInputs()">Clear <img
                                 src="./assets/img/desktop/clear-task-icon.svg"></button>
                         <button class="darkbutton" type="submit" value="Create Task">Create Task <img
                                 src="./assets/img/desktop/create-task-check.svg"></button>
+                            </div>
                     </div>
-
             </form>
         </div>
     </div>

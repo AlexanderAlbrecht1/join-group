@@ -2,9 +2,8 @@ body {
    display: flex;
    flex-direction: row;
    overflow: hidden;
-   margin: auto;
+   margin: 0;
    height: 100vh;
-   max-height: 1024px;
    max-width: 1440px;
    background-color: rgba(246, 247, 248, 1);
 
@@ -348,15 +347,21 @@ a {
 header {
    position: absolute;
    top: 0;
-   display: flex;
    width: 100%;
-   max-width: 1440px;
    height: 96px;
    justify-content: space-between;
    align-items: center;
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
    background-color: rgba(255, 255, 255, 1);
    ;
+}
+
+.max-width {
+   display: flex;
+   height: 96px;
+   justify-content: space-between;
+   align-items: center;
+   max-width: 1440px;
 }
 
 header span {
@@ -434,8 +439,8 @@ nav {
 .mainLinks a:hover,
 .adviceLinks a:hover {
    background-color: rgba(9, 25, 49, 1);
-   ;
 }
+
 
 .adviceLinks {
    display: flex;

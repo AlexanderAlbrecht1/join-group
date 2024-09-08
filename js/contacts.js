@@ -438,12 +438,15 @@ function openEditContactDialog(id) {
    let phone = contacts[index].phone;
 
    let dialogBackground = document.getElementById('dialogBackground');
+   let editContactContainer = document.getElementById('addContactContainer');
    document.getElementById('body').classList.add('overflowHidden');
    dialogBackground.classList.remove('displayNone');
-   dialogBackground.innerHTML = '';
-   dialogBackground.innerHTML = /*html*/ `
+   dialogBackground.classList.add('displayFlex');
+
+   editContactContainer.innerHTML = '';
+   editContactContainer.innerHTML = /*html*/ `
         
-   <div class="addContact" onclick="dontClose(event)">
+   <div class="x" onclick="dontClose(event)">
    
       <input required id="name" type="text" placeholder="name" />
       <input required id="email" type="email" placeholder="e-mail" />
@@ -457,6 +460,8 @@ function openEditContactDialog(id) {
    document.getElementById('name').value = name + ' ' + lastname;
    document.getElementById('email').value = mail;
    document.getElementById('phone').value = phone;
+
+   editContactContainer.style.cssText = 'animation: slideIn .5s ease; animation-fill-mode: forwards;';
 
    console.log(findContact(mail));
 }

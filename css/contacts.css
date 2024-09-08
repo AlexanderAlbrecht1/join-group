@@ -508,7 +508,7 @@ nav {
 ******dialog window add contact******
 */
 
-.addContact {
+.dialogMain {
    margin: auto;
    display: flex;
    align-items: center;

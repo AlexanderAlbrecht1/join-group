@@ -446,15 +446,56 @@ function openEditContactDialog(id) {
    editContactContainer.innerHTML = '';
    editContactContainer.innerHTML = /*html*/ `
         
-   <div class="x" onclick="dontClose(event)">
-   
-      <input required id="name" type="text" placeholder="name" />
-      <input required id="email" type="email" placeholder="e-mail" />
-      <input id="phone" type="text" placeholder="phone number" />
-      <button onclick="deleteContact(${id})">delete</button>
-      <button onclick="saveEditedContact(${id})">Save"icon"</button>
-       
+   <div class="addContactLogoContainer" onclick="dontClose(event)">
+
+      <div>
+         <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
+         <h1>Add contact</h1>
+         <span>Tasks are better with a team!</span>
+         <div class="vector5"></div>
+         <div class="contactLogo"></div>
+      </div>
    </div>
+
+<div class="addContactInputContainer">
+    <div class="emptyMonogram">
+        <img src="./assets/img/desktop/empty_user.svg" alt="">
+    </div>
+
+    <div class="addContactInputContainer2">
+        <div class="close" onclick="closeContactCreation()">
+            <img src="/assets/img/desktop/close.svg" alt="">
+        </div>
+
+        <div id="input-field-container" class="input-container">
+            <input id="name" type="text" required placeholder="Name">
+            <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
+        </div>
+
+        <div id="input-field-container" class="input-container">
+            <input id="email" type="email" required placeholder="Email">
+            <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
+        </div>
+
+        <div id="input-field-container" class="input-container">
+            <input id="phone" type="number" required placeholder="Phone">
+            <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
+        </div>
+
+        <div class="buttons">
+            <div class="cancelButton" onclick="deleteContact(${id})">
+                <span>Delete </span>
+            </div>
+
+            <button class="createContactButton" onclick="saveEditedContact(${id})">
+                <span>Safe</span>
+                <div class="checkSVGContainer">
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+</div>
    `; // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
 
    document.getElementById('name').value = name + ' ' + lastname;

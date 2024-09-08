@@ -21,7 +21,7 @@
 
         <div class="add-task-container">
             <form id="add-task-form" onsubmit="addNewTask();return false">
-                <h1>Add Tasks</h1>
+                <h1>Add Task</h1>
                 <div id="add-task-main">
                     <div class="add-task-left">
                         <div class="label-input-con">
@@ -64,8 +64,9 @@
 
 
 
-                        <div class="button-group">
-                            <legend>Priority</legend>
+                        <div class="button-group label-input-con">
+                            <span>Priority</span>
+                            <div class="d-flex">
                             <input type="radio" id="urgent" name="prio" value="urgent">
                             <label for="urgent" class="button-label urgent">Urgent<img id="urgent-icon"
                                     src="./assets/img/desktop/prio_urgent_red.svg"></label>
@@ -78,9 +79,10 @@
                             <label for="low" class="button-label low">Low <img id="low-icon"
                                     src="./assets/img/desktop/prio_low_green.svg"></label>
                         </div>
-
+                    </div>
+                        <div class="label-input-con">
                         <label for="category">Category<span class="required-asterisk">*</span></label>
-                        <div class="selectBox">
+                        <div id="select-box" class="selectBox">
                             <select id="category" >
                                 <option value="" disabled selected>Select task category</option>
                                 <option value="technical-task">Technical Task</option>
@@ -88,10 +90,11 @@
                             </select>
                         </div>
                         <span id="category-span" class="required-text d-none">This field is required</span>
+                    </div>
 
 
 
-                        <div class="subtask-container">
+                        <div class="subtask-container label-input-con">
                             <label for="subtasks">Subtasks</label>
                             <input type="text" id="subtasks">
                             <button type="button" onclick="addSubtasks()" id="add-subtask"><img id="subtask-icon"

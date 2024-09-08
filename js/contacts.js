@@ -30,7 +30,10 @@ async function displayContacts() {
       <div class="groupLetter">
          <span>\n${letter}</span>
       </div>
-      <div class="breakingLine"></div>
+      <div class="breakingLineContainer">
+         <div class ="breakingLine">   
+         </div>
+      </div>
       `;
       for (let i = 0; i < contacts.length; i++) {
          let contact = contacts[i];

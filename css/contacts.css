@@ -111,7 +111,8 @@ a {
    margin-top: 96px;
    display: flex;
    flex-direction: column;
-   width: 456px; /* Figma */
+   width: 456px;
+   /* Figma */
 }
 
 .contactBook {
@@ -151,6 +152,12 @@ a {
    height: 24px;
 }
 
+.breakingLineContainer {
+   display: flex;
+   align-items: center;
+   padding: 0 36px;
+}
+
 .breakingLine {
    border-bottom: 1px solid rgba(209, 209, 209, 1);
    width: 352px;
@@ -161,7 +168,8 @@ a {
    flex-direction: row;
    align-items: center;
    width: -webkit-fill-available;
-   padding: 15px 36px; /* statt 24 */
+   padding: 15px 36px;
+   /* statt 24 */
    gap: 35px;
    border-radius: 10px;
 }
@@ -362,8 +370,8 @@ nav {
    bottom: 0;
    background-color: rgba(0, 0, 0, 0.3);
    z-index: 500;
-   
-  
+
+
 
 }
 
@@ -371,15 +379,17 @@ nav {
    0% {
       transform: translateX(100%);
    }
+
    100% {
       transform: translateX(0);
    }
 }
 
 @keyframes slideOut {
-  0% {
+   0% {
       transform: translateX(0);
    }
+
    100% {
       transform: translateX(110%);
    }

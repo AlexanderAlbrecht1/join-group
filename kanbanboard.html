@@ -4,14 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kanbanboard</title>
+    <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="./css/kanbanboard.css">
+    <link rel="stylesheet" href="./css/contacts.css">
+    <link rel="stylesheet" href="./assets/font/inter.css">
+    <link rel="stylesheet" href="./assets/font/poppins.css">
     <script src="./js/firebase.js"></script>
     <script src="./js/session.js"></script>
     <script src="./js/kanbanboard.js"></script>
 </head>
 
 <body onload="init()">
-    <div id="wrapper" class="wrapper">
+    <header>
+        <div class="max-width">
+        <span>Kanban Project Management Tool</span>
+        <div class="headerHelpUser">
+            <div class="helparea">
+                <a href=""><img src="/assets/img/desktop/question_mark.svg" alt="Question Mark"></a>
+            </div>
+            <div>Usermonogram</div>
+        </div>
+    </div>
+    </header>
+    
+    <nav>
+        <img src="/assets\img\desktop\join-logo_navbar.svg" alt="Join-Logo">
+        <div class="mainLinks">
+            <a href="/dashboard.html"><img src="/assets/img/desktop/summary_logo.svg" alt="Summary Logo">Summary</a>
+            <a href="/addtask.html"><img src="/assets/img/desktop/logo_add_task.svg" alt="Add task Logo">Add task</a>
+            <a href="/kanbanboard.html" style=" background-color: rgba(9, 25, 49, 1);"><img src="/assets/img/desktop/board_logo.svg" alt="Board Logo">Board</a>
+            <a href="/contacts.html"><img src="/assets/img/desktop/contact_logo.svg" alt="Contacts Logo">Contact</a>
+        </div>
+        <div class="adviceLinks">
+            <a href="">Privacy Policy</a>
+            <a href="">Legal Notice</a>
+        </div>
+    </nav>
+
+
+    <div id="wrapper" class="board-wrapper">
 
         <div>
             <h3>To Do</h3>

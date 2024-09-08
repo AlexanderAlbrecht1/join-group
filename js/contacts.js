@@ -276,7 +276,7 @@ function openCreateContactDialog() {
                <img src="/assets/img/desktop/close.svg" alt="">
             </div>
 
-            <form onsubmit="addNewContact();return false;">
+            <form class="form-input" onsubmit="addNewContact();return false;">
 
                <div id="input-field-container" class="input-container">
                   <input id="name" type="text" required placeholder="Name">

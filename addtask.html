@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
+    <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="./css/addtask.css">
     <link rel="stylesheet" href="./css/contacts.css">
     <link rel="stylesheet" href="./css/customButton.css">
@@ -23,21 +24,22 @@
 
     <header>
         <div class="max-width">
-        <span>Kanban Project Management Tool</span>
-        <div class="headerHelpUser">
-            <div class="helparea">
-                <a href=""><img src="/assets/img/desktop/question_mark.svg" alt="Question Mark"></a>
+            <span>Kanban Project Management Tool</span>
+            <div class="headerHelpUser">
+                <div class="helparea">
+                    <a href=""><img src="/assets/img/desktop/question_mark.svg" alt="Question Mark"></a>
+                </div>
+                <div>Usermonogram</div>
             </div>
-            <div>Usermonogram</div>
         </div>
-    </div>
     </header>
-    
+
     <nav>
         <img src="/assets\img\desktop\join-logo_navbar.svg" alt="Join-Logo">
         <div class="mainLinks">
             <a href="/dashboard.html"><img src="/assets/img/desktop/summary_logo.svg" alt="Summary Logo">Summary</a>
-            <a href="/addtask.html" style=" background-color: rgba(9, 25, 49, 1);"><img src="/assets/img/desktop/logo_add_task.svg" alt="Add task Logo">Add task</a>
+            <a href="/addtask.html" style=" background-color: rgba(9, 25, 49, 1);"><img
+                    src="/assets/img/desktop/logo_add_task.svg" alt="Add task Logo">Add task</a>
             <a href="/kanbanboard.html"><img src="/assets/img/desktop/board_logo.svg" alt="Board Logo">Board</a>
             <a href="/contacts.html"><img src="/assets/img/desktop/contact_logo.svg" alt="Contacts Logo">Contact</a>
         </div>
@@ -80,14 +82,16 @@
                                 </div>
                             </div>
                         </div>
-                     </div>
+                    </div>
 
-                    <div class="vertical-line"></div>
+                    <div class="vertical-line-wrapper">
+                        <div class="vertical-line"></div>
+                    </div>
 
                     <div class="add-task-right">
                         <div class="label-input-con">
                             <label for="due-date">Due Date<span class="required-asterisk">*</span></label>
-                            <input type="date" id="due-date" >
+                            <input type="date" id="due-date" required>
                             <span id="due-date-span" class="required-text d-none">This field is required</span>
                         </div>
 
@@ -96,36 +100,36 @@
                         <div class="button-group label-input-con">
                             <span>Priority</span>
                             <div class="d-flex">
-                            <input type="radio" id="urgent" name="prio" value="urgent">
-                            <label for="urgent" class="button-label urgent">Urgent<img id="urgent-icon"
-                                    src="./assets/img/desktop/prio_urgent_red.svg"></label>
+                                <input type="radio" id="urgent" name="prio" value="urgent">
+                                <label for="urgent" class="button-label urgent">Urgent<img id="urgent-icon"
+                                        src="./assets/img/desktop/prio_urgent_red.svg"></label>
 
-                            <input type="radio" id="medium" name="prio" value="medium" checked>
-                            <label for="medium" class="button-label medium">Medium<img id="medium-icon"
-                                    src="./assets/img/desktop/prio_medium_yellow.svg"></label>
+                                <input type="radio" id="medium" name="prio" value="medium" checked>
+                                <label for="medium" class="button-label medium">Medium<img id="medium-icon"
+                                        src="./assets/img/desktop/prio_medium_yellow.svg"></label>
 
-                            <input type="radio" id="low" name="prio" value="low">
-                            <label for="low" class="button-label low">Low <img id="low-icon"
-                                    src="./assets/img/desktop/prio_low_green.svg"></label>
+                                <input type="radio" id="low" name="prio" value="low">
+                                <label for="low" class="button-label low">Low <img id="low-icon"
+                                        src="./assets/img/desktop/prio_low_green.svg"></label>
+                            </div>
                         </div>
-                    </div>
                         <div class="label-input-con">
-                        <label for="category">Category<span class="required-asterisk">*</span></label>
-                        <div id="select-box" class="selectBox">
-                            <select id="category" >
-                                <option value="" disabled selected>Select task category</option>
-                                <option value="technical-task">Technical Task</option>
-                                <option value="user-story">User Story</option>
-                            </select>
+                            <label for="category">Category<span class="required-asterisk">*</span></label>
+                            <div id="select-box" class="selectBox">
+                                <select id="category">
+                                    <option value="" disabled selected>Select task category</option>
+                                    <option value="technical-task">Technical Task</option>
+                                    <option value="user-story">User Story</option>
+                                </select>
+                            </div>
+                            <span id="category-span" class="required-text d-none">This field is required</span>
                         </div>
-                        <span id="category-span" class="required-text d-none">This field is required</span>
-                    </div>
 
 
 
                         <div class="subtask-container label-input-con">
                             <label for="subtasks">Subtasks</label>
-                            <input type="text" id="subtasks">
+                            <input type="text" id="subtasks" placeholder="Add new subtask">
                             <button type="button" onclick="addSubtasks()" id="add-subtask"><img id="subtask-icon"
                                     src="./assets/img/desktop/add_subtask.svg"></button>
                             <ul id="subtask-list">
@@ -136,17 +140,17 @@
 
                 </div>
 
-                  
 
-                    <div class="button-con">
-                        <p><span class="required-asterisk">*</span>this field is required</p>
-                        <div>
-                        <button class="whitebutton" id="clear-button" type="button" onclick="clearTaskInputs()">Clear <img
-                                src="./assets/img/desktop/clear-task-icon.svg"></button>
+
+                <div class="button-con">
+                    <p><span class="required-asterisk">*</span>this field is required</p>
+                    <div>
+                        <button class="whitebutton" id="clear-button" type="button" onclick="clearTaskInputs()">Clear
+                            <img src="./assets/img/desktop/clear-task-icon.svg"></button>
                         <button class="darkbutton" type="submit" value="Create Task">Create Task <img
                                 src="./assets/img/desktop/create-task-check.svg"></button>
-                            </div>
                     </div>
+                </div>
             </form>
         </div>
     </div>

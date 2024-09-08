@@ -48,7 +48,7 @@ function openPage(url) {
  */
 function isLogged() {
    if (sessionLoad(PROJECT) == null) {
-      openPage("./login.html"); // or as Pop Up
+      openPage("./index.html"); // or as Pop Up
       return false;
    }
    return true;

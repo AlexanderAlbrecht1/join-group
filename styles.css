@@ -4,3 +4,7 @@
     font-style: normal;
 }
 
+::placeholder {
+    color: #D1D1D1 !important;
+    opacity: 1 !important;
+}

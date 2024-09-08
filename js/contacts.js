@@ -206,11 +206,15 @@ function showSingleContact(id) {
           </div>
         </div>
       </div>
-      <h3>Contact Information</h3>
-      <h3><strong>Email</strong></h3>
-      <span>${mail}</span>
-      <h3><strong>Phone</strong></h3>
-      <span>${phone}</span>
+      <div class="contactInformation">
+         <span>Contact Information</span>
+      </div>
+      <div class="emailAndPhone">
+         <span class="spanHeading">Email</span>
+         <span>${mail}</span>
+         <h3><strong>Phone</strong></h3>
+         <span>${phone}</span>
+      </div>
 
     </div>
     `;

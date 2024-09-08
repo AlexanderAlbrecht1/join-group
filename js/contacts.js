@@ -186,9 +186,13 @@ function showSingleContact(id) {
    document.getElementById('contactDetail').innerHTML = '';
    document.getElementById('contactDetail').innerHTML = `
     <div class="name">
-        <span style="background-color: ${backgroundColor}">${initial1}${initial2}</span>
-        <div class="fullName">
-          <span>${name} ${lastname}</span>
+      <div class="detailMonogramContainer">
+        <span class="detailMonogramSpan" style="background-color: ${backgroundColor}">${initial1}${initial2}</span>
+      </div>
+        <div class="fullNameAndButtons">
+         	<div class="fullname">
+               <span>${name} ${lastname}</span>
+            </div>
           <div class="buttons">
             <button onclick="openEditContactDialog(${id})">Edit</button>
             <button onclick="deleteContact(${id})">Delete</button>

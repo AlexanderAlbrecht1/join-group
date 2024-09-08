@@ -30,7 +30,7 @@ a {
 .rightSide {
    display: flex;
    flex-direction: column;
-   width: 569px;
+   /*width: 569px; */
    position: fixed;
    top: 64px;
    margin-left: 511px;
@@ -71,7 +71,7 @@ a {
 */
 
 .contactDetail {
-   width: 461px;
+  /* width: 461px; */
    height: 364px;
    gap: 21px;
 }
@@ -79,12 +79,12 @@ a {
 .name {
    display: flex;
    flex-direction: row;
-   width: 461px;
+   /*width: 461px; */
    height: 120px;
    gap: 54px;
 }
 
-.name span {
+.detailMonogramSpan {
    height: 120px;
    width: 120px;
    display: flex;
@@ -97,10 +97,34 @@ a {
    border-radius: 70px;
 }
 
-.fullName {
+ /*  .name span {
+   height: 120px;
+   width: 120px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-family: Inter;
+   font-size: 47px;
+   font-weight: 500;
+   color: rgba(255, 255, 255, 1);
+   border-radius: 70px; 
+} */
+
+.fullNameAndButtons{
    display: flex;
    flex-direction: column;
    margin-left: 16px;
+}
+
+.fullname {
+ /*  width: 287px; */
+   height: 56px;
+   gap: 5px;
+}
+
+.fullname>span {
+   font-weight: 500;
+   font-size: 47px;
 }
 
 /*

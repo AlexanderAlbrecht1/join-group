@@ -140,3 +140,8 @@ function isFormValid(formqs) {
     return status && cb;
  } 
  
+ function init() {
+    loadUserFromLocalStorage();
+    // initEventListenerLogin();
+    addFormListener('#login-card');
+}

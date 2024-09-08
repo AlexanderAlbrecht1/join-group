@@ -2,7 +2,7 @@
 /**
  * Init the Eventlistener for doing input checks for the Login
  */
-function initEventListenerLogin() {
+function XinitEventListenerLogin() {
     let list=["email","password"];
     initEventListener(list);
 }
@@ -10,7 +10,7 @@ function initEventListenerLogin() {
 /*
          ACHTUNG wird in LOGIN.js überschrieben
 */
-function init() {
+function initOLD() {
     loadUserFromLocalStorage();
     // initEventListenerLogin();
     addFormListener('#login-card');

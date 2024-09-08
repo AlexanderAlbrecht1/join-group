@@ -17,15 +17,8 @@
       <link rel="stylesheet" href="./css/login-media.css" />
       
 
-      <script src="./js/firebase.js"></script>
-      <script src="./js/localStorage.js"></script>
-      <script src="./js/session.js"></script>
-      <script src="./js/login.js"></script>
-      <script src="./js/autentification.js"></script>
-
-      <script src="./js/events.js"></script>
    </head>
-   <body onload="init2()">
+   <body>
       <div class="body">
          <div class="relative">
             <div id="login-master" class="absolute login-master">
@@ -37,7 +30,7 @@
                </div>
 
                <div>
-                  <form onsubmit="login();return false;" onload="removeEvent();return false" id="login-card" class="login-card">
+                  <form onsubmit="alert('Hallo');return false;"  id="login-card" class="login-card">
                      <!-- form onsubmit="login();return false;" id="login-card" class="login-card" -->
                      <div class="login-headline">
 
@@ -57,8 +50,8 @@
                               <span class="error-msg visible"></span>
                           </div>
                       
-                           <div id="password-container" class="input-container password new">
-                              <input id="password" type="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W]{8,}$" placeholder="Password" autocomplete="current-password">
+                           <div id="password-container" class="input-container password">
+                              <input id="password" type="password" required placeholder="Password" autocomplete="current-password">
                               <span class="icon" onmousedown="togglePasswordView(event)">👁️</span>
                               <span id="password-msg" class="error-msg visible"></span>
                           </div>
@@ -77,8 +70,7 @@
 
                      </div>
                      <div class="login-buttons">
-                        <!-- button onmousedown="activateFormErrors('login-card')" id="submit" type="submit" class="darkbutton">Login</button -->
-                        <button  id="submit" type="submit" class="darkbutton">Login</button>
+                        <button onmousedown="activateFormErrors('login-card')" id="submit" type="submit" class="darkbutton">Login</button>
                         <button onclick="guestLogin(event)" type="submit" class="whitebutton">Guest Login</button>
                      </div>
                   </form>

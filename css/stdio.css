@@ -9,7 +9,16 @@
 a,input,button {
     cursor:pointer;
 }
+
 .flex-column {
     display: flex;
     flex-direction:column;
+}
+
+a {
+    text-decoration: none;
+}
+
+.fs16 {
+    font-size: 16px !important;
 }

@@ -12,12 +12,14 @@ function disableCheck(submit,id="submit") {
         button.style.color="";
         button.style.filter="";
         button.style.cursor="pointer";
+        button.style.backgroundColor="";
     } else 
     if (!button.disabled) {
         button.disabled=true;
         button.classList.add("disable");
-        button.style.filter="greyscale(100%) brightness(1.5)";
+        // button.style.filter="grayscale(100%) brightness(1.6)";
         button.style.cursor="not-allowed";
+        button.style.backgroundColor="#A0A0A0";
 
     }
 
@@ -92,8 +94,10 @@ function addFormListener(formSelector, styleObject) {
     inputs.forEach(input => {
         styleElement(input, styleObject);
         input.addEventListener('input', eventErrorMsg);
-        input.addEventListener("focusin",e => removeAllCustomMsg(formSelector)); // to be able te re Submit
-        input.addEventListener("blur",e => removeAllCustomMsg(formSelector)); // to be able te re Submit
+        input.addEventListener("focusin",e => removeCustomErrorCode(input)); // to be able te re Submit ohne ALL
+        input.addEventListener("blur",e => removeCustomMsg(input)); // to be able te re Submit ohne ALL
+        // input.addEventListener("focusin",e => removeAllCustomMsg(formSelector)); // to be able te re Submit ohne ALL
+        // input.addEventListener("blur",e => removeAllCustomMsg(formSelector)); // to be able te re Submit ohne ALL
     });
 }
 
@@ -135,12 +139,37 @@ function customErrorMsg(id=null,customMsg=null) {
     setErrorMsg(sibling);
 }
 
+/**
+ * 
+ * Find the Form TAG of the inputfield we are in
+ * @private - called from:
+ * -  eventErrorMsg
+ * 
+ * @param {elment} element - inputfield we use  
+ * @returns 
+ * - false if no FORM Tag is found, otherwise the tagName of the Forrm
+ */
+function getFormId(element) {
+    let e=element;
+    while ((e=e.parentElement) !== null) {
+        if (e.tagName == "FORM") return e.id;
+    }
+    return false;
+}
+
+function getFormQs(element) {
+    return "#" + (getFormId(element) || "login-card");
+}
+
+
 function eventErrorMsg(event) {
-    let valid=isFormValid("#login-card"); // ############# Faschge stelle ?
-    disableCheck(valid);                  // ############# zusammen im Login nicht möglich ?
+    let formquery=getFormQs(event.target);
     customMessage(event.target);
     setErrorMsg(event.target);
+    let valid=isFormValid(formquery); 
+    disableCheck(valid);
     event.preventDefault();
+    // if (!valid) event.preventDefault();
 }
 
 function setErrorMsg(element) {
@@ -166,6 +195,18 @@ function togglePasswordView(event,container) {
     event.stopPropagation();
  }
 
+function removeCustomErrorCode(input) {
+    input.setCustomValidity('');
+} 
+
+function removeCustomMsg(input) { // on Focus lost
+        input.setCustomValidity('');
+    if (input.checkValidity()) {
+        setErrorMsg(input);
+    }
+    let valid=isFormValid(getFormQs(input)); 
+    disableCheck(valid);
+}
 
 function removeAllCustomMsg(formid) {
     let form = document.querySelector(formid);

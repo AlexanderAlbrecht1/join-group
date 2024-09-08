@@ -485,7 +485,7 @@ nav {
 
 @keyframes slideIn {
    0% {
-      transform: translateX(100%);
+      transform: translateX(100vw);
    }
 
    100% {
@@ -499,7 +499,7 @@ nav {
    }
 
    100% {
-      transform: translateX(110%);
+      transform: translateX(100vw);
    }
 }
 
@@ -516,7 +516,7 @@ nav {
    height: 592px;
    border-radius: 30px;
    background-color: rgba(255, 255, 255, 1);
-   transform: translateX(100%)
+   transform: translateX(100vw)
 }
 
 

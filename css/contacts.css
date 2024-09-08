@@ -79,7 +79,6 @@ a {
 .name {
    display: flex;
    flex-direction: row;
-   /*width: 461px; */
    height: 120px;
    gap: 54px;
 }
@@ -113,7 +112,7 @@ a {
 .fullNameAndButtons{
    display: flex;
    flex-direction: column;
-   margin-left: 16px;
+   gap: 8px;
 }
 
 .fullname {
@@ -125,6 +124,57 @@ a {
 .fullname>span {
    font-weight: 500;
    font-size: 47px;
+}
+
+.editButtons {
+   display: flex;
+   flex-direction: row;
+   height: 24px;
+   align-items: center;
+   gap: 24px;
+}
+
+.editButton {
+   display: flex;
+   align-items: center;
+   gap: 13px;
+}
+
+.editButton>div {
+   width: 24px;
+   height: 24px;
+   background-image: url('/assets/img/desktop/pencil.svg');
+   background-size: 24px 24px;
+}
+
+.editButton:hover,
+.trashButton:hover {
+   cursor: pointer;
+   font-weight: 700;
+   color: rgba(41, 171, 226, 1);
+}
+
+.editButton:hover div{
+   background-image: url('/assets/img/desktop/pencil_hover.svg');
+} 
+
+.trashButton {
+   display: flex;
+   align-items: center;
+   gap: 13px;
+}
+
+.trashButton>div {
+   width: 24px;
+   height: 24px;
+   background-image: url('/assets/img/desktop/trash.svg');
+   background-size: 16px 18px;
+   background-repeat: no-repeat;
+   background-position: center;
+}
+
+.trashButton:hover div{
+   background-image: url(/assets/img/desktop/trash_hover.svg);
 }
 
 /*

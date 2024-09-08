@@ -184,7 +184,7 @@ function showSingleContact(id) {
    let backgroundColor = contacts[index].color;
 
    document.getElementById('contactDetail').innerHTML = '';
-   document.getElementById('contactDetail').innerHTML = `
+   document.getElementById('contactDetail').innerHTML = /*html*/ `
     <div class="name">
       <div class="detailMonogramContainer">
         <span class="detailMonogramSpan" style="background-color: ${backgroundColor}">${initial1}${initial2}</span>
@@ -193,9 +193,16 @@ function showSingleContact(id) {
          	<div class="fullname">
                <span>${name} ${lastname}</span>
             </div>
-          <div class="buttons">
-            <button onclick="openEditContactDialog(${id})">Edit</button>
-            <button onclick="deleteContact(${id})">Delete</button>
+          <div class="editButtons">
+            <div onclick="openEditContactDialog(${id})" class="editButton">
+               <div></div>
+               <span>Edit</span>
+            </div>
+            <div onclick="deleteContact(${id})" class="trashButton">
+               <div></div>
+               <span>Delete</span>
+            </div>
+            
           </div>
         </div>
       </div>

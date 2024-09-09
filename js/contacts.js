@@ -487,12 +487,12 @@ function openEditContactDialog(id) {
             <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
         </div>
 
-        <div class="buttons">
-            <div class="cancelButton" onclick="deleteContact(${id})">
+        <div class="editContactbuttons ">
+            <div class="deleteButton" onclick="deleteContact(${id})">
                 <span>Delete </span>
             </div>
 
-            <button class="createContactButton" onclick="saveEditedContact(${id})">
+            <button class="safeEditContactButton" onclick="saveEditedContact(${id})">
                 <span>Safe</span>
                 <div class="checkSVGContainer">
                 </div>

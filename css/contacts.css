@@ -650,7 +650,7 @@ nav {
    display: flex;
    flex-direction: column;
    align-items: flex-end;
-   gap: 56px;
+   gap: 32px;
 
 }
 
@@ -689,6 +689,14 @@ nav {
    padding-top: 16px;
 }
 
+.editContactbuttons {
+   display: flex;
+   height: 57px;
+   gap: 24px;
+   padding-top: 16px;
+   margin-right: 174px;
+}
+
 .cancelButton {
    box-sizing: border-box;
    display: flex;
@@ -702,14 +710,30 @@ nav {
    align-items: center;
 }
 
-.cancelButton:hover {
+.deleteButton {
+   box-sizing: border-box;
+   display: flex;
+   width: 113px;
+   height: 55px;
+   border-radius: 10px;
+   border: 1px solid black;
+   padding: 16px;
+   gap: 4px;
+   justify-content: center;
+   align-items: center;
+}
+
+
+.cancelButton:hover,
+.deleteButton:hover {
    cursor: pointer;
    border: 2px solid rgba(41, 171, 266, 1);
    color: rgba(41, 171, 226, 1);
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.cancelButton:focus {
+.cancelButton:focus,
+.deleteButton:focus {
    border: px solid rgba(9, 25, 49, 1);
    color: rgba(9, 25, 49, 1);
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
@@ -724,7 +748,8 @@ nav {
 }
 
 
-.cancelButton>span {
+.cancelButton>span,
+.deleteButton>span {
    width: 66px;
    height: 24px;
    font-family: Inter;
@@ -759,18 +784,36 @@ nav {
    border: none;
 }
 
-.createContactButton:hover {
+.safeEditContactButton {
+   box-sizing: border-box;
+   display: flex;
+   width: 111px;
+   height: 57px;
+   border-radius: 10px;
+   padding: 16px;
+   gap: 4px;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba(42, 54, 71, 1);
+   color: rgba(255, 255, 255, 1);
+   border: none;
+}
+
+.createContactButton:hover,
+.safeEditContactButton:hover {
    cursor: pointer;
    background-color: rgba(41, 171, 226, 1);
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.createContactButton:focus {
+.createContactButton:focus
+.safeEditContactButton:focus {
    background-color: rgba(9, 25, 49, 1);
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.createContactButton>span {
+.createContactButton>span,
+.safeEditContactButton>span {
    font-family: Inter;
    font-weight: 700;
    font-size: 21px;

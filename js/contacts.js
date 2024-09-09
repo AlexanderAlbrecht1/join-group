@@ -46,7 +46,7 @@ async function displayContacts() {
          let backgroundColor = contact.color;
 
          document.getElementById('showContacts').innerHTML += `
-            <div onclick="showSingleContact(${ID})" class="contact">
+            <div onclick="showSingleContact(${ID})" class="contact" id="contact${ID}">
                  <div class="monogrammicon" style="background-color: ${backgroundColor}">
                     <span>${initial1}${initial2}</span>
                 </div>
@@ -140,14 +140,13 @@ async function addNewContact() {
       color: color,
    };
    contacts.push(newContact);
-   saveContacts();
+   await saveContacts();
    // saveContacts(id,newContact);
-
-
 
    clearInput(newName, newEmail, newPhone);
    closeContactCreation();
-   displayContacts();
+   await displayContacts();
+   document.getElementById(`contact${id}`).click();
 }
 
 function getNewId(contacts) {
@@ -172,8 +171,17 @@ function clearInput(newName, newEmail, newPhone) {
    newPhone.value = '';
 }
 
+function changeBgColor(id) {
+   let elements = document.querySelectorAll(".contact");
+   elements.forEach(function (element) {
+      element.classList.remove('contactActive');
+   })
+   document.getElementById(`contact${id}`).classList.add('contactActive');
+}
+
 
 function showSingleContact(id) {
+   changeBgColor(id);
    let index = getCurrentContact(id);
    let name = contacts[index].name;
    let lastname = contacts[index].lastname;
@@ -437,6 +445,10 @@ function openEditContactDialog(id) {
    let mail = contacts[index].email;
    let phone = contacts[index].phone;
 
+   let initial1 = Array.from(name)[0].toUpperCase();
+   let initial2 = Array.from(lastname)[0].toUpperCase();
+   let backgroundColor = contacts[index].color;
+
    let dialogBackground = document.getElementById('dialogBackground');
    let editContactContainer = document.getElementById('addContactContainer');
    document.getElementById('body').classList.add('overflowHidden');
@@ -446,21 +458,22 @@ function openEditContactDialog(id) {
    editContactContainer.innerHTML = '';
    editContactContainer.innerHTML = /*html*/ `
         
-   <div class="addContactLogoContainer" onclick="dontClose(event)">
+   <div class="editContactLogoContainer" onclick="dontClose(event)">
 
       <div>
          <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
-         <h1>Add contact</h1>
-         <span>Tasks are better with a team!</span>
-         <div class="vector5"></div>
+         <div class="flexColumn">
+            <h1>Edit contact</h1>
+            <div class="vector5EditContact"></div>
+         </div>
          <div class="contactLogo"></div>
       </div>
    </div>
 
 <div class="addContactInputContainer">
-    <div class="emptyMonogram">
-        <img src="./assets/img/desktop/empty_user.svg" alt="">
-    </div>
+      <div class="detailMonogramContainer">
+            <span class="detailMonogramSpan" style="background-color: ${backgroundColor}">${initial1}${initial2}</span>
+      </div>
 
     <div class="addContactInputContainer2">
         <div class="close" onclick="closeContactCreation()">
@@ -482,12 +495,12 @@ function openEditContactDialog(id) {
             <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
         </div>
 
-        <div class="buttons">
-            <div class="cancelButton" onclick="deleteContact(${id})">
+        <div class="editContactbuttons ">
+            <div class="deleteButton" onclick="deleteContact(${id})">
                 <span>Delete </span>
             </div>
 
-            <button class="createContactButton" onclick="saveEditedContact(${id})">
+            <button class="safeEditContactButton" onclick="saveEditedContact(${id})">
                 <span>Safe</span>
                 <div class="checkSVGContainer">
                 </div>

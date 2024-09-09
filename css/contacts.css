@@ -28,7 +28,7 @@ a {
    display: flex;
    flex-direction: column;
    align-items: flex-start;
-   /*width: 569px; */ 
+   /*width: 569px; */
    position: fixed;
    top: 64px;
    margin-left: 511px;
@@ -67,7 +67,7 @@ a {
 */
 
 .contactDetail {
-  /* width: 461px; */
+   /* width: 461px; */
    height: 364px;
    gap: 21px;
    margin-top: 32px;
@@ -93,7 +93,7 @@ a {
    border-radius: 70px;
 }
 
- /*  .name span {
+/*  .name span {
    height: 120px;
    width: 120px;
    display: flex;
@@ -106,14 +106,14 @@ a {
    border-radius: 70px; 
 } */
 
-.fullNameAndButtons{
+.fullNameAndButtons {
    display: flex;
    flex-direction: column;
    gap: 8px;
 }
 
 .fullname {
- /*  width: 287px; */
+   /*  width: 287px; */
    height: 56px;
    gap: 5px;
 }
@@ -151,9 +151,9 @@ a {
    color: rgba(41, 171, 226, 1);
 }
 
-.editButton:hover div{
+.editButton:hover div {
    background-image: url('/assets/img/desktop/pencil_hover.svg');
-} 
+}
 
 .trashButton {
    display: flex;
@@ -170,7 +170,7 @@ a {
    background-position: center;
 }
 
-.trashButton:hover div{
+.trashButton:hover div {
    background-image: url(/assets/img/desktop/trash_hover.svg);
 }
 
@@ -274,10 +274,15 @@ a {
    border-radius: 10px;
 }
 
-.contact:hover {
-   background-color: rgba(42, 54, 71, 1);
-   color: rgba(255, 255, 255, 1);
+.contact:not(.contactActive):hover {
    cursor: pointer;
+   background-image: linear-gradient(#F0F0F0, #F9F9F9);
+}
+
+.contactActive {
+   cursor: pointer;
+   background-color: rgba(42, 54, 71, 1) !important;
+   color: rgba(255, 255, 255, 1) !important;
 }
 
 .monogrammicon {
@@ -522,7 +527,7 @@ nav {
 
 
 /*
-******left side logo container******
+******left side logo container add contact******
 */
 
 .addContactLogoContainer {
@@ -569,6 +574,57 @@ nav {
 }
 
 /*
+******left side logo container edit contact******
+*/
+
+.flexColumn {
+   display: flex;
+   flex-direction: column;
+}
+
+.editContactLogoContainer {
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 66px 48px;
+   width: 467px;
+   height: 594px;
+   background-color: rgba(42, 54, 71, 1);
+   border-radius: 30px 0 0 30px;
+   color: rgba(255, 255, 255, 1);
+}
+
+.editContactLogoContainer>div {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
+.editContactLogoContainer h1 {
+   font-size: 61px;
+   font-weight: 700;
+   font-family: Inter;
+   margin-bottom: 16px;
+   margin-top: 32px;
+}
+
+.editContactLogoContainer span {
+   font-family: Inter;
+   font-size: 27px;
+   font-weight: 400;
+}
+
+.vector5EditContact {
+   width: 90px;
+   border-bottom: 3px solid rgba(41, 171, 226, 1);
+   margin-bottom: 16px
+}
+
+
+
+/*
 ******right side inout container******
 */
 
@@ -597,7 +653,7 @@ nav {
    display: flex;
    flex-direction: column;
    align-items: flex-end;
-   gap: 56px;
+   gap: 32px;
 
 }
 
@@ -636,6 +692,14 @@ nav {
    padding-top: 16px;
 }
 
+.editContactbuttons {
+   display: flex;
+   height: 57px;
+   gap: 24px;
+   padding-top: 16px;
+   margin-right: 174px;
+}
+
 .cancelButton {
    box-sizing: border-box;
    display: flex;
@@ -649,14 +713,30 @@ nav {
    align-items: center;
 }
 
-.cancelButton:hover {
+.deleteButton {
+   box-sizing: border-box;
+   display: flex;
+   width: 113px;
+   height: 55px;
+   border-radius: 10px;
+   border: 1px solid black;
+   padding: 16px;
+   gap: 4px;
+   justify-content: center;
+   align-items: center;
+}
+
+
+.cancelButton:hover,
+.deleteButton:hover {
    cursor: pointer;
    border: 2px solid rgba(41, 171, 266, 1);
    color: rgba(41, 171, 226, 1);
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.cancelButton:focus {
+.cancelButton:focus,
+.deleteButton:focus {
    border: px solid rgba(9, 25, 49, 1);
    color: rgba(9, 25, 49, 1);
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
@@ -671,7 +751,8 @@ nav {
 }
 
 
-.cancelButton>span {
+.cancelButton>span,
+.deleteButton>span {
    width: 66px;
    height: 24px;
    font-family: Inter;
@@ -706,18 +787,36 @@ nav {
    border: none;
 }
 
-.createContactButton:hover {
+.safeEditContactButton {
+   box-sizing: border-box;
+   display: flex;
+   width: 111px;
+   height: 57px;
+   border-radius: 10px;
+   padding: 16px;
+   gap: 4px;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba(42, 54, 71, 1);
+   color: rgba(255, 255, 255, 1);
+   border: none;
+}
+
+.createContactButton:hover,
+.safeEditContactButton:hover {
    cursor: pointer;
    background-color: rgba(41, 171, 226, 1);
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.createContactButton:focus {
+.createContactButton:focus
+.safeEditContactButton:focus {
    background-color: rgba(9, 25, 49, 1);
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.createContactButton>span {
+.createContactButton>span,
+.safeEditContactButton>span {
    font-family: Inter;
    font-weight: 700;
    font-size: 21px;

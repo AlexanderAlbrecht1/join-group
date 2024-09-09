@@ -330,3 +330,71 @@ textarea {
    display: flex;
    gap: 16px;
 }
+
+.add-subtask-clear {
+   padding-right: 14px;
+   margin-right: 8px;
+   border-right: 1px solid #d1d1d1;
+
+}
+
+.hidden {
+   opacity: 0;
+}
+
+.list-item {
+   margin-bottom: 12px;
+   display: flex;
+   width: 100%;
+   justify-content: space-between;
+
+}
+
+.subtask-icon {
+   width: 24px;
+   display: flex;
+   justify-content: flex-end;
+   gap: 16px;
+   flex: 1;
+
+}
+
+.subtask-icon img:first-child {
+   padding-right: 12px;
+   border-right: 1px solid #d1d1d1;
+}
+
+.subtask-icon img {
+   cursor: pointer;
+}
+
+.subtask-edit-input {
+   width: 100%;
+   border: none !important;
+   border-radius: 0 !important;
+   padding: 4px 16px 4px 16px !important;
+   font-size: 16px !important;
+   border-bottom: 1px solid #29ABE2 !important;
+}
+
+.edit-input-con {
+   position: relative;
+}
+
+.edit-input-con #edit-delete {
+   cursor: pointer;
+   position: absolute;
+   padding-right: 8px;
+   top: 0.3em;
+   right: 40px;
+}
+
+.edit-input-con #edit-check {
+   cursor: pointer;
+   position: absolute;
+   top: 0.5em;
+   right: 20px;
+}
+
+
+

@@ -89,12 +89,62 @@ function addSubtasks() {
       subtaskList.innerHTML = "";
       subtasks.push(subtaskInput.value);
 
-      for (let i = 0; i < subtasks.length; i++) {
-         subtaskList.innerHTML += `<li>${subtasks[i]}</li>`;
-      }
+      renderSubtasks(subtaskList);
+
       subtaskInput.value = "";
+      toggleIcon();
    } else {
       return;
+   }
+}
+
+function renderSubtasks(subtaskList) {
+
+   subtaskList.innerHTML = "";
+
+   for (let i = 0; i < subtasks.length; i++) {
+      subtaskList.innerHTML += `<div id="subtask-con" class="list-item">
+                                 <li>${subtasks[i]}</li>
+                                 <div class="subtask-icon">
+                                 <img onclick="editSubtask(${i})" src="./assets/img/desktop/subtask-edit.svg" alt="">
+                                 <img onclick="deleteSubtask(${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
+                             </div>
+                             </div>`;
+   }
+}
+
+function deleteSubtask(i) {
+   let subtaskList = document.getElementById("subtask-list");
+   let subtaskEditInput = document.getElementById("subtask-edit-input");
+   let subtaskEditCon = document.getElementById('edit-input-con');
+
+   subtasks.splice(i,1);
+   subtaskEditCon.classList.add('hidden');
+   renderSubtasks(subtaskList);
+   subtaskEditInput.value = "";
+
+}
+
+function editSubtask(index) {
+   let subtaskEditInput = document.getElementById("subtask-edit-input");
+   let subtaskEditCon = document.getElementById('edit-input-con');
+
+   subtaskEditCon.classList.remove('hidden');
+   subtaskEditInput.value = subtasks[index];
+   currentEditIndex = index;
+}
+
+function saveEditedSubtask() {
+   let subtaskEditInput = document.getElementById("subtask-edit-input");
+   let subtaskList = document.getElementById("subtask-list");
+   let subtaskEditCon = document.getElementById('edit-input-con');
+
+   if (currentEditIndex !== null && subtaskEditInput.value !== "") {
+      subtasks[currentEditIndex] = subtaskEditInput.value;
+      subtaskEditCon.classList.add('hidden');
+      renderSubtasks(subtaskList);
+      currentEditIndex = null;
+      subtaskEditInput.value = "";
    }
 }
 
@@ -109,12 +159,12 @@ function openKanbanboard() {
 
    function showRequiredText() {
       let title = document.getElementById("title");
-      let titleSpan = document.getElementById('title-span'); // Achte darauf, dass das span-Element die richtige ID hat.
+      let titleSpan = document.getElementById('title-span');
       let dueDate = document.getElementById("due-date");
-      let dueDateSpan = document.getElementById("due-date-span"); // Achte darauf, dass das span-Element die richtige ID hat.
+      let dueDateSpan = document.getElementById("due-date-span");
       let category = document.getElementById("category");
       let categoryBox = document.getElementById('select-box');
-      let categorySpan = document.getElementById("category-span"); // Achte darauf, dass das span-Element die richtige ID hat.
+      let categorySpan = document.getElementById("category-span");
    
       if (!title.value) {
         titleSpan.classList.remove('d-none');
@@ -139,8 +189,26 @@ function openKanbanboard() {
          categorySpan.classList.add('d-none');
       }
  
-      // Falls alle Felder gefüllt, geht es weiter
       return true;
 
    }
+
+
+   function toggleIcon() {
+      const subtaskInput = document.getElementById('subtasks');
+      const checkIcon = document.getElementById('subtask-icon');
+      const clearIcon = document.getElementById('add-subtask-clear');
+      
+      if (subtaskInput.value == "") {
+          checkIcon.src = './assets/img/desktop/add_subtask.svg';  // Ersetze das Icon mit einem anderen Bild
+          clearIcon.classList.add('hidden')
+      } else {
+          checkIcon.src = './assets/img/desktop/add-subtask-check.svg';
+          clearIcon.classList.remove('hidden')  // Setze das ursprüngliche Icon zurück
+      }
+  }
    
+  function clearSubtaskInput() {
+    document.getElementById('subtasks').value = "";
+
+  }

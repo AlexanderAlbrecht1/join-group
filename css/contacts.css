@@ -277,9 +277,13 @@ a {
 }
 
 .contact:hover {
-   background-color: rgba(42, 54, 71, 1);
-   color: rgba(255, 255, 255, 1);
    cursor: pointer;
+   background-image: linear-gradient(#F0F0F0, #F9F9F9);
+}
+
+.contactActive {
+   background-color: rgba(42, 54, 71, 1) !important;
+   color: rgba(255, 255, 255, 1) !important;
 }
 
 .monogrammicon {

@@ -437,6 +437,10 @@ function openEditContactDialog(id) {
    let mail = contacts[index].email;
    let phone = contacts[index].phone;
 
+   let initial1 = Array.from(name)[0].toUpperCase();
+   let initial2 = Array.from(lastname)[0].toUpperCase();
+   let backgroundColor = contacts[index].color;
+
    let dialogBackground = document.getElementById('dialogBackground');
    let editContactContainer = document.getElementById('addContactContainer');
    document.getElementById('body').classList.add('overflowHidden');
@@ -459,9 +463,9 @@ function openEditContactDialog(id) {
    </div>
 
 <div class="addContactInputContainer">
-    <div class="emptyMonogram">
-        <img src="./assets/img/desktop/empty_user.svg" alt="">
-    </div>
+      <div class="detailMonogramContainer">
+            <span class="detailMonogramSpan" style="background-color: ${backgroundColor}">${initial1}${initial2}</span>
+      </div>
 
     <div class="addContactInputContainer2">
         <div class="close" onclick="closeContactCreation()">

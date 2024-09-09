@@ -30,7 +30,7 @@ a {
    display: flex;
    flex-direction: column;
    align-items: flex-start;
-   /*width: 569px; */ 
+   /*width: 569px; */
    position: fixed;
    top: 64px;
    margin-left: 511px;
@@ -69,7 +69,7 @@ a {
 */
 
 .contactDetail {
-  /* width: 461px; */
+   /* width: 461px; */
    height: 364px;
    gap: 21px;
    margin-top: 32px;
@@ -95,7 +95,7 @@ a {
    border-radius: 70px;
 }
 
- /*  .name span {
+/*  .name span {
    height: 120px;
    width: 120px;
    display: flex;
@@ -108,14 +108,14 @@ a {
    border-radius: 70px; 
 } */
 
-.fullNameAndButtons{
+.fullNameAndButtons {
    display: flex;
    flex-direction: column;
    gap: 8px;
 }
 
 .fullname {
- /*  width: 287px; */
+   /*  width: 287px; */
    height: 56px;
    gap: 5px;
 }
@@ -153,9 +153,9 @@ a {
    color: rgba(41, 171, 226, 1);
 }
 
-.editButton:hover div{
+.editButton:hover div {
    background-image: url('/assets/img/desktop/pencil_hover.svg');
-} 
+}
 
 .trashButton {
    display: flex;
@@ -172,7 +172,7 @@ a {
    background-position: center;
 }
 
-.trashButton:hover div{
+.trashButton:hover div {
    background-image: url(/assets/img/desktop/trash_hover.svg);
 }
 
@@ -524,7 +524,7 @@ nav {
 
 
 /*
-******left side logo container******
+******left side logo container add contact******
 */
 
 .addContactLogoContainer {
@@ -569,6 +569,57 @@ nav {
    width: 90px;
    border-bottom: 3px solid rgba(41, 171, 226, 1);
 }
+
+/*
+******left side logo container edit contact******
+*/
+
+.flexColumn {
+   display: flex;
+   flex-direction: column;
+}
+
+.editContactLogoContainer {
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 66px 48px;
+   width: 467px;
+   height: 594px;
+   background-color: rgba(42, 54, 71, 1);
+   border-radius: 30px 0 0 30px;
+   color: rgba(255, 255, 255, 1);
+}
+
+.editContactLogoContainer>div {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
+.editContactLogoContainer h1 {
+   font-size: 61px;
+   font-weight: 700;
+   font-family: Inter;
+   margin-bottom: 16px;
+   margin-top: 32px;
+}
+
+.editContactLogoContainer span {
+   font-family: Inter;
+   font-size: 27px;
+   font-weight: 400;
+}
+
+.vector5EditContact {
+   width: 90px;
+   border-bottom: 3px solid rgba(41, 171, 226, 1);
+   margin-bottom: 16px
+}
+
+
 
 /*
 ******right side inout container******

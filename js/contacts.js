@@ -446,13 +446,14 @@ function openEditContactDialog(id) {
    editContactContainer.innerHTML = '';
    editContactContainer.innerHTML = /*html*/ `
         
-   <div class="addContactLogoContainer" onclick="dontClose(event)">
+   <div class="editContactLogoContainer" onclick="dontClose(event)">
 
       <div>
          <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
-         <h1>Add contact</h1>
-         <span>Tasks are better with a team!</span>
-         <div class="vector5"></div>
+         <div class="flexColumn">
+            <h1>Edit contact</h1>
+            <div class="vector5EditContact"></div>
+         </div>
          <div class="contactLogo"></div>
       </div>
    </div>

@@ -46,7 +46,7 @@ async function displayContacts() {
          let backgroundColor = contact.color;
 
          document.getElementById('showContacts').innerHTML += `
-            <div onclick="showSingleContact(${ID}); changeBgColor(${ID})")" class="contact" id="contact${ID}">
+            <div onclick="showSingleContact(${ID})" class="contact" id="contact${ID}">
                  <div class="monogrammicon" style="background-color: ${backgroundColor}">
                     <span>${initial1}${initial2}</span>
                 </div>
@@ -145,8 +145,8 @@ async function addNewContact() {
 
    clearInput(newName, newEmail, newPhone);
    closeContactCreation();
-   displayContacts();
-   showSingleContact(id);
+   await displayContacts();
+   document.getElementById(`contact${id}`).click();
 }
 
 function getNewId(contacts) {
@@ -181,6 +181,7 @@ function changeBgColor(id) {
 
 
 function showSingleContact(id) {
+   changeBgColor(id);
    let index = getCurrentContact(id);
    let name = contacts[index].name;
    let lastname = contacts[index].lastname;

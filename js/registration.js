@@ -68,7 +68,7 @@ async function register() {
 
     let userList=await getUserList();
     if (existUser(userList)) return;
-
+    await msgfly();
     await addUserToList(userList);
     openLogin(); // autologin move to the page we need to go and exit here
 }

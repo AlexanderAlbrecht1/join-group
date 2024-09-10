@@ -329,17 +329,17 @@ function openCreateContactDialog() {
 
 
     `;
-   addContactContainer.style.cssText = 'animation: slideIn .5s ease; animation-fill-mode: forwards;';
+   addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
    //dialogBackground.style.cssText = 'animation: slideIn .5s ease; animation-fill-mode: forwards;';
 }
 
 function closeContactCreation() {
-   addContactContainer.style.cssText = 'animation: slideOut .5s ease; animation-fill-mode: forwards;';
-   setTimeout(() => {
+   // addContactContainer.style.cssText = 'animation: slideOut .5s ease; animation-fill-mode: forwards;';
+   // setTimeout(() => {
       document.getElementById('dialogBackground').classList.add('displayNone');
       document.getElementById('dialogBackground').classList.remove('displayFlex');
       document.getElementById('body').classList.remove('overflowHidden');
-   }, 500);
+   // }, 500);
 
 }
 
@@ -521,7 +521,7 @@ function openEditContactDialog(id) {
    document.getElementById('email').value = mail;
    document.getElementById('phone').value = phone;
 
-   editContactContainer.style.cssText = 'animation: slideIn .5s ease; animation-fill-mode: forwards;';
+   editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
 
    console.log(findContact(mail));
 }

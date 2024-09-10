@@ -6,12 +6,21 @@
     <title>Kanbanboard</title>
     <link rel="stylesheet" href="./css/kanbanboard.css">
     <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="./css/contacts.css">
+    <!-- link rel="stylesheet" href="./css/contacts.css"-->
     <link rel="stylesheet" href="./assets/font/inter.css">
     <link rel="stylesheet" href="./assets/font/poppins.css">
+    <link rel="stylesheet" href="./css/nav.css">
+    <link rel="stylesheet" href="./css/stdio.css">
+    <link rel="stylesheet" href="./css/inputField.css">
+    
+
+    <link rel="shortcut icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon">
+
     <script src="./js/firebase.js"></script>
     <script src="./js/session.js"></script>
     <script src="./js/kanbanboard.js"></script>
+
+
 </head>
 
 <body onload="init()">
@@ -42,8 +51,74 @@
     </nav>
 
 
-    <div id="wrapper" class="board-wrapper">
+    <div class="main-container mbc">
+        <div class="mbh">
+            <div></div>
+            <div>
+                <div class="board">Board</div>
+                <div class="buttons">
+                    <div class="find-button">
+                        <input type="text">
+                        <img src=""> 
+                    </div>
+    
+                    <div class="submit-button">
+                        Add Task
+                        <img src=""> 
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="todo">
+                    To do
+                    <a class="btn-add">
+                        <img src="./assets/img/desktop/add_subtask.svg">
+                    </a>
+                </div>    
+                <div class="todo">
+                    In progress
+                    <a class="btn-add">
+                        <img src="./assets/img/desktop/add_subtask.svg">
+                    </a>
+                </div>    
+                <div class="todo">
+                    Await feedback
+                    <a class="btn-add">
+                        <img src="./assets/img/desktop/add_subtask.svg">
+                    </a>
+                </div>    
+                <div class="todo">
+                    Done
+                </div>    
+            </div>
+        
+        </div>
 
+        <div class="mbb">            
+            <div>
+                <div class="containers" id="todo-container" ondrop="drop(event, 'to-do')" ondragover="allowDrop(event)">
+                </div>
+            </div>
+    
+            <div>
+                <div class="containers" id="in-progress-container" ondrop="drop(event, 'in-progress')" ondragover="allowDrop(event)">
+                </div>
+            </div>
+    
+            <div>
+                <div class="containers" id="await-feedback-container" ondrop="drop(event, 'await-feedback')" ondragover="allowDrop(event)">
+                </div>
+            </div>
+    
+            <div>
+                <div class="containers" id="done-container" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div>    
         <div>
             <h3>To Do</h3>
             <div class="containers" id="todo-container" ondrop="drop(event, 'to-do')" ondragover="allowDrop(event)">
@@ -68,6 +143,6 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
 </body>
 </html>

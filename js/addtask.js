@@ -148,10 +148,9 @@ function saveEditedSubtask() {
    }
 }
 
-function openKanbanboard() {
-   setTimeout(() => {
+async function openKanbanboard() {
+   await msgfly();
       window.location = ("./kanbanboard.html");
-    }, 2000);
      
    }
 

@@ -12,16 +12,27 @@
     <link rel="stylesheet" href="./css/customCheckbox.css">
     <link rel="stylesheet" href="./assets/font/inter.css">
     <link rel="stylesheet" href="./css/nav.css">
+    <link rel="stylesheet" href="./css/msgfly.css" />
     <link rel="shortcut icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon">
     <script src="./js/addtask.js"></script>
     <script src="./js/firebase.js"></script>
     <script src="./js/contacts.js"></script>
     <script src="./js/colors.js"></script>
     <script src="./js/session.js"></script>
+    <script src="./js/msgfly.js"></script>
     
 </head>
 
 <body onload="init();">
+
+    <div class="relative">
+        <div id="msgfly">
+           <div class="msgfly">
+              <span>Task added to board</span>
+              <img src="./assets/img/desktop/board_logo.svg">
+           </div>
+         </div>   
+     </div>
 
 
     <header>
@@ -159,7 +170,7 @@
                     <div>
                         <button class="whitebutton" id="clear-button" type="button" onclick="clearTaskInputs()">Clear
                             <img src="./assets/img/desktop/clear-task-icon.svg"></button>
-                        <button class="darkbutton" type="submit" value="Create Task">Create Task <img
+                        <button class="darkbutton msgflydisable" type="submit" value="Create Task">Create Task <img
                                 src="./assets/img/desktop/create-task-check.svg"></button>
                     </div>
                 </div>

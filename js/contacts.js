@@ -26,7 +26,7 @@ async function displayContacts() {
    }, {});
 
    for (let [letter, contacts] of Object.entries(groupedContacts)) {
-      document.getElementById('showContacts').innerHTML += `
+      document.getElementById('showContacts').innerHTML += /*html*/ `
       <div class="groupLetter">
          <span>\n${letter}</span>
       </div>
@@ -45,14 +45,16 @@ async function displayContacts() {
          let initial2 = Array.from(lastname)[0].toUpperCase();
          let backgroundColor = contact.color;
 
-         document.getElementById('showContacts').innerHTML += `
+         document.getElementById('showContacts').innerHTML += /*html*/ `
             <div onclick="showSingleContact(${ID})" class="contact" id="contact${ID}">
                  <div class="monogrammicon" style="background-color: ${backgroundColor}">
                     <span>${initial1}${initial2}</span>
                 </div>
                 <div class="nameAndMail">
                     <span class="nameOverviev">${name} ${lastname}</span>
-                    <span class="mailOverview">${mail}</span>
+                     <div class="mailOverviewContainer">
+                        <span class="mailOverview">${mail}</span>
+                     </div>
                 </div>
             </div>
             `;

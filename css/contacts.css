@@ -192,14 +192,35 @@ a {
 .emailAndPhone {
    display: flex;
    flex-direction: column;
+   justify-content: space-between;
    margin-top: 21px;
    height: 128px;
+}
+
+.emailAdressContainer,
+.phoneNumberContainer {
+   display: flex;
+   flex-direction: column;
+   height: 53px;
+   justify-content: space-between;
+   /* margin-bottom: 22px; */
 }
 
 .spanHeading {
    height: 19px;
    font-size: 16px !important;
    font-weight: 700 !important;
+}
+
+.emailspan {
+   height: 19px;
+   font-size: 16px;
+   color: rgba(0, 124, 238, 1);
+}
+
+.phoneSpan {
+   height: 19px;
+   font-size: 16px;
 }
 
 
@@ -273,7 +294,7 @@ a {
    display: flex;
    flex-direction: row;
    align-items: center;
-   
+
    width: -webkit-fill-available;
    padding: 15px 24px;
    gap: 35px;
@@ -316,8 +337,8 @@ a {
 
 .mailOverviewContainer {
    white-space: nowrap;
-    overflow: hidden;
-    max-width: 224px;
+   overflow: hidden;
+   max-width: 224px;
 }
 
 .mailOverview {
@@ -820,8 +841,7 @@ nav {
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.createContactButton:focus
-.safeEditContactButton:focus {
+.createContactButton:focus .safeEditContactButton:focus {
    background-color: rgba(9, 25, 49, 1);
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }

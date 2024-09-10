@@ -220,10 +220,14 @@ function showSingleContact(id) {
          <span>Contact Information</span>
       </div>
       <div class="emailAndPhone">
-         <span class="spanHeading">Email</span>
-         <span>${mail}</span>
-         <h3><strong>Phone</strong></h3>
-         <span>${phone}</span>
+         <div class="emailAdressContainer">
+            <span class="spanHeading">Email</span>
+            <span class="emailSpan">${mail}</span>
+         </div>
+         <div class="phoneNumberContainer">
+            <span class="spanHeading">Phone</span>
+            <span class="phoneSpan">${phone}</span>
+         </div>
       </div>
 
     </div>

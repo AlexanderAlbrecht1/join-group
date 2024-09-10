@@ -1,9 +1,154 @@
+.mbc {
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    gap: 0px; 
+    background: rgba(246, 247, 248, 1);
+    height: calc(100% - 100px);
+} 
 
-
-body {
-    background-color: #b6b6b6;
-    margin: 0 auto;
+.mbc>.mbh {
+    display: flex; 
+    flex-direction:column;   
+    height: 232px;
 }
+
+.mbc>.mbh>div:nth-child(odd) {
+    min-height: 24px;
+    display:flex;
+    padding: 0px 64px;   
+    gap: 24px;
+
+
+}
+.mbc>.mbh>div:nth-child(2)  {
+    flex:1;
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 64px;
+    gap: 26px;
+}
+
+.mbc .board {
+    font-family: Inter;
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73.2px;
+    display: flex;
+    align-items: center;
+}
+
+.mbc .buttons {
+    display: flex;
+    gap: 32px;
+    height: 48px;
+}
+
+.mbc .find-button {
+    box-sizing: border-box;
+    display: flex;
+
+    width: 312px;
+    height: 48px;
+    padding: 8px 16px;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px 0px 0px 0px;
+    background: rgba(255, 255, 255, 1);
+}
+.mbc .find-button>input  {
+    outline: none;
+    width: 100%;
+    display: flex;
+    border: 0px;
+}
+
+.mbc .submit-button {
+    box-sizing: border-box;;
+    display: flex;
+    align-items: center;
+    width: 160px;
+    height: 48px;
+    padding: 8px 16px 8px 16px;
+    gap: 4px;
+    border-radius: 10px;
+    border: 1px;
+    background-color: rgba(42, 54, 71, 1);
+    align-items: center;
+    color: rgba(255, 255, 255, 1);
+    font-family: Inter;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 25.2px;
+}
+.mbc .submit-button>* {
+}
+
+.mbc .submit-button>img {
+    height: 48px;
+    object-fit: contain;
+
+}
+
+/*
+    Todo Headline
+*/
+.mbc .todo {
+    width:244px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    height: 24px;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+
+}
+
+.mbc .todo>* {
+    display: flex;
+    align-items: center;
+}
+
+.btn-add {
+    box-sizing: border-box;
+    border-radius:8px;
+    height: 24px;
+    width: 24px;
+    border: 2px solid rgba(42, 54, 71, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-add>img {
+    justify-content: center;
+    height: 8px;
+    width: 8px;
+    color: rgba(42, 54, 71, 1);
+    filter:brightness(0.5); /**/
+   
+}
+
+/*
+    Todo-Comtainer
+*/
+
+.mbb {
+    padding: 0 64px;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+
+
 
 .containers {
     border: 1px solid gray;

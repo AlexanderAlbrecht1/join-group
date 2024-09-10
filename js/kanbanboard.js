@@ -1,10 +1,14 @@
 let tasks = [];
 
 function init() {
-   if (isLogged()) {
-      fetchTasks();
-   }
+   fetchTasks();
 }
+
+// function init() {
+//    if (isLogged()) {
+//       fetchTasks();
+//    }
+// }
 
 async function fetchTasks() {
    tasks = await loadData('taskstorage');

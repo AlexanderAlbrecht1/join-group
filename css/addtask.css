@@ -369,6 +369,7 @@ textarea {
 }
 
 .subtask-edit-input {
+   margin-bottom: 12px;
    width: 100%;
    border: none !important;
    border-radius: 0 !important;
@@ -394,6 +395,11 @@ textarea {
    position: absolute;
    top: 0.5em;
    right: 20px;
+}
+
+li {
+   cursor: pointer;
+   user-select: none;
 }
 
 

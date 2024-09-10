@@ -104,7 +104,7 @@ function renderSubtasks(subtaskList) {
 
    for (let i = 0; i < subtasks.length; i++) {
       subtaskList.innerHTML += `<div id="subtask-con" class="list-item">
-                                 <li>${subtasks[i]}</li>
+                                 <li ondblclick="editSubtask(${i})">${subtasks[i]}</li>
                                  <div class="subtask-icon">
                                  <img onclick="editSubtask(${i})" src="./assets/img/desktop/subtask-edit.svg" alt="">
                                  <img onclick="deleteSubtask(${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
@@ -119,7 +119,7 @@ function deleteSubtask(i) {
    let subtaskEditCon = document.getElementById('edit-input-con');
 
    subtasks.splice(i,1);
-   subtaskEditCon.classList.add('hidden');
+   subtaskEditCon.classList.add('d-none');
    renderSubtasks(subtaskList);
    subtaskEditInput.value = "";
 
@@ -129,7 +129,7 @@ function editSubtask(index) {
    let subtaskEditInput = document.getElementById("subtask-edit-input");
    let subtaskEditCon = document.getElementById('edit-input-con');
 
-   subtaskEditCon.classList.remove('hidden');
+   subtaskEditCon.classList.remove('d-none');
    subtaskEditInput.value = subtasks[index];
    currentEditIndex = index;
 }
@@ -141,7 +141,7 @@ function saveEditedSubtask() {
 
    if (currentEditIndex !== null && subtaskEditInput.value !== "") {
       subtasks[currentEditIndex] = subtaskEditInput.value;
-      subtaskEditCon.classList.add('hidden');
+      subtaskEditCon.classList.add('d-none');
       renderSubtasks(subtaskList);
       currentEditIndex = null;
       subtaskEditInput.value = "";

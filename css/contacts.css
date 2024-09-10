@@ -20,9 +20,11 @@ a {
    flex-direction: column;
    align-items: flex-start;
    /*width: 569px; */
-   position: fixed;
-   top: 64px;
-   margin-left: 511px;
+   position: fixed; 
+   /* top: 64px; */
+   /* margin-left: 511px; */
+   margin-left: calc(743px - 232px - 456px);
+   margin-top:calc(206px - 96px);
 }
 
 .heading {
@@ -30,7 +32,7 @@ a {
    align-items: center;
    gap: 16px;
    height: 73px;
-   margin-top: 110px;
+   /* margin-top: 110px; */
    /*margin-left: 55px; */
 }
 
@@ -221,10 +223,11 @@ a {
 */
 
 .workingArea {
-   margin-top: 96px;
+   margin-top: 0; /*96px*/;
    display: flex;
    flex-direction: column;
    width: 456px;
+   height: 100%;
    /* Figma */
 }
 

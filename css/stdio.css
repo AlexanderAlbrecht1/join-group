@@ -23,3 +23,9 @@ a {
 .fs16 {
     font-size: 16px !important;
 }
+
+.top-left {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}

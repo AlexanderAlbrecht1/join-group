@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./css/contacts.css" />
     <link rel="stylesheet" href="/assets/font/inter.css">
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/stdio.css">
     <link rel="stylesheet" href="/css/inputField.css">
     <link rel="shortcut icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon">
     <title>Contacts</title>
@@ -43,38 +45,44 @@
         </div>
     </nav>
 
-    <div class="workingArea">
+    <div class="main-container top-left">
+        <div class="workingArea">
+            <div class="contactBook">
+        
+                <div onclick="closeContactCreation()" id="dialogBackground" class="displayNone dialogBackground">
+                    <div class="dialogMain" id="addContactContainer" onclick="dontClose(event)">
+
+                    </div>
+                </div>
+
+                <button onclick="openCreateContactDialog()" class="addNewContactButton">
+                    <span>Add new contact</span>
+                    <img src="/assets/img/desktop/person_add.svg" alt="Person add">
+                </button>
+
+                <div class="contactsOverview" id="showContacts">
+</div>
+</div>
+        </div>
+        
+        <div>
+            <div class="rightSide">
+                <div class="heading">
+                    <h1>Contacts</h1>
+                    <div></div>
+                    <span> Better with a Team</span>
+                </div>
+                <div class="contactDetail" id="contactDetail">
 
 
-        <div class="contactBook">
-            <div onclick="closeContactCreation()" id="dialogBackground" class="displayNone dialogBackground">
-                <div class="dialogMain" id="addContactContainer" onclick="dontClose(event)">
 
                 </div>
             </div>
 
-            <button onclick="openCreateContactDialog()" class="addNewContactButton">
-                <span>Add new contact</span>
-                <img src="/assets/img/desktop/person_add.svg" alt="Person add">
-            </button>
-
-            <div class="contactsOverview" id="showContacts">
-
-            </div>
         </div>
 
-        <div class="rightSide">
-            <div class="heading">
-                <h1>Contacts</h1>
-                <div></div>
-                <span> Better with a Team</span>
-            </div>
-            <div class="contactDetail" id="contactDetail">
 
-
-
-            </div>
-        </div>
+    </div>  
 </body>
 
 </html>

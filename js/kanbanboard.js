@@ -25,7 +25,14 @@ async function fetchTasks() {
 }
 
 function getTodoData(tasks) {
-   let task = tasks.filter((t) => t['status'] == 'to-do');
+   console.log(tasks)
+   let task = tasks.filter((t) => {
+      if (t) {
+         if ( t['status'] == 'to-do') {
+            return t;
+         }
+      }
+   });
    let todoContainer = document.getElementById('todo-container');
    todoContainer.innerHTML = '';
 
@@ -35,7 +42,13 @@ function getTodoData(tasks) {
 }
 
 function getInProgressData(tasks) {
-   let inProgress = tasks.filter((t) => t['status'] == 'in-progress');
+   let inProgress = tasks.filter((t) => {
+      if (t) {
+         if ( t['status'] == 'in-progress') {
+            return t;
+         }
+      }
+   });
    let inProgressContainer = document.getElementById('in-progress-container');
    inProgressContainer.innerHTML = '';
 
@@ -45,7 +58,13 @@ function getInProgressData(tasks) {
 }
 
 function getAwaitFeedbackData(tasks) {
-   let awaitFeedback = tasks.filter((t) => t['status'] == 'await-feedback');
+   let awaitFeedback = tasks.filter((t) => {
+      if (t) {
+         if (t['status'] == 'await-feedback') {
+            return t
+         }
+      }
+   });
    let awaitFeedbackContainer = document.getElementById(
       'await-feedback-container'
    );
@@ -57,7 +76,13 @@ function getAwaitFeedbackData(tasks) {
 }
 
 function getDoneData(tasks) {
-   let done = tasks.filter((t) => t['status'] == 'done');
+   let done = tasks.filter((t) => {
+      if (t) {
+        if ( t['status'] == 'done') {
+         return t
+        }
+      }
+   });
    let doneContainer = document.getElementById('done-container');
    doneContainer.innerHTML = '';
 

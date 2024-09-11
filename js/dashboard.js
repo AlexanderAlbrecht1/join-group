@@ -7,6 +7,15 @@ async function countTasksByStatus(status) {
    return taskArray.filter((task) => task && task.status === status).length;
 }
 
+async function countTasksByPrio(prio) {
+   const tasks = await loadData('taskstorage');
+   if (!tasks) {
+      return 0;
+   }
+   const taskArray = Object.values(tasks);
+   return taskArray.filter((task) => task && task.prio === prio).length;
+}
+
 async function countAllTasks() {
    const tasks = await loadData('taskstorage');
 
@@ -26,13 +35,14 @@ async function loadCurrentUserName(currentUserEmail) {
    }
    const userArray = Object.values(users);
    const user = userArray.find((u) => u.email === currentUserEmail);
-   return user ? user.user : 'Unbekannt';
+   return user ? user.user : 'Gast';
 }
 
 async function updateDashboard() {
    try {
       const todoCount = await countTasksByStatus('to-do');
       const doneCount = await countTasksByStatus('done');
+      const urgentCount = await countTasksByPrio('urgent');
       const inProgressCount = await countTasksByStatus('in-progress');
       const awaitingFeedbackCount = await countTasksByStatus(
          'await-feedback'
@@ -42,6 +52,7 @@ async function updateDashboard() {
 
       document.getElementById('todo-count').innerText = todoCount;
       document.getElementById('done-count').innerText = doneCount;
+      document.getElementById('urgent-count').innerText = urgentCount;
       document.getElementById('in-progress-count').innerText = inProgressCount;
       document.getElementById('awaiting-feedback-count').innerText =
          awaitingFeedbackCount;

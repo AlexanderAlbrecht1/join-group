@@ -1,0 +1,52 @@
+
+.dashboard-container {
+    margin-top: 97px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 24px;
+    background: rebeccapurple;
+    align-items: center;
+}
+
+.dashboard-main {
+    display: flex;
+    flex-direction: column;
+    margin-left: 232px;
+}
+
+.dashboard-headline {
+    margin-top: 97px;
+}
+
+
+.stats1 {
+    background: green;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stats2 {
+    background: yellow;
+}
+
+.stats3 {
+    background: blue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    
+}
+
+.stats3_inner {
+    width: 30%;
+    height: 100%;
+   text-align: center;
+   background: yellowgreen;
+}
+
+.stats1_inner {
+    background: gray;
+    width: 240px;
+}

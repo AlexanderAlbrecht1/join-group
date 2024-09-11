@@ -451,6 +451,10 @@ a {
    transform: translate(0,30vh);
 }
 
+.msgflyout {
+   transform: translate(100vw, 30vh);
+}
+
 
 /*
 ******left side logo container add contact******

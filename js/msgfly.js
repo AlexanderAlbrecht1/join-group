@@ -14,7 +14,6 @@ async function msgfly(sleep=1700)
     msgfly.style.visibility="visible";
     itemfly.classList.add("msgflyin");
     await new Promise(e => setTimeout(e,sleep));
-    itemfly.classList.add("msgflyout");         // fly same way out (Alex)
     msgfly.style.visibility="";
     itemfly.classList.remove("msgflyin");
     if (disabled) disabled.disabled=false;

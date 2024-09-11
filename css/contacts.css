@@ -445,6 +445,7 @@ a {
 
 .msgfly {
    transform: translate(100vw, 30vh);
+   transition: 900ms ease-in-out;
 }
 
 .msgflyin {

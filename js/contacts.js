@@ -26,41 +26,37 @@ async function displayContacts() {
    }, {});
 
    for (let [letter, contacts] of Object.entries(groupedContacts)) {
-      document.getElementById('showContacts').innerHTML += /*html*/ `
-      <div class="groupLetter">
-         <span>\n${letter}</span>
-      </div>
-      <div class="breakingLineContainer">
-         <div class ="breakingLine">   
-         </div>
-      </div>
-      `;
+      document.getElementById('showContacts').innerHTML += generateGroupLetterHTML(letter) ;
       for (let i = 0; i < contacts.length; i++) {
+         // let contactArray = defineVariables(i);
          let contact = contacts[i];
-         let ID = contact.id;
-         let name = contact.name;
-         let lastname = contact.lastname;
-         let mail = contact.email;
-         let initial1 = Array.from(name)[0].toUpperCase();
-         let initial2 = Array.from(lastname)[0].toUpperCase();
-         let backgroundColor = contact.color;
-
-         document.getElementById('showContacts').innerHTML += /*html*/ `
-            <div onclick="showSingleContact(${ID})" class="contact" id="contact${ID}">
-                 <div class="monogrammicon" style="background-color: ${backgroundColor}">
-                    <span>${initial1}${initial2}</span>
-                </div>
-                <div class="nameAndMail">
-                    <span class="nameOverviev">${name} ${lastname}</span>
-                     <div class="mailOverviewContainer">
-                        <span class="mailOverview">${mail}</span>
-                     </div>
-                </div>
-            </div>
-            `;
+         let contactArray = {
+            ID: contact.id,
+            name: contact.name,
+            lastname: contact.lastname,
+            mail: contact.email,
+            initial1: Array.from(contacts[i].name)[0].toUpperCase(),
+            initial2: Array.from(contacts[i].lastname)[0].toUpperCase(),
+            backgroundColor: contact.color,
+         }
+         document.getElementById('showContacts').innerHTML += generateDisplayContactsHTML(contactArray);
       }
    }
 }
+
+// function defineVariables(i) {
+//    let contact = contacts[i];
+//    let contactArray = {
+//       ID: contact.id,
+//       name: contact.name,
+//       lastname: contact.lastname,
+//       mail: contact.email,
+//       initial1: Array.from(contacts[i].name)[0].toUpperCase(),
+//       initial2: Array.from(contacts[i].lastname)[0].toUpperCase(),
+//       backgroundColor: contact.color,
+//    }
+//    return contactArray;
+// }
 
 
 function getCurrentContact(id) {
@@ -337,9 +333,9 @@ function openCreateContactDialog() {
 function closeContactCreation() {
    // addContactContainer.style.cssText = 'animation: slideOut .5s ease; animation-fill-mode: forwards;';
    // setTimeout(() => {
-      document.getElementById('dialogBackground').classList.add('displayNone');
-      document.getElementById('dialogBackground').classList.remove('displayFlex');
-      document.getElementById('body').classList.remove('overflowHidden');
+   document.getElementById('dialogBackground').classList.add('displayNone');
+   document.getElementById('dialogBackground').classList.remove('displayFlex');
+   document.getElementById('body').classList.remove('overflowHidden');
    // }, 500);
 
 }

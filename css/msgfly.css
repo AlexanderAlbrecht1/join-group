@@ -62,6 +62,11 @@
     transform: translate(0,0);
 }
 
+.msgflyout {
+    transition: 900ms ease-in-out;
+    transform: translate(0, 0);
+ }
+
  /*
     This are the Items that are containt in the moving container
 */

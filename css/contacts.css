@@ -439,8 +439,22 @@ a {
    transform: translateX(100vw)
 }
 
+#msgfly {
+   background: transparent;
+}
 
+.msgfly {
+   transform: translate(100vw, 30vh);
+   transition: 900ms ease-in-out;
+}
 
+.msgflyin {
+   transform: translate(0,30vh);
+}
+
+.msgflyout {
+   transform: translate(100vw, 30vh);
+}
 
 
 /*

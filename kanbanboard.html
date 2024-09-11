@@ -23,7 +23,7 @@
 
 </head>
 
-<body onload="init()">
+<body onload="initX()">
     <header>
         <div class="max-width">
         <span>Kanban Project Management Tool</span>
@@ -95,22 +95,36 @@
         
         </div>
 
-        <div class="mbb">            
+        <div class="mbb">
             <div>
                 <div class="containers" id="todo-container" ondrop="drop(event, 'to-do')" ondragover="allowDrop(event)">
+                    <div class="card user-story">
+                        <h1>User Story</h1>
+                        <div class="mbb-text">
+                            <h1>Kochwelt Page & Recipe Recommender</h1>
+                            <span>Build start page with recipe recommendation...</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar"></div>
+                            <span>1/2 Subtasks</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-    
-            <div>
+        
+            <div>           
                 <div class="containers" id="in-progress-container" ondrop="drop(event, 'in-progress')" ondragover="allowDrop(event)">
+                    <div class="card technical-task">
+                        <h1></h1>
+                    </div>
                 </div>
             </div>
-    
+            
             <div>
                 <div class="containers" id="await-feedback-container" ondrop="drop(event, 'await-feedback')" ondragover="allowDrop(event)">
                 </div>
             </div>
-    
+
             <div>
                 <div class="containers" id="done-container" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
                 </div>
@@ -118,31 +132,5 @@
         </div>
     </div>
 
-    <!-- <div>    
-        <div>
-            <h3>To Do</h3>
-            <div class="containers" id="todo-container" ondrop="drop(event, 'to-do')" ondragover="allowDrop(event)">
-            </div>
-        </div>
-
-        <div>
-            <h3>In progress</h3>
-            <div class="containers" id="in-progress-container" ondrop="drop(event, 'in-progress')" ondragover="allowDrop(event)">
-            </div>
-        </div>
-
-        <div>
-            <h3>Await feedback</h3>
-            <div class="containers" id="await-feedback-container" ondrop="drop(event, 'await-feedback')" ondragover="allowDrop(event)">
-            </div>
-        </div>
-
-        <div>
-            <h3>Done</h3>
-            <div class="containers" id="done-container" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-            </div>
-        </div>
-
-    </div> -->
 </body>
 </html>

@@ -227,6 +227,7 @@
 */
 
 .mbb .card {
+    box-sizing: border-box;
     width: 252px;
     padding: 16px;
     gap: 10px;

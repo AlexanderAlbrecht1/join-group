@@ -439,8 +439,17 @@ a {
    transform: translateX(100vw)
 }
 
+#msgfly {
+   background: transparent;
+}
 
+.msgfly {
+   transform: translate(100vw, 30vh);
+}
 
+.msgflyin {
+   transform: translate(0,30vh);
+}
 
 
 /*

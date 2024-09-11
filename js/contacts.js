@@ -149,6 +149,7 @@ async function addNewContact() {
    closeContactCreation();
    await displayContacts();
    document.getElementById(`contact${id}`).click();
+   await msgfly();
 }
 
 function getNewId(contacts) {

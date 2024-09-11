@@ -4,12 +4,17 @@
  * Wait after 800ms
  * Together 1700ms until continue
  */
-async function msgfly() 
+async function msgfly(sleep=1700) 
 {
-    document.querySelector(".msgflydisable").disable;
+    let disabled=document.querySelector(".msgflydisable");
     let msgfly=document.getElementById("msgfly");
+    let itemfly=msgfly.querySelector(".msgfly");
+    
+    disabled?.disabled;
     msgfly.style.visibility="visible";
-    msgfly.querySelector(".msgfly").style.transform="translateY(0)";
-    // msgfly.querySelector(".msgfly").classList.add("msgflyin");
-    await new Promise(e => setTimeout(e,1700));
+    itemfly.classList.add("msgflyin");
+    await new Promise(e => setTimeout(e,sleep));
+    msgfly.style.visibility="";
+    itemfly.classList.remove("msgflyin");
+    if (disabled) disabled.disabled=false;
 }

@@ -28,35 +28,25 @@ async function displayContacts() {
    for (let [letter, contacts] of Object.entries(groupedContacts)) {
       document.getElementById('showContacts').innerHTML += generateGroupLetterHTML(letter) ;
       for (let i = 0; i < contacts.length; i++) {
-         // let contactArray = defineVariables(i);
          let contact = contacts[i];
-         let contactArray = {
-            ID: contact.id,
-            name: contact.name,
-            lastname: contact.lastname,
-            mail: contact.email,
-            initial1: Array.from(contacts[i].name)[0].toUpperCase(),
-            initial2: Array.from(contacts[i].lastname)[0].toUpperCase(),
-            backgroundColor: contact.color,
-         }
+         let contactArray = createContactArray(contact,i);
          document.getElementById('showContacts').innerHTML += generateDisplayContactsHTML(contactArray);
       }
    }
 }
 
-// function defineVariables(i) {
-//    let contact = contacts[i];
-//    let contactArray = {
-//       ID: contact.id,
-//       name: contact.name,
-//       lastname: contact.lastname,
-//       mail: contact.email,
-//       initial1: Array.from(contacts[i].name)[0].toUpperCase(),
-//       initial2: Array.from(contacts[i].lastname)[0].toUpperCase(),
-//       backgroundColor: contact.color,
-//    }
-//    return contactArray;
-// }
+function createContactArray(contact,i) {
+   let contactArray = {
+      ID: contact.id,
+      name: contact.name,
+      lastname: contact.lastname,
+      mail: contact.email,
+      initial1: Array.from(contacts[i].name)[0].toUpperCase(),
+      initial2: Array.from(contacts[i].lastname)[0].toUpperCase(),
+      backgroundColor: contact.color,
+   }
+   return contactArray;
+}
 
 
 function getCurrentContact(id) {

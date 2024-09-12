@@ -1,39 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-      <link rel="stylesheet" href="./css/nav.css">
-      <link rel="icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon">
-      <script src="./js/dashboard.js"></script>
-      <script src="./js/firebase.js"></script>
-      <script src="./js/session.js"></script>
-   </head>
-   <body></body>
-   <div class="dashboard">
-      <h1>Willkommen, <span id="user-name"></span></h1>
-      <div class="dashboard-stats">
-         <div>
-            <h3>To-Do</h3>
-            <p id="todo-count">0</p>
-         </div>
-         <div>
-            <h3>Done</h3>
-            <p id="done-count">0</p>
-         </div>
-         <div>
-            <h3>In Progress</h3>
-            <p id="in-progress-count">0</p>
-         </div>
-         <div>
-            <h3>Awaiting Feedback</h3>
-            <p id="awaiting-feedback-count">0</p>
-         </div>
-         <div>
-            <h3>Gesamtanzahl Aufgaben</h3>
-            <p id="total-count">0</p>
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Document</title>
+   <link rel="stylesheet" href="/styles.css">
+   <link rel="stylesheet" href="./css/nav.css">
+   <link rel="stylesheet" href="./css/dashboard.css">
+   <link rel="stylesheet" href="./assets/font/inter.css">
+   <link rel="stylesheet" href="./css/contacts.css">
+   <link rel="icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon">
+   <script src="./js/dashboard.js"></script>
+   <script src="./js/firebase.js"></script>
+   <script src="./js/session.js"></script>
+</head>
+
+<body>
+
+   <header>
+      <div class="max-width">
+         <span>Kanban Project Management Tool</span>
+         <div class="headerHelpUser">
+            <div class="helparea">
+               <a href=""><img src="/assets/img/desktop/question_mark.svg" alt="Question Mark"></a>
+            </div>
+            <div>Usermonogram</div>
          </div>
       </div>
-   </div>
+   </header>
+
+   <nav>
+      <img src="/assets\img\desktop\join-logo_navbar.svg" alt="Join-Logo">
+      <div class="mainLinks">
+         <a href="/dashboard.html" style=" background-color: rgba(9, 25, 49, 1);"><img src="/assets/img/desktop/summary_logo.svg" alt="Summary Logo">Summary</a>
+         <a href="/addtask.html"><img src="/assets/img/desktop/logo_add_task.svg" alt="Add task Logo">Add
+            task</a>
+         <a href="/kanbanboard.html"><img src="/assets/img/desktop/board_logo.svg" alt="Board Logo">Board</a>
+         <a href="/contacts.html"><img
+               src="/assets/img/desktop/contact_logo.svg" alt="Contacts Logo">Contact</a>
+      </div>
+      <div class="adviceLinks">
+         <a href="">Privacy Policy</a>
+         <a href="">Legal Notice</a>
+      </div>
+   </nav>
+
+    <div class="dashboard-main"> 
+      <h1 class="dashboard-headline">Willkommen, <span id="user-name"></span></h1>
+      <div class="dashboard-container">
+         <div class="dashboard">
+         
+               <div class="stats1">
+                  <div class="stats1_inner">
+                     <p id="todo-count">0</p>
+                     <h3>To-Do</h3>
+                  </div>
+                  <div class="stats1_inner">
+                     <p id="done-count">0</p>
+                     <h3>Done</h3>
+                  </div>
+               </div>
+   
+         
+   
+   
+               <div class="stats2">
+                  <p id="urgent-count">0</p>
+                  <h3>Urgent</h3>
+               </div>
+   
+   
+               <div class="stats3">
+                  <div class="stats3_inner">
+                     <p id="total-count">0</p>
+                     <h3>Gesamtanzahl Aufgaben</h3>
+                  </div>
+                  <div class="stats3_inner">
+                     <p id="in-progress-count">0</p>
+                     <h3>In Progress</h3>
+                  </div>
+                  <div class="stats3_inner">
+                     <p id="awaiting-feedback-count">0</p>
+                     <h3>Awaiting Feedback</h3>
+                  </div>
+               </div>
+   
+   
+            
+         </div>
+   
+         <div> 
+            Good morning
+         </div>
+      </div>
+    </div>
+
+</body>
 </html>

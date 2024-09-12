@@ -85,23 +85,6 @@ function generateDarkColor() {
    return `rgb(${r}, ${g}, ${b})`;
 }
 
-/*
-contcat = []
-
-contact[5]=alsfjslkjf
-contcat[1]=Was anderes
-
-for (i=0;i<blur.len; i++) ;
-for (contact of contacts) {
-
-}
-
-saveContacts("Contacts/" + id)
-contacts=loadContacts("Contacts/" + id)
-*/
-
-
-
 /**
  * Neuen Kontakt erstellen
  */
@@ -131,7 +114,7 @@ async function addNewContact() {
    await saveContacts();
    // saveContacts(id,newContact);
 
-   clearInput(newName, newEmail, newPhone);
+   clearInput();
    closeContactCreation();
    await displayContacts();
    document.getElementById(`contact${id}`).click();
@@ -142,7 +125,6 @@ function getNewId(contacts) {
    if (contacts.length === 0) {
       return 1; // Startet bei 1, wenn keine Kontakte vorhanden sind
    }
-
    let maxId = contacts.reduce((max, contact) => {
       // Prüfe, ob die ID gültig ist und größer als der aktuelle maxId
       if (contact && typeof contact.id === 'number' && contact.id > max) {
@@ -150,14 +132,13 @@ function getNewId(contacts) {
       }
       return max;
    }, 0);
-
    return maxId + 1; // Erhöhe die höchste ID um 1
 }
 
-function clearInput(newName, newEmail, newPhone) {
-   newName.value = '';
-   newEmail.value = '';
-   newPhone.value = '';
+function clearInput() {
+   document.getElementById("name").value = '';
+   document.getElementById("email").value = '';
+   document.getElementById("phone").value = '';
 }
 
 function changeBgColor(id) {
@@ -172,56 +153,23 @@ function changeBgColor(id) {
 function showSingleContact(id) {
    changeBgColor(id);
    let index = getCurrentContact(id);
-   let name = contacts[index].name;
-   let lastname = contacts[index].lastname;
-   let mail = contacts[index].email;
-   let phone = contacts[index].phone;
-   let initial1 = Array.from(name)[0].toUpperCase();
-   let initial2 = Array.from(lastname)[0].toUpperCase();
-   let backgroundColor = contacts[index].color;
-
+   let singleContactArray = createSingleContactArray(index)
    document.getElementById('contactDetail').innerHTML = '';
-   document.getElementById('contactDetail').innerHTML = /*html*/ `
-    <div class="name">
-      <div class="detailMonogramContainer">
-        <span class="detailMonogramSpan" style="background-color: ${backgroundColor}">${initial1}${initial2}</span>
-      </div>
-        <div class="fullNameAndButtons">
-         	<div class="fullname">
-               <span>${name} ${lastname}</span>
-            </div>
-          <div class="editButtons">
-            <div onclick="openEditContactDialog(${id})" class="editButton">
-               <div></div>
-               <span>Edit</span>
-            </div>
-            <div onclick="deleteContact(${id})" class="trashButton">
-               <div></div>
-               <span>Delete</span>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-      <div class="contactInformation">
-         <span>Contact Information</span>
-      </div>
-      <div class="emailAndPhone">
-         <div class="emailAdressContainer">
-            <span class="spanHeading">Email</span>
-            <span class="emailSpan">${mail}</span>
-         </div>
-         <div class="phoneNumberContainer">
-            <span class="spanHeading">Phone</span>
-            <span class="phoneSpan">${phone}</span>
-         </div>
-      </div>
-
-    </div>
-    `;
-
+   document.getElementById('contactDetail').innerHTML = createSingleContactHTML(singleContactArray, id) ;
    console.log(id);
+}
 
+function createSingleContactArray(index) {
+   let singleContactArray = {
+      name : contacts[index].name,
+      lastname : contacts[index].lastname,
+      mail : contacts[index].email,
+      phone : contacts[index].phone,
+      initial1 : Array.from(contacts[index].name)[0].toUpperCase(),
+      initial2 : Array.from(contacts[index].lastname)[0].toUpperCase(),
+      backgroundColor : contacts[index].color,
+   }  
+   return singleContactArray;
 }
 
 async function deleteContact(id) {
@@ -246,7 +194,7 @@ function findContact(id) {
 
 /**
  *
- * creates a contact form
+ * creates a contact form to add a new contact
  */
 function openCreateContactDialog() {
    let dialogBackground = document.getElementById('dialogBackground');
@@ -254,82 +202,27 @@ function openCreateContactDialog() {
    document.getElementById('body').classList.add('overflowHidden');
    dialogBackground.classList.remove('displayNone');
    dialogBackground.classList.add('displayFlex');
-
    addContactContainer.innerHTML = '';
-   addContactContainer.innerHTML = /*html*/ `
-            
-    
-      <div class="addContactLogoContainer">
-         <div>
-            <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
-            <h1>Add contact</h1>
-            <span>Tasks are better with a team!</span>
-            <div class="vector5"></div>
-            <div class="contactLogo"></div>
-         </div>
-      </div>
-      <div class="addContactInputContainer">
-         <div class="emptyMonogram">
-            <img src="./assets/img/desktop/empty_user.svg" alt="">
-         </div>
-         <div class="addContactInputContainer2">
-            <div class="close" onclick="closeContactCreation()">
-               <img src="/assets/img/desktop/close.svg" alt="">
-            </div>
-
-            <form class="form-input" onsubmit="addNewContact();return false;">
-
-               <div id="input-field-container" class="input-container">
-                  <input id="name" type="text" required placeholder="Name">
-                  <span class="icon"  ><img src="./assets/img/desktop/person.svg"></span>
-                  
-               </div>
-
-               <div id="input-field-container" class="input-container">
-                  <input id="email" type="email" required placeholder="Email">
-                  <span class="icon"  ><img src="./assets/img/desktop/letter.svg"></span>
-                  
-               </div>
-            
-               <div id="input-field-container" class="input-container">
-                  <input id="phone" type="number" required placeholder="Phone">
-                  <span class="icon"  ><img src="./assets/img/desktop/phone.svg"></span>
-                  
-               </div>
-
-               <div class="buttons">
-                  <div class="cancelButton" onclick="closeContactCreation()">
-                     <span>Cancel </span>
-                     <div class="cancelSVGContainer">
-                     </div>    
-                  </div>
-
-                  <button class="createContactButton" type="submit">
-                     <span>Create contact</span>
-                     <div class="checkSVGContainer">
-                     </div>
-                  </button>
-               </div>
-            </form>
-         </div>
-      </div>
-
-
-    `;
+   addContactContainer.innerHTML = addContactHTML();
    addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
-   //dialogBackground.style.cssText = 'animation: slideIn .5s ease; animation-fill-mode: forwards;';
 }
 
+/**
+ * 
+ * abort add new contact and close dialog window
+ */
 function closeContactCreation() {
-   // addContactContainer.style.cssText = 'animation: slideOut .5s ease; animation-fill-mode: forwards;';
-   // setTimeout(() => {
    document.getElementById('dialogBackground').classList.add('displayNone');
    document.getElementById('dialogBackground').classList.remove('displayFlex');
    document.getElementById('body').classList.remove('overflowHidden');
-   // }, 500);
-
 }
 
+/**
+ * 
+ * prevent close dialog by click buttons or input fields
+ * 
+ * @param {click} event 
+ */
 function dontClose(event) {
    event.stopPropagation();
 }
@@ -433,14 +326,15 @@ async function initContactList() {
 }
 function openEditContactDialog(id) {
    let index = getCurrentContact(id);
+   // console.log(index);
+   
    let name = contacts[index].name;
    let lastname = contacts[index].lastname;
    let mail = contacts[index].email;
    let phone = contacts[index].phone;
+   let array = generateArray(id,index);
 
-   let initial1 = Array.from(name)[0].toUpperCase();
-   let initial2 = Array.from(lastname)[0].toUpperCase();
-   let backgroundColor = contacts[index].color;
+   
 
    let dialogBackground = document.getElementById('dialogBackground');
    let editContactContainer = document.getElementById('addContactContainer');
@@ -449,60 +343,7 @@ function openEditContactDialog(id) {
    dialogBackground.classList.add('displayFlex');
 
    editContactContainer.innerHTML = '';
-   editContactContainer.innerHTML = /*html*/ `
-        
-   <div class="editContactLogoContainer" onclick="dontClose(event)">
-
-      <div>
-         <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
-         <div class="flexColumn">
-            <h1>Edit contact</h1>
-            <div class="vector5EditContact"></div>
-         </div>
-         <div class="contactLogo"></div>
-      </div>
-   </div>
-
-<div class="addContactInputContainer">
-      <div class="detailMonogramContainer">
-            <span class="detailMonogramSpan" style="background-color: ${backgroundColor}">${initial1}${initial2}</span>
-      </div>
-
-    <div class="addContactInputContainer2">
-        <div class="close" onclick="closeContactCreation()">
-            <img src="/assets/img/desktop/close.svg" alt="">
-        </div>
-
-        <div id="input-field-container" class="input-container">
-            <input id="name" type="text" required placeholder="Name">
-            <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
-        </div>
-
-        <div id="input-field-container" class="input-container">
-            <input id="email" type="email" required placeholder="Email">
-            <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
-        </div>
-
-        <div id="input-field-container" class="input-container">
-            <input id="phone" type="number" required placeholder="Phone">
-            <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
-        </div>
-
-        <div class="editContactbuttons ">
-            <div class="deleteButton" onclick="deleteContact(${id})">
-                <span>Delete </span>
-            </div>
-
-            <button class="safeEditContactButton" onclick="saveEditedContact(${id})">
-                <span>Safe</span>
-                <div class="checkSVGContainer">
-                </div>
-            </button>
-        </div>
-    </div>
-</div>
-</div>
-   `; // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
+   editContactContainer.innerHTML = createEditContactDialogHTML(array); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
 
    document.getElementById('name').value = name + ' ' + lastname;
    document.getElementById('email').value = mail;
@@ -513,11 +354,47 @@ function openEditContactDialog(id) {
    console.log(findContact(mail));
 }
 
+/**
+ * 
+ * creates an array to pass the variables into the createHTML function
+ * 
+ * @param {number} id - unique ID for each contact
+ * @param {number} index - position in 'contacts'-object
+ * @returns - array for generate HTML
+ */
+function generateArray(id,index) {
+   let array = {
+      id : id,
+      initial1 : Array.from(contacts[index].name)[0].toUpperCase(),
+      initial2 : Array.from(contacts[index].lastname)[0].toUpperCase(),
+      backgroundColor : contacts[index].color,
+   }
+   return array;
+}
+/**
+ * 
+ * saves the edited contact
+ * 
+ * @param {number} id - it's a unique number, generated by add a new contact
+ */
 async function saveEditedContact(id) {
    let index = getCurrentContact(id);
-   let color = contacts[index].color;
+   // let color = contacts[index].color;
+
+   let newContact = createNewContactArray(id);
+
    contacts.splice(index, 1);
    await saveContacts();
+   
+   contacts.push(newContact);
+   await saveContacts();
+   clearInput();
+   closeContactCreation();
+   await displayContacts();
+   document.getElementById(`contact${id}`).click();
+}
+
+function createNewContactArray(id) {
    let newName = document.getElementById("name");
    let newEmail = document.getElementById("email");
    let newPhone = document.getElementById("phone");
@@ -525,6 +402,8 @@ async function saveEditedContact(id) {
    let splittedName = fullname.split(' ');
    let newFirstname = splittedName[0];
    let newLastname = splittedName[1];
+   let index = getCurrentContact(id);
+   let color = contacts[index].color
    let newContact = {
       id: id,
       name: newFirstname,
@@ -532,10 +411,6 @@ async function saveEditedContact(id) {
       email: newEmail.value,
       phone: newPhone.value,
       color: color,
-   };
-   contacts.push(newContact);
-   await saveContacts();
-   clearInput(newName, newEmail, newPhone);
-   closeContactCreation();
-   displayContacts();
+   }
+   return newContact;
 }

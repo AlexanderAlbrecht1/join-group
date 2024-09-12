@@ -124,9 +124,13 @@ header {
     padding-left: 56px;
  }
  
- .mainLinks a:hover,
- .adviceLinks a:hover {
+ .mainLinks a:hover {
     background-color: rgba(9, 25, 49, 1);
+ }
+
+ .adviceLinks a:hover {
+   color: #29ABE2;
+   font-size: 17px;
  }
  
  

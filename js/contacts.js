@@ -344,60 +344,7 @@ function openEditContactDialog(id) {
    dialogBackground.classList.add('displayFlex');
 
    editContactContainer.innerHTML = '';
-   editContactContainer.innerHTML = /*html*/ `
-        
-   <div class="editContactLogoContainer" onclick="dontClose(event)">
-
-      <div>
-         <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
-         <div class="flexColumn">
-            <h1>Edit contact</h1>
-            <div class="vector5EditContact"></div>
-         </div>
-         <div class="contactLogo"></div>
-      </div>
-   </div>
-
-<div class="addContactInputContainer">
-      <div class="detailMonogramContainer">
-            <span class="detailMonogramSpan" style="background-color: ${backgroundColor}">${initial1}${initial2}</span>
-      </div>
-
-    <div class="addContactInputContainer2">
-        <div class="close" onclick="closeContactCreation()">
-            <img src="/assets/img/desktop/close.svg" alt="">
-        </div>
-
-        <div id="input-field-container" class="input-container">
-            <input id="name" type="text" required placeholder="Name">
-            <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
-        </div>
-
-        <div id="input-field-container" class="input-container">
-            <input id="email" type="email" required placeholder="Email">
-            <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
-        </div>
-
-        <div id="input-field-container" class="input-container">
-            <input id="phone" type="number" required placeholder="Phone">
-            <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
-        </div>
-
-        <div class="editContactbuttons ">
-            <div class="deleteButton" onclick="deleteContact(${id})">
-                <span>Delete </span>
-            </div>
-
-            <button class="safeEditContactButton" onclick="saveEditedContact(${id})">
-                <span>Safe</span>
-                <div class="checkSVGContainer">
-                </div>
-            </button>
-        </div>
-    </div>
-</div>
-</div>
-   `; // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
+   editContactContainer.innerHTML = createEditContactDialogHTML(id,initial1, initial2,backgroundColor); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
 
    document.getElementById('name').value = name + ' ' + lastname;
    document.getElementById('email').value = mail;

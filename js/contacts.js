@@ -85,23 +85,6 @@ function generateDarkColor() {
    return `rgb(${r}, ${g}, ${b})`;
 }
 
-/*
-contcat = []
-
-contact[5]=alsfjslkjf
-contcat[1]=Was anderes
-
-for (i=0;i<blur.len; i++) ;
-for (contact of contacts) {
-
-}
-
-saveContacts("Contacts/" + id)
-contacts=loadContacts("Contacts/" + id)
-*/
-
-
-
 /**
  * Neuen Kontakt erstellen
  */
@@ -142,7 +125,6 @@ function getNewId(contacts) {
    if (contacts.length === 0) {
       return 1; // Startet bei 1, wenn keine Kontakte vorhanden sind
    }
-
    let maxId = contacts.reduce((max, contact) => {
       // Prüfe, ob die ID gültig ist und größer als der aktuelle maxId
       if (contact && typeof contact.id === 'number' && contact.id > max) {
@@ -150,7 +132,6 @@ function getNewId(contacts) {
       }
       return max;
    }, 0);
-
    return maxId + 1; // Erhöhe die höchste ID um 1
 }
 
@@ -172,56 +153,23 @@ function changeBgColor(id) {
 function showSingleContact(id) {
    changeBgColor(id);
    let index = getCurrentContact(id);
-   let name = contacts[index].name;
-   let lastname = contacts[index].lastname;
-   let mail = contacts[index].email;
-   let phone = contacts[index].phone;
-   let initial1 = Array.from(name)[0].toUpperCase();
-   let initial2 = Array.from(lastname)[0].toUpperCase();
-   let backgroundColor = contacts[index].color;
-
+   let singleContactArray = createSingleContactArray(index)
    document.getElementById('contactDetail').innerHTML = '';
-   document.getElementById('contactDetail').innerHTML = /*html*/ `
-    <div class="name">
-      <div class="detailMonogramContainer">
-        <span class="detailMonogramSpan" style="background-color: ${backgroundColor}">${initial1}${initial2}</span>
-      </div>
-        <div class="fullNameAndButtons">
-         	<div class="fullname">
-               <span>${name} ${lastname}</span>
-            </div>
-          <div class="editButtons">
-            <div onclick="openEditContactDialog(${id})" class="editButton">
-               <div></div>
-               <span>Edit</span>
-            </div>
-            <div onclick="deleteContact(${id})" class="trashButton">
-               <div></div>
-               <span>Delete</span>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-      <div class="contactInformation">
-         <span>Contact Information</span>
-      </div>
-      <div class="emailAndPhone">
-         <div class="emailAdressContainer">
-            <span class="spanHeading">Email</span>
-            <span class="emailSpan">${mail}</span>
-         </div>
-         <div class="phoneNumberContainer">
-            <span class="spanHeading">Phone</span>
-            <span class="phoneSpan">${phone}</span>
-         </div>
-      </div>
-
-    </div>
-    `;
-
+   document.getElementById('contactDetail').innerHTML = createSingleContactHTML(singleContactArray, index) ;
    console.log(id);
+}
 
+function createSingleContactArray(index) {
+   let singleContactArray = {
+      name : contacts[index].name,
+      lastname : contacts[index].lastname,
+      mail : contacts[index].email,
+      phone : contacts[index].phone,
+      initial1 : Array.from(contacts[index].name)[0].toUpperCase(),
+      initial2 : Array.from(contacts[index].lastname)[0].toUpperCase(),
+      backgroundColor : contacts[index].color,
+   }  
+   return singleContactArray;
 }
 
 async function deleteContact(id) {

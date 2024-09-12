@@ -194,7 +194,7 @@ function findContact(id) {
 
 /**
  *
- * creates a contact form
+ * creates a contact form to add a new contact
  */
 function openCreateContactDialog() {
    let dialogBackground = document.getElementById('dialogBackground');
@@ -207,16 +207,22 @@ function openCreateContactDialog() {
    addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
 }
 
+/**
+ * 
+ * abort add new contact and close dialog window
+ */
 function closeContactCreation() {
-   // addContactContainer.style.cssText = 'animation: slideOut .5s ease; animation-fill-mode: forwards;';
-   // setTimeout(() => {
    document.getElementById('dialogBackground').classList.add('displayNone');
    document.getElementById('dialogBackground').classList.remove('displayFlex');
    document.getElementById('body').classList.remove('overflowHidden');
-   // }, 500);
-
 }
 
+/**
+ * 
+ * prevent close dialog by click buttons or input fields
+ * 
+ * @param {click} event 
+ */
 function dontClose(event) {
    event.stopPropagation();
 }

@@ -66,3 +66,53 @@ function createSingleContactHTML(singleContactArray, id) {
     </div>
     `
 }
+
+function addContactHTML() {
+   return /*html*/ `
+      <div class="addContactLogoContainer">
+         <div>
+            <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
+            <h1>Add contact</h1>
+            <span>Tasks are better with a team!</span>
+            <div class="vector5"></div>
+            <div class="contactLogo"></div>
+         </div>
+      </div>
+      <div class="addContactInputContainer">
+         <div class="emptyMonogram">
+            <img src="./assets/img/desktop/empty_user.svg" alt="">
+         </div>
+         <div class="addContactInputContainer2">
+            <div class="close" onclick="closeContactCreation()">
+               <img src="/assets/img/desktop/close.svg" alt="">
+            </div>
+            <form class="form-input" onsubmit="addNewContact();return false;">
+               <div id="input-field-container" class="input-container">
+                  <input id="name" type="text" required placeholder="Name">
+                  <span class="icon"  ><img src="./assets/img/desktop/person.svg"></span>       
+               </div>
+               <div id="input-field-container" class="input-container">
+                  <input id="email" type="email" required placeholder="Email">
+                  <span class="icon"  ><img src="./assets/img/desktop/letter.svg"></span>   
+               </div>
+               <div id="input-field-container" class="input-container">
+                  <input id="phone" type="number" required placeholder="Phone">
+                  <span class="icon"  ><img src="./assets/img/desktop/phone.svg"></span>   
+               </div>
+               <div class="buttons">
+                  <div class="cancelButton" onclick="closeContactCreation()">
+                     <span>Cancel </span>
+                     <div class="cancelSVGContainer">
+                     </div>    
+                  </div>
+                  <button class="createContactButton" type="submit">
+                     <span>Create contact</span>
+                     <div class="checkSVGContainer">
+                     </div>
+                  </button>
+               </div>
+            </form>
+         </div>
+      </div>
+    `
+}

@@ -15,54 +15,62 @@ async function fetchTasks() {
 
    if (tasks) {
       console.log('Aufgaben erfolgreich geladen:', tasks);
-      getTodoData(tasks);
-      getInProgressData(tasks);
-      getAwaitFeedbackData(tasks);
-      getDoneData(tasks);
+      addContainerData(tasks,'to-do');
+      addContainerData(tasks,'in-progress');
+      addContainerData(tasks,'await-feedback');
+      addContainerData(tasks,'done');
+      
    } else {
       console.log('Es sind keine Aufgaben vorhanden');
    }
 }
 
-function getTodoData(tasks) {
-   let task = tasks.filter((t) => t['status'] == 'to-do');
-   let todoContainer = document.getElementById('todo-container');
-   todoContainer.innerHTML = '';
+function getTaskOutput(task) {
+   // !! What is the counter for Subtasks, subtasks done is missing
+   // subDone=task.subtask.filter(e => e.done==false).length;
+   subDone=task.subtasks/2;
+
+   // !!! headline is missing in database
+   task.headline="Kochwelt Page & Recipe Recommender";
+
+   //Now begin
+   return /*html*/`
+      <div class="card user-story" id="task-${task.id}" draggable="true" ondragstart="drag(event)">
+            <h1>${task.category}</h1>
+            <div class="mbb-text">
+               <h1>${task.headline}</h1>
+               <span>${task.description}</span>
+            </div>
+            <div class="progress-container">
+               <div class="progress-bar">
+                  <div id="progress" class="progress" style="width:${subDone*100/task.subtasks.length}}%"></div>
+               </div>
+               <span>${subDone}/${task.subtasks.length} Subtasks</span>
+            </div>
+            <div class="mbb-icons">
+               <div class="monogram"><!-- monograms-->
+                  <div style="background-color: green;">FF</div>
+                  <div style="background-color: aqua;">QQ</div>
+                  <div style="background-color: blue;">ZZ</div>
+               </div>
+               <div class="icon-prio-${task.prio}"><!-- prio -->
+
+               </div>
+
+            </div>
+      </div>
+   `;
+
+}
+
+function addContainerData(tasks,status) {
+   let task = tasks.filter((t) => t['status'] == status);
+   let container = document.getElementById(`${status}-container`);
+   container.innerHTML = '';
 
    for (let i = 0; i < task.length; i++) {
-      todoContainer.innerHTML += `<p id="task-${task[i].id}" draggable="true" ondragstart="drag(event)">${task[i].title}</p>`;
-   }
-}
-
-function getInProgressData(tasks) {
-   let inProgress = tasks.filter((t) => t['status'] == 'in-progress');
-   let inProgressContainer = document.getElementById('in-progress-container');
-   inProgressContainer.innerHTML = '';
-
-   for (let i = 0; i < inProgress.length; i++) {
-      inProgressContainer.innerHTML += `<p id="task-${inProgress[i].id}" draggable="true" ondragstart="drag(event)">${inProgress[i].title}</p>`;
-   }
-}
-
-function getAwaitFeedbackData(tasks) {
-   let awaitFeedback = tasks.filter((t) => t['status'] == 'await-feedback');
-   let awaitFeedbackContainer = document.getElementById(
-      'await-feedback-container'
-   );
-   awaitFeedbackContainer.innerHTML = '';
-
-   for (let i = 0; i < awaitFeedback.length; i++) {
-      awaitFeedbackContainer.innerHTML += `<p id="task-${awaitFeedback[i].id}" draggable="true" ondragstart="drag(event)">${awaitFeedback[i].title}</p>`;
-   }
-}
-
-function getDoneData(tasks) {
-   let done = tasks.filter((t) => t['status'] == 'done');
-   let doneContainer = document.getElementById('done-container');
-   doneContainer.innerHTML = '';
-
-   for (let i = 0; i < done.length; i++) {
-      doneContainer.innerHTML += `<p id="task-${done[i].id}" draggable="true" ondragstart="drag(event)">${done[i].title}</p>`;
+      // container.innerHTML += `<p id="task-${task[i].id}" draggable="true" ondragstart="drag(event)">${task[i].title}</p>`;
+      container.innerHTML += getTaskOutput(task[i]);
    }
 }
 

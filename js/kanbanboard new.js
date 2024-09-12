@@ -64,7 +64,8 @@ function getTaskOutput(task) {
 }
 
 function addContainerData(tasks,status) {
-   let task = tasks.filter((t) => t['status'] == status);
+   if (tasks == null) return; // if (t) necessary ?
+   let task = tasks.filter((t) => t && t['status'] == status);
    let container = document.getElementById(`${status}-container`);
    container.innerHTML = '';
 

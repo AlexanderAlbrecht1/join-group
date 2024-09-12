@@ -17,7 +17,10 @@
     min-height: 24px;
     display:flex;
     padding: 0px 64px;   
-    gap: 24px;
+    gap: 16px;
+    margin-left:-4px;
+    margin-right:4px;
+    overflow: visible;
 
 
 }
@@ -108,12 +111,10 @@
     font-size: 20px;
     font-weight: 700;
 
-    width:244px;
-    min-width: 244px;
+    width:260px;
+    min-width: 260px;
     margin-bottom: 15.5px;
     box-sizing: border-box;
-    padding-left: 5px;
-    padding-right: 5px;    
 
 }
 
@@ -157,16 +158,16 @@
     
     overflow-y:auto; /* hidden */
     height:100%;
-    background-color: blue;
+    /* background-color: blue;*/
     /* flex-grow:1; */
 
 }
 .mbb>div  {
     /* background-color: aqua; */
     /* height: fit-content;*/
-    /* display: flex; */
+    display: flex; 
     /* flex-direction:column; */
-    /* flex-grow:1; */
+    flex-grow:1;
     /* flex-basis: fit-content;*/
     /* min-height: 100%; */
 }
@@ -178,13 +179,15 @@
     flex-direction: column;
 
     box-sizing: border-box;
-    border: 0px solid gray;
+    /* border: 0px solid gray; */
     background-color: yellow;
     width: 252px;
     min-height: 100%; /*inherit-height; /* 100%; */
     flex-grow:1;
     margin: 0px;
     padding:0px;
+    gap:24px;
+    overflow-x:visible;
     /* overflow-y: auto; */
    
 
@@ -192,7 +195,7 @@
 
 .mbb .containers::before {
     box-sizing: border-box;
-    position: relative;
+    position: absolute;
     width:252px;
     height: 48px;
     transform: translate(0, 0);
@@ -210,9 +213,18 @@
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
     background-color: rgba(0, 0, 0, 0.16);
     margin-bottom:-48px;
+    z-index:0;
 }
 
+/*
+    Add this if we drop the Container somwhere 
+    Remove this if there is no Container
+*/
+.mbb .not-empty::before {
+    z-index:-1;
+}
 
+/*
 .board-wrapper {
     width: 100%;
     margin-top: 96px;
@@ -221,24 +233,37 @@
     gap: 24px;
     justify-content: center;
 }
+*/
 
 /*
     Cards
 */
-
+/* .mbb > div {
+    display: flex; 
+    flex-direction: column;
+    gap: 24px;
+} */
 .mbb .card {
     box-sizing: border-box;
     width: 252px;
     padding: 16px;
-    gap: 10px;
+    gap: 24px;
     border-radius: 24px;
     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     background: rgba(255, 255, 255, 1);
-    z-index:1;
+    z-index:5;
+    transform-origin: bottom left;
+    transition: 100ms ease-in-out;
+    cursor: pointer;
 }
-
+.mbb .card:active {
+    transform: rotate(5deg);
+}
+.rotate5 {
+    transform: rotate(5deg);
+}
 
 .mbb .card>h1 {
     display: flex;
@@ -290,6 +315,7 @@
     text-align: left;    
     color: rgba(42, 54, 71, 1);
     height: 38px;
+    margin:0;
 }
 .mbb-text span {
     display: flex;
@@ -302,37 +328,102 @@
     height: 38px;
     color: rgba(168, 168, 168, 1);
 }
-.mbb .progress {
+
+/*
+    Progressbar
+*/
+.mbb .progress-container {
     display: flex;
     flex-direction: row;   
     align-items:center; 
     height: 16px;
+
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    text-align: left;
+    gap:10px;
+    
 }
 
-.mbb .progress-bar::before {
+.mbb .progress-bar {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     width: 128px;
     height: 8px;
-    top: 4px;
-    padding: 0px 64px 0px 0px;
     gap: 10px;
     border-radius: 8px;
     background: rgba(244, 244, 244, 1);
 }
-/*
-    style 128/parts
-*/
-.mbb .progress-bar {
+
+.mbb .progress {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
     background: rgba(69, 137, 255, 1);
-    width: 64px;
+    width: 50%; /* Example */
     height: 8px;
-    border-radius: 16px 0px 0px 0px;
+    border-radius: 16px;
 }
 
+/*
+    Icons of Card on bottom
+*/
+.mbb-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height:32px;
+    min-height: 32px;
+    gap:10px;
+}
+.mbb-icons>.monogram {
+    display: flex;
+    flex-direction: row;
+}
+.mbb-icons>.monogram>div {
+    box-sizing: border-box;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right:-8px;
+    background-color: yellow; /* Example */
+    border: 1px solid #FFFFFF;
+    color:rgba(255, 255, 255, 1);
 
+
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    text-align: center;
+}
+
+.mbb-icons .icon-prio-low {
+    content: url('../assets/img/desktop/prio_low_green.svg');
+    width: 17px;
+    object-fit: contain;
+}
+
+.mbb-icons  .icon-prio-medium {
+    content: url('../assets/img/desktop/prio_medium_yellow.svg');
+    width: 17px;
+    object-fit: contain;
+}
+
+.mbb-icons .icon-prio-high {
+    content: url('../assets/img/desktop/prio_urgent_red.svg');
+    width: 17px;
+    object-fit: contain;
+}
 
 Xp:last-of-type {
     flex:1;
@@ -351,4 +442,12 @@ Xp:last-of-type {
 
 button {
     cursor: pointer;
+}
+
+
+
+p {
+    width:200px;
+    height: 100px;
+    background-color: red;
 }

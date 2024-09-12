@@ -426,7 +426,8 @@ async function saveEditedContact(id) {
    await saveContacts();
    clearInput();
    closeContactCreation();
-   displayContacts();
+   await displayContacts();
+   document.getElementById(`contact${id}`).click();
 }
 
 function createNewContactArray(id) {

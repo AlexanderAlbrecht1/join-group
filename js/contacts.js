@@ -332,10 +332,9 @@ function openEditContactDialog(id) {
    let lastname = contacts[index].lastname;
    let mail = contacts[index].email;
    let phone = contacts[index].phone;
+   let array = generateArray(id,index);
 
-   let initial1 = Array.from(name)[0].toUpperCase();
-   let initial2 = Array.from(lastname)[0].toUpperCase();
-   let backgroundColor = contacts[index].color;
+   
 
    let dialogBackground = document.getElementById('dialogBackground');
    let editContactContainer = document.getElementById('addContactContainer');
@@ -344,7 +343,7 @@ function openEditContactDialog(id) {
    dialogBackground.classList.add('displayFlex');
 
    editContactContainer.innerHTML = '';
-   editContactContainer.innerHTML = createEditContactDialogHTML(id,initial1, initial2,backgroundColor); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
+   editContactContainer.innerHTML = createEditContactDialogHTML(array); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
 
    document.getElementById('name').value = name + ' ' + lastname;
    document.getElementById('email').value = mail;
@@ -353,6 +352,24 @@ function openEditContactDialog(id) {
    editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
 
    console.log(findContact(mail));
+}
+
+/**
+ * 
+ * creates an array to pass the variables into the createHTML function
+ * 
+ * @param {number} id - unique ID for each contact
+ * @param {number} index - position in 'contacts'-object
+ * @returns - array for generate HTML
+ */
+function generateArray(id,index) {
+   let array = {
+      id : id,
+      initial1 : Array.from(contacts[index].name)[0].toUpperCase(),
+      initial2 : Array.from(contacts[index].lastname)[0].toUpperCase(),
+      backgroundColor : contacts[index].color,
+   }
+   return array;
 }
 /**
  * 

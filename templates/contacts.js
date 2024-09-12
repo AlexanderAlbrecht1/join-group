@@ -117,7 +117,7 @@ function addContactHTML() {
     `
 }
 
-function createEditContactDialogHTML(id,initial1, initial2,backgroundColor) {
+function createEditContactDialogHTML(array) {
    return /*html*/ `
         
    <div class="editContactLogoContainer" onclick="dontClose(event)">
@@ -134,7 +134,7 @@ function createEditContactDialogHTML(id,initial1, initial2,backgroundColor) {
 
 <div class="addContactInputContainer">
       <div class="detailMonogramContainer">
-            <span class="detailMonogramSpan" style="background-color: ${backgroundColor}">${initial1}${initial2}</span>
+            <span class="detailMonogramSpan" style="background-color: ${array.backgroundColor}">${array.initial1}${array.initial2}</span>
       </div>
 
     <div class="addContactInputContainer2">
@@ -158,11 +158,11 @@ function createEditContactDialogHTML(id,initial1, initial2,backgroundColor) {
         </div>
 
         <div class="editContactbuttons ">
-            <div class="deleteButton" onclick="deleteContact(${id})">
+            <div class="deleteButton" onclick="deleteContact(${array.id})">
                 <span>Delete </span>
             </div>
 
-            <button class="safeEditContactButton" onclick="saveEditedContact(${id})">
+            <button class="safeEditContactButton" onclick="saveEditedContact(${array.id})">
                 <span>Safe</span>
                 <div class="checkSVGContainer">
                 </div>

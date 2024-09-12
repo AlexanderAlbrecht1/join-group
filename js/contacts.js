@@ -326,32 +326,48 @@ async function initContactList() {
 }
 function openEditContactDialog(id) {
    let index = getCurrentContact(id);
-   // console.log(index);
-   
-   let name = contacts[index].name;
-   let lastname = contacts[index].lastname;
-   let mail = contacts[index].email;
-   let phone = contacts[index].phone;
+   let inventoryData = generateInventoryDataArray(index);
    let array = generateArray(id,index);
-
-   
-
    let dialogBackground = document.getElementById('dialogBackground');
    let editContactContainer = document.getElementById('addContactContainer');
    document.getElementById('body').classList.add('overflowHidden');
    dialogBackground.classList.remove('displayNone');
    dialogBackground.classList.add('displayFlex');
-
    editContactContainer.innerHTML = '';
    editContactContainer.innerHTML = createEditContactDialogHTML(array); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
-
-   document.getElementById('name').value = name + ' ' + lastname;
-   document.getElementById('email').value = mail;
-   document.getElementById('phone').value = phone;
-
+   preFilledInputs(inventoryData);
    editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
+}
 
-   console.log(findContact(mail));
+
+/**
+ * 
+ * writes the loaded data into the input fields
+ * 
+ * @param {array} inventoryData 
+ */
+function preFilledInputs(inventoryData) {
+   document.getElementById('name').value = inventoryData.name + ' ' + inventoryData.lastname;
+   document.getElementById('email').value = inventoryData.mail;
+   document.getElementById('phone').value = inventoryData.phone;
+}
+
+/**
+ * 
+ * creates an array with the existing data
+ * 
+ * @param {number} index - position in 'contacts'-object
+ * @returns - array for pre-filled input fields
+ */
+
+function generateInventoryDataArray(index) {
+   let inventoryData = {
+   name : contacts[index].name,
+   lastname : contacts[index].lastname,
+   mail : contacts[index].email,
+   phone : contacts[index].phone,
+   }
+   return inventoryData;
 }
 
 /**

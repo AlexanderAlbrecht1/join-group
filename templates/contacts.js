@@ -10,16 +10,16 @@ function generateGroupLetterHTML(letter) {
       `
 }
 
-function generateDisplayContactsHTML(contact) {
+function generateDisplayContactsHTML(contactArray,initial1,initial2) {
     return /*html*/ `
-            <div onclick="showSingleContact(${contact.ID})" class="contact" id="contact${contact.ID}">
-                 <div class="monogrammicon" style="background-color: ${contact.backgroundColor}">
-                    <span>${contact.initial1}${contact.initial2}</span>
+            <div onclick="showSingleContact(${contactArray.ID})" class="contact" id="contact${contactArray.ID}">
+                 <div class="monogrammicon" style="background-color: ${contactArray.backgroundColor}">
+                    <span>${initial1}${initial2}</span>
                 </div>
                 <div class="nameAndMail">
-                    <span class="nameOverviev">${contact.name} ${contact.lastname}</span>
+                    <span class="nameOverviev">${contactArray.name} ${contactArray.lastname}</span>
                      <div class="mailOverviewContainer">
-                        <span class="mailOverview">${contact.mail}</span>
+                        <span class="mailOverview">${contactArray.mail}</span>
                      </div>
                 </div>
             </div>

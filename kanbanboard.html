@@ -99,12 +99,20 @@
 
 
 
-
+<!-- 
+            <div class="containers" id="to-do-container" 
+            ondrop="drop(event, 'to-do')"
+            ondragover="allowDrop(event)"
+            ondragleave="alert('leave')"
+            ondragenter="alert('Enter');toggleTaskContainer()">
+ -->
 
             <div class="mbb">
                 <div>
-                    <div class="containers not-empty" id="to-do-container" ondrop="drop(event, 'to-do')"
+                    <div class="containers" id="to-do-container" 
+                        ondrop="drop(event, 'in-progress')"
                         ondragover="allowDrop(event)">
+<!--                         
                         <div class="card user-story" id="task-1" draggable="true" ondragstart="drag(event)">
                             <h1>User Story</h1>
                             <div class="mbb-text">
@@ -118,12 +126,12 @@
                                 <span>1/2 Subtasks</span>
                             </div>
                             <div class="mbb-icons">
-                                <div class="monogram"><!-- monograms-->
+                                <div class="monogram"><!-- monograms-- >
                                     <div style="background-color: green;">FF</div>
                                     <div style="background-color: aqua;">QQ</div>
                                     <div style="background-color: blue;">ZZ</div>
                                 </div>
-                                <div class="icon-prio-low"><!-- prio -->
+                                <div class="icon-prio-low"><!-- prio -- >
 
                                 </div>
 
@@ -144,29 +152,29 @@
                                 <span>1/2 Subtasks</span>
                             </div>
                             <div class="mbb-icons">
-                                <div class="monogram"><!-- monograms-->
+                                <div class="monogram"><!-- monograms-- >
                                     <div style="background-color: green;">FF</div>
                                     <div style="background-color: aqua;">QQ</div>
                                     <div style="background-color: blue;">ZZ</div>
                                 </div>
-                                <div class="icon-prio-low"><!-- prio -->
+                                <div class="icon-prio-low"><!-- prio -- >
 
                                 </div>
 
                             </div>
                         </div>
 
-
+                    -->
                     </div>
                 </div>
 
                 <div>
-                    <div class="containers not-empty" id="in-progress-container" ondrop="drop(event, 'in-progress')"
+                    <div class="containers" id="in-progress-container" ondrop="drop(event, 'in-progress')"
                         ondragover="allowDrop(event)">
-                        <div class="card technical-task">
+                        <!-- <div class="card technical-task">
                             <h1></h1>
                             <p>Test</p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -174,7 +182,7 @@
                     <div class="containers" id="await-feedback-container" ondrop="drop(event, 'await-feedback')"
                         ondragover="allowDrop(event)">
 
-                        <p>Test</p>
+                        <!-- <p>Test</p> -->
                     </div>
                 </div>
 

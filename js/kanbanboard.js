@@ -1,4 +1,5 @@
 let tasks = [];
+let isDragging=false;
 
 function init() {
    fetchTasks();
@@ -68,22 +69,51 @@ function addContainerData(tasks,status) {
    let container = document.getElementById(`${status}-container`);
    container.innerHTML = '';
 
+   /*
    for (let i = 0; i < task.length; i++) {
-      // container.innerHTML += `<p id="task-${task[i].id}" draggable="true" ondragstart="drag(event)">${task[i].title}</p>`;
       container.innerHTML += getTaskOutput(task[i]);
    }
+      */
+   for (let i = 0; i < task.length; i++) {
+      container.innerHTML += getTaskOutput(task[i]);
+   }
+   if (task.length >0)  container.classList.add("hidden");
+
 }
 
 function allowDrop(ev) {
    ev.preventDefault();
 }
 
+function hideNoTaskInfo(e) {
+   let parent=e.target.parentElement;
+   if (parent.childElementCount == 1) {
+      parent.classList.remove("hidden");
+   }
+}
+
+function toggleBorderTaskContainer(e) {
+   let parent=e.target.parentElement;
+   parent.classList.toggle("task-border");
+}
+
+
 function drag(ev) {
    ev.dataTransfer.setData('text', ev.target.id);
+   hideNoTaskInfo(ev);
+   // toggleBorderTaskContainer(ev);
+   isDragging=true;
+}
+function resizeContainer() {
+   let psc= (document.querySelector(".mbb").scrollHeight-100)+"px";
+   document.getElementById("to-do-container").style.height=psc;
+   document.getElementById("in-progress-container").style.height=psc;
+   document.getElementById("await-feedback-container").style.height=psc;
+   document.getElementById("done-container").style.height=psc;
 }
 
 function drop(ev, status) {
-   ev.preventDefault();
+  // ev.preventDefault();
    let data = ev.dataTransfer.getData('text');
    let id = data.split('-');
    let convertedId = Number(id[1]);
@@ -92,5 +122,10 @@ function drop(ev, status) {
    saveData('taskstorage', tasks);
    if (ev.target.classList.contains('containers')) {
       ev.target.appendChild(document.getElementById(data));
+      ev.target.classList.add("hidden");
    }
+   resizeContainer();
+   isDragging=false;
 }
+
+// function toggleDa

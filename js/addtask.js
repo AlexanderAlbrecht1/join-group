@@ -1,8 +1,8 @@
 let tasks = [];
 let subtasks = [];
 
- async function addNewTask() {
-    showRequiredText();
+async function addNewTask() {
+   showRequiredText();
 
    if (!showRequiredText()) {
       return;
@@ -21,7 +21,6 @@ let subtasks = [];
 
    if (tasks === null) {
       tasks = [];
-
    }
    tasks.push({
       id: tasks.length,
@@ -37,7 +36,6 @@ let subtasks = [];
    await saveData("taskstorage", tasks);
    clearTaskInputs();
    openKanbanboard();
-
 }
 
 function clearTaskInputs() {
@@ -53,14 +51,12 @@ function clearTaskInputs() {
       } else {
          radio.checked = false;
       }
-   }
-)
+   });
    document.getElementById("category").selectedIndex = 0;
    subtasks = [];
    document.getElementById("subtask-list").innerHTML = "";
    return;
 }
-
 
 let expanded = false;
 
@@ -71,7 +67,7 @@ function showCheckboxes() {
       expanded = true;
    } else {
       checkboxes.style.display = "none";
-      expanded = false;
+      expanded = false
    }
 }
 
@@ -99,7 +95,6 @@ function addSubtasks() {
 }
 
 function renderSubtasks(subtaskList) {
-
    subtaskList.innerHTML = "";
 
    for (let i = 0; i < subtasks.length; i++) {
@@ -116,20 +111,19 @@ function renderSubtasks(subtaskList) {
 function deleteSubtask(i) {
    let subtaskList = document.getElementById("subtask-list");
    let subtaskEditInput = document.getElementById("subtask-edit-input");
-   let subtaskEditCon = document.getElementById('edit-input-con');
+   let subtaskEditCon = document.getElementById("edit-input-con");
 
-   subtasks.splice(i,1);
-   subtaskEditCon.classList.add('d-none');
+   subtasks.splice(i, 1);
+   subtaskEditCon.classList.add("d-none");
    renderSubtasks(subtaskList);
    subtaskEditInput.value = "";
-
 }
 
 function editSubtask(index) {
    let subtaskEditInput = document.getElementById("subtask-edit-input");
-   let subtaskEditCon = document.getElementById('edit-input-con');
+   let subtaskEditCon = document.getElementById("edit-input-con");
 
-   subtaskEditCon.classList.remove('d-none');
+   subtaskEditCon.classList.remove("d-none");
    subtaskEditInput.value = subtasks[index];
    currentEditIndex = index;
 }
@@ -137,11 +131,11 @@ function editSubtask(index) {
 function saveEditedSubtask() {
    let subtaskEditInput = document.getElementById("subtask-edit-input");
    let subtaskList = document.getElementById("subtask-list");
-   let subtaskEditCon = document.getElementById('edit-input-con');
+   let subtaskEditCon = document.getElementById("edit-input-con");
 
    if (currentEditIndex !== null && subtaskEditInput.value !== "") {
       subtasks[currentEditIndex] = subtaskEditInput.value;
-      subtaskEditCon.classList.add('d-none');
+      subtaskEditCon.classList.add("d-none");
       renderSubtasks(subtaskList);
       currentEditIndex = null;
       subtaskEditInput.value = "";
@@ -150,64 +144,69 @@ function saveEditedSubtask() {
 
 async function openKanbanboard() {
    await msgfly();
-      window.location = ("./kanbanboard.html");
-     
+   window.location = "./kanbanboard.html";
+}
+
+function showRequiredText() {
+   let title = document.getElementById("title");
+   let titleSpan = document.getElementById("title-span");
+   let dueDate = document.getElementById("due-date");
+   let dueDateSpan = document.getElementById("due-date-span");
+   let category = document.getElementById("category");
+   let categoryBox = document.getElementById("select-box");
+   let categorySpan = document.getElementById("category-span");
+
+   if (!title.value) {
+      titleSpan.classList.remove("d-none");
+      title.style.border = "1px solid red";
+   } else {
+      titleSpan.classList.add("d-none");
+      title.style.border = "1px solid #d1d1d1";
    }
 
-
-
-   function showRequiredText() {
-      let title = document.getElementById("title");
-      let titleSpan = document.getElementById('title-span');
-      let dueDate = document.getElementById("due-date");
-      let dueDateSpan = document.getElementById("due-date-span");
-      let category = document.getElementById("category");
-      let categoryBox = document.getElementById('select-box');
-      let categorySpan = document.getElementById("category-span");
-   
-      if (!title.value) {
-        titleSpan.classList.remove('d-none');
-        title.style.border = "1px solid red";
-      } else {
-          titleSpan.classList.add('d-none');
-          title.style.border = '1px solid #d1d1d1';
-      }
-   
-      if (!dueDate.value) {
-           dueDateSpan.classList.remove('d-none');
-           dueDate.style.border = "1px solid red";
-      } else {
-         dueDateSpan.classList.add('d-none');
-      }
-   
-      if (!category.value) {
-          categorySpan.classList.remove('d-none');
-          categoryBox.style.border = '1px solid red';
-          return;
-      } else {
-         categorySpan.classList.add('d-none');
-      }
- 
-      return true;
-
+   if (!dueDate.value) {
+      dueDateSpan.classList.remove("d-none");
+      dueDate.style.border = "1px solid red";
+   } else {
+      dueDateSpan.classList.add("d-none");
    }
 
+   if (!category.value) {
+      categorySpan.classList.remove("d-none");
+      categoryBox.style.border = "1px solid red";
+      return;
+   } else {
+      categorySpan.classList.add("d-none");
+   }
 
-   function toggleIcon() {
-      const subtaskInput = document.getElementById('subtasks');
-      const checkIcon = document.getElementById('subtask-icon');
-      const clearIcon = document.getElementById('add-subtask-clear');
-      
-      if (subtaskInput.value == "") {
-          checkIcon.src = './assets/img/desktop/add_subtask.svg';  // Ersetze das Icon mit einem anderen Bild
-          clearIcon.classList.add('hidden')
-      } else {
-          checkIcon.src = './assets/img/desktop/add-subtask-check.svg';
-          clearIcon.classList.remove('hidden')  // Setze das ursprüngliche Icon zurück
-      }
-  }
-   
-  function clearSubtaskInput() {
-    document.getElementById('subtasks').value = "";
+   return true;
+}
 
-  }
+function toggleIcon() {
+   const subtaskInput = document.getElementById("subtasks");
+   const checkIcon = document.getElementById("subtask-icon");
+   const clearIcon = document.getElementById("add-subtask-clear");
+
+   if (subtaskInput.value == "") {
+      checkIcon.src = "./assets/img/desktop/add_subtask.svg"; // Ersetze das Icon mit einem anderen Bild
+      clearIcon.classList.add("hidden");
+   } else {
+      checkIcon.src = "./assets/img/desktop/add-subtask-check.svg";
+      clearIcon.classList.remove("hidden"); // Setze das ursprüngliche Icon zurück
+   }
+}
+
+function clearSubtaskInput() {
+   document.getElementById("subtasks").value = "";
+}
+
+window.addEventListener("mouseup", function (event) {
+   let checkboxes = document.getElementById("checkboxes");
+   let selectBox = document.querySelector('.selectBox');
+
+   // Falls die Checkboxes sichtbar sind und man außerhalb klickt
+   if (expanded && !checkboxes.contains(event.target) && !selectBox.contains(event.target)) {
+       checkboxes.style.display = "none";
+       expanded = false;
+   }
+});

@@ -32,7 +32,6 @@ async function displayContacts() {
          let initial1 = Array.from(contacts[i].name)[0].toUpperCase();
          let initial2 = Array.from(contacts[i].lastname)[0].toUpperCase();
          let contactArray = createContactArray(contact, i);
-
          document.getElementById('showContacts').innerHTML += generateDisplayContactsHTML(contactArray,initial1,initial2);
       }
    }
@@ -180,6 +179,24 @@ async function deleteContact(id) {
    await saveContacts();
    displayContacts();
    closeContactCreation();
+}
+
+async function deleteContactFromTask(id) {
+  let taskStorage = await loadData("taskstorage");
+  console.log(taskStorage);
+  let sadUser = findContactInTasks(taskStorage,14);
+  console.log(sadUser);
+}
+
+function findContactInTasks(taskStorage,id) {
+   for (let i = 0; i < taskStorage.length; i++) {
+      for (let x = 0; x < taskStorage[i].assignedTo.length; x++) {
+         if (taskStorage[i].assignedTo[x] == Number(`${id}`)) {
+            return i;  
+         }
+      }
+   }
+   return null;
 }
 
 //return contacts.findIndex(e => e.email === name); sollte auch gehen :), dann ist der NOT Found wert -1  (Jörg)

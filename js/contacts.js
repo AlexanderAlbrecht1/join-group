@@ -328,17 +328,25 @@ function openEditContactDialog(id) {
    let index = getCurrentContact(id);
    let inventoryData = generateInventoryDataArray(index);
    let array = generateArray(id,index);
-   let dialogBackground = document.getElementById('dialogBackground');
+   showHiddenDialog();
    let editContactContainer = document.getElementById('addContactContainer');
-   document.getElementById('body').classList.add('overflowHidden');
-   dialogBackground.classList.remove('displayNone');
-   dialogBackground.classList.add('displayFlex');
    editContactContainer.innerHTML = '';
    editContactContainer.innerHTML = createEditContactDialogHTML(array); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
    preFilledInputs(inventoryData);
    editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
 }
 
+/**
+ * 
+ * hidden dialog container becomes visible
+ */
+
+function showHiddenDialog() {
+   let dialogBackground = document.getElementById('dialogBackground');
+   document.getElementById('body').classList.add('overflowHidden');
+   dialogBackground.classList.remove('displayNone');
+   dialogBackground.classList.add('displayFlex');
+}
 
 /**
  * 

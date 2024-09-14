@@ -210,3 +210,17 @@ window.addEventListener("mouseup", function (event) {
        expanded = false;
    }
 });
+
+function toggleCheckbox(divElement) {
+   const checkbox = divElement.querySelector('input[type="checkbox"]');
+   
+   checkbox.checked = !checkbox.checked;
+
+   if (checkbox.checked) {
+       divElement.style.backgroundColor = '#2A3647';
+       divElement.style.color = 'white';
+   } else {
+       divElement.style.backgroundColor = '';
+       divElement.style.color = ''
+   }
+}

@@ -33,5 +33,8 @@
 
 .custom-checkbox input:checked + .checkbox-image {
     background-image: url('../assets/img/desktop/checked.svg'); /* Bild für die aktivierte Checkbox */
+    background-color: white;
+    border-radius: 50% !important;
 }
+
 

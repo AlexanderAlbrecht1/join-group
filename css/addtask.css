@@ -303,9 +303,19 @@ textarea {
    align-items: center;
    justify-content: space-between;
    flex-direction: row;
+   margin-bottom: 4px;
    gap: 8px;
+   border-radius: 10px;
+   padding: 7px 16px 7px 16px;
    overflow: hidden;
+   cursor: pointer;
 }
+
+.contact-checkbox:hover{
+   background-color: #091931;
+   color: white;
+}
+
 
 .contact-checkbox > div {
    display: flex;
@@ -399,4 +409,8 @@ textarea {
 li {
    cursor: pointer;
    user-select: none;
+}
+
+.checkedBg {
+   background: url('/assets/img/desktop/checked-add-task.svg')
 }

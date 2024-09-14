@@ -296,15 +296,19 @@ function sortContacts(contacts) {
 function getHTMLContactSelection(contact) {
    let name = contact.name + ' ' + contact.lastname;
    return `
-         <div class="contact-checkbox">
-         <div>
-            <div class="monogrammicon" style="background-color: ${contact.color}">
-            ${getMonogram(name)}
-            </div>
-             ${name}</div>
-    <label class="custom-checkbox"><input type="checkbox" name="assign" value="${contact.id
-      }" /><span class="checkbox-image"></span></label></div>
-    `;
+   <div class="contact-checkbox" onclick="toggleCheckbox(this)">
+       <div>
+           <div class="monogrammicon" style="background-color: ${contact.color}">
+               ${getMonogram(name)}
+           </div>
+           ${name}
+       </div>
+       <label class="custom-checkbox">
+           <input type="checkbox" name="assign" value="${contact.id}" />
+           <span class="checkbox-image"></span>
+       </label>
+   </div>
+`;
 }
 
 /**

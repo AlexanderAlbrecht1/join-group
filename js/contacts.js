@@ -26,23 +26,23 @@ async function displayContacts() {
    }, {});
 
    for (let [letter, contacts] of Object.entries(groupedContacts)) {
-      document.getElementById('showContacts').innerHTML += generateGroupLetterHTML(letter) ;
+      document.getElementById('showContacts').innerHTML += generateGroupLetterHTML(letter);
       for (let i = 0; i < contacts.length; i++) {
          let contact = contacts[i];
-         let contactArray = createContactArray(contact,i);
-         document.getElementById('showContacts').innerHTML += generateDisplayContactsHTML(contactArray);
+         let initial1 = Array.from(contacts[i].name)[0].toUpperCase();
+         let initial2 = Array.from(contacts[i].lastname)[0].toUpperCase();
+         let contactArray = createContactArray(contact, i);
+         document.getElementById('showContacts').innerHTML += generateDisplayContactsHTML(contactArray,initial1,initial2);
       }
    }
 }
 
-function createContactArray(contact,i) {
+function createContactArray(contact, i) {
    let contactArray = {
       ID: contact.id,
       name: contact.name,
       lastname: contact.lastname,
       mail: contact.email,
-      initial1: Array.from(contacts[i].name)[0].toUpperCase(),
-      initial2: Array.from(contacts[i].lastname)[0].toUpperCase(),
       backgroundColor: contact.color,
    }
    return contactArray;
@@ -155,20 +155,20 @@ function showSingleContact(id) {
    let index = getCurrentContact(id);
    let singleContactArray = createSingleContactArray(index)
    document.getElementById('contactDetail').innerHTML = '';
-   document.getElementById('contactDetail').innerHTML = createSingleContactHTML(singleContactArray, id) ;
+   document.getElementById('contactDetail').innerHTML = createSingleContactHTML(singleContactArray, id);
    console.log(id);
 }
 
 function createSingleContactArray(index) {
    let singleContactArray = {
-      name : contacts[index].name,
-      lastname : contacts[index].lastname,
-      mail : contacts[index].email,
-      phone : contacts[index].phone,
-      initial1 : Array.from(contacts[index].name)[0].toUpperCase(),
-      initial2 : Array.from(contacts[index].lastname)[0].toUpperCase(),
-      backgroundColor : contacts[index].color,
-   }  
+      name: contacts[index].name,
+      lastname: contacts[index].lastname,
+      mail: contacts[index].email,
+      phone: contacts[index].phone,
+      initial1: Array.from(contacts[index].name)[0].toUpperCase(),
+      initial2: Array.from(contacts[index].lastname)[0].toUpperCase(),
+      backgroundColor: contacts[index].color,
+   }
    return singleContactArray;
 }
 
@@ -179,6 +179,24 @@ async function deleteContact(id) {
    await saveContacts();
    displayContacts();
    closeContactCreation();
+}
+
+async function deleteContactFromTask(id) {
+  let taskStorage = await loadData("taskstorage");
+  console.log(taskStorage);
+  let sadUser = findContactInTasks(taskStorage,14);
+  console.log(sadUser);
+}
+
+function findContactInTasks(taskStorage,id) {
+   for (let i = 0; i < taskStorage.length; i++) {
+      for (let x = 0; x < taskStorage[i].assignedTo.length; x++) {
+         if (taskStorage[i].assignedTo[x] == Number(`${id}`)) {
+            return i;  
+         }
+      }
+   }
+   return null;
 }
 
 //return contacts.findIndex(e => e.email === name); sollte auch gehen :), dann ist der NOT Found wert -1  (Jörg)
@@ -327,7 +345,7 @@ async function initContactList() {
 function openEditContactDialog(id) {
    let index = getCurrentContact(id);
    let inventoryData = generateInventoryDataArray(index);
-   let array = generateArray(id,index);
+   let array = generateArray(id, index);
    showHiddenDialog();
    let editContactContainer = document.getElementById('addContactContainer');
    editContactContainer.innerHTML = '';
@@ -370,10 +388,10 @@ function preFilledInputs(inventoryData) {
 
 function generateInventoryDataArray(index) {
    let inventoryData = {
-   name : contacts[index].name,
-   lastname : contacts[index].lastname,
-   mail : contacts[index].email,
-   phone : contacts[index].phone,
+      name: contacts[index].name,
+      lastname: contacts[index].lastname,
+      mail: contacts[index].email,
+      phone: contacts[index].phone,
    }
    return inventoryData;
 }
@@ -386,12 +404,12 @@ function generateInventoryDataArray(index) {
  * @param {number} index - position in 'contacts'-object
  * @returns - array for generate HTML
  */
-function generateArray(id,index) {
+function generateArray(id, index) {
    let array = {
-      id : id,
-      initial1 : Array.from(contacts[index].name)[0].toUpperCase(),
-      initial2 : Array.from(contacts[index].lastname)[0].toUpperCase(),
-      backgroundColor : contacts[index].color,
+      id: id,
+      initial1: Array.from(contacts[index].name)[0].toUpperCase(),
+      initial2: Array.from(contacts[index].lastname)[0].toUpperCase(),
+      backgroundColor: contacts[index].color,
    }
    return array;
 }
@@ -409,11 +427,12 @@ async function saveEditedContact(id) {
 
    contacts.splice(index, 1);
    await saveContacts();
-   
+
    contacts.push(newContact);
    await saveContacts();
    clearInput();
    closeContactCreation();
+   // renderContactList(contacts);
    await displayContacts();
    document.getElementById(`contact${id}`).click();
 }

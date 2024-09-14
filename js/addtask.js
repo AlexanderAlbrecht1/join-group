@@ -67,7 +67,7 @@ function showCheckboxes() {
       expanded = true;
    } else {
       checkboxes.style.display = "none";
-      expanded = false
+      expanded = false;
    }
 }
 
@@ -83,7 +83,8 @@ function addSubtasks() {
 
    if (subtaskInput.value !== "") {
       subtaskList.innerHTML = "";
-      subtasks.push(subtaskInput.value);
+
+      subtasks.push({ name: subtaskInput.value, done: false });
 
       renderSubtasks(subtaskList);
 
@@ -99,7 +100,7 @@ function renderSubtasks(subtaskList) {
 
    for (let i = 0; i < subtasks.length; i++) {
       subtaskList.innerHTML += `<div id="subtask-con" class="list-item">
-                                 <li ondblclick="editSubtask(${i})">${subtasks[i]}</li>
+                                 <li ondblclick="editSubtask(${i})">${subtasks[i].name}</li>
                                  <div class="subtask-icon">
                                  <img onclick="editSubtask(${i})" src="./assets/img/desktop/subtask-edit.svg" alt="">
                                  <img onclick="deleteSubtask(${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
@@ -124,7 +125,7 @@ function editSubtask(index) {
    let subtaskEditCon = document.getElementById("edit-input-con");
 
    subtaskEditCon.classList.remove("d-none");
-   subtaskEditInput.value = subtasks[index];
+   subtaskEditInput.value = subtasks[index].name;
    currentEditIndex = index;
 }
 
@@ -134,7 +135,7 @@ function saveEditedSubtask() {
    let subtaskEditCon = document.getElementById("edit-input-con");
 
    if (currentEditIndex !== null && subtaskEditInput.value !== "") {
-      subtasks[currentEditIndex] = subtaskEditInput.value;
+      subtasks[currentEditIndex].name = subtaskEditInput.value;
       subtaskEditCon.classList.add("d-none");
       renderSubtasks(subtaskList);
       currentEditIndex = null;
@@ -202,25 +203,29 @@ function clearSubtaskInput() {
 
 window.addEventListener("mouseup", function (event) {
    let checkboxes = document.getElementById("checkboxes");
-   let selectBox = document.querySelector('.selectBox');
+   let selectBox = document.querySelector(".selectBox");
 
    // Falls die Checkboxes sichtbar sind und man außerhalb klickt
-   if (expanded && !checkboxes.contains(event.target) && !selectBox.contains(event.target)) {
-       checkboxes.style.display = "none";
-       expanded = false;
+   if (
+      expanded &&
+      !checkboxes.contains(event.target) &&
+      !selectBox.contains(event.target)
+   ) {
+      checkboxes.style.display = "none";
+      expanded = false;
    }
 });
 
 function toggleCheckbox(divElement) {
    const checkbox = divElement.querySelector('input[type="checkbox"]');
-   
+
    checkbox.checked = !checkbox.checked;
 
    if (checkbox.checked) {
-       divElement.style.backgroundColor = '#2A3647';
-       divElement.style.color = 'white';
+      divElement.style.backgroundColor = "#2A3647";
+      divElement.style.color = "white";
    } else {
-       divElement.style.backgroundColor = '';
-       divElement.style.color = ''
+      divElement.style.backgroundColor = "";
+      divElement.style.color = "";
    }
 }

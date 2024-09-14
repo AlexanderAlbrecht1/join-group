@@ -180,7 +180,7 @@
 
     box-sizing: border-box;
     /* border: 0px solid gray; */
-    background-color: yellow;
+    /* background-color: yellow; */
     width: 252px;
     min-height: 100%; /*inherit-height; /* 100%; */
     flex-grow:1;
@@ -414,7 +414,7 @@
 }
 
 .mbb-icons .icon-prio-low {
-    content: url('../assets/img/desktop/prio_low_green.svg');
+    content: url('../assets/img/desktop//prio_low_green.svg');
     width: 17px;
     object-fit: contain;
 }
@@ -425,7 +425,7 @@
     object-fit: contain;
 }
 
-.mbb-icons .icon-prio-high {
+.mbb-icons .icon-prio-urgent {
     content: url('../assets/img/desktop/prio_urgent_red.svg');
     width: 17px;
     object-fit: contain;

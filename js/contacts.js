@@ -184,19 +184,23 @@ async function deleteContact(id) {
 async function deleteContactFromTask(id) {
   let taskStorage = await loadData("taskstorage");
   console.log(taskStorage);
-  let sadUser = findContactInTasks(taskStorage,14);
+  let sadUser = findContactInTasks(taskStorage,id);
   console.log(sadUser);
+
 }
 
 function findContactInTasks(taskStorage,id) {
+   let testArray = [];
    for (let i = 0; i < taskStorage.length; i++) {
       for (let x = 0; x < taskStorage[i].assignedTo.length; x++) {
          if (taskStorage[i].assignedTo[x] == Number(`${id}`)) {
-            return i;  
+            // return [i, x];  
+            console.log(i,x);
+            testArray.push( { storage: i, assigned: x});
          }
       }
    }
-   return null;
+   return testArray;
 }
 
 //return contacts.findIndex(e => e.email === name); sollte auch gehen :), dann ist der NOT Found wert -1  (Jörg)

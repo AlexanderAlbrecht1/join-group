@@ -214,10 +214,23 @@ a {
    /* margin-bottom: 22px; */
 }
 
+.emailAdressContainer>a {
+   height: 19px;
+   font-size: 16px;
+   color: rgba(0, 124, 238, 1);
+   text-decoration: none;
+}
+
 .spanHeading {
    height: 19px;
    font-size: 16px !important;
    font-weight: 700 !important;
+}
+
+.phoneNumberContainer>a {
+   height: 19px;
+   font-size: 16px;
+   color: rgba(0, 0, 0, 1);
 }
 
 .emailspan {

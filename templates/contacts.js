@@ -55,11 +55,16 @@ function createSingleContactHTML(singleContactArray, id) {
       <div class="emailAndPhone">
          <div class="emailAdressContainer">
             <span class="spanHeading">Email</span>
+            <a href="mailto:${singleContactArray.mail}?
+                           &subject=Hello from the other side ...">
             <span class="emailSpan">${singleContactArray.mail}</span>
+            </a>
          </div>
          <div class="phoneNumberContainer">
             <span class="spanHeading">Phone</span>
+            <a href="tel:${singleContactArray.phone}">
             <span class="phoneSpan">${singleContactArray.phone}</span>
+            </a>
          </div>
       </div>
 
@@ -96,7 +101,7 @@ function addContactHTML() {
                   <span class="icon"  ><img src="./assets/img/desktop/letter.svg"></span>   
                </div>
                <div id="input-field-container" class="input-container">
-                  <input id="phone" type="number" required placeholder="Phone">
+                  <input id="phone" type="tel" pattern="[+][0-9]*" maxlength="20" placeholder="Phone">
                   <span class="icon"  ><img src="./assets/img/desktop/phone.svg"></span>   
                </div>
                <div class="buttons">
@@ -153,7 +158,7 @@ function createEditContactDialogHTML(array) {
         </div>
 
         <div id="input-field-container" class="input-container">
-            <input id="phone" type="number" required placeholder="Phone">
+            <input id="phone" type="tel" pattern="[0-9]*" maxlength="20" required placeholder="Phone">
             <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
         </div>
 

@@ -40,7 +40,7 @@ function getContacts(assigns) {
       html+=`<div style="background-color: ${contact.color};">${monogram}</div>`;
    }
    if (assigns.length>5) {
-      html+=`<div>${(assigns.length-5)}</div>`;
+      html+=`<div class="count">+${(assigns.length-5)}</div>`;
    }
    return html;
 }
@@ -48,12 +48,30 @@ function getCategoryClass(category) {
    return category.toLowerCase().replace(" ","-");
 }
 
+function getSubBar(task) {
+   let subbar="";
+   if (task.subtasks != null) {
+      let done=task.subtasks.filter(e => e.done).length;
+      subbar=`
+         <div class="progress-container">
+            <div class="progress-bar">
+               <div id="progress" class="progress" style="width:${done*100/task.subtasks.length}%"></div>
+            </div>
+            <span>${done}/${task.subtasks.length} Subtasks</span>
+         </div>
+      `;
+   }
+   return subbar;
+}
+
+
 function getTaskOutput(task) {
    // !! What is the counter for Subtasks, subtasks done is missing
    // subDone=task.subtask.filter(e => e.done==false).length;
-   let subDone=task.subtasks.length/2;
    let contacts=getContacts(task.assignedTo);
    let categoryClass=getCategoryClass(task.category);
+   let subbar=getSubBar(task);
+
    //Now begin
    return /*html*/`
       <div class="card ${categoryClass}" id="task-${task.id}" 
@@ -66,17 +84,12 @@ function getTaskOutput(task) {
                <h1>${task.title}</h1>
                <span>${task.description}</span>
             </div>
-            <div class="progress-container">
-               <div class="progress-bar">
-                  <div id="progress" class="progress" style="width:${subDone*100/task.subtasks.length}}%"></div>
-               </div>
-               <span>${subDone}/${task.subtasks.length} Subtasks</span>
-            </div>
+            ${subbar}
             <div class="mbb-icons">
                <div class="monogram"><!-- monograms-->
                   ${contacts}
                </div>
-               <div class="icon-prio-${task.prio}"><!-- prio -->
+               <div class="icon-prio-${task.prio}"> <!-- prio -->
 
                </div>
 

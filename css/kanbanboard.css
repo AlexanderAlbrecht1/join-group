@@ -423,6 +423,14 @@
     line-height: 14.4px;
     text-align: center;
 }
+.mbb-icons>.monogram>div.count {
+    color: black;
+    background-color: inherit;
+    border:none;
+    font-weight: 700;
+    margin-left:8px;
+    font-size: 14px;
+}
 
 .mbb-icons .icon-prio-low {
     content: url('../assets/img/desktop//prio_low_green.svg');
@@ -442,11 +450,6 @@
     object-fit: contain;
 }
 
-Xp:last-of-type {
-    flex:1;
-    margin-bottom: 500px;
-    overflow: hidden;
-}
 
 .d-none {
     display: none;

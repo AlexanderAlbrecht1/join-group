@@ -69,10 +69,10 @@ input {
    display: none;
    border-radius: 10px;
    padding: 10px;
-   padding-top: 68px;
+   padding-top: 10px;
    background-color: #fff;
    position: absolute;
-   top: 0px;
+   top: 55px;
    width: 420px;
    max-height: 200px;
    overflow-y: auto;
@@ -303,9 +303,19 @@ textarea {
    align-items: center;
    justify-content: space-between;
    flex-direction: row;
+   margin-bottom: 4px;
    gap: 8px;
+   border-radius: 10px;
+   padding: 7px 16px 7px 16px;
    overflow: hidden;
+   cursor: pointer;
 }
+
+.contact-checkbox:hover{
+   background-color: #091931;
+   color: white;
+}
+
 
 .contact-checkbox > div {
    display: flex;

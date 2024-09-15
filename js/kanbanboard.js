@@ -40,7 +40,7 @@ function getContacts(assigns) {
       html+=`<div style="background-color: ${contact.color};">${monogram}</div>`;
    }
    if (assigns.length>5) {
-      html+="<div>${(assigns.length-5)}</div>";
+      html+=`<div>${(assigns.length-5)}</div>`;
    }
    return html;
 }
@@ -51,7 +51,7 @@ function getCategoryClass(category) {
 function getTaskOutput(task) {
    // !! What is the counter for Subtasks, subtasks done is missing
    // subDone=task.subtask.filter(e => e.done==false).length;
-   let subDone=task.subtasks/2;
+   let subDone=task.subtasks.length/2;
    let contacts=getContacts(task.assignedTo);
    let categoryClass=getCategoryClass(task.category);
    //Now begin

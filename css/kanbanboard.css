@@ -205,7 +205,6 @@
     width:252px;
     height: 48px;
     transform: translate(0, 0);
-    content: "No tasks To do";
     font-family: Open Sans;
     font-size: 16px;
     font-weight: 400;
@@ -222,6 +221,22 @@
 
     margin-bottom:-48px;
     z-index:0;
+}
+
+.mbb #to-do-container::before {
+    content: "No tasks To do";
+}
+
+.mbb #in-progress-container::before {
+    content: "No tasks in progess";
+}
+
+.mbb #await-feedback-container::before {
+    content: "No tasks await feedback";
+}
+
+.mbb #done-container::before {
+    content: "No tasks Done";
 }
 
 /*

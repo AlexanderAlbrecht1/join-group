@@ -157,7 +157,7 @@ function showSingleContact(id) {
    let singleContactArray = createSingleContactArray(index)
    document.getElementById('contactDetail').innerHTML = '';
    document.getElementById('contactDetail').innerHTML = createSingleContactHTML(singleContactArray, id);
-   console.log(id);
+   // console.log(id);
 }
 
 function createSingleContactArray(index) {
@@ -172,6 +172,13 @@ function createSingleContactArray(index) {
    }
    return singleContactArray;
 }
+
+/**
+ * 
+ * delets choosen user from contactbook and tasks
+ * 
+ * @param {Number} id 
+ */
 
 async function deleteContact(id) {
    let index = getCurrentContact(id);

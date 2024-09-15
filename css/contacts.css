@@ -227,6 +227,12 @@ a {
    font-weight: 700 !important;
 }
 
+.phoneNumberContainer>a {
+   height: 19px;
+   font-size: 16px;
+   color: rgba(0, 0, 0, 1);
+}
+
 .emailspan {
    height: 19px;
    font-size: 16px;

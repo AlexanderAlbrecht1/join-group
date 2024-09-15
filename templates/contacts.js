@@ -62,7 +62,9 @@ function createSingleContactHTML(singleContactArray, id) {
          </div>
          <div class="phoneNumberContainer">
             <span class="spanHeading">Phone</span>
+            <a href="tel:${singleContactArray.phone}">
             <span class="phoneSpan">${singleContactArray.phone}</span>
+            </a>
          </div>
       </div>
 

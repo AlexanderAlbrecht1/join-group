@@ -44,16 +44,19 @@ function getContacts(assigns) {
    }
    return html;
 }
+function getCategoryClass(category) {
+   return category.toLowerCase().replace(" ","-");
+}
 
 function getTaskOutput(task) {
    // !! What is the counter for Subtasks, subtasks done is missing
    // subDone=task.subtask.filter(e => e.done==false).length;
    let subDone=task.subtasks/2;
    let contacts=getContacts(task.assignedTo);
-
+   let categoryClass=getCategoryClass(task.category);
    //Now begin
    return /*html*/`
-      <div class="card user-story" id="task-${task.id}" 
+      <div class="card ${categoryClass}" id="task-${task.id}" 
       draggable="true" 
       ondragstart="drag(event)"
       ondragenter="toggleBorder(event,true)"

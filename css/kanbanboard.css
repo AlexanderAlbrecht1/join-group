@@ -218,6 +218,8 @@
     border-radius: 10px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
     background-color: rgba(0, 0, 0, 0.16);
+    background-color: rgba(231, 231, 231, 1);
+
     margin-bottom:-48px;
     z-index:0;
 }
@@ -293,15 +295,9 @@
 .mbb .user-story>h1 {
     background: rgba(0, 56, 255, 1);
 }
-.mbb .user-story>h1 {
-    content: "User Story";
-}
 
 .mbb .technical-task>h1 {
     background: rgba(31, 215, 193, 1);
-}
-.mbb .technical-task>h1:before {
-    content: 'Technical Task';
 }
 
 .mbb-text {

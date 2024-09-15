@@ -17,7 +17,15 @@
 </form>
 
 <script>
+console.log("STAT");
+alert("STAT");
 
+let nestedArr = [[1, 2], [3, 4]];
+let shallowCopy = [...nestedArr];
+console.log(shallowCopy);
+shallowCopy[0][0] = 99;
+
+console.log(nestedArr[0][0]);  // 99 (tiefere Ebene ist immer noch referenziert)
 
     document.addEventListener("DOMContentLoaded", () => {
         const form = document.getElementById("login-form");

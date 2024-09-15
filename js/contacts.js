@@ -95,6 +95,7 @@ async function addNewContact() {
    let newName = document.getElementById("name");
    let newEmail = document.getElementById("email");
    let newPhone = document.getElementById("phone");
+   newPhone.value = newPhone.value.replace(/^0+/, '+49');
    let fullname = newName.value;
    let splittedName = fullname.split(' ');
    let newFirstname = splittedName[0];

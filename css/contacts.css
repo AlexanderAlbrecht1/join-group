@@ -268,7 +268,7 @@ a {
    /* height: 928px; */
    height: 100vh;
    background-color: rgba(255, 255, 255, 1);
-   padding: 32px 24px;
+   padding: 0 24px 32px 24px;
    overflow-y: scroll;
    overflow-x: hidden;
 }
@@ -777,6 +777,15 @@ a {
    background-position: center;
 }
 
+.buttonBackground {
+   display: flex;
+   width: 100%;
+   padding-top: 32px;
+   justify-content: center;
+   position: sticky;
+   top: 0px;
+   background-color: rgba(255, 255, 255);
+}
 
 
 

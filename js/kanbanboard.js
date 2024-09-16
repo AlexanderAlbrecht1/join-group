@@ -31,6 +31,7 @@ async function fetchTasks() {
 
 
 function getContacts(assigns) {
+   if (assigns == null) return "";
    let html=``;
    for(i=0;i<Math.min(assigns.length,5);i++) {
       let contact=contacts.find(e => e.id == assigns[i]);

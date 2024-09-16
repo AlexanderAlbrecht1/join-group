@@ -201,6 +201,7 @@ async function deleteContactFromTask(id) {
 
 function findContactInTasks(tasks,id) {
    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].assingnedTo == null) continue;
       for (let x = 0; x < tasks[i].assignedTo.length; x++) {
          if (tasks[i].assignedTo[x] == Number(`${id}`)) {
             console.log(i,x);

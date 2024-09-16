@@ -20,7 +20,6 @@ async function fetchTasks() {
    tasks = await loadData('taskstorage');
 
    if (tasks) {
-      console.log('Aufgaben erfolgreich geladen:', tasks);
       for(let status of statusList) {
          addContainerData(tasks,status);
       }
@@ -52,7 +51,7 @@ function getSubBar(task) {
    let subbar="";
    if (task.subtasks != null) {
       let done=task.subtasks.filter(e => e.done).length;
-      subbar=`
+      subbar=/*html*/`
          <div class="progress-container">
             <div class="progress-bar">
                <div id="progress" class="progress" style="width:${done*100/task.subtasks.length}%"></div>
@@ -66,8 +65,6 @@ function getSubBar(task) {
 
 
 function getTaskOutput(task) {
-   // !! What is the counter for Subtasks, subtasks done is missing
-   // subDone=task.subtask.filter(e => e.done==false).length;
    let contacts=getContacts(task.assignedTo);
    let categoryClass=getCategoryClass(task.category);
    let subbar=getSubBar(task);
@@ -79,21 +76,19 @@ function getTaskOutput(task) {
       ondragstart="drag(event)"
       ondragenter="toggleBorder(event,true)"
      >
-            <h1>${task.category}</h1>
-            <div class="mbb-text">
-               <h1>${task.title}</h1>
-               <span>${task.description}</span>
+         <h1>${task.category}</h1>
+         <div class="mbb-text">
+            <h1>${task.title}</h1>
+            <span>${task.description}</span>
+         </div>
+         ${subbar}
+         <div class="mbb-icons">
+            <div class="monogram"><!-- monograms-->
+               ${contacts}
             </div>
-            ${subbar}
-            <div class="mbb-icons">
-               <div class="monogram"><!-- monograms-->
-                  ${contacts}
-               </div>
-               <div class="icon-prio-${task.prio}"> <!-- prio -->
-
-               </div>
-
+            <div class="icon-prio-${task.prio}"> <!-- prio -->
             </div>
+         </div>
       </div>
    `;
 

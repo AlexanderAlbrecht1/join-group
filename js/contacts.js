@@ -1,4 +1,5 @@
 let contacts = [];
+let taskStorage =[];
 
 async function displayContacts() {
    contacts = await loadContacts();
@@ -182,26 +183,28 @@ function createSingleContactArray(index) {
 
 async function deleteContact(id) {
    let index = getCurrentContact(id);
+   tasks= await loadData("taskstorage");
    // await loadContacts();
    contacts.splice(index, 1);
    await deleteContactFromTask(id);
    await saveContacts();
+   await saveData("taskstorage",tasks)
    displayContacts();
    closeContactCreation();
 }
 
 async function deleteContactFromTask(id) {
-  let taskStorage = await loadData("taskstorage");
-  console.log(taskStorage);
-  findContactInTasks(taskStorage,id);
+//   taskStorage = await loadData("taskstorage");
+  console.log(tasks);
+  findContactInTasks(tasks,id);
 }
 
-function findContactInTasks(taskStorage,id) {
-   for (let i = 0; i < taskStorage.length; i++) {
-      for (let x = 0; x < taskStorage[i].assignedTo.length; x++) {
-         if (taskStorage[i].assignedTo[x] == Number(`${id}`)) {
+function findContactInTasks(tasks,id) {
+   for (let i = 0; i < tasks.length; i++) {
+      for (let x = 0; x < tasks[i].assignedTo.length; x++) {
+         if (tasks[i].assignedTo[x] == Number(`${id}`)) {
             console.log(i,x);
-            taskStorage[i].assignedTo.splice(x,1);
+            tasks[i].assignedTo.splice(x,1);
          }
       }
    }

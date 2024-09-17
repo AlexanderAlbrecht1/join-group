@@ -166,12 +166,29 @@ function createSingleContactArray(index) {
       name: contacts[index].name,
       lastname: contacts[index].lastname,
       mail: contacts[index].email,
-      phone: replacedPhone.slice(0, 3) + ' ' + replacedPhone.slice(3,6) + ' ' + replacedPhone.slice(6),
+      // phone: replacedPhone.slice(0, 3) + ' ' + replacedPhone.slice(3,6) + ' ' + replacedPhone.slice(6),
+      phone : formatPhoneNumber(replacedPhone),
       initial1: Array.from(contacts[index].name)[0].toUpperCase(),
       initial2: Array.from(contacts[index].lastname)[0].toUpperCase(),
       backgroundColor: contacts[index].color,
    }
    return singleContactArray;
+}
+
+function formatPhoneNumber(replacedPhone) {
+   if (replacedPhone.startsWith("+491")) {
+       
+       return replacedPhone.slice(0, 3) + ' ' + replacedPhone.slice(3,6) + ' ' + replacedPhone.slice(6);
+   }
+   if (replacedPhone.startsWith("+4930")||
+       replacedPhone.startsWith("+4940")|| 
+       replacedPhone.startsWith("+4969")|| 
+       replacedPhone.startsWith("+4989")) {
+      return replacedPhone.slice(0, 3) + ' ' + replacedPhone.slice(3,5)+ ' ' + replacedPhone.slice(5);
+   } else {
+      return replacedPhone.slice(0, 3) + ' ' + replacedPhone.slice(3);
+   }
+   return replacedPhone;
 }
 
 /**

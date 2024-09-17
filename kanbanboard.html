@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Kanbanboard</title>
         <link rel="stylesheet" href="./css/kanbanboard.css">
+        <link rel="stylesheet" href="./css/kanbanTaskView.css">
         <link rel="stylesheet" href="/styles.css">
         <!-- link rel="stylesheet" href="./css/contacts.css"-->
         <link rel="stylesheet" href="./assets/font/inter.css">
@@ -27,8 +28,68 @@
     <body onload="init()">
         <div class="relative">
             <div id="task-view" class="drive-in go">
+                <div class="task-view-card user-story">
+                    <div class="top">
+                        <div>User Story</div>
+                        <img class="exit" onclick="closeTaskView()" src="./assets/img/desktop/close.svg">
+                    </div>
+                    <h1>CSS Architecture Planning</h1>
+                    <p>Define CSS naming conventions and structure</p>
+                    <p><strong>Due Date:</strong>02/09/2023</p>
+                    <p><strong>Priority:</strong>02/09/2023<img class="icon-prio-urgent"></p>
+                    <div class="assign">
+                        <strong>Assigned to:</strong>
+                        <div>
+                            <div>
+                                <div style="background-color: #008080">SM</div>
+                                <span>Sofia Müller(You)</span>
+                            </div>
+                            <div>&nbsp;
+                            </div>
+                        </div>
 
+                        <div>
+                            <div>
+                                <div style="background-color: #008080">SM</div>
+                                <span>Sofia Müller(You)</span>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div>
+                                <div style="background-color: #4040F0">BZ</div>
+                                <span>Sofia Müller(You)</span>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="subtasks"><strong>Subtasks</strong>
+                        <div>
+                            <img src="./assets/img/desktop/checked.svg">
+                            <span>Establish CSS Methodology</span>
+                        </div>
+                        <div>
+                            <img src="./assets/img/desktop/checked.svg">
+                            <span>Setup Base Styles</span>
+                        </div>
+                    </div>
 
+                    <div class="bottom">
+                        <a>
+                            <img class="trash" src="./assets/img/desktop/trash.svg">
+                            <span>Delete</span>
+                        </a>
+                        <div></div>
+                        <a>
+                            <img class="pencil" src="./assets/img/desktop/pencil.svg">
+                            <span>edit</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         <header>

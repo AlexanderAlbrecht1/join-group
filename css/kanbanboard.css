@@ -433,19 +433,19 @@
     font-size: 14px;
 }
 
-.mbb-icons .icon-prio-low {
+.icon-prio-low {
     content: url('../assets/img/desktop//prio_low_green.svg');
     width: 17px;
     object-fit: contain;
 }
 
-.mbb-icons  .icon-prio-medium {
+.icon-prio-medium {
     content: url('../assets/img/desktop/prio_medium_yellow.svg');
     width: 17px;
     object-fit: contain;
 }
 
-.mbb-icons .icon-prio-urgent {
+.icon-prio-urgent {
     content: url('../assets/img/desktop/prio_urgent_red.svg');
     width: 17px;
     object-fit: contain;
@@ -466,13 +466,13 @@ button {
 }
 
 
-
+/*
 p {
     width:200px;
     height: 100px;
     background-color: red;
 }
-
+*/
 .mbh .buttons .icon {
     padding-left:16px;
     border-left: 1px solid rgb(209,209,209);
@@ -503,12 +503,16 @@ p {
     left:0px;
     width: 100vw;
     height: 100vh;
+    bottom: 0px;
+    left:0p;
     display: flex;
     justify-content: center;
     align-items:center;
     background-color: blue;
     z-index:5;
+    overflow: hidden;
 }
+
 .drive-in.go {
     transform: translate(100vw,0);
     transition: 600ms ease-in-out;

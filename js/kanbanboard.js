@@ -15,20 +15,27 @@ async function init() {
 //       fetchTasks();
 //    }
 // }
+function displayTasks(tasks) {
+   for(let status of statusList) {
+      addContainerData(tasks,status);
+   }
+}
 
 async function fetchTasks() {
    tasks = await loadData('taskstorage');
 
    if (tasks) {
-      for(let status of statusList) {
-         addContainerData(tasks,status);
-      }
-
+      displayTasks(tasks);
    } else {
       console.log('Es sind keine Aufgaben vorhanden');
    }
 }
 
+function filterTasks() {
+   let search=document.getElementById("find").value;
+   let filteredTasks=tasks.filter(e => e.title.includes(search) || e.description.includes(search) )
+   displayTasks(filteredTasks);
+}
 
 function getContacts(assigns) {
    if (assigns == null) return "";
@@ -103,7 +110,12 @@ function addContainerData(tasks,status) {
    for (let i = 0; i < task.length; i++) {
       container.innerHTML += getTaskOutput(task[i]);
    }
-   if (task.length >0)  container.classList.add("hidden");
+   if (task.length >0)  {
+      container.classList.add("hidden");
+   } else {
+      container.classList.remove("hidden");
+
+   }
 
 }
 

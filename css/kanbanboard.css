@@ -484,8 +484,10 @@ p {
     height: 17.58px;
     width: 17.58px;
     border-radius: 50%;
-    padding: 6px;
+    padding: 4px;
+    overflow:visible;
 }
+
 .mbh .buttons .icon img:hover {
     background-color: rgb(209,209,209);
 }

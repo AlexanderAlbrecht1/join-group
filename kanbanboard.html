@@ -61,15 +61,9 @@
                     <div class="board">Board</div>
                     <div class="buttons">
                         <div id="input-field-container" class="input-container">
-                            <input id="find" type="text"  placeholder="Find Task">
-                            <span class="icon"  ><img src="./assets/img/desktop/search.svg"></span>
+                            <input id="find" type="text"  placeholder="Find Task" oninput="filterTasks()">
+                            <span class="icon"><img src="./assets/img/desktop/search.svg"></span>
                         </div>
-
-                      <!-- <div class="find-button">
-                            <input type="text">
-                            <img src="">
-                        </div> -->
-
                         <div class="submit-button">
                             Add Task
                             <img src="">
@@ -142,42 +136,5 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-<!-- 
-
-    <div class="main-container mbc">
-
-        <div>    
-            <div>
-                <h3>To Do</h3>
-                <div class="containers" id="todo-container" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
-                </div>
-            </div>
-            <div>
-                <h3>In progress</h3>
-                <div class="containers" id="in-progress-container" ondrop="drop(event, 'in-progress')" ondragover="allowDrop(event)">
-                </div>
-            </div>
-            <div>
-                <h3>Await feedback</h3>
-                <div class="containers" id="await-feedback-container" ondrop="drop(event, 'await-feedback')" ondragover="allowDrop(event)">
-                </div>
-            </div>
-            <div>
-                <h3>Done</h3>
-                <div class="containers" id="done-container" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-                </div>
-            </div>
-        </div> 
-
-    </div> -->
-
     </body>
 </html>

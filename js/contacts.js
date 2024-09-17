@@ -96,7 +96,6 @@ async function addNewContact() {
    let newName = document.getElementById("name");
    let newEmail = document.getElementById("email");
    let newPhone = document.getElementById("phone");
-   newPhone.value = newPhone.value.replace(/^0+/, '+49');
    let fullname = newName.value;
    let splittedName = fullname.split(' ');
    let newFirstname = splittedName[0];
@@ -162,11 +161,12 @@ function showSingleContact(id) {
 }
 
 function createSingleContactArray(index) {
+   let replacedPhone = contacts[index].phone.replace(/^0+/, '+49');
    let singleContactArray = {
       name: contacts[index].name,
       lastname: contacts[index].lastname,
       mail: contacts[index].email,
-      phone: contacts[index].phone,
+      phone: replacedPhone,
       initial1: Array.from(contacts[index].name)[0].toUpperCase(),
       initial2: Array.from(contacts[index].lastname)[0].toUpperCase(),
       backgroundColor: contacts[index].color,

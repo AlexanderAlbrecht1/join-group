@@ -101,7 +101,7 @@ function addContactHTML() {
                   <span class="icon"  ><img src="./assets/img/desktop/letter.svg"></span>   
                </div>
                <div id="input-field-container" class="input-container">
-                  <input id="phone" type="tel" pattern="[+][0-9]*" maxlength="20" placeholder="Phone">
+                  <input id="phone" type="tel" pattern="[0-9]*" maxlength="20" placeholder="Phone">
                   <span class="icon"  ><img src="./assets/img/desktop/phone.svg"></span>   
                </div>
                <div class="buttons">

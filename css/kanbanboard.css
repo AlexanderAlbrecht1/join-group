@@ -90,7 +90,8 @@
 }
 
 .mbc .submit-button>img {
-    height: 48px;
+    margin-left: 8px;
+    height: 18.67px;
     object-fit: contain;
 
 }
@@ -490,4 +491,25 @@ p {
 
 .mbh .buttons .icon img:hover {
     background-color: rgb(209,209,209);
+}
+
+#input-field-container {
+    width: 312px;
+}
+
+.drive-in {
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    background-color: blue;
+    z-index:5;
+}
+.drive-in.go {
+    transform: translate(100vw,0);
+    transition: 600ms ease-in-out;
 }

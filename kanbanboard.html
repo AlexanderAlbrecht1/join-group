@@ -25,6 +25,12 @@
     </head>
 
     <body onload="init()">
+        <div class="relative">
+            <div id="task-view" class="drive-in go">
+
+
+            </div>
+        </div>
         <header>
             <div class="max-width">
                 <span>Kanban Project Management Tool</span>
@@ -62,11 +68,11 @@
                     <div class="buttons">
                         <div id="input-field-container" class="input-container">
                             <input id="find" type="text"  placeholder="Find Task" oninput="filterTasks()">
-                            <span class="icon"><img src="./assets/img/desktop/search.svg"></span>
+                            <span class="icon" onclick="filterTasks()"><img src="./assets/img/desktop/search.svg"></span>
                         </div>
                         <div class="submit-button">
                             Add Task
-                            <img src="">
+                            <img src="./assets/img/desktop/white-plus.svg">
                         </div>
                     </div>
                 </div>

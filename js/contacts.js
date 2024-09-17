@@ -166,7 +166,7 @@ function createSingleContactArray(index) {
       name: contacts[index].name,
       lastname: contacts[index].lastname,
       mail: contacts[index].email,
-      phone: replacedPhone,
+      phone: replacedPhone.slice(0, 3) + ' ' + replacedPhone.slice(3,6) + ' ' + replacedPhone.slice(6),
       initial1: Array.from(contacts[index].name)[0].toUpperCase(),
       initial2: Array.from(contacts[index].lastname)[0].toUpperCase(),
       backgroundColor: contacts[index].color,

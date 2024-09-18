@@ -1,5 +1,5 @@
 let msg = "";
-
+let user ="" ;
 
 /**
  * Logout user
@@ -63,7 +63,9 @@ async function isLoginCorrect(email, password, showmsg = true) {
    let { err, msg, focus } = validateUser(userList, email, password);
 
    if (showmsg && err) handleErrors(msg, focus);
-   
+
+   if (!err) return userList.find(e => e.email==email);
+
    return !err;
 }
 

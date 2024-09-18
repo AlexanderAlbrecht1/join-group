@@ -508,12 +508,24 @@ p {
     display: flex;
     justify-content: center;
     align-items:center;
-    background-color: blue;
-    z-index:5;
     overflow: hidden;
+    background-color: rgba(0,0,0,0.15);
+    z-index: 0;
+    opacity: 0;
+}
+
+.drive-in>.task-view-card {
+    transform: translate(100vw,0);
 }
 
 .drive-in.go {
-    transform: translate(100vw,0);
+    transition-property:opacity;
+    z-index:5;
+    opacity:1;
+    transition: 600ms ease-in-out;
+}
+
+.drive-in.go>.task-view-card {
+    transform: translate(0,0);
     transition: 600ms ease-in-out;
 }

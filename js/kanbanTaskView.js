@@ -94,7 +94,6 @@ async function openTask(event,Xid) {
     if (event.type === "dragleave") {
         return
     }
-    console.log(event.currentTarget);
     let id=event.currentTarget.id.split("-")[1];
     let json = await loadObjectDataById("taskstorage",id);
     document.getElementById("task-view-card").innerHTML=getTaskView(json[0]);

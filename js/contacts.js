@@ -69,6 +69,15 @@ function getCurrentContact(id) {
    return index;
 }
 
+function findContact(id) {
+   for (let i = 0; i < contacts.length; i++) {
+      if (contacts[i].id === id) {
+         return i;
+      }
+   }
+   return null;
+}
+
 /**
  * 
  * load contact array from Firebase
@@ -285,16 +294,7 @@ function findContactInTasks(tasks, id) {
    }
 }
 
-//return contacts.findIndex(e => e.email === name); sollte auch gehen :), dann ist der NOT Found wert -1  (Jörg)
 
-function findContact(id) {
-   for (let i = 0; i < contacts.length; i++) {
-      if (contacts[i].id === id) {
-         return i;
-      }
-   }
-   return null;
-}
 
 /**
  *

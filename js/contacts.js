@@ -1,6 +1,11 @@
 let contacts = [];
 let taskStorage = [];
 
+/**
+ * 
+ * load contacts from Firebase an renders the contact book
+ * 
+ */
 async function displayContacts() {
    contacts = await loadContacts();
    contacts = contacts.filter(
@@ -65,8 +70,12 @@ function createContactArray(contact, i) {
  * @returns 
  */
 function getCurrentContact(id) {
-   let index = findContact(id);
-   return index;
+   for (let index = 0; index < contacts.length; index++) {
+      if (contacts[index].id === id) {
+         return index;
+      }
+   }
+   return null;
 }
 
 /**
@@ -260,20 +269,14 @@ async function deleteContact(id) {
    tasks = await loadData("taskstorage");
    // await loadContacts();
    contacts.splice(index, 1);
-   await deleteContactFromTask(id);
+   await deleteContactFromTask(tasks, id);
    await saveContacts();
    await saveData("taskstorage", tasks)
    displayContacts();
    closeContactCreation();
 }
 
-async function deleteContactFromTask(id) {
-   //   taskStorage = await loadData("taskstorage");
-   console.log(tasks);
-   findContactInTasks(tasks, id);
-}
-
-function findContactInTasks(tasks, id) {
+async function deleteContactFromTask(tasks, id) {
    for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].assignedTo == null) continue;
       for (let x = 0; x < tasks[i].assignedTo.length; x++) {
@@ -283,17 +286,6 @@ function findContactInTasks(tasks, id) {
          }
       }
    }
-}
-
-//return contacts.findIndex(e => e.email === name); sollte auch gehen :), dann ist der NOT Found wert -1  (Jörg)
-
-function findContact(id) {
-   for (let i = 0; i < contacts.length; i++) {
-      if (contacts[i].id === id) {
-         return i;
-      }
-   }
-   return null;
 }
 
 /**
@@ -512,12 +504,9 @@ function generateArray(id, index) {
 async function saveEditedContact(id) {
    let index = getCurrentContact(id);
    // let color = contacts[index].color;
-
    let newContact = createNewContactArray(id);
-
    contacts.splice(index, 1);
    await saveContacts();
-
    contacts.push(newContact);
    await saveContacts();
    clearInput();
@@ -527,6 +516,13 @@ async function saveEditedContact(id) {
    document.getElementById(`contact${id}`).click();
 }
 
+/**
+ * 
+ * generates an array with new contacts infos to push it in cotancts array
+ * 
+ * @param {number} id 
+ * @returns array with new contact data
+ */
 function createNewContactArray(id) {
    let newName = document.getElementById("name");
    let newEmail = document.getElementById("email");

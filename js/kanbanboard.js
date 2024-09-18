@@ -83,6 +83,7 @@ function getTaskOutput(task) {
       draggable="true" 
       ondragstart="drag(event)"
       ondragenter="toggleBorder(event,true)"
+      onmouseup="openTask(event,${task.id})"
      >
          <h1>${task.category}</h1>
          <div class="mbb-text">

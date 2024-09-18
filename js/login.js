@@ -82,10 +82,11 @@ function clearLogin() {
 async function login() {
    let password = document.getElementById("password");
    let email = document.getElementById("email");
-
-   if (await isLoginCorrect(email.value, password.value)) {
-      sessionSave(PROJECT, { email: email.value, password: password.value });
+   user = await isLoginCorrect(email.value, password.value);
+   if ( user != null ) {
+      sessionSave(PROJECT, { email: email.value, password: password.value, username: user.user });
       rememberMe();
       openDashboard();
    }
 }
+

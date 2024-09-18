@@ -21,13 +21,15 @@
         <script src="./js/session.js"></script>
         <script src="./js/contacts.js"></script>
         <script src="./js/kanbanboard.js"></script>
+        <script src="./js/kanbanTaskView.js"></script>
+        
 
 
     </head>
 
     <body onload="init()">
         <div class="relative">
-            <div id="task-view" class="drive-in go">
+            <div id="task-view" class="drive-in">
                 <div class="task-view-card user-story">
                     <div class="top">
                         <div>User Story</div>
@@ -39,16 +41,16 @@
                     <p><strong>Priority:</strong>02/09/2023<img class="icon-prio-urgent"></p>
                     <div class="assign">
                         <strong>Assigned to:</strong>
-                        <div>
+                        <div onclick="toggleActiveKanbanTask(event)">
                             <div>
                                 <div style="background-color: #008080">SM</div>
                                 <span>Sofia Müller(You)</span>
                             </div>
-                            <div>&nbsp;
+                            <div><!-- input type="checkbox"-->
                             </div>
                         </div>
 
-                        <div>
+                        <div onclick="toggleActiveKanbanTask(event)">
                             <div>
                                 <div style="background-color: #008080">SM</div>
                                 <span>Sofia Müller(You)</span>
@@ -57,7 +59,7 @@
                             </div>
                         </div>
                         
-                        <div>
+                        <div onclick="toggleActiveKanbanTask(event)">
                             <div>
                                 <div style="background-color: #4040F0">BZ</div>
                                 <span>Sofia Müller(You)</span>
@@ -69,11 +71,11 @@
                     
                     <div class="subtasks"><strong>Subtasks</strong>
                         <div>
-                            <img src="./assets/img/desktop/checked.svg">
+                            <img onclick="toggleSubtaskStateEvent(event,4,1)" src="./assets/img/desktop/checked.svg">
                             <span>Establish CSS Methodology</span>
                         </div>
                         <div>
-                            <img src="./assets/img/desktop/checked.svg">
+                            <img onclick="toggleSubtaskStateEvent(event)" src="./assets/img/desktop/unchecked.svg">
                             <span>Setup Base Styles</span>
                         </div>
                     </div>

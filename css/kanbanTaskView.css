@@ -96,6 +96,7 @@
     gap: 4px;
 }
 
+
 .task-view-card .assign>div {
     display: flex;
     flex-direction: row;
@@ -104,7 +105,21 @@
     gap: 0px;
     border-radius: 10px;
     justify-content: space-between;
+    cursor: pointer;
 }
+.task-view-card .assign>div:hover {
+    background: rgba(231, 231, 231, 1);
+}
+
+.task-view-card .assign>.dark-selection {
+    background-color: rgba(42, 54, 71, 1);
+    color: rgba(205, 205, 205, 1)
+}
+.task-view-card .assign>.dark-selection:hover {
+    background-color: rgba(9, 25, 49, 1);   
+}
+
+
 .task-view-card .assign>div>div {
     gap: 16px;
     display:flex;
@@ -144,13 +159,29 @@
     align-items: center;
     gap: 16px;
     padding: 6px 16px;
+    border-radius: 10px;
+
 }
 
+.task-view-card .subtasks>div:hover {
+    background: rgba(231, 231, 231, 1);
+}
 
 .task-view-card .subtasks img {
     border-radius: 50%;
     height: 24px;
     width: 24px;
+    padding:2px;
+    cursor: pointer;
+    content:url("../assets/img/desktop/unchecked.svg");
+}
+
+.task-view-card .subtasks img.checked {
+    content:url("../assets/img/desktop/checked.svg");
+}
+
+.task-view-card .subtasks img:hover {
+    background: rgba(209, 209, 209, 1);
 }
 
 .task-view-card .bottom {
@@ -206,4 +237,8 @@
 
 .task-view-card .exit:hover {
     background: rgba(231, 231, 231, 1);
+}
+
+.task-view-card .checked {
+    content:url("../assets/img/desktop/checked.svg");
 }

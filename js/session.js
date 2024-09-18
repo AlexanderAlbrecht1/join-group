@@ -23,6 +23,7 @@ function sessionLoad(key) {
    return JSON.parse(sessionStorage.getItem(key));
 }
 
+
 /**
  * saves a JSON array to the key to the session
  * @param {string} key    - key
@@ -47,9 +48,13 @@ function openPage(url) {
  * or body onload="isLogged()"
  */
 function isLogged() {
-   if (sessionLoad(PROJECT) == null) {
+   if (user=sessionLoad(PROJECT) == null) {
       openPage("./index.html"); // or as Pop Up
       return false;
    }
    return true;
+}
+
+function getUsername() {
+   return sessionLoad(PROJECT).username;
 }

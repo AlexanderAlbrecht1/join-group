@@ -1,5 +1,5 @@
 let contacts = [];
-let taskStorage =[];
+let taskStorage = [];
 
 async function displayContacts() {
    contacts = await loadContacts();
@@ -33,11 +33,19 @@ async function displayContacts() {
          let initial1 = Array.from(contacts[i].name)[0].toUpperCase();
          let initial2 = Array.from(contacts[i].lastname)[0].toUpperCase();
          let contactArray = createContactArray(contact, i);
-         document.getElementById('showContacts').innerHTML += generateDisplayContactsHTML(contactArray,initial1,initial2);
+         document.getElementById('showContacts').innerHTML += generateDisplayContactsHTML(contactArray, initial1, initial2);
       }
    }
 }
 
+/**
+ * 
+ * genearte an array of contact details and hand over the genaerate HTML code
+ * 
+ * @param {Object} contact 
+ * @param {Number} i 
+ * @returns 
+ */
 function createContactArray(contact, i) {
    let contactArray = {
       ID: contact.id,
@@ -49,36 +57,55 @@ function createContactArray(contact, i) {
    return contactArray;
 }
 
-
+/**
+ * 
+ * takes the unique ID from contact and search the position at the contact array
+ * 
+ * @param {Number} id 
+ * @returns 
+ */
 function getCurrentContact(id) {
    let index = findContact(id);
    return index;
 }
 
+/**
+ * 
+ * load contact array from Firebase
+ * 
+ */
 async function loadContacts(table = 'Contacts') {
    let loadedContacts = await loadData(table);
-
-   // Überprüfen, ob die Antwort null oder undefined ist
    if (!loadedContacts) {
-      return []; // Gibt ein leeres Array zurück, wenn keine Kontakte vorhanden sind
+      return [];
    }
-
-   // Wenn die Daten als Array oder Objekt vorliegen, konvertiere sie in ein Array
    if (Array.isArray(loadedContacts)) {
-      return loadedContacts.filter((contact) => contact !== null); // Null-Werte entfernen
+      return loadedContacts.filter((contact) => contact !== null);
    } else if (typeof loadedContacts === 'object' && loadedContacts !== null) {
       return Object.values(loadedContacts).filter(
          (contact) => contact !== null
       );
    }
-
-   return []; // Falls nichts geladen wurde, leeres Array zurückgeben
+   return [];
 }
 
+/**
+ * 
+ * save contact array to Firebase
+ * 
+ * @param {object} table 
+ * @returns 
+ */
 async function saveContacts(table = 'Contacts') {
    return await saveData(table, contacts); // push to Firebase}
 }
 
+/**
+ * 
+ * generate the background color for new user monogram
+ * 
+ * @returns a color code
+ */
 function generateDarkColor() {
    const r = Math.floor(Math.random() * 129); // R=0-128
    const g = Math.floor(Math.random() * 129); // G=0-128
@@ -87,7 +114,8 @@ function generateDarkColor() {
 }
 
 /**
- * Neuen Kontakt erstellen
+ * 
+ * add new contact to contactbook
  */
 async function addNewContact() {
    let id = await getIncrementedId("contact");
@@ -122,26 +150,36 @@ async function addNewContact() {
    await msgfly();
 }
 
-function getNewId(contacts) {
-   if (contacts.length === 0) {
-      return 1; // Startet bei 1, wenn keine Kontakte vorhanden sind
-   }
-   let maxId = contacts.reduce((max, contact) => {
-      // Prüfe, ob die ID gültig ist und größer als der aktuelle maxId
-      if (contact && typeof contact.id === 'number' && contact.id > max) {
-         return contact.id;
-      }
-      return max;
-   }, 0);
-   return maxId + 1; // Erhöhe die höchste ID um 1
-}
+// function getNewId(contacts) {
+//    if (contacts.length === 0) {
+//       return 1; // Startet bei 1, wenn keine Kontakte vorhanden sind
+//    }
+//    let maxId = contacts.reduce((max, contact) => {
+//       // Prüfe, ob die ID gültig ist und größer als der aktuelle maxId
+//       if (contact && typeof contact.id === 'number' && contact.id > max) {
+//          return contact.id;
+//       }
+//       return max;
+//    }, 0);
+//    return maxId + 1; // Erhöhe die höchste ID um 1
+// }
 
+/**
+ * 
+ * clears the input fields
+ */
 function clearInput() {
    document.getElementById("name").value = '';
    document.getElementById("email").value = '';
    document.getElementById("phone").value = '';
 }
 
+/**
+ * 
+ * remove hover effect from a per click selected contact in the contactbook
+ * 
+ * @param {number} id 
+ */
 function changeBgColor(id) {
    let elements = document.querySelectorAll(".contact");
    elements.forEach(function (element) {
@@ -150,7 +188,12 @@ function changeBgColor(id) {
    document.getElementById(`contact${id}`).classList.add('contactActive');
 }
 
-
+/**
+ * 
+ * creates a detailed contact view of the contact, clicked in the contactbook
+ * 
+ * @param {number} id 
+ */
 function showSingleContact(id) {
    changeBgColor(id);
    let index = getCurrentContact(id);
@@ -160,6 +203,13 @@ function showSingleContact(id) {
    // console.log(id);
 }
 
+/**
+ * 
+ * generates an array with detailed contact infos and hand over to generate HTML code
+ * 
+ * @param {number} index 
+ * @returns an array with detailed contact infos
+ */
 function createSingleContactArray(index) {
    let replacedPhone = contacts[index].phone.replace(/^0+/, '+49');
    let singleContactArray = {
@@ -167,7 +217,7 @@ function createSingleContactArray(index) {
       lastname: contacts[index].lastname,
       mail: contacts[index].email,
       // phone: replacedPhone.slice(0, 3) + ' ' + replacedPhone.slice(3,6) + ' ' + replacedPhone.slice(6),
-      phone : formatPhoneNumber(replacedPhone),
+      phone: formatPhoneNumber(replacedPhone),
       initial1: Array.from(contacts[index].name)[0].toUpperCase(),
       initial2: Array.from(contacts[index].lastname)[0].toUpperCase(),
       backgroundColor: contacts[index].color,
@@ -175,16 +225,23 @@ function createSingleContactArray(index) {
    return singleContactArray;
 }
 
+/**
+ * 
+ * changes the way the phone number ist displayed on detail view
+ * 
+ * @param {string} replacedPhone 
+ * @returns styled telephon number
+ */
 function formatPhoneNumber(replacedPhone) {
    if (replacedPhone.startsWith("+491")) {
-       
-       return replacedPhone.slice(0, 3) + ' ' + replacedPhone.slice(3,6) + ' ' + replacedPhone.slice(6);
+
+      return replacedPhone.slice(0, 3) + ' ' + replacedPhone.slice(3, 6) + ' ' + replacedPhone.slice(6);
    }
-   if (replacedPhone.startsWith("+4930")||
-       replacedPhone.startsWith("+4940")|| 
-       replacedPhone.startsWith("+4969")|| 
-       replacedPhone.startsWith("+4989")) {
-      return replacedPhone.slice(0, 3) + ' ' + replacedPhone.slice(3,5)+ ' ' + replacedPhone.slice(5);
+   if (replacedPhone.startsWith("+4930") ||
+      replacedPhone.startsWith("+4940") ||
+      replacedPhone.startsWith("+4969") ||
+      replacedPhone.startsWith("+4989")) {
+      return replacedPhone.slice(0, 3) + ' ' + replacedPhone.slice(3, 5) + ' ' + replacedPhone.slice(5);
    } else {
       return replacedPhone.slice(0, 3) + ' ' + replacedPhone.slice(3);
    }
@@ -193,36 +250,36 @@ function formatPhoneNumber(replacedPhone) {
 
 /**
  * 
- * delets choosen user from contactbook and tasks
+ * deletes choosen user from contactbook and tasks
  * 
  * @param {Number} id 
  */
 
 async function deleteContact(id) {
    let index = getCurrentContact(id);
-   tasks= await loadData("taskstorage");
+   tasks = await loadData("taskstorage");
    // await loadContacts();
    contacts.splice(index, 1);
    await deleteContactFromTask(id);
    await saveContacts();
-   await saveData("taskstorage",tasks)
+   await saveData("taskstorage", tasks)
    displayContacts();
    closeContactCreation();
 }
 
 async function deleteContactFromTask(id) {
-//   taskStorage = await loadData("taskstorage");
-  console.log(tasks);
-  findContactInTasks(tasks,id);
+   //   taskStorage = await loadData("taskstorage");
+   console.log(tasks);
+   findContactInTasks(tasks, id);
 }
 
-function findContactInTasks(tasks,id) {
+function findContactInTasks(tasks, id) {
    for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].assignedTo == null) continue;
       for (let x = 0; x < tasks[i].assignedTo.length; x++) {
          if (tasks[i].assignedTo[x] == Number(`${id}`)) {
-            console.log(i,x);
-            tasks[i].assignedTo.splice(x,1);
+            console.log(i, x);
+            tasks[i].assignedTo.splice(x, 1);
          }
       }
    }
@@ -489,4 +546,8 @@ function createNewContactArray(id) {
       color: color,
    }
    return newContact;
+}
+
+function logedUserMonogram() {
+   document.getElementById('logedUserMonogram').innerHTML = '';
 }

@@ -308,12 +308,14 @@
 
 }
 
-.mbb .user-story>h1 {
-    background: rgba(0, 56, 255, 1);
+.mbb .user-story>h1, 
+.task-view-card>.top>.user-story {
+    background: rgba(0, 56, 255, 1) !important;
 }
 
-.mbb .technical-task>h1 {
-    background: rgba(31, 215, 193, 1);
+.mbb .technical-task>h1, 
+.task-view-card>.top>.technical-task{
+    background: rgba(31, 215, 193, 1) !important;
 }
 
 .mbb-text {

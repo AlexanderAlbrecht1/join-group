@@ -1,11 +1,12 @@
 function getFullNameInContact(contact) {
-    let name=getFullName(contact.name + " " + contact.lastname);
-    if (name == loginname) name+=" (You)";
+    let name=contact.name + " " + contact.lastname;
+    //if (name == getLoginname()) name+=" (You)";
     return name;
 }
 
 function getTaskViewAssign(a) {
     let contact=contacts.find(e => e.id == a);
+    if (contact == null) return "";
     let name=getFullNameInContact(contact);
 
     return /*html*/ `
@@ -21,6 +22,7 @@ function getTaskViewAssign(a) {
 }
 
 function getTaskViewAssigns(assigns) {
+    if (assigns == null) return "";
     let html="";
     for (let assign of assigns) {
         html+=getTaskViewAssign(assign);
@@ -30,39 +32,44 @@ function getTaskViewAssigns(assigns) {
 
 
 function getTaskViewSubtasks(json) {
-    for (subtask of subtasks,json)    
+    if (json.subtasks == null) return "";
+    let html="";
+    let checked=""
+    for (subId=0;subId<json.subtasks.length;subId++) {
+        if (json.subtasks[subId].done == true) checked="checked";
+
+        html+= /*html*/ `  
+        <div>
+            <img class="${checked}" onclick="toggleSubtaskStateEvent(event,${json.id},${subId})" src="./assets/img/desktop/checked.svg">
+            <span>${json.subtasks[subId].name}</span>
+        </div>
+        `;
+    } 
+    return html;
 }
-<div>
-<img onclick="toggleSubtaskStateEvent(event,4,1)" src="./assets/img/desktop/checked.svg">
-<span>Establish CSS Methodology</span>
-</div>
 
 
-function displayTaskView(json) {
+function getTaskView(json) {
+    let cat = "User Story";
+    if (json.category == "technical-task") {
+        cat="Technical Task";
+    }
     return /*html*/ `
         <div class="top">
-            <div>User Story</div>
+            <div class="${json.category}">${cat}</div>
             <img class="exit" onclick="closeTaskView()" src="./assets/img/desktop/close.svg">
         </div>
-        <h1>CSS Architecture Planning</h1>
-        <p>Define CSS naming conventions and structure</p>
-        <p><strong>Due Date:</strong>02/09/2023</p>
-        <p><strong>Priority:</strong>02/09/2023<img class="icon-prio-urgent"></p>
+        <h1>${json.title}</h1>
+        <p>${json.description}</p>
+        <p><strong>Due Date:</strong>${json.dueDate}</p>
+        <p><strong>Priority:</strong>${json.prio}<img class="icon-prio-${json.prio}"></p>
         <div class="assign">
             <strong>Assigned to:</strong>
             ${getTaskViewAssigns(json.assignedTo)}            
         </div>
         
         <div class="subtasks"><strong>Subtasks</strong>
-            ${getTaskViewSubtasks(json.subtasks)}
-            <div>
-                <img onclick="toggleSubtaskStateEvent(event,4,1)" src="./assets/img/desktop/checked.svg">
-                <span>Establish CSS Methodology</span>
-            </div>
-            <div>
-                <img onclick="toggleSubtaskStateEvent(event)" src="./assets/img/desktop/unchecked.svg">
-                <span>Setup Base Styles</span>
-            </div>
+            ${getTaskViewSubtasks(json)}
         </div>
 
         <div class="bottom">
@@ -83,19 +90,14 @@ function displayTaskView(json) {
 
 }
 
-async function openTask(event,id) {
-    console.log(event.type);
-
+async function openTask(event,Xid) {
     if (event.type === "dragleave") {
         return
     }
-    // here the code
-    console.log(event.currentTarget.id);
-    let saveId=event.currentTarget.id.split("-")[1];
+    console.log(event.currentTarget);
+    let id=event.currentTarget.id.split("-")[1];
     let json = await loadObjectDataById("taskstorage",id);
-
-    displayTaskView(json[0]);
-
+    document.getElementById("task-view-card").innerHTML=getTaskView(json[0]);
     document.getElementById("task-view").classList.add("go")
 }
 

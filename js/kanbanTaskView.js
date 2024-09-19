@@ -73,12 +73,12 @@ function getTaskView(json) {
         </div>
 
         <div class="bottom">
-            <a>
+            <a onclick="deleteTask(${json.id})">
                 <img class="trash" src="./assets/img/desktop/trash.svg">
                 <span>Delete</span>
             </a>
             <div></div>
-            <a>
+            <a onclick="editTask(${json.id})">
                 <img class="pencil" src="./assets/img/desktop/pencil.svg">
                 <span>edit</span>
             </a>
@@ -128,4 +128,17 @@ async function toggleSubtaskStateEvent(event,id,subId) {
     // change dataset with new Information
     // save Dataset
 
+}
+
+async function deleteTask(id) {
+    await deleteData("taskstorage",id);
+    let i=tasks.findIndex(e => e.id==id);
+    let status=tasks[i].status;
+    tasks.splice(i,1);
+
+    addContainerData(tasks,status);
+    closeTaskView();
+}
+
+async function editTask(id) {
 }

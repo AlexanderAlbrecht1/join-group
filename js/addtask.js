@@ -75,6 +75,7 @@ function init() {
    if (isLogged()) {
       initContactList(contacts);
    }
+   logedUserMonogram();
 }
 
 function addSubtasks() {

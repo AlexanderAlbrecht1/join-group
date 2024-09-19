@@ -1,6 +1,12 @@
 let contacts = [];
 let taskStorage = [];
 
+async function initContacts() {
+   isLogged();
+   logedUserMonogram();
+   await displayContacts();
+}
+
 /**
  * 
  * load contacts from Firebase an renders the contact book
@@ -332,7 +338,11 @@ function dontClose(event) {
  */
 function getMonogram(name) {
    let na = name.toUpperCase().split(' ', 2);
-   return na[0][0] + na[1][0];
+   if (na.length == 1) {
+      return na[0][0];
+   } else {
+      return na[0][0] + na[1][0]; 
+   }
 }
 
 /**
@@ -544,6 +554,4 @@ function createNewContactArray(id) {
    return newContact;
 }
 
-function logedUserMonogram() {
-   document.getElementById('logedUserMonogram').innerHTML = '';
-}
+

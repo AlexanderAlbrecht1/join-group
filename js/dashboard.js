@@ -64,3 +64,7 @@ async function updateDashboard() {
 }
 
 window.onload = updateDashboard;
+
+function init() {
+   logedUserMonogram();
+}

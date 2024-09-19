@@ -67,6 +67,29 @@ async function loadData(table,id=null) {
     };
     return await getResponse(table,options,id);
 }
+
+/**
+ * 
+ * Userinterface for fetching Data DELETE
+ * 
+ * Explanaition:
+ *      we need to get the key from the Id, to delete by key
+ *      It ist not possible to delete by a given Id 
+ * 
+ * We need first to get 
+ * @returns {object} - JSON arrary of data
+ */
+async function deleteData(table,id=null) {
+    let json=await loadData(table,id);
+    table+="/"+Object.keys(json)[0];
+    let options={
+        method: "DELETE",
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        }
+    };
+    return await getResponse(table,options);
+}
  
 
 /**

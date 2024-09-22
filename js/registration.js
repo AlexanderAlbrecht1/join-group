@@ -56,7 +56,7 @@ async function addUserToList(userList) {
 
     // this part saves the new user to contacts -> contact book - start (Alex)
     contacts = await loadContacts();
-    let id = await getIncrementedId("user");
+    let id = await getIncrementedId("contact");
     let fullname = user.value;
     let splittedName = fullname.split(' ');
     let newFirstname = splittedName[0];

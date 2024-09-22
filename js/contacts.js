@@ -156,7 +156,7 @@ async function addNewContact() {
    };
    contacts.push(newContact);
    // await saveContacts();
-   await saveData("Contacts",contacts);
+   await saveData("Contacts", contacts);
    // saveContacts(id,newContact);
 
    clearInput();
@@ -272,16 +272,28 @@ function formatPhoneNumber(replacedPhone) {
  */
 
 async function deleteContact(id) {
+   let currentSession = sessionLoad(PROJECT);
    let index = getCurrentContact(id);
    tasks = await loadData("taskstorage");
-   checkIfContactIsAktivUser(id,index);
-   // await loadContacts(); 
-   contacts.splice(index, 1);
-   await deleteContactFromTask(tasks, id);
-   await saveContacts();
-   await saveData("taskstorage", tasks)
-   displayContacts();
-   closeContactCreation();
+   console.log(currentSession.id);
+   if (id === currentSession.id) {
+      let array = generateArray(id, index);
+      let dialogBackground = document.getElementById('dialogBackground');
+      dialogBackground.classList.remove('displayNone');
+      dialogBackground.classList.add('displayFlex');
+      document.getElementById('addContactContainer').innerHTML = '';
+      document.getElementById('addContactContainer').innerHTML = warningHTML(array);
+      addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
+   } else {
+      contacts.splice(index, 1);
+      await deleteContactFromTask(tasks, id);
+      await saveContacts();
+      await saveData("taskstorage", tasks);
+      await removeUser(userList, index);
+      await saveData("user", userList);
+      displayContacts();
+      closeContactCreation();
+   }
 }
 
 async function deleteContactFromTask(tasks, id) {
@@ -296,28 +308,17 @@ async function deleteContactFromTask(tasks, id) {
    }
 }
 
-function checkIfContactIsAktivUser(id) {
-   let currentSession = sessionLoad(PROJECT); 
-   console.log(currentSession.id);
-   if (id === currentSession.id){
-      let index = getCurrentContact(id);
-      let array = generateArray(id, index);
-      let dialogBackground = document.getElementById('dialogBackground');
-      dialogBackground.classList.remove('displayNone');
-      dialogBackground.classList.add('displayFlex');
-      document.getElementById('addContactContainer').innerHTML = '';
-      document.getElementById('addContactContainer').innerHTML = warningHTML(array);
-      addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
-   }
-}
 
 async function confirmDelete(id) {
+   let userList = await getUserList();
    let index = getCurrentContact(id);
    tasks = await loadData("taskstorage");
    contacts.splice(index, 1);
    await deleteContactFromTask(tasks, id);
    await saveContacts();
-   await saveData("taskstorage", tasks)
+   await saveData("taskstorage", tasks);
+   await removeUser(userList, index);
+   await saveData("user", userList);
    displayContacts();
    closeContactCreation();
 }
@@ -374,7 +375,7 @@ function getMonogram(name) {
    if (na.length == 1) {
       return na[0][0];
    } else {
-      return na[0][0] + na[1][0]; 
+      return na[0][0] + na[1][0];
    }
 }
 

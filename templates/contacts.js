@@ -212,7 +212,7 @@ function warningHTML(array) {
    </div>
 
   <div class="editContactbuttons ">
-      <div class="deleteButton" onclick="deleteContact(${array.id})">
+      <div class="deleteButton" onclick="confirmDelete(${array.id})">
           <span>Delete anyway!</span>
       </div>
 

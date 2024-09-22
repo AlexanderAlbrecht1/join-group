@@ -84,6 +84,15 @@ function getCurrentContact(id) {
    return null;
 }
 
+function getIndexUser(userList, id) {
+   for (let index = 0; index < userList.length; index++) {
+      if (userList[index].id === id) {
+         return index;
+      }
+   }
+   return null;
+}
+
 /**
  * 
  * load contact array from Firebase
@@ -289,8 +298,8 @@ async function deleteContact(id) {
       await deleteContactFromTask(tasks, id);
       await saveContacts();
       await saveData("taskstorage", tasks);
-      await removeUser(userList, index);
-      await saveData("user", userList);
+      // await removeUser(userList, index);
+      // await saveData("user", userList);
       displayContacts();
       closeContactCreation();
    }
@@ -311,16 +320,24 @@ async function deleteContactFromTask(tasks, id) {
 
 async function confirmDelete(id) {
    let userList = await getUserList();
-   let index = getCurrentContact(id);
+   let indexUserlist = getIndexUser(userList, id);
+   let indexTaskList = getCurrentContact(id);
    tasks = await loadData("taskstorage");
-   contacts.splice(index, 1);
+   contacts.splice(indexTaskList, 1);
    await deleteContactFromTask(tasks, id);
    await saveContacts();
    await saveData("taskstorage", tasks);
-   await removeUser(userList, index);
-   await saveData("user", userList);
-   displayContacts();
-   closeContactCreation();
+   await removeUser(userList, indexUserlist);
+   isLogged();
+}
+
+async function removeUser(userList, index) {
+   userList.splice(index, 1); // Remove User self 
+   saveData("user", userList);
+   clearLocalStorage();
+   sessionDestroy();
+   // clearLoginFields();
+   // msgBox(`Your data is completely deleted! Sorry to loose you !`);
 }
 
 function abortDelete() {

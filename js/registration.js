@@ -53,20 +53,26 @@ async function addUserToList(userList) {
     let password = document.getElementById("sign-password");
     let email = document.getElementById("email");
     let user = document.getElementById("user");
-    let id = 10010 // just for testing
+
     // this part saves the new user to contacts -> contact book - start (Alex)
     contacts = await loadContacts();
+    let id = await getIncrementedId("user");
     let fullname = user.value;
     let splittedName = fullname.split(' ');
     let newFirstname = splittedName[0];
-    let newLastname = splittedName[1];
+    let newLastname = [];
+    if (splittedName.length == 1) {
+        newLastname = ' ';
+     } else {
+        newLastname = splittedName[1]; 
+     }
     let color = generateDarkColor();
     let newContact = {
         id: id,
         name: newFirstname,
         lastname: newLastname,
         email: email.value,
-        phone: 'please add a telephonenumber',
+        phone: '0000000',
         color: color,
     };
     contacts.push(newContact);

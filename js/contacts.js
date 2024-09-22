@@ -155,7 +155,8 @@ async function addNewContact() {
       color: color,
    };
    contacts.push(newContact);
-   await saveContacts();
+   // await saveContacts();
+   await saveData("Contacts",contacts);
    // saveContacts(id,newContact);
 
    clearInput();

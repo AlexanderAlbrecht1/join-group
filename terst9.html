@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+<style>
+
+/* Style the custom checkbox image */
+/*
+.checkbox-image {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border: 5px solid black;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+*/
+
+
+
+.selector .custom-checkbox ~ .checkbox-design {
+  background-color: transparent;
+}
+.selector .custom-checkbox:hover ~ .checkbox-design {
+  background-color: blue;
+}
+.selector .custom-checkbox:checked ~ .checkbox-design {
+  background-color: orange;
+}
+.selector .custom-checkbox:checked:hover ~ .checkbox-design {
+  background-color: red;
+}
+
+.selector .custom-checkbox ~ .checkbox-design>img {
+   content:url("assets/img/desktop/unchecked.svg");
+}
+
+.selector .custom-checkbox:checked ~ .checkbox-design>img {
+   content:url("assets/img/desktop/checked.svg");
+}
+.selector * {
+   display:flex;
+   align-items: center;
+}
+
+.selector {
+   display: flex;
+   flex-direction: row;
+   cursor: pointer;
+}
+.selector>input[type="checkbox"] {
+   display: none;
+}
+
+
+</style>
+</head>
+<body>
+   <!--label for="test2" class="custom-checkbox"-->
+
+   <label class="selector">
+      <input type="checkbox" class="custom-checkbox">
+      <div class="checkbox-design">
+         <div>
+            <div>Icon</div>
+            <div>Name</div>
+         </div>
+         <img></img>
+      </div>
+   </label>
+
+
+
+   <!-- /label-->
+
+   </body>
+</html>

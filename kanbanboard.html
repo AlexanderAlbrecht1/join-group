@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="./css/nav.css">
         <link rel="stylesheet" href="./css/stdio.css">
         <link rel="stylesheet" href="./css/inputField.css">
+        <link rel="stylesheet" href="./css/customButton.css">
 
 
         <link rel="shortcut icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon">
@@ -30,70 +31,135 @@
     <body onload="init()">
         <div class="relative">
             <div id="task-view" class="drive-in">
-                <div id="task-view-card" class="task-view-card user-story">
+                <div id="task-view-card" class="task-view-card"></div>
+                <div id="task-edit-card" class="task-view-card user-story">
                     <div class="top">
-                        <div>User Story</div>
+                        <div class="${json.category}">${cat}</div>
                         <img class="exit" onclick="closeTaskView()" src="./assets/img/desktop/close.svg">
                     </div>
-                    <h1>CSS Architecture Planning</h1>
-                    <p>Define CSS naming conventions and structure</p>
-                    <p><strong>Due Date:</strong>02/09/2023</p>
-                    <p><strong>Priority:</strong>02/09/2023<img class="icon-prio-urgent"></p>
-                    <div class="assign">
-                        <strong>Assigned to:</strong>
-                        <div onclick="toggleActiveKanbanTask(event)">
-                            <div>
-                                <div style="background-color: #008080">SM</div>
-                                <span>Sofia Müller(You)</span>
+                    <div class="center">
+                        <div>
+                            <strong>Title</strong>
+                            <div class="input-container invalid">
+                                <input id="edit-title" type="text"  required placeholder="Title" value="${json.title}">
                             </div>
-                            <div><!-- input type="checkbox"-->
-                            </div>
-                        </div>
-
-                        <div onclick="toggleActiveKanbanTask(event)">
-                            <div>
-                                <div style="background-color: #008080">SM</div>
-                                <span>Sofia Müller(You)</span>
-                            </div>
-                            <div>
-                            </div>
+                            <span class="msg">This field is required</span>
                         </div>
                         
-                        <div onclick="toggleActiveKanbanTask(event)">
-                            <div>
-                                <div style="background-color: #4040F0">BZ</div>
-                                <span>Sofia Müller(You)</span>
-                            </div>
-                            <div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="subtasks"><strong>Subtasks</strong>
                         <div>
-                            <img onclick="toggleSubtaskStateEvent(event,4,1)" src="./assets/img/desktop/checked.svg">
-                            <span>Establish CSS Methodology</span>
+                            <strong>Description</strong>
+                            <div class="input-container invalid">
+                                <textarea id="edit-description" type="text" required rows="4"  placeholder="Description">${json.description}</textarea>
+                            </div>
+                            <span class="msg">This field is required</span>
                         </div>
+                        
                         <div>
-                            <img onclick="toggleSubtaskStateEvent(event)" src="./assets/img/desktop/unchecked.svg">
-                            <span>Setup Base Styles</span>
+                            <strong>Due date</strong>
+                            <div class="input-container invalid">
+                                <input id="edit-title" type="date"  required placeholder="Title" width="100%" value="${json.dueDate}">
+                                <!-- <span class="icon" onclick="filterTasks()"><img src="./assets/img/desktop/search.svg"></span> -->
+                            </div>
+                            <span class="msg">This field is required</span>
                         </div>
-                    </div>
 
-                    <div class="bottom">
-                        <a>
-                            <img class="trash" src="./assets/img/desktop/trash.svg">
-                            <span>Delete</span>
-                        </a>
-                        <div></div>
-                        <a>
-                            <img class="pencil" src="./assets/img/desktop/pencil.svg">
-                            <span>edit</span>
-                        </a>
+                        <div>
+                            <strong>Priority</strong>
+                            <div class="flex-row gap16 priority">
+                                <input type="radio" id="urgent" name="prio" value="urgent">
+                                <label for="urgent" class="button-label urgent">Urgent<img id="urgent-icon"
+                                        src="./assets/img/desktop/prio_urgent_red.svg"></label>
+
+                                <input type="radio" id="medium" name="prio" value="medium" ${json.prio=="medium"?"checked":""}>
+                                <label for="medium" class="button-label medium">Medium<img id="medium-icon"
+                                        src="./assets/img/desktop/prio_medium_yellow.svg"></label>
+
+                                <input type="radio" id="low" name="prio" value="low">
+                                <label for="low" class="button-label low">Low <img id="low-icon"
+                                        src="./assets/img/desktop/prio_low_green.svg"></label>
+                            </div>
+                        </div>
+
+
+
+                        <div class="relative h48">
+                            <details class="absolute">
+                                <summary><input type="text"></summary>
+                                <div class="selectors">
+                                    <label class="selector">
+                                        <input type="checkbox" class="custom-checkbox" name="assign" value="21">
+                                        <div class="checkbox-design">
+                                            <div>
+                                                <span class="monogram">VN</span>  
+                                                <span>VName Name</span>
+                                            </div>
+                                            <img>
+                                        </div>
+                                    </label>
+
+                                    <label class="selector">
+                                        <input type="checkbox" class="custom-checkbox" name="assign" value="21">
+                                        <div class="checkbox-design">
+                                            <div>
+                                                <span class="monogram">VN</span>  
+                                                <span>VName Name</span>
+                                            </div>
+                                            <img>
+                                        </div>
+                                    </label>
+
+                                    <label class="selector">
+                                        <input type="checkbox" class="custom-checkbox" name="assign" value="21">
+                                        <div class="checkbox-design">
+                                            <div>
+                                                <span class="monogram">VN</span>  
+                                                <span>VName Name</span>
+                                            </div>
+                                            <img>
+                                        </div>
+                                    </label>
+
+                                </div>
+                               <p>CSS steht für Cascading Style Sheets und wird verwendet, um das Aussehen und Layout von Webseiten zu gestalten.</p>
+                            </details>
+                         </div>
+                      
+
+
+
+
+
+<!--                         
+                        <h1>${json.title}</h1>
+                        <p>${json.description}</p>
+                        <p><strong>Due Date:</strong>${json.dueDate}</p>
+                        <p><strong>Priority:</strong>${json.prio}<img class="icon-prio-${json.prio}"></p>
+                        <div class="assign">
+                            <strong>Assigned to:</strong>
+                            ${getTaskViewAssigns(json.assignedTo)}            
+                        </div>
+                        
+                        <div class="subtasks"><strong>Subtasks</strong>
+                            ${getTaskViewSubtasks(json)}
+                        </div> -->
+
+
+
                     </div>
+            
+                    <div class="bottom">
+
+                        <div class="darkbutton">
+                            Ok
+                            <img class="invert" src="./assets/img/desktop/add-subtask-check.svg">
+                        </div>
+                    </div>
+            
+
                 </div>
             </div>
         </div>
+
         <header>
             <div class="max-width">
                 <span>Kanban Project Management Tool</span>

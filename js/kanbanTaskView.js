@@ -59,17 +59,19 @@ function getTaskView(json) {
             <div class="${json.category}">${cat}</div>
             <img class="exit" onclick="closeTaskView()" src="./assets/img/desktop/close.svg">
         </div>
-        <h1>${json.title}</h1>
-        <p>${json.description}</p>
-        <p><strong>Due Date:</strong>${json.dueDate}</p>
-        <p><strong>Priority:</strong>${json.prio}<img class="icon-prio-${json.prio}"></p>
-        <div class="assign">
-            <strong>Assigned to:</strong>
-            ${getTaskViewAssigns(json.assignedTo)}            
-        </div>
-        
-        <div class="subtasks"><strong>Subtasks</strong>
-            ${getTaskViewSubtasks(json)}
+        <div class="center">
+            <h1>${json.title}</h1>
+            <p>${json.description}</p>
+            <p><strong>Due Date:</strong>${json.dueDate}</p>
+            <p><strong>Priority:</strong>${json.prio}<img class="icon-prio-${json.prio}"></p>
+            <div class="assign">
+                <strong>Assigned to:</strong>
+                ${getTaskViewAssigns(json.assignedTo)}            
+            </div>
+            
+            <div class="subtasks"><strong>Subtasks</strong>
+                ${getTaskViewSubtasks(json)}
+            </div>
         </div>
 
         <div class="bottom">
@@ -90,7 +92,7 @@ function getTaskView(json) {
 
 }
 
-async function openTask(event,Xid) {
+async function openTask(event) {
     if (event.type === "dragleave") {
         return
     }
@@ -123,10 +125,6 @@ async function toggleSubtaskStateEvent(event,id,subId) {
     let json = await loadObjectDataById("taskstorage",id);
     json[0].subtasks[subId].done=state;
     saveObjectDataById("taskstorage",json);
-
-    // load Dataset
-    // change dataset with new Information
-    // save Dataset
 
 }
 

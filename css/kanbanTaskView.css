@@ -18,8 +18,8 @@
     line-height: 24px;
     text-align: left;
     color: black;
-    overflow-y: auto;
-    height: auto;
+    /* overflow-y: auto; */
+     height: auto;
     max-height: calc(100% - 32px);
 }
 
@@ -184,6 +184,13 @@
     background: rgba(209, 209, 209, 1);
 }
 
+.task-view-card .center {
+    display:flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow-y: auto;
+}
+
 .task-view-card .bottom {
     display: flex;
     flex-direction: row;
@@ -241,4 +248,10 @@
 
 .task-view-card .checked {
     content:url("../assets/img/desktop/checked.svg");
+}
+
+.task-view-card input[type="date"] {
+    padding-right:21px;
+    display:initial;
+
 }

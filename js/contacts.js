@@ -340,11 +340,6 @@ async function removeUser(userList, index) {
    // msgBox(`Your data is completely deleted! Sorry to loose you !`);
 }
 
-function abortDelete() {
-   displayContacts();
-   closeContactCreation();
-}
-
 /**
  *
  * creates a contact form to add a new contact

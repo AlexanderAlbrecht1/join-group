@@ -274,7 +274,10 @@ function formatPhoneNumber(replacedPhone) {
 async function deleteContact(id) {
    let index = getCurrentContact(id);
    tasks = await loadData("taskstorage");
+   checkIfContactIsAktivUser(id,index);
    // await loadContacts();
+
+   
    contacts.splice(index, 1);
    await deleteContactFromTask(tasks, id);
    await saveContacts();
@@ -295,6 +298,20 @@ async function deleteContactFromTask(tasks, id) {
    }
 }
 
+function checkIfContactIsAktivUser(id) {
+   let currentSession = sessionLoad(PROJECT); 
+   console.log(currentSession.id);
+   if (id === currentSession.id){
+      let index = getCurrentContact(id);
+      let array = generateArray(id, index);
+      let dialogBackground = document.getElementById('dialogBackground');
+      dialogBackground.classList.remove('displayNone');
+      dialogBackground.classList.add('displayFlex');
+      document.getElementById('addContactContainer').innerHTML = '';
+      document.getElementById('addContactContainer').innerHTML = warningHTML(array);
+   }
+}
+
 /**
  *
  * creates a contact form to add a new contact
@@ -312,7 +329,7 @@ function openCreateContactDialog() {
 
 /**
  * 
- * abort add new contact and close dialog window
+ * close dialog window
  */
 function closeContactCreation() {
    document.getElementById('dialogBackground').classList.add('displayNone');

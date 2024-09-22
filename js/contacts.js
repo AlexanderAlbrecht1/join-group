@@ -1,6 +1,12 @@
 let contacts = [];
 let taskStorage = [];
 
+async function initContacts() {
+   isLogged();
+   logedUserMonogram();
+   await displayContacts();
+}
+
 /**
  * 
  * load contacts from Firebase an renders the contact book
@@ -149,7 +155,8 @@ async function addNewContact() {
       color: color,
    };
    contacts.push(newContact);
-   await saveContacts();
+   // await saveContacts();
+   await saveData("Contacts",contacts);
    // saveContacts(id,newContact);
 
    clearInput();
@@ -267,7 +274,8 @@ function formatPhoneNumber(replacedPhone) {
 async function deleteContact(id) {
    let index = getCurrentContact(id);
    tasks = await loadData("taskstorage");
-   // await loadContacts();
+   checkIfContactIsAktivUser(id,index);
+   // await loadContacts(); 
    contacts.splice(index, 1);
    await deleteContactFromTask(tasks, id);
    await saveContacts();
@@ -288,6 +296,37 @@ async function deleteContactFromTask(tasks, id) {
    }
 }
 
+function checkIfContactIsAktivUser(id) {
+   let currentSession = sessionLoad(PROJECT); 
+   console.log(currentSession.id);
+   if (id === currentSession.id){
+      let index = getCurrentContact(id);
+      let array = generateArray(id, index);
+      let dialogBackground = document.getElementById('dialogBackground');
+      dialogBackground.classList.remove('displayNone');
+      dialogBackground.classList.add('displayFlex');
+      document.getElementById('addContactContainer').innerHTML = '';
+      document.getElementById('addContactContainer').innerHTML = warningHTML(array);
+      addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
+   }
+}
+
+async function confirmDelete(id) {
+   let index = getCurrentContact(id);
+   tasks = await loadData("taskstorage");
+   contacts.splice(index, 1);
+   await deleteContactFromTask(tasks, id);
+   await saveContacts();
+   await saveData("taskstorage", tasks)
+   displayContacts();
+   closeContactCreation();
+}
+
+function abortDelete() {
+   displayContacts();
+   closeContactCreation();
+}
+
 /**
  *
  * creates a contact form to add a new contact
@@ -305,7 +344,7 @@ function openCreateContactDialog() {
 
 /**
  * 
- * abort add new contact and close dialog window
+ * close dialog window
  */
 function closeContactCreation() {
    document.getElementById('dialogBackground').classList.add('displayNone');
@@ -332,7 +371,11 @@ function dontClose(event) {
  */
 function getMonogram(name) {
    let na = name.toUpperCase().split(' ', 2);
-   return na[0][0] + na[1][0];
+   if (na.length == 1) {
+      return na[0][0];
+   } else {
+      return na[0][0] + na[1][0]; 
+   }
 }
 
 /**
@@ -544,6 +587,4 @@ function createNewContactArray(id) {
    return newContact;
 }
 
-function logedUserMonogram() {
-   document.getElementById('logedUserMonogram').innerHTML = '';
-}
+

@@ -58,3 +58,10 @@ function isLogged() {
 function getUsername() {
    return sessionLoad(PROJECT).username;
 }
+
+function logedUserMonogram() {
+   let user = sessionLoad(PROJECT).username;
+   let userMonogram = getMonogram(user);
+   // document.getElementById('loggedUserMonogram').innerHTML = '';
+   document.getElementById('loggedUserMonogram').innerHTML = `<span> ${userMonogram} </span>`;
+}

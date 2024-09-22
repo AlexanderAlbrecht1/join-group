@@ -8,6 +8,7 @@ let statusList=[
 async function init() {
    contacts = await loadData('Contacts');
    fetchTasks();
+   logedUserMonogram();
 }
 
 // function init() {

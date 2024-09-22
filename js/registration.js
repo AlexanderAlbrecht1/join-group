@@ -20,12 +20,12 @@ function msgBox(msg) {
  * @returns - true if passwords are the same otherwise false
  */
 function isEqualPassword() {
-    let password=document.getElementById("sign-password");
-    let confirmPassword=document.getElementById("confirm-password");;
+    let password = document.getElementById("sign-password");
+    let confirmPassword = document.getElementById("confirm-password");;
     if (password.value != confirmPassword.value) {
-        customErrorMsg("confirm-password","passwords are different");
+        customErrorMsg("confirm-password", "passwords are different");
     }
-    return password.value == confirmPassword.value;   
+    return password.value == confirmPassword.value;
 }
 
 /**
@@ -36,10 +36,10 @@ function isEqualPassword() {
  * @returns - true if user exist, otherwise false
  */
 function existUser(userList) {
-    let email=document.getElementById("email").value;
-    let index=userList.findIndex(element =>  element.email == email);
+    let email = document.getElementById("email").value;
+    let index = userList.findIndex(element => element.email == email);
     if (index != -1) {
-        customErrorMsg("email",`E-mail already exist. Please choose another e-mail. <br>${email}, <a href="./index.html">login at your existing account ?`);
+        customErrorMsg("email", `E-mail already exist. Please choose another e-mail. <br>${email}, <a href="./index.html">login at your existing account ?`);
     }
     return index != -1;
 }
@@ -50,11 +50,37 @@ function existUser(userList) {
  * @param {object} userList  List of Users 
  */
 async function addUserToList(userList) {
-    let password=document.getElementById("sign-password");
-    let email=document.getElementById("email"); 
-    let user=document.getElementById("user");
-    userList.push({user:user.value,password: password.value,email: email.value});
-    await saveData("user",userList);
+    let password = document.getElementById("sign-password");
+    let email = document.getElementById("email");
+    let user = document.getElementById("user");
+
+    // this part saves the new user to contacts -> contact book - start (Alex)
+    contacts = await loadContacts();
+    let id = await getIncrementedId("contact");
+    let fullname = user.value;
+    let splittedName = fullname.split(' ');
+    let newFirstname = splittedName[0];
+    let newLastname = [];
+    if (splittedName.length == 1) {
+        newLastname = ' ';
+     } else {
+        newLastname = splittedName[1]; 
+     }
+    let color = generateDarkColor();
+    let newContact = {
+        id: id,
+        name: newFirstname,
+        lastname: newLastname,
+        email: email.value,
+        phone: '0000000',
+        color: color,
+    };
+    contacts.push(newContact);
+    await saveData("Contacts",contacts);
+    // await saveContacts();
+    // - end
+    userList.push({ user: user.value, password: password.value, email: email.value, id: id, });
+    await saveData("user", userList);
 }
 
 
@@ -66,7 +92,7 @@ async function register() {
     if (!isFormValid) return;
     if (!isEqualPassword()) return;
 
-    let userList=await getUserList();
+    let userList = await getUserList();
     if (existUser(userList)) return;
     await msgfly();
     await addUserToList(userList);
@@ -81,9 +107,9 @@ async function register() {
  * @param {object} userList - List aof all Users
  * @param {integer} index    - the found index from index search
  */
-async function removeUser(userList,index) {
-    userList.splice(index,1); // Remove User self 
-    saveData("user",userList);
+async function removeUser(userList, index) {
+    userList.splice(index, 1); // Remove User self 
+    saveData("user", userList);
     clearLocalStorage();
     sessionDestroy();
     clearLoginFields();
@@ -96,10 +122,10 @@ async function removeUser(userList,index) {
  * 
  * @param {array} passwordOfList 
  */
-function passwordValidationOK(passwordOfList)  {
-    let password=document.getElementById("sign-password");
+function passwordValidationOK(passwordOfList) {
+    let password = document.getElementById("sign-password");
     if (passwordOfList != password.value) {
-        customErrorMsg("confirm-password","The mail-password validation failed !");
+        customErrorMsg("confirm-password", "The mail-password validation failed !");
     }
 }
 
@@ -109,13 +135,13 @@ function passwordValidationOK(passwordOfList)  {
  * redirect to Login at least
  */
 async function unregister() {
-    let email=document.getElementById("email");
-    let userList=await getUserList();
-    let index= userList.findIndex(element =>  element.email == email.value);
+    let email = document.getElementById("email");
+    let userList = await getUserList();
+    let index = userList.findIndex(element => element.email == email.value);
     if (index != -1) {
         if (passwordValidationOK(userList[index].password)) {
             removeTasksOf(email.value);    // Remove all Tasks of the user
-            removeUser(userList,index);    // remove all Userinformation and cleanup
+            removeUser(userList, index);    // remove all Userinformation and cleanup
             openPage("./index.html");
         }
     } else {
@@ -128,19 +154,19 @@ async function unregister() {
 function isFormValid(formqs) {
     let form = document.querySelector(formqs);
     if (!form) return false;
- 
+
     let inputs = form.querySelectorAll('input');
     let status = Array.from(inputs).findIndex(input => !input.checkValidity()) == -1;
     let cb = form.querySelector("#remember-me").checked;
- 
+
     /* if (!status || !cb) {
         disableCheck(!status || !cb);
     }*/
     // let err=Array.from(inputs).findIndex(input =>input.validity.valid===false);
     return status && cb;
- } 
- 
- function init() {
+}
+
+function init() {
     loadUserFromLocalStorage();
     // initEventListenerLogin();
     addFormListener('#login-card');

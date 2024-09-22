@@ -275,9 +275,7 @@ async function deleteContact(id) {
    let index = getCurrentContact(id);
    tasks = await loadData("taskstorage");
    checkIfContactIsAktivUser(id,index);
-   // await loadContacts();
-
-   
+   // await loadContacts(); 
    contacts.splice(index, 1);
    await deleteContactFromTask(tasks, id);
    await saveContacts();
@@ -309,7 +307,24 @@ function checkIfContactIsAktivUser(id) {
       dialogBackground.classList.add('displayFlex');
       document.getElementById('addContactContainer').innerHTML = '';
       document.getElementById('addContactContainer').innerHTML = warningHTML(array);
+      addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
    }
+}
+
+async function confirmDelete(id) {
+   let index = getCurrentContact(id);
+   tasks = await loadData("taskstorage");
+   contacts.splice(index, 1);
+   await deleteContactFromTask(tasks, id);
+   await saveContacts();
+   await saveData("taskstorage", tasks)
+   displayContacts();
+   closeContactCreation();
+}
+
+function abortDelete() {
+   displayContacts();
+   closeContactCreation();
 }
 
 /**

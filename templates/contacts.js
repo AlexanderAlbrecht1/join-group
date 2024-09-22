@@ -213,11 +213,11 @@ function warningHTML(array) {
 
   <div class="editContactbuttons ">
       <div class="deleteButton" onclick="deleteContact(${array.id})">
-          <span>Delete </span>
+          <span>Delete anyway!</span>
       </div>
 
-      <button class="safeEditContactButton" onclick="saveEditedContact(${array.id})">
-          <span>Safe</span>
+      <button class="safeEditContactButton" onclick="abortDelete()">
+          <span>ABORT</span>
           <div class="checkSVGContainer">
           </div>
       </button>

@@ -37,10 +37,39 @@
 
 .dashboard-container {
    display: flex;
+   justify-content: space-between;
+   width: 100%;
+   gap: 40px;
+}
+
+.dashboard-left {
+   width: 70%;
+   display: flex;
    flex-direction: column;
    gap: 40px;
-   width: 100%;
-   align-items: center;
+}
+
+.dashboard-right {
+   width: 30%;
+   display: flex;
+   flex-direction: column;
+   align-items: center; /* Zentriert den Text horizontal */
+   justify-content: center; /* Zentriert den Text vertikal */
+   text-align: center; /* Text zentrieren */
+}
+
+.dashboard h3 {
+   font-size: 1.5rem;
+}
+
+.dashboard p {
+   font-size: 3rem;
+}
+
+.greeting-text {
+   font-size: 2rem;
+   color: #091931;
+   margin: 0 0 0 2rem;
 }
 
 .stats1 {
@@ -57,7 +86,6 @@
    width: 260px;
    height: 168px;
    padding: 28px 48px;
-   gap: 20px;
    background-color: #fff;
    box-shadow: 0px 0px 4px 0px #0000001a;
    border-radius: 2rem;
@@ -65,13 +93,15 @@
 }
 
 .stats1_inner:hover {
+   background-color: #2a3647;
+   color: #fff;
    transform: translateY(-5px);
    box-shadow: 0px 4px 10px 0px #00000033;
 }
 
 .stats2 {
    display: flex;
-   justify-content: space-between;
+   justify-content: space-evenly;
    align-items: center;
    height: 168px;
    padding: 28px 48px;
@@ -95,10 +125,11 @@
 }
 
 .stats2:hover {
+   background-color: #2a3647;
+   color: #fff; /* Text wird weiß beim Hover */
    transform: translateY(-5px);
    box-shadow: 0px 4px 10px 0px #00000033;
 }
-
 .stats3 {
    display: flex;
    justify-content: space-evenly;
@@ -111,6 +142,7 @@
    flex-direction: column;
    align-items: center;
    justify-content: center;
+   text-align: center;
    width: 160px;
    height: 168px;
    padding: 28px 48px;
@@ -121,6 +153,8 @@
 }
 
 .stats3_inner:hover {
+   background-color: #2a3647;
+   color: #fff; /* Text wird weiß beim Hover */
    transform: translateY(-5px);
    box-shadow: 0px 4px 10px 0px #00000033;
 }

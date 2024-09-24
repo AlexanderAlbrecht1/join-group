@@ -9,6 +9,7 @@ async function init() {
    contacts = await loadData('Contacts');
    fetchTasks();
    logedUserMonogram();
+   initSelector();
 }
 
 // function init() {

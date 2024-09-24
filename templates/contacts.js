@@ -187,7 +187,7 @@ function warningHTML(array) {
 <div>
    <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
    <div class="flexColumn">
-      <h1>Warning!</h1>
+      <h1 class="warningHeadline">Warning!</h1>
       <div class="vector5EditContact"></div>
    </div>
    <div class="contactLogo"></div>
@@ -205,18 +205,18 @@ function warningHTML(array) {
   </div>
 
    <div>
-      <h2>Attention! <br> 
-      If you delte yoruself in Contacts your account will be delted an you will be logged out. <br>
+      <h2>Attention! <br><br> 
+      If you delete yoruself your account will be deleted an you will be logged out! <br><br>
       Are you realy want to go on?
    </h2>
    </div>
 
   <div class="editContactbuttons ">
-      <div class="deleteButton" onclick="deleteContact(${array.id})">
+      <div class="deleteAnywayButton" onclick="confirmDelete(${array.id})">
           <span>Delete anyway!</span>
       </div>
 
-      <button class="safeEditContactButton" onclick="abortDelete()">
+      <button class="safeEditContactButton" onclick="closeContactCreation()">
           <span>ABORT</span>
           <div class="checkSVGContainer">
           </div>

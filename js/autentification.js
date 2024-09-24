@@ -169,10 +169,12 @@ async function getUserList() {
  * @returns - false if User was not loaded
  */
 async function loadUserFromLocalStorage() {
-   let userRow = loadFromLocalStorage(PROJECT);
-   if (userRow != null) {
-      if (await isLoginCorrect(userRow.email, userRow.password, false)) {
-         putLoginToValue(userRow.email, userRow.password);
+   user = loadFromLocalStorage(PROJECT);
+   if (user != null) {
+      if (await isLoginCorrect(user.email, user.password, false)) {
+         putLoginToValue(user.email, user.password);
+         let obj={ "email": user.email, "password": user.password, "username": user.username };
+         sessionSave(PROJECT, obj );
          openDashboard(); // Exit from here
          return true;
       }
@@ -187,12 +189,21 @@ async function loadUserFromLocalStorage() {
  * prepare user / password and to save to local storage
  */
 function saveUserToLocalStorage() {
+   saveToLocalStorage(PROJECT, {
+      email: user.email,
+      password: user.password,
+      username: user.user
+   });
+
+   /*
    let password = document.getElementById("password");
    let email = document.getElementById("email");
+
    saveToLocalStorage(PROJECT, {
       email: email.value,
       password: password.value,
    });
+   */
 }
 
 

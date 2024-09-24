@@ -6,10 +6,13 @@ let statusList=[
    "done"];
 
 async function init() {
-   contacts = await loadData('Contacts');
-   fetchTasks();
-   logedUserMonogram();
-   initSelector();
+   if (isLogged()) {
+
+      contacts = await loadData('Contacts');
+      fetchTasks();
+      logedUserMonogram();
+      initSelector();
+   }
 }
 
 // function init() {

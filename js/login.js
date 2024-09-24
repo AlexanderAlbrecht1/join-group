@@ -84,7 +84,8 @@ async function login() {
    let email = document.getElementById("email");
    user = await isLoginCorrect(email.value, password.value);
    if ( user != null ) {
-      sessionSave(PROJECT, { email: email.value, password: password.value, username: user.user, id: user.id });
+      let obj={ "email": user.email, "password": user.password, "username": user.user };
+      sessionSave(PROJECT, obj );
       rememberMe();
       openDashboard();
    }

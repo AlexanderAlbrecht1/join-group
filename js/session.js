@@ -48,9 +48,15 @@ function openPage(url) {
  * or body onload="isLogged()"
  */
 function isLogged() {
-   if (user=sessionLoad(PROJECT) == null) {
-      openPage("./index.html"); // or as Pop Up
-      return false;
+   let ls;
+   user=sessionLoad(PROJECT);
+   if (user == null) {
+      if (loadFromLocalStorage(PROJECT) == null) { 
+         openPage("./index.html"); // or as Pop Up
+         return false;
+      } else {
+         loadUserFromLocalStorage()
+      }
    }
    return true;
 }
@@ -60,8 +66,8 @@ function getUsername() {
 }
 
 function logedUserMonogram() {
-   let user = sessionLoad(PROJECT).username;
-   let userMonogram = getMonogram(user);
+   let user = sessionLoad(PROJECT);
+   let userMonogram = getMonogram(user.username);
    // document.getElementById('loggedUserMonogram').innerHTML = '';
    document.getElementById('loggedUserMonogram').innerHTML = `<span> ${userMonogram} </span>`;
 }

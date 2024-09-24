@@ -63,8 +63,11 @@ async function updateDashboard() {
    }
 }
 
-window.onload = updateDashboard;
+// window.onload = updateDashboard; // <-- das sollte in init
 
 function init() {
-   logedUserMonogram();
+   if (isLogged()) {
+      logedUserMonogram();
+      updateDashboard();
+   }
 }

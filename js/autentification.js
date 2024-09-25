@@ -173,7 +173,7 @@ async function loadUserFromLocalStorage() {
    if (user != null) {
       if (await isLoginCorrect(user.email, user.password, false)) {
          putLoginToValue(user.email, user.password);
-         let obj={ "email": user.email, "password": user.password, "username": user.username };
+         let obj={ "email": user.email, "password": user.password, "username": user.username, "id" : user.id };
          sessionSave(PROJECT, obj );
          openDashboard(); // Exit from here
          return true;

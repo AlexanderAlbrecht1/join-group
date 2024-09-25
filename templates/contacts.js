@@ -206,8 +206,8 @@ function warningHTML(array) {
 
    <div>
       <h2>Attention! <br><br> 
-      If you delete yoruself your account will be deleted an you will be logged out! <br><br>
-      Are you realy want to go on?
+      If you delete yourself, your account will be deleted an you will be logged out! <br><br>
+      Do you realy want to go on?
    </h2>
    </div>
 

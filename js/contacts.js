@@ -285,7 +285,7 @@ async function deleteContact(id) {
    let index = getCurrentContact(id);
    tasks = await loadData("taskstorage");
    console.log(currentSession.id);
-   if (id === currentSession.id) {
+   if (id == currentSession.id) {
       let array = generateArray(id, index);
       let dialogBackground = document.getElementById('dialogBackground');
       dialogBackground.classList.remove('displayNone');
@@ -328,6 +328,8 @@ async function confirmDelete(id) {
    await saveContacts();
    await saveData("taskstorage", tasks);
    await removeUser(userList, indexUserlist);
+   localStorage.removeItem(PROJECT);
+   sessionStorage.removeItem(PROJECT);
    isLogged();
 }
 

@@ -91,8 +91,53 @@ header span {
    color: rgba(41, 171, 226, 1);
 }
 
+.userMonogramicon:hover {
+   cursor: pointer;
+   border: 3px solid rgba(42, 54, 71, 1);
+   box-shadow: rgba(42, 54, 71, 1) 0px 8px 24px;
+}
+
 .userMonogramicon>span {
    padding: 0 !important;
+}
+
+.popUpUser {
+   display: none;
+   width: 150px;
+   height: 204px;
+   background-color: #2A3647;
+   border-radius: 20px 0 20px 20px;
+   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+   position: absolute;
+   right: 64px;
+   top: 80px;
+   padding: 10px;
+   box-sizing: border-box;
+   z-index: 500;
+   /* display: flex; */
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-around;
+}
+
+.linkBox {
+   width: 130px;
+   height: 46px;
+   display: flex;
+   padding-left: 16px;
+   box-sizing: border-box;
+   justify-content: flex-start;
+   align-items: center;
+   border-radius: 20px 0 20px 20px;
+}
+
+.dFlex {
+   display: flex;
+}
+
+.linkBox:hover {
+   background-color: rgba(9, 25, 49, 1);
+   cursor: pointer;
 }
 
 /*

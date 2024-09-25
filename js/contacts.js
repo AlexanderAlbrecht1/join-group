@@ -284,7 +284,6 @@ async function deleteContact(id) {
    let currentSession = sessionLoad(PROJECT);
    let index = getCurrentContact(id);
    tasks = await loadData("taskstorage");
-   console.log(currentSession.id);
    if (id == currentSession.id) {
       let array = generateArray(id, index);
       let dialogBackground = document.getElementById('dialogBackground');

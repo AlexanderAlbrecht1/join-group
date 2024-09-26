@@ -12,20 +12,26 @@
    <link rel="stylesheet" href="/css/inputField.css">
    <link rel="shortcut icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon">
 
+   <script src="./js/localStorage.js"></script>
+   <script src="./js/session.js"></script>
+   <script src="./js/nav_header.js"></script>
+   <script src="./js/localStorage.js"></script>
+   
+
    <title>Privacy Policy</title>
 </head>
-<body>
-   <header>
-      <div class="max-width">
-          <span>Kanban Project Management Tool</span>
-          <div class="headerHelpUser">
-              <div class="helparea">
-                  <a href="./help.html"><img src="/assets/img/desktop/question_mark.svg" alt="Question Mark"></a>
-              </div>
-              <div>Usermonogram</div>
-          </div>
-      </div>
-  </header>
+<body onload="initSessionMonogram()">
+    <header>
+        <div class="max-width">
+            <span>Kanban Project Management Tool</span>
+            <div class="headerHelpUser">
+                <div class="helparea">
+                    <a href="./help.html"><img src="/assets/img/desktop/question_mark.svg" alt="Question Mark"></a>
+                </div>
+                <div id="loggedUserMonogram" class="userMonogramicon" onclick="openUserMenu()"></div>
+            </div>
+        </div>
+    </header>
 
   <nav>
       <img src="/assets\img\desktop\join-logo_navbar.svg" alt="Join-Logo">

@@ -24,10 +24,24 @@
               <div class="helparea">
                   <a href="./help.html"><img src="/assets/img/desktop/question_mark.svg" alt="Question Mark"></a>
               </div>
-              <div id="loggedUserMonogram" class="userMonogramicon"></div>
+              <div id="loggedUserMonogram" class="userMonogramicon" onclick="openUserMenu()"></div>
           </div>
       </div>
   </header>
+  <div class="popUpUser" id="popUpUser">
+    <div class="linkBox">
+        <a href="./help.html">Help</a>
+    </div>
+    <div class="linkBox">
+        <a href="./legal-notice.html">Legal Notice</a>
+    </div>
+    <div class="linkBox">
+        <a href="./privacy-policy.html">Privacy Policy</a>
+    </div>
+    <div class="linkBox">
+        <a onclick="logOut()" href="./index.html">Log out</a>
+    </div>
+</div>
 
   <nav>
       <img src="/assets\img\desktop\join-logo_navbar.svg" alt="Join-Logo">

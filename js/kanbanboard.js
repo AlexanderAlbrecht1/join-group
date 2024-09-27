@@ -37,8 +37,8 @@ async function fetchTasks() {
 }
 
 function filterTasks() {
-   let search=document.getElementById("find").value;
-   let filteredTasks=tasks.filter(e => e.title.includes(search) || e.description.includes(search) )
+   let search=document.getElementById("find").value.toLowerCase();
+   let filteredTasks=tasks.filter(e => e.title.toLowerCase().includes(search) || e.description.toLowerCase().includes(search) )
    displayTasks(filteredTasks);
 }
 

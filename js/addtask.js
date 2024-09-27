@@ -89,7 +89,6 @@ function addSubtasks() {
 
    if (subtaskInput.value !== "") {
       subtaskList.innerHTML = "";
-
       subtasks.push({ name: subtaskInput.value, done: false });
 
       renderSubtasks(subtaskList);
@@ -105,6 +104,7 @@ function renderSubtasks(subtaskList) {
    subtaskList.innerHTML = "";
 
    for (let i = 0; i < subtasks.length; i++) {
+      
       subtaskList.innerHTML += `<div id="subtask-con" class="list-item">
                                  <li ondblclick="editSubtask(${i})">${subtasks[i].name}</li>
                                  <div class="subtask-icon">

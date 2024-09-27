@@ -48,7 +48,6 @@ header {
 }
 
 header span {
-   padding-left: 348px;
    font-size: 20px;
    font-weight: 400;
 }
@@ -224,8 +223,16 @@ nav {
    justify-content: flex-start;
 }
 
+.pd-16 {
+   padding-left: 16px;
+}
+
 
 @media (max-width: 1100px ) {
+   header span {
+      display: none;
+   }
+
    nav {
       flex-direction: row;
       width: 100%;
@@ -241,6 +248,7 @@ nav {
 
    .mainLinks {
       flex-direction: row;
+      justify-content: space-around;
       height: 0;
       width: 100%;
    }

@@ -223,3 +223,42 @@ nav {
    align-items: center;
    justify-content: flex-start;
 }
+
+
+@media (max-width: 1100px ) {
+   nav {
+      flex-direction: row;
+      width: 100%;
+      bottom: 0;
+      top: unset;
+      box-sizing: border-box;
+      padding: 2px;
+      height: 80px;
+   }
+   nav>img {
+      display: none;
+   }
+
+   .mainLinks {
+      flex-direction: row;
+      height: 0;
+      width: 100%;
+   }
+
+   .mainLinks a {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 76px;
+      gap: 4px;
+      }
+
+   .mainLinks>a>img {
+      padding: 0;
+   }
+
+   .adviceLinks {
+      display: none;
+   }
+
+}

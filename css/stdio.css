@@ -36,6 +36,9 @@ a {
 .gap16 {
     gap:16px;
 }
+.gap8 {
+    gap:8px;
+}
 .invert {
     filter:invert();
 }

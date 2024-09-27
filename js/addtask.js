@@ -81,6 +81,11 @@ function init() {
 function addSubtasks() {
    let subtaskInput = document.getElementById("subtasks");
    let subtaskList = document.getElementById("subtask-list");
+   
+   const src="add_subtask.svg";   
+   if (document.getElementById("subtask-icon").src.indexOf(src) != -1) {
+      subtaskInput.focus();      
+   }
 
    if (subtaskInput.value !== "") {
       subtaskList.innerHTML = "";
@@ -188,9 +193,12 @@ function toggleIcon() {
    const subtaskInput = document.getElementById("subtasks");
    const checkIcon = document.getElementById("subtask-icon");
    const clearIcon = document.getElementById("add-subtask-clear");
+   const src="./assets/img/desktop/add_subtask.svg";
+
+
 
    if (subtaskInput.value == "") {
-      checkIcon.src = "./assets/img/desktop/add_subtask.svg"; // Ersetze das Icon mit einem anderen Bild
+      checkIcon.src = src; // Ersetze das Icon mit einem anderen Bild
       clearIcon.classList.add("hidden");
    } else {
       checkIcon.src = "./assets/img/desktop/add-subtask-check.svg";

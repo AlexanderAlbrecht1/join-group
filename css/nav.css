@@ -262,3 +262,9 @@ nav {
    }
 
 }
+
+@media (max-width: 330px ) {
+   .mainLinks a {
+      font-size: 14px;
+   }
+}

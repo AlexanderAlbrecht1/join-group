@@ -49,6 +49,10 @@ a {
     height:48px;
 }
 
+.mb24 {
+    margin-bottom: 24px;
+}
+
 .circle-monogram {
     box-sizing: border-box;
     display: flex;

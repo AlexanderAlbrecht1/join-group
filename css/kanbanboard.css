@@ -68,7 +68,7 @@
     border: 0px;
 }
 
-.mbs .submit-button {
+.submit-button {
     box-sizing: border-box;;
     display: flex;
     align-items: center;
@@ -86,14 +86,11 @@
     font-weight: 700;
     line-height: 25.2px;
 }
-.mbc .submit-button>* {
-}
 
-.mbc .submit-button>img {
+.submit-button>img {
     margin-left: 8px;
     height: 18.67px;
     object-fit: contain;
-
 }
 
 /*

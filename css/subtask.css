@@ -1,0 +1,111 @@
+.subtask-container {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+ }
+
+ .label-input-con {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+    gap: 8px;
+ }
+ 
+ .label-input-con input {
+    padding: 12px 21px 12px 21px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    font-size: 20px;
+    line-height: 24px;
+
+ }
+ 
+ .label-input-con textarea {
+    padding: 18px 16px 18px 16px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+ }
+ 
+ .label-input-con input:focus,
+ .label-input-con textarea:focus {
+    border: 1px solid #29abe2;
+    outline: none;
+ }
+ .add-subtask-clear {
+    padding-right: 14px;
+    margin-right: 8px;
+    border-right: 1px solid #d1d1d1;
+ }
+ 
+ .opacity {
+    opacity: 0;
+ }
+ 
+ .subtask-icon {
+    width: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    flex: 1;
+    background-color: green;;
+ }
+ 
+ .subtask-icon img:first-child {
+    padding-right: 12px;
+    border-right: 1px solid #d1d1d1;
+ }
+ 
+ .subtask-icon img {
+    cursor: pointer;
+ }
+ 
+ .subtask-edit-input {
+    margin-bottom: 12px;
+    width: 100%;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 4px 16px 4px 16px !important;
+    font-size: 16px !important;
+    border-bottom: 1px solid #29abe2 !important;
+ }
+ 
+ .edit-input-con {
+    position: relative;
+ }
+ 
+ .edit-input-con #edit-delete {
+    cursor: pointer;
+    position: absolute;
+    padding-right: 8px;
+    top: 0.3em;
+    right: 40px;
+ }
+ 
+ .edit-input-con #edit-check {
+    cursor: pointer;
+    position: absolute;
+    top: 0.5em;
+    right: 20px;
+ }
+ 
+ li {
+    cursor: pointer;
+    user-select: none;
+ }
+ 
+ #add-subtask {
+    all: unset;
+    position: absolute;
+    top: 2.3em; 
+    right: 16px;
+    outline: none;
+ }
+ 
+ #add-subtask:hover {
+    cursor: pointer;
+ }
+ 
+ #subtasks:focus {
+    border: 1px solid #29abe2;
+ }
+ 

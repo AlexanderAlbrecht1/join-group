@@ -15,6 +15,8 @@
         <link rel="stylesheet" href="./css/inputField.css">
         <link rel="stylesheet" href="./css/customButton.css">
         <link rel="stylesheet" href="./css/customSelector.css">
+        <link rel="stylesheet" href="./css/subtask.css">
+        
 
 
         <link rel="shortcut icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon">
@@ -86,7 +88,7 @@
 
 
 
-                        <div class="relative h32" >
+                        <div class="relative mb24" >
                             <details class="absolute" style="width:100%;">
                                 <summary><input type="text"></summary>
                                 <div class="selectors">
@@ -135,6 +137,26 @@
 
 
                       
+                        <div class="subtask-container label-input-con">
+                            <label for="subtasks">Subtasks</label>
+                            <input oninput="toggleIcon()" type="text" id="subtasks" placeholder="Add new subtask">
+
+                            <button type="button" id="add-subtask"><img id="add-subtask-clear"
+                                    onclick="clearSubtaskInput()" class="add-subtask-clear opacity"
+                                    src="./assets/img/desktop/add-subtask-clear.svg" alt="">
+                                <img onclick="addSubtasks()" id="subtask-icon"
+                                    src="./assets/img/desktop/add_subtask.svg">
+                            </button>
+                            <ul id="subtask-list">
+                            </ul>
+                            <div id="edit-input-con" class="edit-input-con d-none">
+                                <input type="text" id="subtask-edit-input" class="subtask-edit-input">
+                                <img id="edit-delete" onclick="deleteSubtask()"
+                                    src="./assets/img/desktop/subtask-delete.svg" alt="">
+                                <img id="edit-check" onclick="saveEditedSubtask()"
+                                    src="./assets/img/desktop/add-subtask-check.svg" alt="">
+                            </div>
+                        </div>
 
 
 
@@ -228,7 +250,7 @@
                             <input id="find" type="text"  placeholder="Find Task" oninput="filterTasks()">
                             <span class="icon" onclick="filterTasks()"><img src="./assets/img/desktop/search.svg"></span>
                         </div>
-                        <div class="submit-button">
+                        <div class="submit-button darkbutton">
                             Add Task
                             <img src="./assets/img/desktop/white-plus.svg">
                         </div>

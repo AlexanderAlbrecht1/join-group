@@ -45,3 +45,20 @@ a {
 .h48 {
     height:48px;
 }
+
+.circle-monogram {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    border-radius: 50%;
+    border: 2px solid white;
+    color:white;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    height:42px;
+    width: 42px;
+    min-height: 42px;
+    min-width:42px;   
+}

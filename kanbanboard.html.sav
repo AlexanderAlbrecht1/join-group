@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="./css/customButton.css">
         <link rel="stylesheet" href="./css/customSelector.css">
         <link rel="stylesheet" href="./css/subtask.css">
-
+        
 
 
         <link rel="shortcut icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon">
@@ -30,7 +30,7 @@
         <script src="./js/customSelector.js"></script>
         <script src="./js/nav_header.js"></script>
         <script src="./js/addtask.js"></script>
-
+        
 
 
     </head>
@@ -63,7 +63,7 @@
                         
                         <div>
                             <strong>Due date</strong>
-                            <div class="input-container invalid">
+                            <div class="input-container">
                                 <input id="edit-title" type="date"  required placeholder="Title" width="100%" value="${json.dueDate}">
                                 <!-- <span class="icon" onclick="filterTasks()"><img src="./assets/img/desktop/search.svg"></span> -->
                             </div>
@@ -89,7 +89,7 @@
 
 
 
-                        <div class="relative h32" >
+                        <div class="relative mb24" >
                             <details class="absolute" style="width:100%;">
                                 <summary><input type="text"></summary>
                                 <div class="selectors">
@@ -136,6 +136,8 @@
                             <span class="circle-monogram" style="background-color:violet">AZ</span>  
                         </div>
 
+
+                      
                         <div class="subtask-container label-input-con">
                             <label for="subtasks">Subtasks</label>
                             <input class="input-subtask" oninput="toggleSubtaskIcon()" type="text" id="subtasks" placeholder="Add new subtask">
@@ -157,8 +159,6 @@
                                     src="./assets/img/desktop/add-subtask-check.svg" alt="">
                             </div>
                         </div>
-
-                      
 
 
 
@@ -197,7 +197,6 @@
 
         <header>
             <div class="max-width">
-                <img class="pd-16" src="./assets/img/desktop/join-logo_header.svg">
                <span>Kanban Project Management Tool</span>
                <div class="headerHelpUser">
                   <div class="helparea">
@@ -252,7 +251,7 @@
                             <input id="find" type="text"  placeholder="Find Task" oninput="filterTasks()">
                             <span class="icon" onclick="filterTasks()"><img src="./assets/img/desktop/search.svg"></span>
                         </div>
-                        <div class="submit-button">
+                        <div class="submit-button darkbutton">
                             Add Task
                             <img src="./assets/img/desktop/white-plus.svg">
                         </div>

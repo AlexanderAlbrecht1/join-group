@@ -406,10 +406,32 @@ textarea {
    right: 20px;
 }
 
+/*
 li {
    cursor: pointer;
    user-select: none;
 }
+*/
+
+.label-input-con li {
+   cursor: pointer;
+   user-select: none;
+   width: 100%;
+   margin-right: 64px;
+}
+.label-input-con li>input {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 100%;
+   border:none;
+   background: inherit;
+   font-size:inherit;
+   height:unset;
+   margin:0;
+   padding:0;
+   pointer-events:none;
+} 
 
 @media (max-width: 1300px ) {
    .vertical-line-wrapper {

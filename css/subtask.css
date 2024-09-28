@@ -1,63 +1,3 @@
-/*
-    Changes from Origina
-    
-    .subtask-container {
-        position: relative;
-        box-sizing: border-box;
-        display: flex;
-        width: unset;
-    }
-
-    .label-input-con input {
-        padding: 12px 21px 12px 21px;
-        border-radius: 10px;
-        border: 1px solid #d1d1d1;
-        font-size: 20px;
-        line-height: 24px;
-    }
-
-    .opacity {
-        opacity: 0;
-    }
-
-    .hidden { #removed and not used
-        opacity: unset;
-    }
-
-    #add-subtask {
-        all: unset;
-        position: absolute;
-        top: 2.3em;  #top: 3em
-        right: 16px;
-        outline: none;
-    }
-
-    .label-input-con li {
-      cursor: pointer;
-      user-select: none;
-      width: 100%;
-      margin-right: 64px;
-   }
-
-   .label-input-con li>input {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      width: 100%;
-      border:none;
-      background: inherit;
-      font-size:inherit;
-      height:unset;
-      margin:0;
-      padding:0;
-      pointer-events:none;
-   } 
-    
-    i need to change all unique #
-
-
-*/
-
 .subtask-container {
    position: relative;
    box-sizing: border-box;
@@ -102,12 +42,13 @@
 }
 
 .subtask-icon {
-   width: 24px;
+   /* width: 24px; */
+   height: 18px;
    display: flex;
    justify-content: flex-end;
    gap: 16px;
    flex: 1;
-   background-color: green;;
+   padding-right: 8px;
 }
 
 .subtask-icon img:first-child {
@@ -116,6 +57,7 @@
 }
 
 .subtask-icon img {
+   height: 100%;
    cursor: pointer;
 }
 
@@ -130,8 +72,12 @@
 }
 
 .edit-input-con {
+   display: flex;
+   box-sizing: border-box;
    position: relative;
 }
+
+
 
 .edit-input-con #edit-delete {
    cursor: pointer;
@@ -147,7 +93,59 @@
    top: 0.5em;
    right: 20px;
 }
- 
+
+
+.label-input-con ul {
+   margin:0;
+   align-items: center;
+
+   padding:0;
+   list-style:none;
+
+   /* list-style-position: inside;*/ 
+   /* list-style-type: disc; */
+}
+
+.label-input-con .list-item { 
+   position: relative;
+   display: flex;
+   align-items: center;
+   padding-left: 40px; 
+}
+
+.label-input-con .list-item::before {
+   content: '';
+   display: inline-block; 
+   width: 6px; 
+   height: 6px; 
+   background-color: black; 
+   border-radius: 50%; 
+   position: absolute; 
+   left: 20px; 
+   top: 50%; 
+   transform: translateY(-50%); 
+}
+
+
+
+.label-input-con .list-item:hover {
+   background-color: rgba(231, 231, 231, 1);
+   border-radius: 8px;
+}
+.label-input-con .list-item:not(:hover) img {
+   display:none;  
+}
+
+
+.label-input-con .list-item {
+   display:flex;
+   align-items:center;
+   justify-content: space-between;
+   background-color: transparent;
+   transition: background-color 0.3s ease;
+   height: 32px;
+}
+
 .label-input-con li {
    cursor: pointer;
    user-select: none;
@@ -162,29 +160,65 @@
    width: 100%;
    border:none;
    background: inherit;
-   font-size:inherit;
    height:unset;
    margin:0;
    padding:0;
    pointer-events:none;
+   font-family: Inter;
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 19.2px;
 } 
 
- 
+/* PLUS + */
 .btn-add-subtask {
     all: unset;
     position: absolute;
-    top: 2.3em; 
+    /* top: 2.3em; */
     right: 16px;
     outline: none;
+    height: 48px;  /* must be the height of the Inputvalue */
+    top: 33px;     /* must be the height of the label+1 */
+    display: flex;
+    align-items: center
 }
- 
+.btn-add-subtask>img {
+   height: 14px;
+   width: auto;
+}
+
 
 .btn-add-subtask:hover {
     cursor: pointer;
 }
 
-.input-subtask {
-    /* #subtasks:focus {*/
+.Xinput-subtask {
     border: 1px solid #29abe2;
 }
  
+
+/* Stellt sicher, dass der Container den gesamten Platz einnimmt */
+.subtask-con {
+   display: flex;
+   align-items: center; 
+   justify-content: space-between; 
+   padding: 10px; 
+   background-color: transparent; 
+   transition: background-color 0.3s ease; 
+}
+
+.subtask-con:hover {
+   background-color: rgba(231, 231, 231, 1);
+   border-radius: 8px; 
+}
+
+.subtask-item {
+   list-style: none;
+   margin: 0;
+   padding: 0; 
+}
+
+.subtask-icon img {
+   margin-left: 10px; 
+   cursor: pointer; 
+}

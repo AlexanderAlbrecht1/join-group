@@ -75,12 +75,15 @@ function createSingleContactHTML(singleContactArray, id) {
 function addContactHTML() {
    return /*html*/ `
       <div class="addContactLogoContainer">
+         <div class="closeMobile" onclick="closeContactCreation()">
+               <img src="/assets/img/desktop/close_white.svg" alt="">
+         </div>
          <div>
             <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
             <h1>Add contact</h1>
             <span>Tasks are better with a team!</span>
             <div class="vector5"></div>
-            <div class="contactLogo"></div>
+            <div class="contactLogoMirror"></div>
          </div>
       </div>
       <div class="addContactInputContainer">

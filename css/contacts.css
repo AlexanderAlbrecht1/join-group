@@ -494,7 +494,8 @@ a {
    gap: 12px;
 }
 
-.contactLogo {
+.contactLogo,
+.contactLogoMirror {
    width: 55.6px;
    height: 66.48px;
 }
@@ -574,7 +575,7 @@ a {
 
 .addContactInputContainer {
    display: flex;
-   flex: 1;
+   /* flex: 1; */
    justify-content: space-around;
    align-items: center;
    padding: 0 48px 66px 48px;
@@ -605,13 +606,23 @@ a {
    gap: 32px;
 }
 
-.close {
+.close,
+.closeMobile {
    display: flex;
    align-items: center;
    justify-content: center;
    width: 32px;
    height: 32px;
    border-radius: 56px;
+}
+
+.closeMobile {
+   display: none !important;
+}
+
+.closeMobile:hover {
+   background-color: rgba(41, 171, 226, 1);
+   cursor: pointer;
 }
 
 .close:hover {
@@ -630,7 +641,7 @@ a {
 
 .buttons {
    display: flex;
-   width: 364px;
+   /* width: 364px; */
    height: 57px;
    gap: 24px;
    padding-top: 16px;

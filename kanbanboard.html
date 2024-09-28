@@ -29,7 +29,7 @@
         <script src="./js/kanbanTaskView.js"></script>
         <script src="./js/customSelector.js"></script>
         <script src="./js/nav_header.js"></script>
-        <script src="./js/addtask.js"></script>
+        <script src="./js/subtask.js"></script>
 
 
 
@@ -89,7 +89,7 @@
 
 
 
-                        <div class="relative h32" >
+                        <div class="relative mb32" >
                             <details class="absolute" style="width:100%;">
                                 <summary><input type="text"></summary>
                                 <div class="selectors">
@@ -147,14 +147,18 @@
                                 <img onclick="addSubtasks()" id="subtask-icon"
                                     src="./assets/img/desktop/add_subtask.svg">
                             </button>
+                            
                             <ul id="subtask-list">
                             </ul>
+
                             <div id="edit-input-con" class="edit-input-con d-none">
                                 <input type="text" id="subtask-edit-input" class="subtask-edit-input">
-                                <img id="edit-delete" onclick="deleteSubtask()"
-                                    src="./assets/img/desktop/subtask-delete.svg" alt="">
-                                <img id="edit-check" onclick="saveEditedSubtask()"
-                                    src="./assets/img/desktop/add-subtask-check.svg" alt="">
+                                <!-- div class="subtask-icon" -->
+                                    <img id="edit-delete" onclick="deleteSubtask()"
+                                        src="./assets/img/desktop/subtask-delete.svg" alt="">
+                                    <img id="edit-check" onclick="saveEditedSubtask()"
+                                        src="./assets/img/desktop/add-subtask-check.svg" alt="">
+                                <!-- /div-->
                             </div>
                         </div>
 

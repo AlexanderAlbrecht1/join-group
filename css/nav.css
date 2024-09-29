@@ -27,6 +27,7 @@ body {
 
 
 header {
+   z-index: 999;
    position: fixed;
    top: 0;
    width: 100%;
@@ -232,7 +233,9 @@ nav {
    header span {
       display: none;
    }
-
+   body {
+      height: unset;
+   }
    nav {
       flex-direction: row;
       width: 100%;

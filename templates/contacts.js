@@ -72,6 +72,52 @@ function createSingleContactHTML(singleContactArray, id) {
     `
 }
 
+function createSingleContactMobileHTML(singleContactArray, id) {
+   return /*html*/ `
+    <div class="name">
+      <div class="detailMonogramContainer">
+        <span class="detailMonogramSpan" style="background-color: ${singleContactArray.backgroundColor}">${singleContactArray.initial1}${singleContactArray.initial2}</span>
+      </div>
+        <div class="fullNameAndButtons">
+         	<div class="fullname">
+               <span>${singleContactArray.name} ${singleContactArray.lastname}</span>
+            </div>
+          <div class="editButtons">
+            <div onclick="openEditContactDialog(${id})" class="editButton">
+               <div></div>
+               <span>Edit</span>
+            </div>
+            <div onclick="deleteContact(${id})" class="trashButton">
+               <div></div>
+               <span>Delete</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="contactInformation">
+         <span>Contact Information</span>
+      </div>
+      <div class="emailAndPhone">
+         <div class="emailAdressContainer">
+            <span class="spanHeading">Email</span>
+            <a href="mailto:${singleContactArray.mail}?
+                           &subject=Hello from the other side ...">
+            <span class="emailSpan">${singleContactArray.mail}</span>
+            </a>
+         </div>
+         <div class="phoneNumberContainer">
+            <span class="spanHeading">Phone</span>
+            <a href="tel:${singleContactArray.phone}">
+            <span class="phoneSpan">${singleContactArray.phone}</span>
+            </a>
+         </div>
+      </div>
+
+    </div>
+    `
+}
+
 function addContactHTML() {
    return /*html*/ `
       <div class="addContactLogoContainer">

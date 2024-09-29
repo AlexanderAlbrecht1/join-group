@@ -220,12 +220,19 @@ function changeBgColor(id) {
  * @param {number} id 
  */
 function showSingleContact(id) {
+   let width = window.innerWidth;
+   console.log(width);
    changeBgColor(id);
    let index = getCurrentContact(id);
-   let singleContactArray = createSingleContactArray(index)
+   let singleContactArray = createSingleContactArray(index);
+   if (width > 841) {  
    document.getElementById('contactDetail').innerHTML = '';
    document.getElementById('contactDetail').innerHTML = createSingleContactHTML(singleContactArray, id);
    // console.log(id);
+   }  else {
+      document.getElementById('contactDetail').innerHTML = 'Pech jehabt, screen zu kleen!';
+      openMobileContactDetail(singleContactArray, id);
+   }
 }
 
 /**
@@ -354,6 +361,14 @@ function openCreateContactDialog() {
    addContactContainer.innerHTML = '';
    addContactContainer.innerHTML = addContactHTML();
    addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
+}
+
+function openMobileContactDetail(singleContactArray, id) {
+   document.getElementById('contactBook').style.display = none;
+
+   // document.getElementById('workingArea').innerHTML = '';
+   // document.getElementById('workingArea').innerHTML = createSingleContactMobileHTML(singleContactArray, id) ;
+//    addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
 }
 
 /**
@@ -600,5 +615,4 @@ function createNewContactArray(id) {
    }
    return newContact;
 }
-
 

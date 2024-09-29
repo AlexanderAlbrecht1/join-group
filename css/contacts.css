@@ -823,3 +823,11 @@ form {
    display: flex;
    flex-direction: column;
 }
+
+.contactDetailMobile {
+   height: 80vh;
+   width: 100vw;
+   display: flex;
+   flex-direction: column;
+   background-color: rgb(246,247,248);
+}

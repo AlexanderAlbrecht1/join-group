@@ -31,7 +31,11 @@
         <script src="./js/nav_header.js"></script>
         <script src="./js/subtask.js"></script>
 
-
+        <!--
+        A C H T U N G 
+        Nach Eingabe dem Feld "invalid" hinzufügen , damit Fehler erkannt werden
+        man könnte auch visited mit "invalid" abfragen oder nicht
+        -->
 
     </head>
 
@@ -47,7 +51,7 @@
                     <div class="center">
                         <div>
                             <strong>Title</strong>
-                            <div class="input-container invalid">
+                            <div class="input-container">
                                 <input id="edit-title" type="text"  required placeholder="Title" value="${json.title}">
                             </div>
                             <span class="msg">This field is required</span>
@@ -55,7 +59,7 @@
                         
                         <div>
                             <strong>Description</strong>
-                            <div class="input-container invalid">
+                            <div class="input-container">
                                 <textarea id="edit-description" type="text" required rows="4"  placeholder="Description">${json.description}</textarea>
                             </div>
                             <span class="msg">This field is required</span>
@@ -63,7 +67,7 @@
                         
                         <div>
                             <strong>Due date</strong>
-                            <div class="input-container invalid">
+                            <div class="input-container">
                                 <input id="edit-title" type="date"  required placeholder="Title" width="100%" value="${json.dueDate}">
                                 <!-- <span class="icon" onclick="filterTasks()"><img src="./assets/img/desktop/search.svg"></span> -->
                             </div>
@@ -137,26 +141,26 @@
                         </div>
 
                         <div class="subtask-container label-input-con">
-                            <label for="subtasks">Subtasks</label>
-                            <input class="input-subtask" oninput="toggleSubtaskIcon()" type="text" id="subtasks" placeholder="Add new subtask">
-
+                            <label>Subtasks</label>
+                            <input class="input-subtask" oninput="toggleSubtaskIcon(event)" type="text" id="subtasks" placeholder="Add new subtask">
+                            
                             <button type="button" id="add-subtask" class="btn-add-subtask">
-                                <img id="add-subtask-clear"
-                                    onclick="clearSubtaskInput()" class="add-subtask-clear opacity"
+                                <img 
+                                    onclick="clearSubtaskInput(event)" class="add-subtask-clear opacity"
                                     src="./assets/img/desktop/add-subtask-clear.svg" alt="">
-                                <img onclick="addSubtasks()" id="subtask-icon"
+                                <img onclick="addSubtasks(event)" class="subtask-icon"
                                     src="./assets/img/desktop/add_subtask.svg">
                             </button>
                             
-                            <ul id="subtask-list">
+                            <ul class="subtask-list">
                             </ul>
 
-                            <div id="edit-input-con" class="edit-input-con d-none">
-                                <input type="text" id="subtask-edit-input" class="subtask-edit-input">
+                            <div class="edit-input-con d-none">
+                                <input type="text" class="subtask-edit-input">
                                 <!-- div class="subtask-icon" -->
-                                    <img id="edit-delete" onclick="deleteSubtask()"
+                                    <img class="edit-delete" onclick="deleteSubtask(event)"
                                         src="./assets/img/desktop/subtask-delete.svg" alt="">
-                                    <img id="edit-check" onclick="saveEditedSubtask()"
+                                    <img class="edit-check" onclick="saveEditedSubtask(event)"
                                         src="./assets/img/desktop/add-subtask-check.svg" alt="">
                                 <!-- /div-->
                             </div>

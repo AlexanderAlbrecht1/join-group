@@ -1,16 +1,50 @@
 let subtasks=[]
-let currentEditIndex=0;
-/*
-    changes: 
-    toggleSubtaskIcon() was toggleIcin()
-*/
-/*
-    PUBLIC Functions
-*/
-function toggleSubtaskIcon() {
-    const subtaskInput = document.getElementById("subtasks");
-    const checkIcon = document.getElementById("subtask-icon");
-    const clearIcon = document.getElementById("add-subtask-clear");
+let currentEditIndex=null;
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * instead of using IDs we find out where we are and use classes
+ * 
+ * we can use subtasks on different places, wehn we have no unique id
+ * 
+ * this function is for handling thing easiely and reducing mistakes
+ * 
+ * @param {element} target - the element that triggered the event 
+ * @param {*} classname    - the classname
+ * @returns 
+ */
+function getElement(target,classname) {
+    switch(classname) {
+        case "subtask-edit-input":
+        case "edit-input-con":
+        case "subtask-list":
+        case "input-subtask":    // id subtasks
+        case "subtask-icon":
+        case "add-subtask-clear":
+            return target.closest(".subtask-container").querySelector(`.${classname}`);
+
+    }
+    return null;
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * TRIGGERS: when input is made in Subtask entry field
+ * 
+ * INTERNAL Call from: addSubtasks()
+ * 
+ * CHANGES: toggleSubtaskIcon() was toggleIcon()
+ * 
+ */
+function toggleSubtaskIcon(event) {
+    const subtaskInput = getElement(event.currentTarget,"input-subtask");
+    const checkIcon    = getElement(event.currentTarget,"subtask-icon");
+    const clearIcon    = getElement(event.currentTarget,"add-subtask-clear");
     const src="./assets/img/desktop/add_subtask.svg";
  
     if (subtaskInput.value == "") {
@@ -22,54 +56,110 @@ function toggleSubtaskIcon() {
        clearIcon.classList.remove("hidden"); // Setze das ursprüngliche Icon zurück
        clearIcon.classList.remove("opacity");
     }
- }
+}
  
-function clearSubtaskInput() {
-    document.getElementById("subtasks").value = "";
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Clear the main input of subtask
+ * 
+ * @param {event} event - main input of subtask  
+ */ 
+function clearSubtaskInput(event) {
+    getElement(event.currentTarget,"input-subtask").value ="";
 }
 
-function addSubtasks() {
-    let subtaskInput = document.getElementById("subtasks");
-    let subtaskList = document.getElementById("subtask-list");
-    
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Adding new Subtasks to the array
+ * 
+ * @param {event} event - event, that is triggered from Buttons  
+ */
+function addSubtasks(event) {
+    let subtaskInput = getElement(event.currentTarget,"input-subtask");
+    let subtaskList = getElement(event.currentTarget,"subtask-list");
+    let subtaskIcon = getElement(event.currentTarget,"subtask-icon");
     const src="add_subtask.svg";   
-    if (document.getElementById("subtask-icon").src.indexOf(src) != -1) {
+    if (subtaskIcon.src.indexOf(src) != -1) {
        subtaskInput.focus();      
     }
  
     if (subtaskInput.value !== "") {
        subtaskList.innerHTML = "";
- 
        subtasks.push({ name: subtaskInput.value, done: false });
- 
        renderSubtasks(subtaskList);
- 
        subtaskInput.value = "";
-       toggleSubtaskIcon();
-    } else {
-       return;
-    }
+       toggleSubtaskIcon(event);
+    } 
 }
- 
-function deleteSubtask(i) {
-    let subtaskList = document.getElementById("subtask-list");
-    let subtaskEditInput = document.getElementById("subtask-edit-input");
-    let subtaskEditCon = document.getElementById("edit-input-con");
- 
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Delete a Subtask in the Card
+ * 
+ * USES a Global Variable: currentEditIndex 
+ * 
+ * @param {event} event - event that triggers
+ * @param {integer} i   - index of the array, if null use global currentEditIndex 
+ */
+function deleteSubtask(event,i) {
+    let [subtaskEditInput,subtaskList,subtaskEditCon] = getSubtaskElements(event.currentTarget);
+
+    if (i == null && currentEditIndex != null) {
+        i=currentEditIndex;
+    }
+    if (i === null) return;
+
     subtasks.splice(i, 1);
     subtaskEditCon.classList.add("d-none");
     renderSubtasks(subtaskList);
     subtaskEditInput.value = "";
 }
- 
 
 
+/**
+ * 
+ * PRIVATE
+ * 
+ * Returns a group of targets elements
+ * 
+ * @param {element} target - element of the triggert event 
+ * @returns 
+ * - Elements of Classes:
+ * - "subtask-edit-input"
+ * - "subtask-list"
+ * - "edit-input-con"
+ * 
+ */
+function getSubtaskElements(target) {
+    let subtaskEditInput = getElement(target,"subtask-edit-input");
+    let subtaskList = getElement(target,"subtask-list");
+    let subtaskEditCon = getElement(target,"edit-input-con");
 
-function saveEditedSubtask() {
-    let subtaskEditInput = document.getElementById("subtask-edit-input");
-    let subtaskList = document.getElementById("subtask-list");
-    let subtaskEditCon = document.getElementById("edit-input-con");
- 
+    return [subtaskEditInput,subtaskList,subtaskEditCon]
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * save changes to the array
+ * returns to the normal view
+ * 
+ * @param {event} event - triggert from subtasks
+ */
+function saveEditedSubtask(event) {
+    let [subtaskEditInput,subtaskList,subtaskEditCon] = getSubtaskElements(event.currentTarget);
+
     if (currentEditIndex !== null && subtaskEditInput.value !== "") {
        subtasks[currentEditIndex].name = subtaskEditInput.value;
        subtaskEditCon.classList.add("d-none");
@@ -79,48 +169,85 @@ function saveEditedSubtask() {
     }
 }
 
-function editSubtask(index) {
-    let subtaskEditInput = document.getElementById("subtask-edit-input");
-    let subtaskEditCon = document.getElementById("edit-input-con");
- 
-    subtaskEditCon.classList.remove("d-none");
-    subtaskEditCon.focus();
 
-    subtaskEditInput.value = subtasks[index].name;
+/**
+ *
+ * PRIVATE
+ * 
+ * Moves the Selectet Content to a new Inputfield
+ *  
+ * @param {element} target    - The emlement we want to analyse
+ * @param {integer} index     - index of the subtask in array
+ */
+function fillSubtaskInput(target,index) {
+    let container  = target.closest(".subtask-container").querySelector(".edit-input-con");
+    let input      = container.querySelector("INPUT");
+    input.value = subtasks[index].name;
     currentEditIndex = index;
- }
- 
- 
-/*
-    PRIVATE / INTERNAL Functions
-*/
+}
 
 
+/**
+ *
+ * PRIVATE
+ * 
+ * Displays the Inputfiled at the correct Position
+ *  
+ * @param {element} target  - The emlement we want to analyse
+ */
+function displaySubtaskInput(element) {
+    let container  = element.closest(".subtask-container").querySelector(".edit-input-con");
+    let target     = element.closest(".list-item");
+    let input      = container.querySelector("INPUT");
+
+    container.classList.remove("d-none");
+    container.style.marginTop=0;
+
+    let rectTarget    = target.getBoundingClientRect();
+    let rectContainer = container.getBoundingClientRect(); // Hier Ok
+    container.style.marginTop=`${(rectTarget.top - rectContainer.top)}px`;
+    input.focus();
+}
+
+
+/**
+ *
+ * PUBLIC
+ * 
+ * UI: give the Option to edit a Subtask
+ *  
+ * @param {event} event       - Doubleclick/click event 
+ * @param {integer} index     - index of the subtask in array
+ */
+function editSubtask(event,index) {
+    fillSubtaskInput(event.currentTarget,index);
+    displaySubtaskInput(event.currentTarget);
+}
+
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Renders the List of Subtasks, and abels it to do any action
+ * 
+ * @param {elemen} subtaskList - Target to fill the data
+ */
 function renderSubtasks(subtaskList) {
     subtaskList.innerHTML = "";
  
     for (let i = 0; i < subtasks.length; i++) {
-/*
-       subtaskList.innerHTML += `
-       <div id="subtask-con" class="list-item">
-            <li ondblclick="editSubtask(${i})">
-                <input type="text" value="${subtasks[i].name}">
-            </li>
-            <div class="subtask-icon">
-                <img onclick="editSubtask(${i})" src="./assets/img/desktop/subtask-edit.svg" alt="">
-                <img onclick="deleteSubtask(${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
-            </div>
-        </div>`;
-*/
         subtaskList.innerHTML +=/*html*/ `
-            <div id="subtask-con" class="list-item">
-                <li ondblclick="editSubtask(${i})">
+            <div class="list-item relative">
+                <li ondblclick="editSubtask(event,${i})">
                     <input type="text" value="${subtasks[i].name}">
                 </li>
                 <div class="subtask-icon">
-                    <img onclick="editSubtask(${i})" src="./assets/img/desktop/subtask-edit.svg" alt="">
-                    <img onclick="deleteSubtask(${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
+                    <img onclick="editSubtask(event,${i})" src="./assets/img/desktop/subtask-edit.svg" alt="">
+                    <img onclick="deleteSubtask(event,${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
                 </div>
+                <!-- div class="subtask-change edit-input-con d-none"></div-->
+                <div class="subtask-change d-none"></div>
             </div>
         `;
     }

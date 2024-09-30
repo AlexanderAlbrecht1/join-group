@@ -48,12 +48,16 @@ function getTaskViewSubtasks(json) {
     return html;
 }
 
-
-function getTaskView(json) {
+function getCategoryText(json) {
     let cat = "User Story";
     if (json.category == "technical-task") {
         cat="Technical Task";
     }
+    return cat;
+}
+
+function getTaskView(json) {
+    let cat = getCategoryText(json);
     return /*html*/ `
         <div class="top">
             <div class="${json.category}">${cat}</div>

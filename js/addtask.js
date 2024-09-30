@@ -12,7 +12,7 @@ async function addNewTask() {
    let description = document.getElementById("description");
    let assignedTo = Array.from(
       document.querySelectorAll('input[name="assign"]:checked')
-   ).map((checkbox) => checkbox.value);
+   ).map((checkbox) => +checkbox.value);
    let dueDate = document.getElementById("due-date");
    let selectedPrio = document.querySelector('input[name="prio"]:checked');
    let category = document.getElementById("category");

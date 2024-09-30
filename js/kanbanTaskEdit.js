@@ -1,4 +1,4 @@
-function kanbanEditSelectors(assignedList) {
+function XkanbanEditSelectorsSelected(assignedList) {
     let html="";
     for (let i=0;i<assignedList.length;i++) {
         html+=kanbanEditSelector(assignedList[i]);
@@ -6,15 +6,28 @@ function kanbanEditSelectors(assignedList) {
     return html;
 }
 
-function kanbanEditSelector(contactId) {
-    let contact=contacts.find(e => e.id == contactId);
+function kanbanEditSelectors(assignedList) {
+    let html="";
+    
+
+    for (let i=0;i<contacts.length;i++) {
+        let checked="";
+        if (assignedList.indexOf(contacts[i].id) != -1) {
+            checked="checked";
+        }
+
+        html+=kanbanEditSelector(contacts[i],checked);
+    };
+    return html;
+}
+function kanbanEditSelector(contact,checked) {
     if (contact == null) return "";
     let name=getFullNameInContact(contact);
 
 
     return /*html*/ `
         <label class="selector">
-            <input type="checkbox" class="custom-checkbox" name="assign" value="${contact.id}">
+            <input type="checkbox" class="custom-checkbox" name="assign" value="${contact.id}" ${checked}>
             <div class="checkbox-design">
                 <div>
                     <span class="circle-monogram" style="background-color:${contact.color}">${getMonogram(name)}</span>  
@@ -29,12 +42,13 @@ function kanbanEditRenderTask(json) {
     let cat = getCategoryText(json);
 
     return /*html*/ `
-            <div class="top">${cat}</div>
-                <img class="exit" onclick="closeTaskView()" src="./assets/img/desktop/close.svg">
-            </div>
+        <div class="top">
+            <div class="${json.category}">${cat}</div>
+            <img class="exit" onclick="closeTaskView()" src="./assets/img/desktop/close.svg">
+        </div>
             <div class="center">
                 <div>
-                    <strong>${json.category}</strong>
+                    <strong>Title</strong>
                     <div class="input-container">
                         <input id="edit-title" type="text"  required placeholder="Title" value="${json.title}">
                     </div>
@@ -138,7 +152,7 @@ async function editTask(id) {
     // document.getElementById("task-view").classList.add("go")   
     // hier die  Event Listener aufrufen  für Selecor
     // oder den EventListener global gestzalten aber nicht sinnvol
-
-
+    // await new Promise(e => setTimeout(e,1000));
+    initSelector();
 }
 

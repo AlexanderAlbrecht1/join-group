@@ -11,7 +11,7 @@ async function init() {
       contacts = await loadData('Contacts');
       fetchTasks();
       logedUserMonogram();
-      initSelector();
+      //initSelector();
    }
 }
 
@@ -81,6 +81,7 @@ function getTaskOutput(task) {
    let contacts=getContacts(task.assignedTo);
    let categoryClass=getCategoryClass(task.category);
    let subbar=getSubBar(task);
+   let cat = getCategoryText(task);
 
    //Now begin
    return /*html*/`
@@ -90,7 +91,7 @@ function getTaskOutput(task) {
       ondragenter="toggleBorder(event,true)"
       onmouseup="openTask(event)"
      >
-         <h1>${task.category}</h1>
+         <h1>${cat}</h1>
          <div class="mbb-text">
             <h1>${task.title}</h1>
             <span>${task.description}</span>

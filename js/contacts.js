@@ -230,7 +230,6 @@ function showSingleContact(id) {
    document.getElementById('contactDetail').innerHTML = createSingleContactHTML(singleContactArray, id);
    // console.log(id);
    }  else {
-      document.getElementById('contactDetail').innerHTML = 'Pech jehabt, screen zu kleen!';
       openMobileContactDetail(singleContactArray, id);
    }
 }
@@ -364,10 +363,10 @@ function openCreateContactDialog() {
 }
 
 function openMobileContactDetail(singleContactArray, id) {
-   document.getElementById('contactBook').style.display = none;
+   document.getElementById('contactBook').style.display='none';
 
-   // document.getElementById('workingArea').innerHTML = '';
-   // document.getElementById('workingArea').innerHTML = createSingleContactMobileHTML(singleContactArray, id) ;
+   document.getElementById('contactDetail').innerHTML = '';
+   document.getElementById('contactDetail').innerHTML = createSingleContactMobileHTML(singleContactArray, id) ;
 //    addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
 }
 

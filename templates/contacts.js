@@ -175,7 +175,9 @@ function createEditContactDialogHTML(array) {
    return /*html*/ `
         
    <div class="editContactLogoContainer" onclick="dontClose(event)">
-
+   <div class="closeMobile" onclick="closeContactCreation()">
+               <img src="/assets/img/desktop/close_white.svg" alt="">
+         </div>
       <div>
          <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
          <div class="flexColumn">

@@ -498,4 +498,8 @@ li {
    .button-label.urgent, .button-label.low, .button-label.medium {
       font-size: 12px;
    }
+
+   select {
+      font-size: 16px;
+   }
 }

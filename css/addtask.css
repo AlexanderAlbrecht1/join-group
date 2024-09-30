@@ -31,7 +31,6 @@ input {
 }
 
 .selectBox {
-   z-index: 1;
    position: relative;
    border: 1px solid #ccc;
    border-radius: 10px;

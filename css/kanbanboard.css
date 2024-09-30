@@ -1,3 +1,6 @@
+body {
+    height: 100vh;
+}
 .mbc {
     /* height: 100%; */
     display: flex;
@@ -486,13 +489,11 @@ p {
 }
 
 .drive-in {
-    position: absolute;
+    position: fixed;
     top:0px;
     left:0px;
-    width: 100vw;
-    height: 100vh;
+    right: 0px;
     bottom: 0px;
-    left:0p;
     display: flex;
     justify-content: center;
     align-items:center;

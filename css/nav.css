@@ -8,7 +8,6 @@ body {
 body {
    display: flex;
    flex-direction: row;
-   height: 100vh;
    max-width: 1440px;
    background-color: rgba(246, 247, 248, 1);
 }
@@ -27,7 +26,7 @@ body {
 
 
 header {
-   z-index: 999;
+   z-index: 2;
    position: fixed;
    top: 0;
    width: 100%;
@@ -152,6 +151,7 @@ header span {
 
 
 nav {
+   z-index: 2;
    position: fixed;
    top: 0px;
    left: 0px;
@@ -232,9 +232,6 @@ nav {
 @media (max-width: 1100px ) {
    header span {
       display: none;
-   }
-   body {
-      height: unset;
    }
    nav {
       flex-direction: row;

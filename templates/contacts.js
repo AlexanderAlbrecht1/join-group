@@ -1,5 +1,5 @@
 function generateGroupLetterHTML(letter) {
-    return /*html*/ `
+   return /*html*/ `
       <div class="groupLetter">
          <span>\n${letter}</span>
       </div>
@@ -10,8 +10,8 @@ function generateGroupLetterHTML(letter) {
       `
 }
 
-function generateDisplayContactsHTML(contactArray,initial1,initial2) {
-    return /*html*/ `
+function generateDisplayContactsHTML(contactArray, initial1, initial2) {
+   return /*html*/ `
             <div onclick="showSingleContact(${contactArray.ID})" class="contact" id="contact${contactArray.ID}">
                  <div class="monogrammicon" style="background-color: ${contactArray.backgroundColor}">
                     <span>${initial1}${initial2}</span>
@@ -113,8 +113,22 @@ function createSingleContactMobileHTML(singleContactArray, id) {
             </a>
          </div>
       </div>
+      
 
     </div>
+    <div class="wrapperContactEditMobile">
+            
+         </div>
+    <div class="popUpEdit">
+    <div onclick="openEditContactDialog(${id})" class="editButtonMobile">
+               <div></div>
+               <span>Edit</span>
+            </div>
+            <div onclick="deleteContact(${id})" class="trashButtonMobile">
+               <div></div>
+               <span>Delete</span>
+            </div>
+    </div>  
     `
 }
 

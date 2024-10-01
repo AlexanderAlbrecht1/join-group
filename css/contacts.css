@@ -50,7 +50,7 @@ a {
    align-items: flex-start;
    justify-content: space-between;
    width: 100%;
-    margin-right: 16px;
+   margin-right: 16px;
 }
 
 .warpperArrowLeft {
@@ -265,7 +265,23 @@ a {
    font-size: 16px;
 }
 
+.wrapperContactEditMobile {
+   position: absolute;
+   right: 16px;
+   bottom: -100px;
+   width: 56px;
+   height: 56px;
+   border-radius: 100%;
+   background-color: rgba(42, 54, 71, 1);
+   background-image: url("/assets/img/desktop/3_dots_vertical.svg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 5px 21px;
+}
 
+.wrapperContactEditMobile:hover {
+   cursor: pointer;
+}
 
 
 /*

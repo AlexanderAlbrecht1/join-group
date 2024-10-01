@@ -169,7 +169,7 @@ a {
 }
 
 .editButton>div,
-.editButtonMobile>div  {
+.editButtonMobile>div {
    width: 24px;
    height: 24px;
    background-image: url('/assets/img/desktop/pencil.svg');
@@ -181,6 +181,11 @@ a {
    cursor: pointer;
    font-weight: 700;
    color: rgba(41, 171, 226, 1);
+}
+
+.editButtonMobile,
+.trashButtonMobile {
+   cursor: pointer;
 }
 
 .editButton:hover div {
@@ -270,6 +275,7 @@ a {
 }
 
 .wrapperContactEditMobile {
+   display: none;
    position: absolute;
    right: 16px;
    bottom: -100px;
@@ -288,7 +294,7 @@ a {
 }
 
 .popUpWrapper {
-   display: flex;
+   display: none;
    position: fixed;
    top: 0;
    bottom: 0;
@@ -314,6 +320,25 @@ a {
    box-sizing: border-box;
    z-index: 500;
    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+#mobileDialogBackground {
+   display: none;
+   background-color: transparent;
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   z-index: 600;
+}
+
+#mobileWorkContactContainer {
+   position: absolute;
+   top: 100px;
+   bottom: 81px;
+   left: 8px;
+   right: 8px;
 }
 
 /*

@@ -507,6 +507,21 @@ function openEditContactDialog(id) {
    editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
 }
 
+function openEditContactDialogMobile(id) {
+   let index = getCurrentContact(id);
+   let inventoryData = generateInventoryDataArray(index);
+   let array = generateArray(id, index);
+   document.getElementById('mobileDialogBackground').style.display = 'flex';
+   let editContactContainer = document.getElementById('mobileWorkContactContainer');
+   editContactContainer.innerHTML = '';
+   editContactContainer.innerHTML = createEditContactDialogHTML(array); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
+   preFilledInputs(inventoryData);
+}
+
+function closeMobileDialogBackground() {
+   document.getElementById('mobileDialogBackground').style.display = 'none';
+}
+
 /**
  * 
  * hidden dialog container becomes visible

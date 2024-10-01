@@ -20,6 +20,9 @@ function kanbanEditSelectors(assignedList) {
     };
     return html;
 }
+
+
+
 function kanbanEditSelector(contact,checked) {
     if (contact == null) return "";
     let name=getFullNameInContact(contact);
@@ -38,8 +41,10 @@ function kanbanEditSelector(contact,checked) {
         </label>`;
 }
 
+  
 function kanbanEditRenderTask(json) {
     let cat = getCategoryText(json);
+    let mindate=getTaskDateMin(json.dueDate);
 
     return /*html*/ `
         <div class="top">
@@ -66,7 +71,7 @@ function kanbanEditRenderTask(json) {
                 <div>
                     <strong>Due date</strong>
                     <div class="input-container">
-                        <input id="edit-title" type="date"  required placeholder="Title" width="100%" value="${json.dueDate}">
+                        <input id="edit-title" type="date"  required placeholder="Title" width="100%" value="${json.dueDate}" min="${mindate}">
                     </div>
                     <span class="msg">This field is required</span>
                 </div>
@@ -99,10 +104,7 @@ function kanbanEditRenderTask(json) {
                     </details>
                 </div>
                 <div class="monogramlist flex-row gap8">
-                    <span class="circle-monogram" style="background-color:aqua">VN</span>  
-                    <span class="circle-monogram" style="background-color:blue">XY</span>  
-                    <span class="circle-monogram" style="background-color:violet">AZ</span>
-                    Aktive Monogramme  
+                    ${getTaskEditAssigns(json.assignedTo)}
                 </div>
 
                 <div class="subtask-container label-input-con">
@@ -156,3 +158,38 @@ async function editTask(id) {
     initSelector();
 }
 
+/**
+ * 
+ * PRIVATE 
+ * 
+ * Creates HTML: One monogram 
+ * 
+ * @param {*} a - assigned contact
+ * @returns - the generatetd HTML for one contact 
+ */
+function getTaskEditAssign(a) {
+    let contact=contacts.find(e => e.id == a);
+    if (contact == null) return "";
+    let name=getFullNameInContact(contact);
+
+    return /*html*/ `
+       <span class="circle-monogram" style="background-color:${contact.color}">${getMonogram(name)}</span>`;
+}
+
+/**
+ * 
+ * PUBLIC 
+ * 
+ * Creates HTML: a row of contacts
+ * 
+ * @param {*} assigns  - contact.assignedTo List of assigned Contacts
+ * @returns - a row of contacts in HTML  
+ */
+function getTaskEditAssigns(assigns) {
+    if (assigns == null) return "";
+    let html="";
+    for (let assign of assigns) {
+        html+=getTaskEditAssign(assign);
+    }
+    return html;
+}

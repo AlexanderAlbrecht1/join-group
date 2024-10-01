@@ -161,13 +161,15 @@ a {
    gap: 24px;
 }
 
-.editButton {
+.editButton,
+.editButtonMobile {
    display: flex;
    align-items: center;
    gap: 13px;
 }
 
-.editButton>div {
+.editButton>div,
+.editButtonMobile>div  {
    width: 24px;
    height: 24px;
    background-image: url('/assets/img/desktop/pencil.svg');
@@ -185,13 +187,15 @@ a {
    background-image: url('/assets/img/desktop/pencil_hover.svg');
 }
 
-.trashButton {
+.trashButton,
+.trashButtonMobile {
    display: flex;
    align-items: center;
    gap: 13px;
 }
 
-.trashButton>div {
+.trashButton>div,
+.trashButtonMobile>div {
    width: 24px;
    height: 24px;
    background-image: url('/assets/img/desktop/trash.svg');
@@ -283,6 +287,34 @@ a {
    cursor: pointer;
 }
 
+.popUpWrapper {
+   display: flex;
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background-color: transparent;
+   z-index: 450;
+}
+
+.popUpEdit {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   justify-content: space-around;
+   width: 116px;
+   height: 100px;
+   background-color: rgba(255, 255, 255, 1);
+   border-radius: 20px 20px 0 20px;
+   position: absolute;
+   right: 16px;
+   bottom: 100px;
+   padding: 10px;
+   box-sizing: border-box;
+   z-index: 500;
+   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
 
 /*
 ******contactbook area******

@@ -619,3 +619,10 @@ function backToContactBook() {
    document.getElementById('contactBook').style.display='flex';
 }
 
+function openPopUpEdit() {
+   document.getElementById('popUpWarpper').style.display='flex';
+}
+
+function closeMobileEditPopUp() {
+   document.getElementById('popUpWarpper').style.display='none';
+}

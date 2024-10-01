@@ -615,3 +615,7 @@ function createNewContactArray(id) {
    return newContact;
 }
 
+function backToContactBook() {
+   document.getElementById('contactBook').style.display='flex';
+}
+

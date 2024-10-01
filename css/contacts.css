@@ -45,6 +45,29 @@ a {
    margin-top: calc(206px - 96px);
 }
 
+.wrapperHeading {
+   display: flex;
+   align-items: flex-start;
+   justify-content: space-between;
+   width: 100%;
+   margin-right: 16px;
+}
+
+.warpperArrowLeft {
+   display: none;
+   align-items: center;
+   justify-content: center;
+   width: 32px;
+   height: 32px;
+   background-image: url("/assets/img/desktop/arrow_left_blue.svg");
+   background-position: center;
+   background-size: 24px 24px;
+}
+
+.warpperArrowLeft:hover {
+   cursor: pointer;
+}
+
 .heading {
    display: flex;
    align-items: center;
@@ -242,7 +265,23 @@ a {
    font-size: 16px;
 }
 
+.wrapperContactEditMobile {
+   position: absolute;
+   right: 16px;
+   bottom: -100px;
+   width: 56px;
+   height: 56px;
+   border-radius: 100%;
+   background-color: rgba(42, 54, 71, 1);
+   background-image: url("/assets/img/desktop/3_dots_vertical.svg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 5px 21px;
+}
 
+.wrapperContactEditMobile:hover {
+   cursor: pointer;
+}
 
 
 /*
@@ -829,5 +868,5 @@ form {
    width: 100vw;
    display: flex;
    flex-direction: column;
-   background-color: rgb(246,247,248);
+   background-color: rgb(246, 247, 248);
 }

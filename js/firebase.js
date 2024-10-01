@@ -206,6 +206,26 @@ function arrayToObject(array) {
     }, {});
 }
 
+/**
+ * Firebas Authenificatione
+ * {
+ *      "rules": {
+ *          ".read": "auth != null",
+ *          ".write": "auth != null"
+ *      }
+ * }
+ * 
+ */
+/*
+firebase.auth().createUserWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    console.log("Benutzer registriert:", user);
+  })
+  .catch((error) => {
+    console.error("Fehler bei der Registrierung:", error.message);
+});
+*/
 
 /*
 function convertToTable(jsonArray) {

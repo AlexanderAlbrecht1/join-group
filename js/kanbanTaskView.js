@@ -124,12 +124,17 @@ function toggleSubtaskState(element,state=null) {
 }
 
 
+
 async function toggleSubtaskStateEvent(event,id,subId) {
     let state = toggleSubtaskState(event.currentTarget);
     let json = await loadObjectDataById("taskstorage",id);
     json[0].subtasks[subId].done=state;
     saveObjectDataById("taskstorage",json);
 
+    index=tasks.findIndex(e => e.id==id);
+    tasks[index]=json[0];  // .subtasks[subId].done=state;
+    addContainerData(tasks,json[0].status);
+    resizeContainer();
 }
 
 async function deleteTask(id) {

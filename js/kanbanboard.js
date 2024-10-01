@@ -24,6 +24,7 @@ function displayTasks(tasks) {
    for(let status of statusList) {
       addContainerData(tasks,status);
    }
+   resizeContainer();
 }
 
 async function fetchTasks() {

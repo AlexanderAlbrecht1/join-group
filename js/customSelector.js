@@ -8,7 +8,8 @@ let unalowedSpace=false;
  * Init must be called, at beginning
  */
 function initSelector() {
-    addToggleSelectListener();     
+    addToggleSelectListener();    
+
  }
 
 
@@ -159,6 +160,14 @@ function displaySelectorMonograms(event) {
 }
 
 
+
+
+
+
+
+
+
+
 /**
  * 
  * PUBLIC
@@ -180,3 +189,4 @@ function filterSelector(event) {
         return true;
     });
 } 
+

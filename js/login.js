@@ -1,4 +1,4 @@
-function isFormValid(formqs) {
+function XisFormValid(formqs) {
    let form = document.querySelector(formqs);
    if (!form) return false;
 

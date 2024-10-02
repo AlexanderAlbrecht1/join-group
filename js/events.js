@@ -6,6 +6,8 @@
  */
 function disableCheck(submit,id="submit") {
     let button=document.getElementById(id)
+    if (button == null) return
+
     if (submit) {
         button.disabled=false;
         button.classList.remove("disable");
@@ -75,7 +77,7 @@ function addValidationMessage(element) {
 */
 function disableFormEvents(formid) {
     let form=document.getElementById(formid);
-    inputs = form.querySelectorAll('input');
+    inputs = form.querySelectorAll('input, textarea');
     inputs.forEach(element => {
         element.addEventListener("invalid", e => e.preventDefault());
         element.addEventListener("submit", e => e.preventDefault());
@@ -90,7 +92,7 @@ function addFormListener(formSelector, styleObject) {
     let form = document.querySelector(formSelector);
     if (!form) return false;
 
-    let inputs = form.querySelectorAll('input');
+    let inputs = form.querySelectorAll('input, textarea');
     inputs.forEach(input => {
         styleElement(input, styleObject);
         input.addEventListener('input', eventErrorMsg);
@@ -212,7 +214,7 @@ function removeAllCustomMsg(formid) {
     let form = document.querySelector(formid);
     if (!form) return false;
 
-    let inputs = form.querySelectorAll('input');
+    let inputs = form.querySelectorAll('input, textarea');
     inputs.forEach(input => {
         input.setCustomValidity('');
     })
@@ -222,9 +224,18 @@ function markAllFieds(formid) {
     let form = document.querySelector(formid);
     if (!form) return false;
 
-    let inputs = form.querySelectorAll('input');
+    let inputs = form.querySelectorAll('input, textarea');
     inputs.forEach(input => {
         customMessage(input);
         setErrorMsg(input);
     })
 }
+
+function isFormValid(formqs) {
+    let form = document.querySelector(formqs);
+    if (!form) return false;
+ 
+    let inputs = form.querySelectorAll('input, textarea');
+    let status = Array.from(inputs).findIndex(input => !input.checkValidity()) == -1;
+    return status;
+ } 

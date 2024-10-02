@@ -79,6 +79,10 @@ function detailsEventKey(event) {
     if (event.code === 'Space') {
         unalowedSpace = true; // Set the flag when Space key is pressed
     }
+    if (event.code === 'Escape') {
+        detailsEventCloseWindow(event);
+        console.log("ESC");
+    }
 };
 
 
@@ -137,9 +141,21 @@ function addToggleSelectListener(rootId) {
     root.addEventListener('click', detailsEventClick);
     root.addEventListener('toggle', detailsEventToggle);
     root.querySelector("INPUT").addEventListener('input', filterSelector);
+    // root.eventPreventDefault();
+    window.addEventListener('click',closeDetails);
+    // window.addEventListener('keydown',closeDetailsESC);
+    console.log("Events hinzugefügt");
 }
 
- 
+function closeDetails(event) {
+    detailsEventCloseWindow(event);
+} 
+function closeDetailsESC(event) {
+    print ("ESC");
+    if (event.code === "Escape") {
+        detailsEventCloseWindow(event);
+    }
+} 
 /**
  * 
  * PRIVATE 

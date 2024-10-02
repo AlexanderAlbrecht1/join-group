@@ -54,26 +54,26 @@ function kanbanEditRenderTask(json) {
             <div class="center">
                 <div>
                     <strong>Title</strong>
-                    <div class="input-container">
+                    <div class="input-container invalid">
                         <input id="edit-title" type="text"  required placeholder="Title" value="${json.title}">
+                        <span class="error-msg visible"></span>
                     </div>
-                    <span class="msg">This field is required</span>
                 </div>
                 
                 <div>
                     <strong>Description</strong>
-                    <div class="input-container">
+                    <div class="input-container invalid">
                         <textarea id="edit-description" type="text" required rows="4"  placeholder="Description">${json.description}</textarea>
+                        <span class="error-msg visible"></span>
                     </div>
-                    <span class="msg">This field is required</span>
                 </div>
                 
                 <div>
                     <strong>Due date</strong>
-                    <div class="input-container">
+                    <div class="input-container invalid">
                         <input id="edit-title" type="date"  required placeholder="Title" width="100%" value="${json.dueDate}" min="${mindate}">
+                        <span class="error-msg visible"></span>
                     </div>
-                    <span class="msg">This field is required</span>
                 </div>
 
                 <div>
@@ -156,6 +156,8 @@ async function editTask(id) {
     // oder den EventListener global gestzalten aber nicht sinnvol
     // await new Promise(e => setTimeout(e,1000));
     initSelector();
+    addFormListener("#task-edit-card");
+    
 }
 
 /**

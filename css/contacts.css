@@ -274,10 +274,16 @@ a {
    font-size: 16px;
 }
 
-.wrapperContactEditMobile {
+.wrapperMobileButton {
+   position: fixed;
+   bottom: 100px;
+   right: 16px;
+}
+
+.mobileButton {
    display: none;
-   position: absolute;
-   right: 8px;
+   /* position: absolute;
+   right: 8px; */
    bottom: -164px;
    width: 56px;
    height: 56px;
@@ -289,7 +295,7 @@ a {
    background-size: 5px 21px;
 }
 
-.wrapperContactEditMobile:hover {
+.mobileButton:hover {
    cursor: pointer;
 }
 
@@ -339,7 +345,7 @@ a {
    bottom: 81px;
    left: 8px;
    right: 8px;
-   background-color: rgb(255, 255  , 255);
+   background-color: rgb(255, 255, 255);
    border-radius: 30px;
 }
 

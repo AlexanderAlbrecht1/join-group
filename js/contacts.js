@@ -364,6 +364,8 @@ function openCreateContactDialog() {
 
 function openMobileContactDetail(singleContactArray, id) {
    document.getElementById('contactBook').style.display='none';
+   document.getElementById('workingArea').style.display='none';
+
 
    document.getElementById('contactDetail').innerHTML = '';
    document.getElementById('contactDetail').innerHTML = createSingleContactMobileHTML(singleContactArray, id) ;
@@ -632,6 +634,8 @@ function createNewContactArray(id) {
 
 function backToContactBook() {
    document.getElementById('contactBook').style.display='flex';
+   document.getElementById('workingArea').style.display='flex';
+   document.getElementById('mobileButton').style.display='none';
 }
 
 function openPopUpEdit() {

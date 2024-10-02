@@ -177,7 +177,7 @@
       gap: 20px;
    }
 
-   .fullNameAndButtons {
-      word-break: break-word;
-   }
+   .fullname>span {
+      font-size: 24px;
+   }   
 }

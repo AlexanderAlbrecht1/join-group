@@ -514,7 +514,7 @@ function openEditContactDialogMobile(id) {
    document.getElementById('mobileDialogBackground').style.display = 'flex';
    let editContactContainer = document.getElementById('mobileWorkContactContainer');
    editContactContainer.innerHTML = '';
-   editContactContainer.innerHTML = createEditContactDialogHTML(array); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
+   editContactContainer.innerHTML = createEditContactDialogMobileHTML(array); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
    preFilledInputs(inventoryData);
 }
 

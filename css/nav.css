@@ -141,7 +141,7 @@ header span {
 }
 
 .linkBox:hover {
-   background-color: rgba(9, 25, 49, 1);
+   background-color: #2A3D59;
    cursor: pointer;
 }
 
@@ -195,7 +195,7 @@ nav {
 }
 
 .mainLinks a:hover {
-   background-color: rgba(9, 25, 49, 1);
+   background-color: #2A3D59;
 }
 
 .adviceLinks a:hover {

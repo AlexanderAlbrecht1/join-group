@@ -277,8 +277,8 @@ a {
 .wrapperContactEditMobile {
    display: none;
    position: absolute;
-   right: 16px;
-   bottom: -100px;
+   right: 8px;
+   bottom: -164px;
    width: 56px;
    height: 56px;
    border-radius: 100%;
@@ -339,6 +339,8 @@ a {
    bottom: 81px;
    left: 8px;
    right: 8px;
+   background-color: rgb(255, 255  , 255);
+   border-radius: 30px;
 }
 
 /*
@@ -671,7 +673,7 @@ a {
 
 .addContactInputContainer {
    display: flex;
-   /* flex: 1; */
+   flex: 1;
    justify-content: space-around;
    align-items: center;
    padding: 0 48px 66px 48px;

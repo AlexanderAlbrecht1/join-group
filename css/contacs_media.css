@@ -152,4 +152,32 @@
    .editButtons {
       display: none;
    }
+
+   .rightSide {
+      margin-top: 48px;
+   }
+
+   .detailMonogramSpan {
+      width: 80px;
+      height: 80px;
+      font-size: 27px;
+   }
+
+   .contactInformation {
+      height: auto;
+   }
+}
+
+@media (max-width: 400px) {
+   .rightSide {
+      margin-top: 8px;
+   }
+
+   .name {
+      gap: 20px;
+   }
+
+   .fullname>span {
+      font-size: 24px;
+   }   
 }

@@ -76,6 +76,8 @@ function init() {
       initContactList(contacts);
    }
    logedUserMonogram();
+   date = new Date().toISOString().split('T')[0];
+   document.getElementById('due-date').setAttribute('min', date);
 }
 
 function addSubtasks() {

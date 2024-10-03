@@ -33,38 +33,44 @@ function findTag(element,tagname) {
 
 
 /**
- * 
+ * DEPRICATED
  * PRIVATE EVENT
  * 
  * Do not Toggle Window, when Space is pressed
  * 
  * @param {event} event - event of the "detail"- tag
  */
-function preventSpaceToggle(event) {
+function XpreventSpaceToggle(event) {
     const activeElement = document.activeElement;
     if (unalowedSpace && activeElement.tagName.toLowerCase() === 'input' && activeElement.type === 'text') {
         event.preventDefault();  
         unalowedSpace = false;
+        
     }
 }
 
 
 /**
  * 
- * PRIVATE EVENT
+ * PRIVATE
  * 
- * Closes the details-Window when clicked outside
+ * reduce the amout of List of the Selector. Its a filter by typing Letters
  * 
- * @param {event} event - Close window on Click outside
+ * @param {event} event - input Event form Selector  
  */
-function detailsEventCloseWindow(event) {
-    let element=findTag(event.target,"details");
-    if (!element) {
-        for (let element of document.querySelectorAll('details')) {
-            element.open=false;
-        };
-    }
-}
+function filterSelector(event) {
+    if (document.activeElement.tagName != "INPUT") return;
+    let search=document.activeElement.value.toLowerCase();
+    let names=Array.from(event.target.closest("DETAILS").querySelectorAll('.selector-name'));
+    names.filter(e => {
+        if (e.innerHTML.toLowerCase().includes(search)) {
+            e.closest(".selector").classList.remove("d-none");
+        } else {
+            e.closest(".selector").classList.add("d-none");
+        }
+        return true;
+    });
+} 
 
 
 /**
@@ -73,17 +79,52 @@ function detailsEventCloseWindow(event) {
  * 
  * Disables the Window Toggle via Space Key
  * 
- * @param {event} event - Close window on Click outside
+ * @param {event} event - keydown Event - Close window on Click outside
  */
 function detailsEventKey(event) {
     if (event.code === 'Space') {
-        unalowedSpace = true; // Set the flag when Space key is pressed
+        unalowedSpace = true; 
     }
-    if (event.code === 'Escape') {
-        detailsEventCloseWindow(event);
-        console.log("ESC");
+    if (event.code === "Escape") {
+        event.target.closest("details").open=false;
     }
 };
+
+
+/**
+ * 
+ * PRIVATE EVENT
+ * 
+ * Closes the details-Window when clicked outside
+ * 
+ * @param {event} event - click event - Close window on Click outside
+ */
+function detailsEventCloseWindow(event) {
+    let element=findTag(event.target,"details");
+    if (!element) {
+        for (let element of document.querySelectorAll('details')) {
+            element.open=false;
+        };
+    }        
+}
+
+
+/**
+ * 
+ * PRIVATE EVENT
+ * 
+ * Main Click Event, a summery of Events
+ * If Space key was pressed and input is focused, prevent toggle
+ * 
+ * @param {*} event - Click Event
+ */
+function detailsEventClick(event) {
+    const activeElement = document.activeElement;
+    if (unalowedSpace && activeElement.tagName.toLowerCase() === 'input' && activeElement.type === 'text') {
+        event.preventDefault();  
+        unalowedSpace = false;  
+    }
+}
 
 
 /**
@@ -109,19 +150,14 @@ function detailsEventToggle(event) {
  * 
  * PRIVATE EVENT
  * 
- * Main Click Event, a summery of Events
- * If Space key was pressed and input is focused, prevent toggle
+ * Closes Window when ESC is pressed autside the Inputfield
  * 
- * @param {*} event - Klick Event
+ * @param {event} event keydown Event   
  */
-function detailsEventClick(event) {
-    const activeElement = document.activeElement;
-    if (unalowedSpace && activeElement.tagName.toLowerCase() === 'input' && activeElement.type === 'text') {
-        event.preventDefault();  
-        unalowedSpace = false;  
+function checkEscapeKey(event) {
+    if (event.code === "Escape") {
+        detailsEventCloseWindow(event);
     }
-    window.onclick   = detailsEventCloseWindow(event); 
-    window.onkeydown = detailsEventKey(event);
 }
 
 
@@ -138,24 +174,17 @@ function addToggleSelectListener(rootId) {
     if (rootId != null) {
         root=document.getElementById(rootId);
     }
+    let input=root.querySelector("INPUT");
+
     root.addEventListener('click', detailsEventClick);
     root.addEventListener('toggle', detailsEventToggle);
-    root.querySelector("INPUT").addEventListener('input', filterSelector);
-    // root.eventPreventDefault();
-    window.addEventListener('click',closeDetails);
-    // window.addEventListener('keydown',closeDetailsESC);
-    console.log("Events hinzugefügt");
+    input.addEventListener('input', filterSelector);
+    input.addEventListener('keydown',detailsEventKey);
+    window.addEventListener('click',detailsEventCloseWindow); // Close Window on click outside
+    window.addEventListener("keydown",checkEscapeKey);        // Close Window on ESC Key
 }
 
-function closeDetails(event) {
-    detailsEventCloseWindow(event);
-} 
-function closeDetailsESC(event) {
-    print ("ESC");
-    if (event.code === "Escape") {
-        detailsEventCloseWindow(event);
-    }
-} 
+
 /**
  * 
  * PRIVATE 
@@ -183,26 +212,4 @@ function displaySelectorMonograms(event) {
 
 
 
-
-/**
- * 
- * PUBLIC
- * 
- * reduce the amout of List of the Selector. Its a filter by typing Letters
- * 
- * @param {event} event - input Event form Selector  
- */
-function filterSelector(event) {
-    if (document.activeElement.tagName != "INPUT") return;
-    let search=document.activeElement.value.toLowerCase();
-    let names=Array.from(event.target.closest("DETAILS").querySelectorAll('.selector-name'));
-    names.filter(e => {
-        if (e.innerHTML.toLowerCase().includes(search)) {
-            e.closest(".selector").classList.remove("d-none");
-        } else {
-            e.closest(".selector").classList.add("d-none");
-        }
-        return true;
-    });
-} 
 

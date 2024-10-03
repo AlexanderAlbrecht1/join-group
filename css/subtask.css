@@ -32,13 +32,24 @@
 }
 
 .add-subtask-clear {
-   padding-right: 14px;
-   margin-right: 8px;
-   border-right: 1px solid #d1d1d1;
+   /* padding-right: 14px;*/
+   /* margin-right: 8px;*/
+   /* border-right: 1px solid #d1d1d1; */
 }
+
 
 .opacity {
    opacity: 0;
+}
+ 
+/*
+.subtask-icon .list-item:not(:hover) .h-line24 {
+   display:none;
+}
+*/
+
+.subtask-container .d-none+.h-line24 {
+   display: none;
 }
 
 .subtask-icon {
@@ -46,14 +57,15 @@
    height: 18px;
    display: flex;
    justify-content: flex-end;
-   gap: 16px;
+   align-items: center;
+   gap:4px; /*gap: 16px;*/
    flex: 1;
-   padding-right: 8px;
+   /* padding-right: 8px; */
 }
 
 .subtask-icon img:first-child {
-   padding-right: 12px;
-   border-right: 1px solid #d1d1d1;
+   /* padding-right: 12px;
+   border-right: 1px solid #d1d1d1;*/
 }
 
 .subtask-icon img {
@@ -79,21 +91,31 @@
    position: relative;
 }
 
+.edit-input-con>div {
+   position:absolute;
+   right:16px;
+   top:0px;
+   height:24px;
+   flex-direction:row;
+   display:flex;
+   align-items: center;;
+   gap: 4px;
+}
+
+.edit-input-con>div img {
+   cursor:pointer;
+   object-fit: contain;
+}
 
 
 .edit-input-con .edit-delete {
-   cursor: pointer;
-   position: absolute;
-   padding-right: 8px;
-   top: 0.3em;
-   right: 40px;
+   width: 16px;
+   height: 18px;
 }
 
 .edit-input-con .edit-check {
-   cursor: pointer;
-   position: absolute;
-   top: 0.5em;
-   right: 20px;
+   width: 18px;
+   height: auto;
 }
 
 
@@ -112,7 +134,8 @@
    position: relative;
    display: flex;
    align-items: center;
-   padding-left: 40px; 
+   padding-left: 40px;
+   padding-right:16px;
 }
 
 .label-input-con .list-item::before {
@@ -134,7 +157,9 @@
    background-color: rgba(231, 231, 231, 1);
    border-radius: 8px;
 }
-.label-input-con .list-item:not(:hover) img {
+.label-input-con .list-item:not(:hover) img, 
+.label-input-con .list-item:not(:hover) div
+{ /*img*/
    display:none;  
 }
 
@@ -186,7 +211,8 @@
     height: 48px;  /* must be the height of the Inputvalue */
     top: 33px;     /* must be the height of the label+1 */
     display: flex;
-    align-items: center
+    align-items: center;
+    gap: 4px;
 }
 .btn-add-subtask>img {
    height: 14px;
@@ -225,7 +251,7 @@
 }
 
 .subtask-icon img {
-   margin-left: 10px; 
+   /* margin-left: 10px; */
    cursor: pointer; 
 }
 

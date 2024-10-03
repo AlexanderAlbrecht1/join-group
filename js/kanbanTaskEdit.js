@@ -113,8 +113,9 @@ function kanbanEditRenderTask(json) {
                     
                     <button type="button" id="add-subtask" class="btn-add-subtask">
                         <img 
-                            onclick="clearSubtaskInput(event)" class="add-subtask-clear opacity"
+                            onclick="clearSubtaskInput(event)" class="add-subtask-clear d-none"
                             src="./assets/img/desktop/add-subtask-clear.svg" alt="">
+                        <div class="h-line24"></div>    
                         <img onclick="addSubtasks(event)" class="subtask-icon"
                             src="./assets/img/desktop/add_subtask.svg">
                     </button>
@@ -124,10 +125,16 @@ function kanbanEditRenderTask(json) {
 
                     <div class="edit-input-con d-none">
                         <input type="text" class="subtask-edit-input">
+                        <div>
                             <img class="edit-delete" onclick="deleteSubtask(event)"
                                 src="./assets/img/desktop/subtask-delete.svg" alt="">
+                            
+                            <div class="h-line24"></div>    
+                            
                             <img class="edit-check" onclick="saveEditedSubtask(event)"
                                 src="./assets/img/desktop/add-subtask-check.svg" alt="">
+                    
+                        </div>
                     </div>
                 </div>
 
@@ -146,18 +153,22 @@ function kanbanEditRenderTask(json) {
 
 async function editTask(id) {
     let json = await loadObjectDataById("taskstorage",id);
+    let card=document.getElementById("task-edit-card");
+    subtasks=json[0].subtasks;
 
-
-    document.getElementById("task-edit-card").innerHTML=kanbanEditRenderTask(json[0]);
-    document.getElementById("task-edit-card").classList.add(json[0].category);
-    document.getElementById("task-edit-card").classList.remove("d-none");
+    card.innerHTML=kanbanEditRenderTask(json[0]);
+    card.classList.add(json[0].category);
+    card.classList.remove("d-none");
     // document.getElementById("task-view").classList.add("go")   
     // hier die  Event Listener aufrufen  für Selecor
     // oder den EventListener global gestzalten aber nicht sinnvol
     // await new Promise(e => setTimeout(e,1000));
     initSelector();
     addFormListener("#task-edit-card");
-    
+
+    let subtaskElement=card.querySelector(".subtask-list");
+    renderSubtasks(subtaskElement);
+
 }
 
 /**

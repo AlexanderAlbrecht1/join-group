@@ -49,12 +49,15 @@ function toggleSubtaskIcon(event) {
  
     if (subtaskInput.value == "") {
        checkIcon.src = src; // Ersetze das Icon mit einem anderen Bild
-       clearIcon.classList.add("hidden");
-       clearIcon.classList.add("opacity");
+       clearIcon.classList.add("d-none");
+       // clearIcon.classList.add("opacity");
+       clearIcon.nextElementSibling.classList.add("d-none");
+
     } else {
        checkIcon.src = "./assets/img/desktop/add-subtask-check.svg";
-       clearIcon.classList.remove("hidden"); // Setze das ursprüngliche Icon zurück
-       clearIcon.classList.remove("opacity");
+       clearIcon.classList.remove("d-none"); // Setze das ursprüngliche Icon zurück
+       // clearIcon.classList.remove("opacity");
+       clearIcon.nextElementSibling.classList.remove("d-none");
     }
 }
  
@@ -244,6 +247,7 @@ function renderSubtasks(subtaskList) {
                 </li>
                 <div class="subtask-icon">
                     <img onclick="editSubtask(event,${i})" src="./assets/img/desktop/subtask-edit.svg" alt="">
+                    <div class="h-line24"></div>    
                     <img onclick="deleteSubtask(event,${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
                 </div>
                 <!-- div class="subtask-change edit-input-con d-none"></div-->

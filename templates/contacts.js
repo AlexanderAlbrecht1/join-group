@@ -217,7 +217,7 @@ function createEditContactDialogHTML(array) {
         <div class="close" onclick="closeContactCreation()">
             <img src="/assets/img/desktop/close.svg" alt="">
         </div>
-
+        
         <div id="input-field-container" class="input-container">
             <input id="name" type="text" required placeholder="Name">
             <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
@@ -276,7 +276,7 @@ function createEditContactDialogMobileHTML(array) {
         <div class="close" onclick="closeContactCreation()">
             <img src="/assets/img/desktop/close.svg" alt="">
         </div>
-
+        <form class="form-input">
         <div id="input-field-container" class="input-container">
             <input id="name" type="text" required placeholder="Name">
             <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
@@ -303,6 +303,7 @@ function createEditContactDialogMobileHTML(array) {
                 </div>
             </button>
         </div>
+         </form>
     </div>
 </div>
 </div>

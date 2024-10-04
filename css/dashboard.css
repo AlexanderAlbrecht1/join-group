@@ -19,7 +19,7 @@
 }
 
 .dashboard-subtitle {
-   font-size: 4rem;
+   font-size: 3rem;
    font-weight: bold;
    color: #091931;
 }
@@ -53,17 +53,17 @@
    width: 30%;
    display: flex;
    flex-direction: column;
-   align-items: center; /* Zentriert den Text horizontal */
-   justify-content: center; /* Zentriert den Text vertikal */
-   text-align: center; /* Text zentrieren */
+   align-items: center;
+   justify-content: center;
+   text-align: center;
 }
 
 .dashboard h3 {
-   font-size: 1.5rem;
+   font-size: 1.3rem;
 }
 
 .dashboard p {
-   font-size: 3rem;
+   font-size: 2rem;
 }
 
 .greeting-text {
@@ -72,97 +72,124 @@
    margin: 0 0 0 2rem;
 }
 
+.stat-icon {
+   width: 3rem;
+   height: 3rem;
+   background-color: #2a3647;
+   border-radius: 50%;
+   padding: 1.5rem;
+}
+
 .stats1 {
    display: flex;
    justify-content: space-between;
-   margin: 0 0 2rem 0;
+   gap: 20px;
 }
 
 .stats1_inner {
    display: flex;
-   flex-direction: column;
    align-items: center;
    justify-content: center;
-   width: 260px;
-   height: 168px;
-   padding: 28px 48px;
+   gap: 2rem;
    background-color: #fff;
    box-shadow: 0px 0px 4px 0px #0000001a;
    border-radius: 2rem;
    transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
+   flex-direction: row;
+   width: 100%;
+   height: auto;
+   padding: 3rem;
 }
 
 .stats1_inner:hover {
    background-color: #2a3647;
    color: #fff;
-   transform: translateY(-5px);
-   box-shadow: 0px 4px 10px 0px #00000033;
+   transform: translateY(-3px);
+   box-shadow: 0px 3px 8px 0px #00000033;
 }
 
+.stats1 .stats-text {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 1rem;
+}
+
+.stats1 .stats-text h3 {
+   font-size: 1.3rem;
+   margin-block-start: 0;
+   margin-block-end: 0;
+}
+
+.stats1 .stats-text p {
+   font-size: 2rem;
+   margin-block-start: 0;
+   margin-block-end: 0;
+}
+
+/* Styling für Stats 2 */
 .stats2 {
    display: flex;
    justify-content: space-evenly;
    align-items: center;
-   height: 168px;
-   padding: 28px 48px;
+   height: 117px;
+   padding: 19px 34px;
    margin: 2rem 0;
    background-color: #fff;
    box-shadow: 0px 0px 4px 0px #0000001a;
    border-radius: 2rem;
-   position: relative;
    transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
-}
-
-.stats2::after {
-   content: '';
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   height: 100px;
-   width: 1px;
-   background-color: #0000001a;
 }
 
 .stats2:hover {
    background-color: #2a3647;
-   color: #fff; /* Text wird weiß beim Hover */
-   transform: translateY(-5px);
-   box-shadow: 0px 4px 10px 0px #00000033;
+   color: #fff;
+   transform: translateY(-3px);
+   box-shadow: 0px 3px 8px 0px #00000033;
 }
+
+/* Styling für Stats 3 */
 .stats3 {
    display: flex;
    justify-content: space-evenly;
-   gap: 2rem;
-   margin: 2rem 0;
+   gap: 20px;
 }
 
 .stats3_inner {
    display: flex;
    flex-direction: column;
-   align-items: center;
-   justify-content: center;
    text-align: center;
-   width: 160px;
-   height: 168px;
-   padding: 28px 48px;
    background-color: #fff;
    box-shadow: 0px 0px 4px 0px #0000001a;
    border-radius: 2rem;
    transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
+   width: 100%;
+   height: auto;
 }
 
 .stats3_inner:hover {
    background-color: #2a3647;
-   color: #fff; /* Text wird weiß beim Hover */
-   transform: translateY(-5px);
-   box-shadow: 0px 4px 10px 0px #00000033;
+   color: #fff;
+   transform: translateY(-3px);
+   box-shadow: 0px 3px 8px 0px #00000033;
 }
 
-.dashboard-container div {
-   opacity: 1;
+.stats3 .stats-text {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-block-start: 0;
+   margin-block-end: 0;
 }
 
-.dashboard-container div:hover {
-   opacity: 1;
+.stats3 .stats-text h3 {
+   font-size: 1.3rem;
+   margin-block-start: 0;
+   margin-block-end: 0;
+}
+
+.stats3 .stats-text p {
+   font-size: 2rem;
+   margin-block-start: 0;
+   margin-block-end: 0;
 }

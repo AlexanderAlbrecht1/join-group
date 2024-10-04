@@ -180,6 +180,12 @@ body{
    }
 }
 
+@media (max-width: 500px) {
+   .addContactInputContainer2 {
+      width: unset;
+   }
+}
+
 @media (max-width: 400px) {
    .rightSide {
       margin-top: 8px;

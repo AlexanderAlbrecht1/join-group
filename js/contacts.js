@@ -362,6 +362,22 @@ function openCreateContactDialog() {
    addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
 }
 
+function openCreateContactDialogMobile() {
+   document.getElementById('mobileDialogBackground').style.display = 'flex';
+   let editContactContainer = document.getElementById('mobileWorkContactContainer');
+   editContactContainer.innerHTML = '';
+   editContactContainer.innerHTML = addContactHTML();
+   editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
+   // let dialogBackground = document.getElementById('dialogBackground');
+   // let addContactContainer = document.getElementById('addContactContainer');
+   // document.getElementById('body').classList.add('overflowHidden');
+   // dialogBackground.classList.remove('displayNone');
+   // dialogBackground.classList.add('displayFlex');
+   // addContactContainer.innerHTML = '';
+   // addContactContainer.innerHTML = addContactHTML();
+   // addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
+}
+
 function openMobileContactDetail(singleContactArray, id) {
    document.getElementById('contactBook').style.display='none';
    document.getElementById('workingArea').style.display='none';
@@ -518,6 +534,7 @@ function openEditContactDialogMobile(id) {
    editContactContainer.innerHTML = '';
    editContactContainer.innerHTML = createEditContactDialogMobileHTML(array); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
    preFilledInputs(inventoryData);
+   editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
 }
 
 function closeMobileDialogBackground() {

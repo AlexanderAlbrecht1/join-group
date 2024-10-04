@@ -103,12 +103,10 @@ body {
       flex-direction: column;
       padding: 16px;
       justify-content: flex-start;
-      margin-top: -72px;
+      margin-top: -56px;
    }
 
-   .addContactLogoContainer h1 {
-      font-size: 47px;
-   }
+
 
    .addContactLogoContainer span {
       font-size: 20px;
@@ -141,6 +139,12 @@ body {
 }
 
 @media (max-width: 841px) {
+
+   .addContactLogoContainer h1,
+   .editContactLogoContainer h1 {
+      font-size: 47px;
+   }
+
    .warpperArrowLeft {
       display: flex;
    }
@@ -161,7 +165,8 @@ body {
       margin-top: 48px;
    }
 
-   .detailMonogramSpan {
+   .detailMonogramSpan,
+   .emptyMonogram>img {
       width: 80px;
       height: 80px;
       font-size: 27px;
@@ -207,11 +212,29 @@ body {
       display: none;
    }
 
-   .addContactLogoContainer h1 {
+   .addContactLogoContainer h1,
+   .editContactLogoContainer h1 {
       font-size: 40px;
+   }
+
+   .contactLogo,
+   .contactLogoMirror {
+      display: none;
    }
 
    .addContactLogoContainer span {
       font-size: 18px;
+   }
+
+   .form-input {
+         gap: 4px;
+   }
+
+   .addContactInputContainer2 {
+      margin-top: 4px;
+   }
+
+   .addContactInputContainer {
+      padding: 0;
    }
 }

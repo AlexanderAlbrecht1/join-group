@@ -371,7 +371,7 @@ function openCreateContactDialogMobile() {
    editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
    // let dialogBackground = document.getElementById('dialogBackground');
    // let addContactContainer = document.getElementById('addContactContainer');
-   // document.getElementById('body').classList.add('overflowHidden');
+   document.getElementById('contactBook').style.overflowY = "hidden";
    // dialogBackground.classList.remove('displayNone');
    // dialogBackground.classList.add('displayFlex');
    // addContactContainer.innerHTML = '';
@@ -620,6 +620,7 @@ async function saveEditedContact(id) {
    // renderContactList(contacts);
    await displayContacts();
    document.getElementById(`contact${id}`).click();
+   closeMobileDialogBackground();
 }
 
 /**

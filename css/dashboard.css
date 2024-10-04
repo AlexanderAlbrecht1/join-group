@@ -19,7 +19,7 @@
 }
 
 .dashboard-subtitle {
-   font-size: 3rem;
+   font-size: 2rem;
    font-weight: bold;
    color: #091931;
 }
@@ -28,6 +28,12 @@
    font-size: 3rem;
    color: #29abe2;
    margin: 0 3rem;
+}
+
+.divider-urgent {
+   font-size: 4rem;
+   color: lightgrey;
+   margin: 0 2rem;
 }
 
 .dashboard-subtext {
@@ -132,6 +138,25 @@
    flex-direction: column;
    align-items: center;
    gap: 1rem;
+}
+
+.stats-text-deadline h3 {
+   font-size: 1.5rem;
+   margin-block-start: 0;
+   margin-block-end: 0;
+}
+
+.stats-text-deadline p {
+   font-size: 1rem;
+   margin-block-start: 0;
+   margin-block-end: 0;
+}
+
+.stats2-c {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 2rem;
 }
 
 .stats1 .stats-text h3 {

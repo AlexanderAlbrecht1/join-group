@@ -140,6 +140,17 @@
    gap: 1rem;
 }
 
+.stats-text-deadline {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+.keynumber {
+   font-size: 6rem;
+   font-weight: bold;
+}
+
 .stats-text-deadline h3 {
    font-size: 1.5rem;
    margin-block-start: 0;

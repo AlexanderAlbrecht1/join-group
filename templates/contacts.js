@@ -113,11 +113,6 @@ function createSingleContactMobileHTML(singleContactArray, id) {
             </a>
          </div>
       </div>
-      <!-- <div class="wrapperMobileButton">
-         <div class="mobileButton" onclick="openPopUpEdit()">
-            
-            </div>
-      </div> -->
 
     </div>
 

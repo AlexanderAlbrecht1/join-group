@@ -280,6 +280,12 @@ a {
    right: 16px;
 }
 
+.wrapperMobileButton1 {
+   position: fixed;
+   bottom: 100px;
+   right: 16px;
+}
+
 .mobileButton {
    display: none;
    /* position: absolute;
@@ -294,6 +300,22 @@ a {
    background-position: center;
    background-size: 5px 21px;
 }
+
+.AddContactButtonMobile {
+   display: none;
+   /* position: absolute;
+   right: 8px; */
+   bottom: -164px;
+   width: 56px;
+   height: 56px;
+   border-radius: 100%;
+   background-color: rgba(42, 54, 71, 1);
+   background-image: url("/assets/img/desktop/person_add.svg");
+   background-repeat: no-repeat;
+   background-position: center;
+   /* background-size: 5px 21px; */
+}
+
 
 .mobileButton:hover {
    cursor: pointer;

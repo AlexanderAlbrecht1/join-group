@@ -1,4 +1,4 @@
-body{
+body {
    height: 100vh;
 }
 
@@ -170,11 +170,11 @@ body{
    .contactInformation {
       height: auto;
    }
-   
+
    .buttonBackground {
       display: none;
-   } 
-   
+   }
+
    .AddContactButtonMobile {
       display: flex;
    }
@@ -182,7 +182,7 @@ body{
 
 @media (max-width: 500px) {
    .addContactInputContainer2 {
-      width: unset;
+      width: auto;
    }
 }
 
@@ -197,5 +197,21 @@ body{
 
    .fullname>span {
       font-size: 24px;
-   }   
+   }
+
+   .addContactInputContainer2 {
+      width: 290px;
+   }
+
+   .cancelButton {
+      display: none;
+   }
+
+   .addContactLogoContainer h1 {
+      font-size: 40px;
+   }
+
+   .addContactLogoContainer span {
+      font-size: 18px;
+   }
 }

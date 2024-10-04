@@ -172,6 +172,7 @@ async function addNewContact() {
    closeContactCreation();
    await displayContacts();
    document.getElementById(`contact${id}`).click();
+   closeMobileDialogBackground();
    await msgfly();
 }
 

@@ -141,7 +141,7 @@ function createSingleContactMobileHTML(singleContactArray, id) {
 function addContactHTML() {
    return /*html*/ `
       <div class="addContactLogoContainer">
-         <div class="closeMobile" onclick="closeContactCreation()">
+         <div class="closeMobile" onclick="closeContactCreation(), closeMobileDialogBackground()">
                <img src="/assets/img/desktop/close_white.svg" alt="">
          </div>
          <div>

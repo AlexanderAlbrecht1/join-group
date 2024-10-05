@@ -2,16 +2,12 @@
    position: relative;
    box-sizing: border-box;
    display: flex;
-}
-
-.label-input-con {
-   display: flex;
    flex-direction: column;
    margin-top: 32px;
    gap: 8px;
 }
  
-.label-input-con input {
+.subtask-container input {
    padding: 12px 21px 12px 21px;
    border-radius: 10px;
    border: 1px solid #d1d1d1;
@@ -19,63 +15,45 @@
    line-height: 24px;
 }
 
-.label-input-con textarea {
+.subtask-container textarea {
    padding: 18px 16px 18px 16px;
    border-radius: 10px;
    border: 1px solid #d1d1d1;
 }
 
-.label-input-con input:focus,
-.label-input-con textarea:focus {
+.subtask-container input:focus,
+.subtask-container textarea:focus {
    border: 1px solid #29abe2;
    outline: none;
-}
-
-.add-subtask-clear {
-   /* padding-right: 14px;*/
-   /* margin-right: 8px;*/
-   /* border-right: 1px solid #d1d1d1; */
 }
 
 
 .opacity {
    opacity: 0;
 }
- 
-/*
-.subtask-icon .list-item:not(:hover) .h-line24 {
-   display:none;
-}
-*/
+
 
 .subtask-container .d-none+.h-line24 {
    display: none;
 }
 
-.subtask-icon {
-   /* width: 24px; */
+.subtask-container .subtask-icon {
    height: 18px;
    display: flex;
    justify-content: flex-end;
    align-items: center;
-   gap:4px; /*gap: 16px;*/
+   gap:4px; 
    flex: 1;
-   /* padding-right: 8px; */
 }
 
-.subtask-icon img:first-child {
-   /* padding-right: 12px;
-   border-right: 1px solid #d1d1d1;*/
-}
 
-.subtask-icon img {
+.subtask-container .subtask-icon img {
    height: 100%;
    cursor: pointer;
 }
 
-.subtask-edit-input {
+.subtask-container .subtask-edit-input {
    margin-bottom: 12px;
-   /*width: 100%;* wenn mit box-sizing */
    border: none !important;
    border-radius: 0 !important;
    padding: 4px 16px 4px 16px !important;
@@ -85,13 +63,13 @@
    flex:1;
 }
 
-.edit-input-con {
+.subtask-container .edit-input-con {
    display: flex;
    box-sizing: border-box;
    position: relative;
 }
 
-.edit-input-con>div {
+.subtask-container .edit-input-con>div {
    position:absolute;
    right:16px;
    top:0px;
@@ -102,43 +80,33 @@
    gap: 4px;
 }
 
-.edit-input-con>div img {
+.subtask-container .edit-input-con>div img {
    cursor:pointer;
    object-fit: contain;
 }
 
 
-.edit-input-con .edit-delete {
+.subtask-container .edit-input-con .edit-delete {
    width: 16px;
    height: 18px;
 }
 
-.edit-input-con .edit-check {
+.subtask-container .edit-input-con .edit-check {
    width: 18px;
    height: auto;
 }
 
 
-.label-input-con ul {
+.subtask-container ul {
    margin:0;
    align-items: center;
 
    padding:0;
    list-style:none;
-
-   /* list-style-position: inside;*/ 
-   /* list-style-type: disc; */
 }
 
-.label-input-con .list-item { 
-   position: relative;
-   display: flex;
-   align-items: center;
-   padding-left: 40px;
-   padding-right:16px;
-}
 
-.label-input-con .list-item::before {
+.subtask-container .list-item::before {
    content: '';
    display: inline-block; 
    width: 6px; 
@@ -153,38 +121,43 @@
 
 
 
-.label-input-con .list-item:hover {
+.subtask-container .list-item:hover {
    background-color: rgba(231, 231, 231, 1);
    border-radius: 8px;
 }
-.label-input-con .list-item:not(:hover) img, 
-.label-input-con .list-item:not(:hover) div
+.subtask-container .list-item:not(:hover) img, 
+.subtask-container .list-item:not(:hover) div
 { /*img*/
    display:none;  
 }
 
-.label-input-con .subtask-edit-input:focus~img {
+.subtask-container .subtask-edit-input:focus~img {
    display:flex !important;  
 }
 
 
-.label-input-con .list-item {
-   display:flex;
+.subtask-container .list-item {
+   position: relative;
+   box-sizing: border-box;
+   display: flex;
    align-items:center;
    justify-content: space-between;
    background-color: transparent;
    transition: background-color 0.3s ease;
    height: 32px;
+   padding-left: 40px;
+   padding-right:16px;
 }
 
-.label-input-con li {
+
+.subtask-container li {
    cursor: pointer;
    user-select: none;
    width: 100%;
    margin-right: 64px;
 }
 
-.label-input-con li>input {
+.subtask-container li>input {
    overflow: hidden;
    text-overflow: ellipsis;
    white-space: nowrap;
@@ -202,10 +175,9 @@
 } 
 
 /* PLUS + */
-.btn-add-subtask {
+.subtask-container .btn-add-subtask {
     all: unset;
     position: absolute;
-    /* top: 2.3em; */
     right: 16px;
     outline: none;
     height: 48px;  /* must be the height of the Inputvalue */
@@ -214,7 +186,9 @@
     align-items: center;
     gap: 4px;
 }
-.btn-add-subtask>img {
+
+
+.subtask-container .btn-add-subtask>img {
    height: 14px;
    width: auto;
 }
@@ -224,12 +198,9 @@
     cursor: pointer;
 }
 
-.Xinput-subtask {
-    border: 1px solid #29abe2;
-}
- 
 
 /* Stellt sicher, dass der Container den gesamten Platz einnimmt */
+/*
 .subtask-con {
    display: flex;
    align-items: center; 
@@ -251,7 +222,6 @@
 }
 
 .subtask-icon img {
-   /* margin-left: 10px; */
    cursor: pointer; 
 }
 
@@ -269,3 +239,4 @@
    align-content: space-between;
    background-color: yellow;
 }
+*/

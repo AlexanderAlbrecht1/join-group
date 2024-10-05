@@ -33,24 +33,6 @@ function findTag(element,tagname) {
 
 
 /**
- * DEPRICATED
- * PRIVATE EVENT
- * 
- * Do not Toggle Window, when Space is pressed
- * 
- * @param {event} event - event of the "detail"- tag
- */
-function XpreventSpaceToggle(event) {
-    const activeElement = document.activeElement;
-    if (unalowedSpace && activeElement.tagName.toLowerCase() === 'input' && activeElement.type === 'text') {
-        event.preventDefault();  
-        unalowedSpace = false;
-        
-    }
-}
-
-
-/**
  * 
  * PRIVATE
  * 

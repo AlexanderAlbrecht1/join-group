@@ -506,10 +506,6 @@ p {
     transition: 600ms ease-in-out;
 }
 
-.Xanimated2d {
-    transition: 600ms ease-in-out;
-}
-
 .drive-in>.task-view-card {
     transform: translate(100vw,0);
     transition: 600ms ease-in-out;

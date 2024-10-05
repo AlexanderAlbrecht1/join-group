@@ -1,5 +1,5 @@
 let tasks = [];
-let subtasks = [];
+// let subtasks = [];
 
 async function addNewTask() {
    showRequiredText();
@@ -71,16 +71,18 @@ function showCheckboxes() {
    }
 }
 
-function init() {
+async function init() {
    if (isLogged()) {
-      initContactList(contacts);
+      // initContactList(contacts);
+      contacts=await loadSortedContactList();
+      logedUserMonogram();
+      date = new Date().toISOString().split('T')[0];
+      document.getElementById('due-date').setAttribute('min', date);
+      initAssignSelector();
    }
-   logedUserMonogram();
-   date = new Date().toISOString().split('T')[0];
-   document.getElementById('due-date').setAttribute('min', date);
 }
 
-function addSubtasks() {
+function XXaddSubtasks() {
    let subtaskInput = document.getElementById("subtasks");
    let subtaskList = document.getElementById("subtask-list");
    

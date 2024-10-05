@@ -125,19 +125,6 @@ a {
    border-radius: 70px;
 }
 
-/*  .name span {
-   height: 120px;
-   width: 120px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   font-family: Inter;
-   font-size: 47px;
-   font-weight: 500;
-   color: rgba(255, 255, 255, 1);
-   border-radius: 70px; 
-} */
-
 .fullNameAndButtons {
    display: flex;
    flex-direction: column;
@@ -537,7 +524,7 @@ a {
    top: 0;
    right: 0;
    left: 0;
-   bottom: -200px;
+   bottom: 0;
    background-color: rgba(0, 0, 0, 0.3);
    z-index: 500;
 }

@@ -157,7 +157,7 @@ function addContactHTML() {
             <img src="./assets/img/desktop/empty_user.svg" alt="">
          </div>
          <div class="addContactInputContainer2">
-            <div class="close" onclick="closeContactCreation()">
+            <div class="close" onclick="closeContactCreation(), closeMobileDialogBackground()">
                <img src="/assets/img/desktop/close.svg" alt="">
             </div>
             <form class="form-input" onsubmit="addNewContact();return false;">

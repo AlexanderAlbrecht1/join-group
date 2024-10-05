@@ -1,9 +1,6 @@
-function XkanbanEditSelectorsSelected(assignedList) {
-    let html="";
-    for (let i=0;i<assignedList.length;i++) {
-        html+=kanbanEditSelector(assignedList[i]);
-    };
-    return html;
+function getElementEdit(targetElement,query) {
+    let father=targetElement.closest(".task-edit-card");
+    return father.querySelector(query);     
 }
 
 function kanbanEditSelectors(assignedList) {
@@ -55,7 +52,7 @@ function kanbanEditRenderTask(json) {
                 <div>
                     <strong>Title</strong>
                     <div class="input-container invalid">
-                        <input id="edit-title" type="text"  required placeholder="Title" value="${json.title}">
+                        <input class="edit-title" type="text"  required placeholder="Title" value="${json.title}">
                         <span class="error-msg visible"></span>
                     </div>
                 </div>
@@ -63,7 +60,7 @@ function kanbanEditRenderTask(json) {
                 <div>
                     <strong>Description</strong>
                     <div class="input-container invalid">
-                        <textarea id="edit-description" type="text" required rows="4"  placeholder="Description">${json.description}</textarea>
+                        <textarea class="edit-description" type="text" required rows="4"  placeholder="Description">${json.description}</textarea>
                         <span class="error-msg visible"></span>
                     </div>
                 </div>
@@ -71,7 +68,7 @@ function kanbanEditRenderTask(json) {
                 <div>
                     <strong>Due date</strong>
                     <div class="input-container invalid">
-                        <input id="edit-title" type="date"  required placeholder="Title" width="100%" value="${json.dueDate}" min="${mindate}">
+                        <input class="edit-date" type="date"  required placeholder="Title" width="100%" value="${json.dueDate}" min="${mindate}">
                         <span class="error-msg visible"></span>
                     </div>
                 </div>
@@ -79,17 +76,29 @@ function kanbanEditRenderTask(json) {
                 <div>
                     <strong>Priority</strong>
                     <div class="flex-row gap16 priority">
-                        <input type="radio" id="urgent" name="prio" value="urgent" ${json.prio=="urgent"?"checked":""}>
-                        <label for="urgent" class="button-label urgent">Urgent<img id="urgent-icon"
-                                src="./assets/img/desktop/prio_urgent_red.svg"></label>
+                        <label>
+                            <input type="radio" name="edit-prio" value="urgent" ${json.prio=="urgent"?"checked":""}>
+                            <div class="button-label urgent">
+                                Urgent
+                                <img src="./assets/img/desktop/prio_urgent_red.svg">
+                            </div>
+                        </label>
 
-                        <input type="radio" id="medium" name="prio" value="medium" ${json.prio=="medium"?"checked":""}>
-                        <label for="medium" class="button-label medium">Medium<img id="medium-icon"
-                                src="./assets/img/desktop/prio_medium_yellow.svg"></label>
+                        <label>
+                            <input type="radio" id="edit-medium" name="edit-prio" value="medium" ${json.prio=="medium"?"checked":""}>
+                            <div class="button-label medium">
+                                Medium
+                                <img src="./assets/img/desktop/prio_medium_yellow.svg">
+                            </div>
+                        </label>
 
-                        <input type="radio" id="low" name="prio" value="low" ${json.prio=="low"?"checked":""}>
-                        <label for="low" class="button-label low">Low <img id="low-icon"
-                                src="./assets/img/desktop/prio_low_green.svg"></label>
+                        <label>
+                            <input type="radio" id="edit-low" name="edit-prio" value="low" ${json.prio=="low"?"checked":""}>
+                            <div for="edit-low" class="button-label low">
+                                Low 
+                                <img src="./assets/img/desktop/prio_low_green.svg">
+                            </div>
+                        </label>
                     </div>
                 </div>
 
@@ -205,4 +214,25 @@ function getTaskEditAssigns(assigns) {
         html+=getTaskEditAssign(assign);
     }
     return html;
+}
+
+function getRadioValue(element,name) {
+    radio = element.querySelectorAll(`input[name='${name}']`);
+    for (let i=0;i<radio.length;i++) {
+        if (radio[i].checked) return radio[i].value;
+    }
+    return "";
+}
+
+function taskToObj(event,task) {
+    let father=event.target.closest(".task-edit-card");
+    console.log(tasks);
+    console.log(subtasks);
+    console.log(father.getElementEdit(event,target,".edit-title"));
+    console.log(father.getElementEdit(event.target,".edit-description"));
+    console.log(father.getElementEdit(event.target,".edit-date"));
+    
+    console.log(getRadioValue(father,"edit-prio"));
+    console.log(subtasks);
+
 }

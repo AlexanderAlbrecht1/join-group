@@ -237,6 +237,8 @@ function editSubtask(event,index) {
  * @param {elemen} subtaskList - Target to fill the data
  */
 function renderSubtasks(subtaskList) {
+    if (subtasks== null) return;
+    
     subtaskList.innerHTML = "";
  
     for (let i = 0; i < subtasks.length; i++) {

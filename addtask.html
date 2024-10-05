@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="./css/nav.css">
     <link rel="stylesheet" href="./css/msgfly.css" />
 
+    <link rel="stylesheet" href="./css/stdio.css" />
+    <link rel="stylesheet" href="./css/customSelector.css" />
+
     <link rel="shortcut icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon">
     
     <script src="./js/localStorage.js"></script>
@@ -25,6 +28,10 @@
     <script src="./js/msgfly.js"></script>
     <script src="./js/nav_header.js"></script>
     <script src="./js/stdio.js"></script>
+    <script src="./js/customSelector.js"></script>
+    <script src="./js/assignSelector.js"></script>
+    <script src="./js/contactAddons.js"></script>
+    
     
 </head>
 
@@ -98,7 +105,9 @@
                             <label for="description">Description</label>
                             <textarea id="description" placeholder="Enter a Description"></textarea>
                         </div>
-                        <div class="label-input-con">
+
+
+                        <!-- div class="label-input-con">
                             <label>Assigned to</label>
                             <div class="multiselect">
                                 <div class="selectBox" onmouseup="showCheckboxes()">
@@ -114,7 +123,26 @@
                                     <label><input type="checkbox" name="assign" value="Kontakt 4" /> Kontakt 4</label>
                                 </div>
                             </div>
+                        </div-->
+
+                        <div class="label-input-con relative mb32" >
+                            <label>Assigned to</label>
+        
+                            <details class="absolute" style="width:100%;">
+                                <summary><input type="text"></summary>
+                                <div id="add-task-assignToList" class="selectors">
+                                    ${kanbanEditSelectors(json.assignedTo)}
+                                </div>
+                            </details>
                         </div>
+                        <div id="addtask-monogramlist" class="monogramlist flex-row gap8">
+                            ${getTaskEditAssigns(json.assignedTo)}
+                        </div>
+        
+
+
+
+
                     </div>
 
                     <div class="vertical-line-wrapper">
@@ -144,6 +172,7 @@
                                         src="./assets/img/desktop/prio_low_green.svg"></label>
                             </div>
                         </div>
+
                         <div class="label-input-con">
                             <label for="category">Category<span class="required-asterisk">*</span></label>
                             <div id="select-box" class="selectBox">

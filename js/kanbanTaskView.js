@@ -1,8 +1,4 @@
-function getFullNameInContact(contact) {
-    let name=contact.name + " " + contact.lastname;
-    //if (name == getLoginname()) name+=" (You)";
-    return name;
-}
+
 
 function getTaskViewAssign(a) {
     let contact=contacts.find(e => e.id == a);
@@ -110,11 +106,7 @@ async function openTask(event) {
     let id=event.currentTarget.id.split("-")[1];
     let json = await loadObjectDataById("taskstorage",id);
     openTaskView(json);
-    
-    // let json = await loadObjectDataById("taskstorage",id);
-    // document.getElementById("task-edit-card").style="display: none";
-    // document.getElementById("task-view-card").innerHTML=getTaskView(json[0]);
-    
+       
     document.getElementById("task-view").classList.add("go");
 
 }
@@ -128,10 +120,7 @@ async function closeTaskEdit() {
 }
 
 function closeTaskView() {
-    // document.getElementById("task-view").classList.add("goback"); // Neu XX
-    // await new Promise(e=>setTimeout(e,600));    
     document.getElementById("task-view").classList.remove("go");
-    // document.getElementById("task-view-card").classList.remove("move-right"); // Neu XX
 }
 
 function toggleActiveKanbanTask(event) {

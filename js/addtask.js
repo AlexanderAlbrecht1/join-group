@@ -1,5 +1,5 @@
 let tasks = [];
-let subtasks = [];
+// let subtasks = [];
 
 async function addNewTask() {
    showRequiredText();
@@ -82,7 +82,7 @@ async function init() {
    }
 }
 
-function addSubtasks() {
+function XXaddSubtasks() {
    let subtaskInput = document.getElementById("subtasks");
    let subtaskList = document.getElementById("subtask-list");
    

@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" href="./css/stdio.css" />
     <link rel="stylesheet" href="./css/customSelector.css" />
+    <link rel="stylesheet" href="./css/subtask.css" />
 
     <link rel="shortcut icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon">
     
@@ -29,8 +30,10 @@
     <script src="./js/nav_header.js"></script>
     <script src="./js/stdio.js"></script>
     <script src="./js/customSelector.js"></script>
-    <script src="./js/assignSelector.js"></script>
+    <script src="./js/assignSelector.js"></script>   
     <script src="./js/contactAddons.js"></script>
+    <script src="./js/subtask.js"></script>
+    
     
     
 </head>
@@ -106,43 +109,18 @@
                             <textarea id="description" placeholder="Enter a Description"></textarea>
                         </div>
 
-
-                        <!-- div class="label-input-con">
+                        <div class="label-input-con" >
                             <label>Assigned to</label>
-                            <div class="multiselect">
-                                <div class="selectBox" onmouseup="showCheckboxes()">
-                                    <select>
-                                        <option style="display:none;">Select contacts to assign</option>
-                                    </select>
-                                    <div class="overSelect"></div>
-                                </div>
-                                <div id="checkboxes">
-                                    <label><input type="checkbox" name="assign" value="Kontakt 1" /> Kontakt 1</label>
-                                    <label><input type="checkbox" name="assign" value="Kontakt 2" /> Kontakt 2</label>
-                                    <label><input type="checkbox" name="assign" value="Kontakt 3" /> Kontakt 3</label>
-                                    <label><input type="checkbox" name="assign" value="Kontakt 4" /> Kontakt 4</label>
-                                </div>
+                            <div class="relative addtask-assign" >
+                                <details class="absolute" style="width:100%;">
+                                    <summary><input type="text"></summary>
+                                    <div id="add-task-assignToList" class="selectors">
+                                    </div>
+                                </details>
                             </div>
-                        </div-->
-
-                        <div class="label-input-con relative mb32" >
-                            <label>Assigned to</label>
-        
-                            <details class="absolute" style="width:100%;">
-                                <summary><input type="text"></summary>
-                                <div id="add-task-assignToList" class="selectors">
-                                    ${kanbanEditSelectors(json.assignedTo)}
-                                </div>
-                            </details>
-                        </div>
-                        <div id="addtask-monogramlist" class="monogramlist flex-row gap8">
-                            ${getTaskEditAssigns(json.assignedTo)}
-                        </div>
-        
-
-
-
-
+                            <div id="addtask-monogramlist" class="monogramlist flex-row gap8">
+                            </div>
+                        </div>        
                     </div>
 
                     <div class="vertical-line-wrapper">
@@ -186,8 +164,42 @@
                         </div>
 
 
-
                         <div class="subtask-container label-input-con">
+                            <label>Subtasks</label>
+                            <input class="input-subtask" oninput="toggleSubtaskIcon(event)" type="text" id="subtasks" placeholder="Add new subtask">
+                            
+                            <button type="button" id="add-subtask" class="btn-add-subtask">
+                                <img 
+                                    onclick="clearSubtaskInput(event)" class="add-subtask-clear d-none"
+                                    src="./assets/img/desktop/add-subtask-clear.svg" alt="">
+                                <div class="h-line24"></div>    
+                                <img onclick="addSubtasks(event)" class="subtask-icon"
+                                    src="./assets/img/desktop/add_subtask.svg">
+                            </button>
+                            
+                            <ul class="subtask-list">
+                            </ul>
+        
+                            <div class="edit-input-con d-none">
+                                <input type="text" class="subtask-edit-input">
+                                <div>
+                                    <img class="edit-delete" onclick="deleteSubtask(event)"
+                                        src="./assets/img/desktop/subtask-delete.svg" alt="">
+                                    
+                                    <div class="h-line24"></div>    
+                                    
+                                    <img class="edit-check" onclick="saveEditedSubtask(event)"
+                                        src="./assets/img/desktop/add-subtask-check.svg" alt="">
+                            
+                                </div>
+                            </div>
+                        </div>
+        
+
+
+
+
+                        <!-- div class="subtask-container label-input-con">
                             <label for="subtasks">Subtasks</label>
                             <input oninput="toggleIcon()" type="text" id="subtasks" placeholder="Add new subtask">
 
@@ -200,11 +212,11 @@
                             <ul id="subtask-list">
                             </ul>
                             <div id="edit-input-con" class="edit-input-con d-none">
-                            <input type="text" id="subtask-edit-input" class="subtask-edit-input">
-                            <img id="edit-delete" onclick="deleteSubtask()" src="./assets/img/desktop/subtask-delete.svg" alt="">
-                            <img id="edit-check" onclick="saveEditedSubtask()" src="./assets/img/desktop/add-subtask-check.svg" alt="">
-                        </div>
-                        </div>
+                                <input type="text" id="subtask-edit-input" class="subtask-edit-input">
+                                <img id="edit-delete" onclick="deleteSubtask()" src="./assets/img/desktop/subtask-delete.svg" alt="">
+                                <img id="edit-check" onclick="saveEditedSubtask()" src="./assets/img/desktop/add-subtask-check.svg" alt="">
+                            </div>
+                        </div-->
                     </div>
 
                 </div>

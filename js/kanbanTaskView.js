@@ -34,8 +34,8 @@ function getTaskViewAssigns(assigns) {
 function getTaskViewSubtasks(json) {
     if (json.subtasks == null) return "";
     let html="";
-    let checked=""
     for (subId=0;subId<json.subtasks.length;subId++) {
+        let checked=""
         if (json.subtasks[subId].done == true) checked="checked";
 
         html+= /*html*/ `  
@@ -96,18 +96,42 @@ function getTaskView(json) {
 
 }
 
+async function openTaskView(json) {
+    document.getElementById("task-edit-card").style="display: none";
+    document.getElementById("task-view-card").innerHTML=getTaskView(json[0]);
+    document.getElementById("task-view-card").style="";
+    
+}
+
 async function openTask(event) {
     if (event.type === "dragleave") {
         return
     }
     let id=event.currentTarget.id.split("-")[1];
     let json = await loadObjectDataById("taskstorage",id);
-    document.getElementById("task-view-card").innerHTML=getTaskView(json[0]);
-    document.getElementById("task-view").classList.add("go")
+    openTaskView(json);
+    
+    // let json = await loadObjectDataById("taskstorage",id);
+    // document.getElementById("task-edit-card").style="display: none";
+    // document.getElementById("task-view-card").innerHTML=getTaskView(json[0]);
+    
+    document.getElementById("task-view").classList.add("go");
+
+}
+
+
+async function closeTaskEdit() {
+    closeTaskView();
+    await new Promise(e=>setTimeout(e,600));    
+    document.getElementById("task-view-card").style="";
+    
 }
 
 function closeTaskView() {
-    document.getElementById("task-view").classList.remove("go")
+    // document.getElementById("task-view").classList.add("goback"); // Neu XX
+    // await new Promise(e=>setTimeout(e,600));    
+    document.getElementById("task-view").classList.remove("go");
+    // document.getElementById("task-view-card").classList.remove("move-right"); // Neu XX
 }
 
 function toggleActiveKanbanTask(event) {
@@ -147,5 +171,3 @@ async function deleteTask(id) {
     closeTaskView();
 }
 
-async function editTask(id) {
-}

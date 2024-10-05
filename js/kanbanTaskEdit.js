@@ -9,8 +9,11 @@ function kanbanEditSelectors(assignedList) {
 
     for (let i=0;i<contacts.length;i++) {
         let checked="";
-        if (assignedList.indexOf(contacts[i].id) != -1) {
-            checked="checked";
+        if (assignedList != null) {
+
+            if (assignedList.indexOf(contacts[i].id) != -1) {
+                checked="checked";
+            }
         }
 
         html+=kanbanEditSelector(contacts[i],checked);
@@ -46,7 +49,7 @@ function kanbanEditRenderTask(json) {
     return /*html*/ `
         <div class="top">
             <div class="${json.category}">${cat}</div>
-            <img class="exit" onclick="closeTaskView()" src="./assets/img/desktop/close.svg">
+            <img class="exit" onclick="closeTaskEdit()" src="./assets/img/desktop/close.svg">
         </div>
             <div class="center">
                 <div>
@@ -105,6 +108,8 @@ function kanbanEditRenderTask(json) {
 
 
                 <div class="relative mb32" >
+                    <strong>Assigned to</strong>
+
                     <details class="absolute" style="width:100%;">
                         <summary><input type="text"></summary>
                         <div class="selectors">
@@ -150,7 +155,7 @@ function kanbanEditRenderTask(json) {
             </div>
     
             <div class="bottom">
-                <div class="darkbutton">
+                <div class="darkbutton" onclick="saveEditTask(${json.id})">
                     Ok
                     <img class="invert" src="./assets/img/desktop/add-subtask-check.svg">
                 </div>
@@ -174,6 +179,8 @@ async function editTask(id) {
     // await new Promise(e => setTimeout(e,1000));
     initSelector();
     addFormListener("#task-edit-card");
+    document.getElementById("task-view-card").style="display: none";
+    card.style="";
 
     let subtaskElement=card.querySelector(".subtask-list");
     renderSubtasks(subtaskElement);
@@ -223,16 +230,46 @@ function getRadioValue(element,name) {
     }
     return "";
 }
+function getAssignedIdsFromUI(father) {
+    let selections=father.querySelectorAll('input[name="assign"]');
+    if (selections==null) return [];
+    assigned=[];
+    for (let i=0;i<selections.length;i++) {
+        if (selections[i].checked) assigned.push(+selections[i].value);
+    }
+    return assigned;
+};
 
-function taskToObj(event,task) {
-    let father=event.target.closest(".task-edit-card");
-    console.log(tasks);
-    console.log(subtasks);
-    console.log(father.getElementEdit(event,target,".edit-title"));
-    console.log(father.getElementEdit(event.target,".edit-description"));
-    console.log(father.getElementEdit(event.target,".edit-date"));
-    
-    console.log(getRadioValue(father,"edit-prio"));
-    console.log(subtasks);
+function taskEditToObj(task) {
+    let father=document.getElementById("task-edit-card");
+    task.subtasks=subtasks;
+    task.title=father.querySelector(".edit-title").value;
+    task.description=father.querySelector(".edit-description").value;
+    task.prio=getRadioValue(father,"edit-prio");
+    task.dueDate=father.querySelector(".edit-date").value
+    task.assignedTo=getAssignedIdsFromUI(father);
+}
+
+function updateTask(task) {
+    let index=tasks.findIndex(e => e.id==task.id);
+    tasks[index]=task;
+    addContainerData(tasks,task.status);
+
+}
+
+async function saveEditTask(id) {
+    let json = await loadObjectDataById("taskstorage",id);
+    taskEditToObj(json[0]);
+    updateTask(json[0]);
+    await saveObjectDataById("taskstorage",json);
+    openTaskView(json);
+
+
+
+
+
+    // save
+    // close
+
 
 }

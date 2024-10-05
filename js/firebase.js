@@ -65,7 +65,10 @@ async function loadData(table,id=null) {
             'Content-type': 'application/json; charset=UTF-8',
         }
     };
-    return await getResponse(table,options,id);
+    let data=await getResponse(table,options,id);
+    if (Array.isArray(data)) data = data.filter(element => element !== null);
+
+    return data;
 }
 
 /**

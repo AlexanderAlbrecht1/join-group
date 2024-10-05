@@ -28,7 +28,8 @@ function displayTasks(tasks) {
 }
 
 async function fetchTasks() {
-   tasks = await loadData('taskstorage');
+   // tasks = await loadData('taskstorage');
+   tasks = await loadObjectData('taskstorage');
 
    if (tasks) {
       displayTasks(tasks);

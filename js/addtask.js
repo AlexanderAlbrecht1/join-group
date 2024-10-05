@@ -45,6 +45,7 @@ function clearTaskInputs() {
       .querySelectorAll('input[name="assign"]')
       .forEach((checkbox) => (checkbox.checked = false));
    document.getElementById("due-date").value = "";
+   document.getElementById('addtask-monogramlist').innerHTML="";
    document.querySelectorAll('input[name="prio"]').forEach((radio) => {
       if (radio.id == "medium") {
          radio.checked = true;

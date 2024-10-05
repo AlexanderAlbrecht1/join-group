@@ -9,6 +9,7 @@ body {
    }
 }
 
+
 @media(max-width : 1250px) {
    .heading {
       flex-direction: column;
@@ -157,6 +158,17 @@ body {
 
 }
 
+
+@media(min-width : 842px) {
+   .workingArea {
+      display: flex !important;
+   }
+
+   .contactBook {
+      display: flex !important;
+   }
+}
+
 @media (max-width: 841px) {
 
    .addContactLogoContainer h1,
@@ -260,6 +272,13 @@ body {
    .addContactInputContainer {
       padding: 0;
    }
+
+   .contactBook,
+   .contactsOverview  {
+      width: 100%;
+   }
+
+   
 }
 
 @media (max-height:750px) {

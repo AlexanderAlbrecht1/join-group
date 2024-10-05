@@ -65,15 +65,21 @@ body {
       font-size: 20px;
    }
 
-   .dialogMain {
-      width: 90%;
+   #mobileWorkContactContainer {
+      width: 95% !important;
    }
+}
 
-   /* .detailMonogramSpan {
-       width: 80px;
-       height: 80px;
-       font-size: 27px;
-    } */
+@media (min-width:1101px) {
+   #mobileWorkContactContainer {
+      margin: auto;
+      display: flex;
+      align-items: center;
+      width: 1212px;
+      height: 592px;
+      border-radius: 30px;
+      background-color: rgba(255, 255, 255, 1);
+   }
 }
 
 @media (max-width: 1100px) {
@@ -91,8 +97,8 @@ body {
    }
 
    .dialogMain {
-      width: 90%;
-      height: 90%;
+      width: 95%;
+      height: 80%;
       flex-direction: column;
    }
 
@@ -208,7 +214,7 @@ body {
    }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 410px) {
    /* .rightSide {
       margin-top: 8px;
    } */
@@ -244,7 +250,7 @@ body {
    }
 
    .form-input {
-         gap: 4px;
+      gap: 4px;
    }
 
    .addContactInputContainer2 {
@@ -253,5 +259,21 @@ body {
 
    .addContactInputContainer {
       padding: 0;
+   }
+}
+
+@media (max-height:750px) {
+   .rightSide {
+      margin-top: 8px;
+   }
+}
+
+@media (max-height:610px) {
+   .addContactLogoContainer {
+      height: 100%;
+   }
+
+   .dialogMain {
+      height: 80%;
    }
 }

@@ -353,14 +353,20 @@ async function removeUser(userList, index) {
  * creates a contact form to add a new contact
  */
 function openCreateContactDialog() {
-   let dialogBackground = document.getElementById('dialogBackground');
-   let addContactContainer = document.getElementById('addContactContainer');
-   document.getElementById('body').classList.add('overflowHidden');
-   dialogBackground.classList.remove('displayNone');
-   dialogBackground.classList.add('displayFlex');
-   addContactContainer.innerHTML = '';
-   addContactContainer.innerHTML = addContactHTML();
-   addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
+   document.getElementById('mobileDialogBackground').style.display = 'flex';
+   let editContactContainer = document.getElementById('mobileWorkContactContainer');
+   editContactContainer.innerHTML = '';
+   editContactContainer.innerHTML = addContactHTML();
+   editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
+   document.getElementById('contactBook').style.overflowY = "hidden";
+   // let dialogBackground = document.getElementById('dialogBackground');
+   // let addContactContainer = document.getElementById('addContactContainer');
+   // document.getElementById('body').classList.add('overflowHidden');
+   // dialogBackground.classList.remove('displayNone');
+   // dialogBackground.classList.add('displayFlex');
+   // addContactContainer.innerHTML = '';
+   // addContactContainer.innerHTML = addContactHTML();
+   // addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
 }
 
 function openCreateContactDialogMobile() {

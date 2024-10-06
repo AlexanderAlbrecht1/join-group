@@ -465,7 +465,7 @@ a {
 }
 
 .nameOverviev {
-   height: 24px;
+   /* height: 24px; */
    font-size: 20px;
    font-family: Inter;
    font-weight: 400;
@@ -485,6 +485,10 @@ a {
    color: rgba(0, 124, 238, 1);
    overflow: hidden;
    text-overflow: ellipsis;
+}
+
+.scrollWrapper {
+   width: 100%;
 }
 
 

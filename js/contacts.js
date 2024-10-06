@@ -1,5 +1,6 @@
 let contacts = [];
 let taskStorage = [];
+let h = window.innerHeight
 
 async function initContacts() {
    isLogged();
@@ -307,7 +308,7 @@ async function deleteContact(id) {
       // await removeUser(userList, index);
       // await saveData("user", userList);
       displayContacts();
-      closeContactCreation();
+      document.getElementById('mobileDialogBackground').style.display = 'none';
    }
 }
 

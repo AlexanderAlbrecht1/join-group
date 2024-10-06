@@ -171,6 +171,10 @@ body {
 
 @media (max-width: 841px) {
 
+   .name {
+      gap: 20px;
+   }
+
    .addContactLogoContainer h1,
    .editContactLogoContainer h1 {
       font-size: 47px;
@@ -231,10 +235,6 @@ body {
       margin-top: 8px;
    } */
 
-   .name {
-      gap: 20px;
-   }
-
    .fullname>span {
       font-size: 24px;
    }
@@ -274,11 +274,11 @@ body {
    }
 
    .contactBook,
-   .contactsOverview  {
+   .contactsOverview {
       width: 100%;
    }
 
-   
+
 }
 
 @media (max-height:750px) {
@@ -294,5 +294,17 @@ body {
 
    .dialogMain {
       height: 80%;
+   }
+
+   .contactDetail {
+      height: 500px;
+      /* overflow-y: scroll;
+      margin-bottom: 80px; */
+   }
+
+   .scrollWrapper {
+      overflow-y: scroll;
+      height: 500px;
+      scrollbar-width: none;
    }
 }

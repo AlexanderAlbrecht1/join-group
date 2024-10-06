@@ -71,3 +71,7 @@ function init() {
       updateDashboard();
    }
 }
+
+function forwardingToBoard() {
+   window.location.href = './kanbanboard.html';
+}

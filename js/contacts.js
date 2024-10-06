@@ -1,6 +1,12 @@
 let contacts = [];
 let taskStorage = [];
-let h = window.innerHeight
+
+/**
+ * 
+ * checks if the a user ist logged in, geneartes the user mongram, laods the contact book
+ * 
+ * 
+ */
 
 async function initContacts() {
    isLogged();
@@ -85,6 +91,12 @@ function getCurrentContact(id) {
    return null;
 }
 
+/**
+ * 
+ * @param {object} userList - list of all registed users
+ * @param {number} id - a unique number for every person in Join
+ * @returns 
+ */
 function getIndexUser(userList, id) {
    for (let index = 0; index < userList.length; index++) {
       if (userList[index].id === id) {
@@ -165,10 +177,7 @@ async function addNewContact() {
       color: color,
    };
    contacts.push(newContact);
-   // await saveContacts();
    await saveData("Contacts", contacts);
-   // saveContacts(id,newContact);
-
    clearInput();
    closeContactCreation();
    await displayContacts();
@@ -176,20 +185,6 @@ async function addNewContact() {
    closeMobileDialogBackground();
    await msgfly();
 }
-
-// function getNewId(contacts) {
-//    if (contacts.length === 0) {
-//       return 1; // Startet bei 1, wenn keine Kontakte vorhanden sind
-//    }
-//    let maxId = contacts.reduce((max, contact) => {
-//       // Prüfe, ob die ID gültig ist und größer als der aktuelle maxId
-//       if (contact && typeof contact.id === 'number' && contact.id > max) {
-//          return contact.id;
-//       }
-//       return max;
-//    }, 0);
-//    return maxId + 1; // Erhöhe die höchste ID um 1
-// }
 
 /**
  * 
@@ -219,7 +214,7 @@ function changeBgColor(id) {
  * 
  * creates a detailed contact view of the contact, clicked in the contactbook
  * 
- * @param {number} id 
+ * @param {number} id - 
  */
 function showSingleContact(id) {
    let width = window.innerWidth;
@@ -305,13 +300,18 @@ async function deleteContact(id) {
       await deleteContactFromTask(tasks, id);
       await saveContacts();
       await saveData("taskstorage", tasks);
-      // await removeUser(userList, index);
-      // await saveData("user", userList);
       displayContacts();
       document.getElementById('mobileDialogBackground').style.display = 'none';
    }
 }
 
+/**
+ * 
+ * serches the deleted contact in tasks and remove it
+ * 
+ * @param {object} tasks 
+ * @param {number} id 
+ */
 async function deleteContactFromTask(tasks, id) {
    for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].assignedTo == null) continue;
@@ -345,31 +345,12 @@ async function removeUser(userList, index) {
    saveData("user", userList);
    clearLocalStorage();
    sessionDestroy();
-   // clearLoginFields();
-   // msgBox(`Your data is completely deleted! Sorry to loose you !`);
 }
 
 /**
  *
  * creates a contact form to add a new contact
  */
-function openCreateContactDialog() {
-   document.getElementById('mobileDialogBackground').style.display = 'flex';
-   let editContactContainer = document.getElementById('mobileWorkContactContainer');
-   editContactContainer.innerHTML = '';
-   editContactContainer.innerHTML = addContactHTML();
-   editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
-   document.getElementById('contactBook').style.overflowY = "hidden";
-   // let dialogBackground = document.getElementById('dialogBackground');
-   // let addContactContainer = document.getElementById('addContactContainer');
-   // document.getElementById('body').classList.add('overflowHidden');
-   // dialogBackground.classList.remove('displayNone');
-   // dialogBackground.classList.add('displayFlex');
-   // addContactContainer.innerHTML = '';
-   // addContactContainer.innerHTML = addContactHTML();
-   // addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
-}
-
 function openCreateContactDialogMobile() {
    document.getElementById('mobileDialogBackground').style.display = 'flex';
    let editContactContainer = document.getElementById('mobileWorkContactContainer');
@@ -511,18 +492,24 @@ async function initContactList() {
    let contacts = await loadSortedContactList();
    renderContactList(contacts);
 }
-function openEditContactDialog(id) {
-   let index = getCurrentContact(id);
-   let inventoryData = generateInventoryDataArray(index);
-   let array = generateArray(id, index);
-   showHiddenDialog();
-   let editContactContainer = document.getElementById('addContactContainer');
-   editContactContainer.innerHTML = '';
-   editContactContainer.innerHTML = createEditContactDialogHTML(array); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
-   preFilledInputs(inventoryData);
-   editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
-}
+// function openEditContactDialog(id) {
+//    let index = getCurrentContact(id);
+//    let inventoryData = generateInventoryDataArray(index);
+//    let array = generateArray(id, index);
+//    showHiddenDialog();
+//    let editContactContainer = document.getElementById('addContactContainer');
+//    editContactContainer.innerHTML = '';
+//    editContactContainer.innerHTML = createEditContactDialogHTML(array); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
+//    preFilledInputs(inventoryData);
+//    editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
+// }
 
+/**
+ * 
+ * open a dialog window with pre filled input fields, so you can edit the contact data and save
+ * 
+ * @param {number} id - unique number for every person on Join
+ */
 function openEditContactDialogMobile(id) {
    let index = getCurrentContact(id);
    let inventoryData = generateInventoryDataArray(index);
@@ -535,6 +522,10 @@ function openEditContactDialogMobile(id) {
    editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
 }
 
+/**
+ * close mobile dialog window
+ * 
+ */
 function closeMobileDialogBackground() {
    document.getElementById('mobileDialogBackground').style.display = 'none';
    document.getElementById('contactBook').style.overflowY = "scroll";
@@ -607,7 +598,6 @@ function generateArray(id, index) {
  */
 async function saveEditedContact(id) {
    let index = getCurrentContact(id);
-   // let color = contacts[index].color;
    let newContact = createNewContactArray(id);
    contacts.splice(index, 1);
    await saveContacts();
@@ -615,7 +605,6 @@ async function saveEditedContact(id) {
    await saveContacts();
    clearInput();
    closeContactCreation();
-   // renderContactList(contacts);
    await displayContacts();
    document.getElementById(`contact${id}`).click();
    closeMobileDialogBackground();
@@ -649,16 +638,26 @@ function createNewContactArray(id) {
    return newContact;
 }
 
+/**
+ * takes the user back from contact detail to contac book on mobile
+ * 
+ */
 function backToContactBook() {
    document.getElementById('contactBook').style.display='flex';
    document.getElementById('workingArea').style.display='flex';
    document.getElementById('mobileButton').style.display='none';
 }
 
+/**
+ * opens a little pop up on mobile view
+ */
 function openPopUpEdit() {
    document.getElementById('popUpWarpper').style.display='flex';
 }
 
+/**
+ * closes the little pop up on mobile view
+ */
 function closeMobileEditPopUp() {
    document.getElementById('popUpWarpper').style.display='none';
 }

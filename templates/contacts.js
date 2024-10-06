@@ -174,7 +174,7 @@ function addContactHTML() {
                   <span class="icon"  ><img src="./assets/img/desktop/phone.svg"></span>   
                </div>
                <div class="buttons">
-                  <div class="cancelButton" onclick="closeContactCreation()">
+                  <div class="cancelButton" onclick="closeContactCreation(), closeMobileDialogBackground()">
                      <span>Cancel </span>
                      <div class="cancelSVGContainer">
                      </div>    

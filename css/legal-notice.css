@@ -3,7 +3,7 @@ body {
     padding: 0;
 }
 
-.privacy-policy-content {
+.legal-notice-content {
     margin-top: 96px;
     margin-left: 232px;
     padding-top: 72px;
@@ -12,26 +12,26 @@ body {
     width: 100%;
 }
 
-.privacy-headline {
+.legal-notice-headline {
     margin: 0;
     margin-bottom: 64px;
     font-size: 61px;
     font-weight: 700;
 }
 
-.privacy-subheadline {
+.legal-subheadline {
     font-size: 27px;
     font-weight: 700;
 }
 
 @media (max-width: 1100px) {
-    .privacy-policy-content {
+    .legal-notice-content {
        margin-left: 0px !important;
     }
 }
 
 @media (max-width: 580px) {
-    .privacy-headline {
+    .legal-notice-headline {
         font-size: 48px;
     }
 }

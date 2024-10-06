@@ -23,7 +23,7 @@ function initAssignSelector() {
  * @returns - the generatetd HTML for one contact 
  */
 function getTaskEditAssign(a) {
-    let contact=contacts.find(e => e.id == a);
+    let contact=contact.find(e => e.id == a);
     if (contact == null) return "";
     let name=getFullNameInContact(contact);
 

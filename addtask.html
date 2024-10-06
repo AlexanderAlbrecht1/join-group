@@ -95,7 +95,7 @@
     <div class="main-container">
 
         <div class="add-task-container">
-            <form id="add-task-form" onsubmit="addNewTask();return false">
+            <form id="add-task-form" onkeydown="noSubmit(event,'Enter')" onsubmit="addNewTask();return false" >
                 <h1>Add Task</h1>
                 <div id="add-task-main">
                     <div class="add-task-left">
@@ -113,7 +113,7 @@
                             <label>Assigned to</label>
                             <div class="relative addtask-assign" >
                                 <details class="absolute" style="width:100%;">
-                                    <summary><input type="text"></summary>
+                                    <summary><input type="text" placeholder="Select contacts to assign"></summary>
                                     <div id="add-task-assignToList" class="selectors">
                                     </div>
                                 </details>
@@ -177,7 +177,7 @@
                                     src="./assets/img/desktop/add_subtask.svg">
                             </button>
                             
-                            <ul class="subtask-list">
+                            <ul id="subtask-list" class="subtask-list">
                             </ul>
         
                             <div class="edit-input-con d-none">

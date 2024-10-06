@@ -111,7 +111,7 @@ function kanbanEditRenderTask(json) {
                     <strong>Assigned to</strong>
 
                     <details class="absolute" style="width:100%;">
-                        <summary><input type="text"></summary>
+                        <summary><input type="text" placeholder="Select contacts to assign"></summary>
                         <div class="selectors">
                             ${kanbanEditSelectors(json.assignedTo)}
                         </div>

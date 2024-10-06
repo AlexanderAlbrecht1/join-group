@@ -42,9 +42,14 @@ function getElement(target,classname) {
  * 
  */
 function toggleSubtaskIcon(event) {
+    const subtaskInput = getElement(event.target,"input-subtask");
+    const checkIcon    = getElement(event.target,"subtask-icon");
+    const clearIcon    = getElement(event.target,"add-subtask-clear");
+/*
     const subtaskInput = getElement(event.currentTarget,"input-subtask");
     const checkIcon    = getElement(event.currentTarget,"subtask-icon");
     const clearIcon    = getElement(event.currentTarget,"add-subtask-clear");
+*/
     const src="./assets/img/desktop/add_subtask.svg";
  
     if (subtaskInput.value == "") {
@@ -84,9 +89,14 @@ function clearSubtaskInput(event) {
  * @param {event} event - event, that is triggered from Buttons  
  */
 function addSubtasks(event) {
+    let subtaskInput = getElement(event.target,"input-subtask");
+    let subtaskList = getElement(event.target,"subtask-list");
+    let subtaskIcon = getElement(event.target,"subtask-icon");
+/*
     let subtaskInput = getElement(event.currentTarget,"input-subtask");
     let subtaskList = getElement(event.currentTarget,"subtask-list");
     let subtaskIcon = getElement(event.currentTarget,"subtask-icon");
+*/    
     const src="add_subtask.svg";   
     if (subtaskIcon.src.indexOf(src) != -1) {
        subtaskInput.focus();      
@@ -238,7 +248,7 @@ function editSubtask(event,index) {
  */
 function renderSubtasks(subtaskList) {
     if (subtasks== null) return;
-    
+
     subtaskList.innerHTML = "";
  
     for (let i = 0; i < subtasks.length; i++) {

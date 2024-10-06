@@ -1,16 +1,19 @@
+/**
+ * 
+ * PUBLIC
+ * 
+ * Preload the Assign Selector 
+ * Add Listener for the Selector
+ * Empty Monogramlist
+ * 
+ */
 function initAssignSelector() {
-    // contacts= loadContacts(table = 'Contacts');
-
-    // ${kanbanEditSelectors(json.assignedTo)}
     let list=document.getElementById("add-task-assignToList")
     list.innerHTML=kanbanEditSelectors();
-    
     let monograms=document.getElementById("addtask-monogramlist");
     monograms.innerHTML=""; // getTaskEditAssigns(json.assignedTo);
-
     addToggleSelectListener();
 }
-
 
 
 /**
@@ -18,12 +21,16 @@ function initAssignSelector() {
  * PRIVATE 
  * 
  * Creates HTML: One monogram 
+ * contacts is a list of global contacts
+ * This function finds a contact in the contact list by ID
+ * the id is given from the assignTo, 
+ * the assignTo was iterated by a function that calls this function
  * 
  * @param {*} a - assigned contact
  * @returns - the generatetd HTML for one contact 
  */
 function getTaskEditAssign(a) {
-    let contact=contact.find(e => e.id == a);
+    let contact=contacts.find(e => e.id == a); // must be contacts
     if (contact == null) return "";
     let name=getFullNameInContact(contact);
 
@@ -31,9 +38,10 @@ function getTaskEditAssign(a) {
        <span class="circle-monogram" style="background-color:${contact.color}">${getMonogram(name)}</span>`;
 }
 
+
 /**
  * 
- * PUBLIC 
+ * PUBLIC RENDER
  * 
  * Creates HTML: a row of contacts
  * 
@@ -50,9 +58,17 @@ function getTaskEditAssigns(assigns) {
 }
 
 
+/**
+ * 
+ * PRIVATE RENDER
+ * 
+ * Creates a HTML Output for the Assign Selector
+ * 
+ * @param {array} assignedList - List of contact ids 
+ * @returns  -html List of Contacts
+ */
 function kanbanEditSelectors(assignedList) {
     let html="";    
-
     for (let i=0;i<contacts.length;i++) {
         let checked="";
         if (assignedList != null) {
@@ -61,18 +77,25 @@ function kanbanEditSelectors(assignedList) {
                 checked="checked";
             }
         }
-
         html+=kanbanEditSelector(contacts[i],checked);
     };
     return html;
 }
 
 
-
+/**
+ * 
+ * PRIVATE RENDER
+ * 
+ * Creates a  row of Selectors 
+ * 
+ * @param {object} contact - contact we need in the Selector
+ * @param {bool} checked   - is the contact adviced to the Task
+ * @returns -  for the selector the row width Monogram and contact name
+ */
 function kanbanEditSelector(contact,checked) {
     if (contact == null) return "";
     let name=getFullNameInContact(contact);
-
 
     return /*html*/ `
         <label class="selector">

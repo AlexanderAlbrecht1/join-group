@@ -1,7 +1,11 @@
+let doNotSubmit= false;
 let tasks = [];
 // let subtasks = [];
 
 async function addNewTask() {
+   if (doNotSubmit) return;
+
+   console.log("addTask");
    showRequiredText();
 
    if (!showRequiredText()) {
@@ -23,7 +27,7 @@ async function addNewTask() {
       tasks = [];
    }
    tasks.push({
-      id: tasks.length,
+      id: getNewId(tasks), //tasks.length,
       title: title.value,
       description: description.value,
       assignedTo: assignedTo,
@@ -56,6 +60,8 @@ function clearTaskInputs() {
    document.getElementById("category").selectedIndex = 0;
    subtasks = [];
    document.getElementById("subtask-list").innerHTML = "";
+   document.getElementById("addtask-monogramlist").innerHTML = "";
+   document.getElementById("subtask-list").innerHTML = "";
    return;
 }
 
@@ -80,28 +86,6 @@ async function init() {
       date = new Date().toISOString().split('T')[0];
       document.getElementById('due-date').setAttribute('min', date);
       initAssignSelector();
-   }
-}
-
-function XXaddSubtasks() {
-   let subtaskInput = document.getElementById("subtasks");
-   let subtaskList = document.getElementById("subtask-list");
-   
-   const src="add_subtask.svg";   
-   if (document.getElementById("subtask-icon").src.indexOf(src) != -1) {
-      subtaskInput.focus();      
-   }
-
-   if (subtaskInput.value !== "") {
-      subtaskList.innerHTML = "";
-      subtasks.push({ name: subtaskInput.value, done: false });
-
-      renderSubtasks(subtaskList);
-
-      subtaskInput.value = "";
-      toggleIcon();
-   } else {
-      return;
    }
 }
 
@@ -205,6 +189,7 @@ function showRequiredText() {
    return true;
 }
 
+/*
 function toggleIcon() {
    const subtaskInput = document.getElementById("subtasks");
    const checkIcon = document.getElementById("subtask-icon");
@@ -252,5 +237,31 @@ function toggleCheckbox(divElement) {
    } else {
       divElement.style.backgroundColor = "";
       divElement.style.color = "";
+   }
+}
+
+*/
+
+
+/**
+ * 
+ * PUBLIC EVENT 
+ * 
+ * Prevent in forms that Form ist submitten when pressing Enter key
+ * Handels Subtask via Enter Key
+ * 
+ * @param {*} event - keydown event that triggers
+ * @param {*} key   - key to disable/action
+ */
+function noSubmit(event,key) {
+   doNotSubmit=false
+   if (event.code == key && event.target.tagName== "INPUT") {
+      console.log("noSubmit");
+      if (event.target.classList.contains("input-subtask")) {
+         addSubtasks(event);
+         doNotSubmit=true;
+
+      } 
+      event.preventDefault();
    }
 }

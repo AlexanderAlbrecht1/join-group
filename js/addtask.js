@@ -214,11 +214,11 @@ function toggleIcon() {
 
 
    if (subtaskInput.value == "") {
-      checkIcon.src = src; // Ersetze das Icon mit einem anderen Bild
+      checkIcon.src = src;
       clearIcon.classList.add("hidden");
    } else {
       checkIcon.src = "./assets/img/desktop/add-subtask-check.svg";
-      clearIcon.classList.remove("hidden"); // Setze das ursprüngliche Icon zurück
+      clearIcon.classList.remove("hidden");
    }
 }
 

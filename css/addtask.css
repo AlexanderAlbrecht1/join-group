@@ -91,6 +91,7 @@ input {
    cursor: pointer;
 }
 
+
 /*
 .subtask-container {
    position: relative;
@@ -446,6 +447,10 @@ li {
 
    .button-con {
       margin-top: 32px;
+   }
+
+   .assigned-to-input {
+      width: 100% !important;
    }
 }
 

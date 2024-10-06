@@ -68,6 +68,8 @@ body {
 
    #mobileWorkContactContainer {
       width: 95% !important;
+      overflow-y: scroll;
+      scrollbar-width: none;
    }
 }
 

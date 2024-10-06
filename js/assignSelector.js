@@ -18,12 +18,16 @@ function initAssignSelector() {
  * PRIVATE 
  * 
  * Creates HTML: One monogram 
+ * contacts is a list of global contacts
+ * This function finds a contact in the contact list by ID
+ * the id is given from the assignTo, 
+ * the assignTo was iterated by a function that calls this function
  * 
  * @param {*} a - assigned contact
  * @returns - the generatetd HTML for one contact 
  */
 function getTaskEditAssign(a) {
-    let contact=contact.find(e => e.id == a);
+    let contact=contacts.find(e => e.id == a); // must be contacts
     if (contact == null) return "";
     let name=getFullNameInContact(contact);
 

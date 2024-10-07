@@ -7,10 +7,23 @@
  * Empty Monogramlist
  * 
  */
-function initAssignSelector() {
-    let list=document.getElementById("add-task-assignToList")
+
+
+
+function initAssignSelector(selector) {
+    let listId;
+    let monogramId;
+    if (selector == null) {
+        listId="add-task-assignToList";
+        monogramId="addtask-monogramlist";
+    } else {
+        listId=selector + "List"
+        monogramId=selector + "Monogram"
+    }
+
+    let list=document.getElementById(listId)
     list.innerHTML=kanbanEditSelectors();
-    let monograms=document.getElementById("addtask-monogramlist");
+    let monograms=document.getElementById(monogramId);
     monograms.innerHTML=""; // getTaskEditAssigns(json.assignedTo);
     addToggleSelectListener();
 }

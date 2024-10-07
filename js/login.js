@@ -83,7 +83,7 @@ async function login() {
    let password = document.getElementById("password");
    let email = document.getElementById("email");
    user = await isLoginCorrect(email.value, password.value);
-   if ( user != null ) {
+   if ( user != false ) {
       let obj={ "email": user.email, "password": user.password, "username": user.user, "id" : user.id };
       sessionSave(PROJECT, obj );
       rememberMe();

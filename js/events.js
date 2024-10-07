@@ -98,10 +98,9 @@ function addFormListener(formSelector, styleObject) {
         input.addEventListener('input', eventErrorMsg);
         input.addEventListener("focusin",e => removeCustomErrorCode(input)); // to be able te re Submit ohne ALL
         input.addEventListener("blur",e => removeCustomMsg(input)); // to be able te re Submit ohne ALL
-        // input.addEventListener("focusin",e => removeAllCustomMsg(formSelector)); // to be able te re Submit ohne ALL
-        // input.addEventListener("blur",e => removeAllCustomMsg(formSelector)); // to be able te re Submit ohne ALL
     });
 }
+
 
 /**
  * 
@@ -119,9 +118,9 @@ function customMessage(element) {
     }
     let cl=element.parentElement.classList;
     if (cl.contains("new")) {
-        element.setCustomValidity(`Mindestens: 8 Zeichen, 1 Kleinbuchstabe, 1 Großbuchstabe, 1 Zahl, 1 Sonderzeichen`);
+        element.setCustomValidity(`Minimum: 8 characters, 1 lowercase, 1 uppercase, 1 number, 1 special char`);
     } else if (cl.contains("name")) {
-        element.setCustomValidity(`Kein Sonderzeichen, Namen müssen mit Buchtsaben anfangen`);    
+        element.setCustomValidity(`no special chars, names has to begin width letters`);    
     } else {
         element.setCustomValidity(``);
     }
@@ -171,7 +170,6 @@ function eventErrorMsg(event) {
     let valid=isFormValid(formquery); 
     disableCheck(valid);
     event.preventDefault();
-    // if (!valid) event.preventDefault();
 }
 
 function setErrorMsg(element) {

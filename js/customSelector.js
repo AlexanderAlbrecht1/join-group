@@ -132,6 +132,24 @@ function detailsEventToggle(event) {
  * 
  * PRIVATE EVENT
  * 
+ * Opens the Options of details
+ * 
+ * @param {event} event - Click Event 
+ */
+function detailsToggle(event) {
+    let root=event.target.closest("details");
+    if (!root.open) {
+        root.open=true;
+    } else {
+        root.open=false;
+    }
+}
+
+
+/**
+ * 
+ * PRIVATE EVENT
+ * 
  * Closes Window when ESC is pressed autside the Inputfield
  * 
  * @param {event} event keydown Event   
@@ -162,6 +180,7 @@ function addToggleSelectListener(rootId) {
     root.addEventListener('toggle', detailsEventToggle);
     input.addEventListener('input', filterSelector);
     input.addEventListener('keydown',detailsEventKey);
+    input.addEventListener('click',detailsToggle);
     window.addEventListener('click',detailsEventCloseWindow); // Close Window on click outside
     window.addEventListener("keydown",checkEscapeKey);        // Close Window on ESC Key
 }
@@ -185,13 +204,3 @@ function displaySelectorMonograms(event) {
         monogramList.appendChild(monogram);
     })
 }
-
-
-
-
-
-
-
-
-
-

@@ -18,6 +18,8 @@ a:hover {
     filter: brightness(1.2);
 }
 
+/* arrow back to summary */
+
 .wrapHead {
     width: 100%;
     display: flex;

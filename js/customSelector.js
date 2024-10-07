@@ -114,7 +114,7 @@ function detailsEventClick(event) {
  * PRIVATE EVENT
  * 
  * Updates the Selected Monogramlist, when closed
- * Focus the Inputrfield, Opened
+ * Focus the Input field of details when Opened
  * 
  * @param {event} event - Toggle Event 
  */
@@ -150,7 +150,7 @@ function detailsToggle(event) {
  * 
  * PRIVATE EVENT
  * 
- * Closes Window when ESC is pressed autside the Inputfield
+ * Closes details Window when ESC is pressed autside the Inputfield
  * 
  * @param {event} event keydown Event   
  */
@@ -191,6 +191,8 @@ function addToggleSelectListener(rootId) {
  * PRIVATE 
  * 
  * Displays all activated monograms in one Row
+ * 
+ * Changes in sibling from details selector
  *  
  * @param {event} event - Displays all activated monograms  in a row
  */

@@ -113,3 +113,21 @@ select {
     align-items: flex-start;
  }
  
+@media (max-width: 1080px) {
+    .task-view-card.add .vertical-line-wrapper {
+        display: none;
+    }
+
+    .task-view-card.add .top {
+        width: 440px; 
+    }    
+    .task-view-card.add {
+        align-items: center;   
+    }
+    #add-task .button-con {
+        width: 440px; 
+        justify-content: center;
+    }
+
+
+}

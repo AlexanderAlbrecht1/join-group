@@ -2,6 +2,7 @@ function initAddTask() {
     // selector=document.getElementById("add-task").querySelector(".selectors");
     // selector.innerHTML=kanbanEditSelectors(); 
     initAssignSelector("subtaskPopup");
+    addToggleSelectListener("subtask-popup-details");
 
 
 }

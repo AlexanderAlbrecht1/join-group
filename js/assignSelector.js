@@ -16,16 +16,18 @@ function initAssignSelector(selector) {
     if (selector == null) {
         listId="add-task-assignToList";
         monogramId="addtask-monogramlist";
+        rootId=null;
     } else {
-        listId=selector + "List"
-        monogramId=selector + "Monogram"
+        listId=selector + "List";
+        monogramId=selector + "Monogram";
+        rootId=selector + "Root";
     }
 
     let list=document.getElementById(listId)
     list.innerHTML=kanbanEditSelectors();
     let monograms=document.getElementById(monogramId);
     monograms.innerHTML=""; // getTaskEditAssigns(json.assignedTo);
-    addToggleSelectListener();
+    addToggleSelectListener(rootId);
 }
 
 

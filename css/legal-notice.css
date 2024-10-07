@@ -14,7 +14,6 @@ body {
 
 .legal-notice-headline {
     margin: 0;
-    margin-bottom: 64px;
     font-size: 61px;
     font-weight: 700;
 }
@@ -22,6 +21,29 @@ body {
 .legal-subheadline {
     font-size: 27px;
     font-weight: 700;
+}
+
+/* arrow back to summary */
+
+.wrapHead {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 64px;
+}
+
+.arrowBack {
+    width: 37px;
+    height: 37px;
+    background-image: url('/assets/img/desktop/arrow_left_blue.svg');
+    background-size: 21px 21px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.arrowBack:hover {
+    cursor: pointer;
 }
 
 @media (max-width: 1100px) {

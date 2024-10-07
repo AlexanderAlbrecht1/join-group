@@ -222,11 +222,11 @@ function showSingleContact(id) {
    changeBgColor(id);
    let index = getCurrentContact(id);
    let singleContactArray = createSingleContactArray(index);
-   if (width > 841) {  
-   document.getElementById('contactDetail').innerHTML = '';
-   document.getElementById('contactDetail').innerHTML = createSingleContactHTML(singleContactArray, id);
-   // console.log(id);
-   }  else {
+   if (width > 841) {
+      document.getElementById('contactDetail').innerHTML = '';
+      document.getElementById('contactDetail').innerHTML = createSingleContactHTML(singleContactArray, id);
+      // console.log(id);
+   } else {
       openMobileContactDetail(singleContactArray, id);
    }
 }
@@ -289,12 +289,18 @@ async function deleteContact(id) {
    tasks = await loadData("taskstorage");
    if (id == currentSession.id) {
       let array = generateArray(id, index);
-      let dialogBackground = document.getElementById('dialogBackground');
-      dialogBackground.classList.remove('displayNone');
-      dialogBackground.classList.add('displayFlex');
-      document.getElementById('addContactContainer').innerHTML = '';
-      document.getElementById('addContactContainer').innerHTML = warningHTML(array);
-      addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
+      document.getElementById('mobileDialogBackground').style.display = 'flex';
+      let editContactContainer = document.getElementById('mobileWorkContactContainer');
+      editContactContainer.innerHTML = '';
+      editContactContainer.innerHTML = warningHTML(array);
+      editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
+      document.getElementById('contactBook').style.overflowY = "hidden";
+      // let dialogBackground = document.getElementById('dialogBackground');
+      // dialogBackground.classList.remove('displayNone');
+      // dialogBackground.classList.add('displayFlex');
+      // document.getElementById('addContactContainer').innerHTML = '';
+      // document.getElementById('addContactContainer').innerHTML = warningHTML(array);
+      // addContactContainer.style.cssText = 'animation: slideIn .3s ease-out ; animation-fill-mode: forwards;';
    } else {
       contacts.splice(index, 1);
       await deleteContactFromTask(tasks, id);
@@ -361,10 +367,10 @@ function openCreateContactDialogMobile() {
 }
 
 function openMobileContactDetail(singleContactArray, id) {
-   document.getElementById('contactBook').style.display='none';
-   document.getElementById('workingArea').style.display='none';
+   document.getElementById('contactBook').style.display = 'none';
+   document.getElementById('workingArea').style.display = 'none';
    document.getElementById('contactDetail').innerHTML = '';
-   document.getElementById('contactDetail').innerHTML = createSingleContactMobileHTML(singleContactArray, id) ;
+   document.getElementById('contactDetail').innerHTML = createSingleContactMobileHTML(singleContactArray, id);
 }
 
 /**
@@ -643,21 +649,21 @@ function createNewContactArray(id) {
  * 
  */
 function backToContactBook() {
-   document.getElementById('contactBook').style.display='flex';
-   document.getElementById('workingArea').style.display='flex';
-   document.getElementById('mobileButton').style.display='none';
+   document.getElementById('contactBook').style.display = 'flex';
+   document.getElementById('workingArea').style.display = 'flex';
+   document.getElementById('mobileButton').style.display = 'none';
 }
 
 /**
  * opens a little pop up on mobile view
  */
 function openPopUpEdit() {
-   document.getElementById('popUpWarpper').style.display='flex';
+   document.getElementById('popUpWarpper').style.display = 'flex';
 }
 
 /**
  * closes the little pop up on mobile view
  */
 function closeMobileEditPopUp() {
-   document.getElementById('popUpWarpper').style.display='none';
+   document.getElementById('popUpWarpper').style.display = 'none';
 }

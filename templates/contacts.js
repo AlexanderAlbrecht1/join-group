@@ -347,7 +347,7 @@ function warningHTML(array) {
           <span>Delete anyway!</span>
       </div>
 
-      <button class="safeEditContactButton" onclick="closeContactCreation()">
+      <button class="safeEditContactButton" onclick="closeMobileDialogBackground()">
           <span>ABORT</span>
           <div class="checkSVGContainer">
           </div>

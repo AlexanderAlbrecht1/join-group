@@ -162,6 +162,9 @@ body {
 
 
 @media(min-width : 842px) {
+
+ 
+
    .workingArea {
       display: flex !important;
    }
@@ -172,6 +175,10 @@ body {
 }
 
 @media (max-width: 841px) {
+
+   .addContactInputContainer2 {
+      align-items: center;
+   }
 
    .name {
       gap: 20px;
@@ -236,6 +243,11 @@ body {
    /* .rightSide {
       margin-top: 8px;
    } */
+
+   .deleteAnywayButton {
+      padding: unset;
+      width: 162px;
+   }
 
    .fullname>span {
       font-size: 24px;

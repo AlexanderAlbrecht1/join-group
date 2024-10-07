@@ -104,6 +104,7 @@ function addSubtasks(event) {
  
     if (subtaskInput.value !== "") {
        subtaskList.innerHTML = "";
+       if (subtasks==null) subtasks=[];
        subtasks.push({ name: subtaskInput.value, done: false });
        renderSubtasks(subtaskList);
        subtaskInput.value = "";

@@ -33,6 +33,7 @@
         <script src="./js/kanbanboard.js"></script>
         <script src="./js/kanbanTaskView.js"></script>
         <script src="./js/kanbanTaskEdit.js"></script>
+        <script src="./js/kanbanAddTask.js"></script>
         <script src="./js/customSelector.js"></script>
         <script src="./js/assignSelector.js"></script>
         <script src="./js/nav_header.js"></script>
@@ -55,113 +56,112 @@
             </div>
             <div id="add-task" class="drive-in go">
                 <form id="add-task-form" class="relative input-container task-view-card add" onkeydown="noSubmit(event,'Enter')" onsubmit="addNewTask();return false" >
-                    <div class="splitter">
-                        <div>
-                            <h1>Add Task</h1>
-                            <img class="exit" onclick="closeAddTask()" src="./assets/img/desktop/close.svg">
-                        </div>
 
-                        <div id="add-task-main">
-                            <div class="add-task-left">
-                                <div class="label-input-con">
-                                    <label for="title">Title<span class="required-asterisk">*</span></label>
-                                    <input type="text" id="title" placeholder="Enter a title">
-                                    <span id="title-span" class="required-text d-none">This field is required</span>
-                                </div>
-                                <div class="label-input-con">
-                                    <label for="description">Description</label>
-                                    <textarea id="description" placeholder="Enter a Description"></textarea>
-                                </div>
-        
-                                <div class="label-input-con" >
-                                    <label>Assigned to</label>
-                                    <div class="relative addtask-assign" >
-                                        <details class="absolute" style="width:100%;">
-                                            <summary><input class="assigned-to-input" type="text" placeholder="Select contacts to assign"></summary>
-                                            <div id="add-task-assignToList" class="selectors">
-                                            </div>
-                                        </details>
-                                    </div>
-                                    <div id="addtask-monogramlist" class="monogramlist flex-row gap8">
-                                    </div>
-                                </div>        
+                    <div class="top">
+                        <h1>Add Task</h1>
+                        <img class="exit" onclick="closeAddTask()" src="./assets/img/desktop/close.svg">
+                    </div>
+
+                    <div id="add-task-main" class="slider">
+                        <div class="add-task-left">
+                            <div class="label-input-con">
+                                <label for="title">Title<span class="required-asterisk">*</span></label>
+                                <input type="text" id="title" placeholder="Enter a title">
+                                <span id="title-span" class="required-text d-none">This field is required</span>
                             </div>
-        
-                            <div class="vertical-line-wrapper">
-                                <div class="vertical-line"></div>
+                            <div class="label-input-con">
+                                <label for="description">Description</label>
+                                <textarea id="description" placeholder="Enter a Description"></textarea>
                             </div>
-        
-                            <div class="add-task-right">
-                                <div class="label-input-con">
-                                    <label for="due-date">Due Date<span class="required-asterisk">*</span></label>
-                                    <input type="date" id="due-date">
-                                    <span id="due-date-span" class="required-text d-none">This field is required</span>
-                                </div>
-        
-                                <div class="priority label-input-con">
-                                    <span>Priority</span>
-                                    <div class="d-flex">
-                                        <input type="radio" id="urgent" name="prio" value="urgent">
-                                        <label for="urgent" class="button-label urgent">Urgent<img id="urgent-icon"
-                                                src="./assets/img/desktop/prio_urgent_red.svg"></label>
-        
-                                        <input type="radio" id="medium" name="prio" value="medium" checked>
-                                        <label for="medium" class="button-label medium">Medium<img id="medium-icon"
-                                                src="./assets/img/desktop/prio_medium_yellow.svg"></label>
-        
-                                        <input type="radio" id="low" name="prio" value="low">
-                                        <label for="low" class="button-label low">Low <img id="low-icon"
-                                                src="./assets/img/desktop/prio_low_green.svg"></label>
-                                    </div>
-                                </div>
-        
-                                <div class="label-input-con">
-                                    <label for="category">Category<span class="required-asterisk">*</span></label>
-                                    <div id="select-box" class="selectBox">
-                                        <select id="category">
-                                            <option value="" disabled selected>Select task category</option>
-                                            <option value="technical-task">Technical Task</option>
-                                            <option value="user-story">User Story</option>
-                                        </select>
-                                    </div>
-                                    <span id="category-span" class="required-text d-none">This field is required</span>
-                                </div>
-        
-        
-                                <div class="subtask-container label-input-con">
-                                    <label>Subtasks</label>
-                                    <input class="input-subtask" oninput="toggleSubtaskIcon(event)" type="text" id="subtasks" placeholder="Add new subtask">
-                                    
-                                    <button type="button" id="add-subtask" class="btn-add-subtask">
-                                        <img 
-                                            onclick="clearSubtaskInput(event)" class="add-subtask-clear d-none"
-                                            src="./assets/img/desktop/add-subtask-clear.svg" alt="">
-                                        <div class="h-line24"></div>    
-                                        <img onclick="addSubtasks(event)" class="subtask-icon"
-                                            src="./assets/img/desktop/add_subtask.svg">
-                                    </button>
-                                    
-                                    <ul id="subtask-list" class="subtask-list">
-                                    </ul>
-                
-                                    <div class="edit-input-con d-none">
-                                        <input type="text" class="subtask-edit-input">
-                                        <div>
-                                            <img class="edit-delete" onclick="deleteSubtask(event)"
-                                                src="./assets/img/desktop/subtask-delete.svg" alt="">
-                                            
-                                            <div class="h-line24"></div>    
-                                            
-                                            <img class="edit-check" onclick="saveEditedSubtask(event)"
-                                                src="./assets/img/desktop/add-subtask-check.svg" alt="">
-                                    
+    
+                            <div class="label-input-con" >
+                                <label>Assigned to</label>
+                                <div class="relative addtask-assign" >
+                                    <details class="absolute" style="width:100%;">
+                                        <summary><input class="assigned-to-input" type="text" placeholder="Select contacts to assign"></summary>
+                                        <div id="add-task-assignToList" class="selectors">
                                         </div>
+                                    </details>
+                                </div>
+                                <div id="addtask-monogramlist" class="monogramlist flex-row gap8">
+                                </div>
+                            </div>        
+                        </div>
+    
+                        <div class="vertical-line-wrapper">
+                            <div class="vertical-line"></div>
+                        </div>
+    
+                        <div class="add-task-right">
+                            <div class="label-input-con">
+                                <label for="due-date">Due Date<span class="required-asterisk">*</span></label>
+                                <input type="date" id="due-date">
+                                <span id="due-date-span" class="required-text d-none">This field is required</span>
+                            </div>
+    
+                            <div class="priority label-input-con">
+                                <span>Priority</span>
+                                <div class="d-flex">
+                                    <input type="radio" id="urgent" name="prio" value="urgent">
+                                    <label for="urgent" class="button-label urgent">Urgent<img id="urgent-icon"
+                                            src="./assets/img/desktop/prio_urgent_red.svg"></label>
+    
+                                    <input type="radio" id="medium" name="prio" value="medium" checked>
+                                    <label for="medium" class="button-label medium">Medium<img id="medium-icon"
+                                            src="./assets/img/desktop/prio_medium_yellow.svg"></label>
+    
+                                    <input type="radio" id="low" name="prio" value="low">
+                                    <label for="low" class="button-label low">Low <img id="low-icon"
+                                            src="./assets/img/desktop/prio_low_green.svg"></label>
+                                </div>
+                            </div>
+    
+                            <div class="label-input-con">
+                                <label for="category">Category<span class="required-asterisk">*</span></label>
+                                <div id="select-box" class="selectBox">
+                                    <select id="category">
+                                        <option value="" disabled selected>Select task category</option>
+                                        <option value="technical-task">Technical Task</option>
+                                        <option value="user-story">User Story</option>
+                                    </select>
+                                </div>
+                                <span id="category-span" class="required-text d-none">This field is required</span>
+                            </div>
+    
+    
+                            <div class="subtask-container label-input-con">
+                                <label>Subtasks</label>
+                                <input class="input-subtask" oninput="toggleSubtaskIcon(event)" type="text" id="subtasks" placeholder="Add new subtask">
+                                
+                                <button type="button" id="add-subtask" class="btn-add-subtask">
+                                    <img 
+                                        onclick="clearSubtaskInput(event)" class="add-subtask-clear d-none"
+                                        src="./assets/img/desktop/add-subtask-clear.svg" alt="">
+                                    <div class="h-line24"></div>    
+                                    <img onclick="addSubtasks(event)" class="subtask-icon"
+                                        src="./assets/img/desktop/add_subtask.svg">
+                                </button>
+                                
+                                <ul id="subtask-list" class="subtask-list">
+                                </ul>
+            
+                                <div class="edit-input-con d-none">
+                                    <input type="text" class="subtask-edit-input">
+                                    <div>
+                                        <img class="edit-delete" onclick="deleteSubtask(event)"
+                                            src="./assets/img/desktop/subtask-delete.svg" alt="">
+                                        
+                                        <div class="h-line24"></div>    
+                                        
+                                        <img class="edit-check" onclick="saveEditedSubtask(event)"
+                                            src="./assets/img/desktop/add-subtask-check.svg" alt="">
+                                
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>    
-    
+                    </div>
+
                     <div class="button-con">
                         <p><span class="required-asterisk">*</span>this field is required</p>
                         <div>
@@ -232,7 +232,7 @@
                             <input id="find" type="text"  placeholder="Find Task" oninput="filterTasks()">
                             <span class="icon" onclick="filterTasks()"><img src="./assets/img/desktop/search.svg"></span>
                         </div>
-                        <div class="submit-button darkbutton">
+                        <div onclick="openAddTask()" class="submit-button darkbutton">
                             Add Task
                             <img src="./assets/img/desktop/white-plus.svg">
                         </div>

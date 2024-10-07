@@ -162,7 +162,7 @@
    text-overflow: ellipsis;
    white-space: nowrap;
    width: 100%;
-   border:none;
+   border:none !important;
    background: inherit;
    height:unset;
    margin:0;

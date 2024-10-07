@@ -30,7 +30,6 @@
     overflow-y: auto;
     flex:1;
     justify-content: center;
-    flex-wrap: wrap;
 }
 
 .add-task-left,
@@ -128,6 +127,10 @@ select {
         width: 440px; 
         justify-content: center;
     }
+    #add-task-main {
+        flex-wrap: wrap;
+    }
+    
 
 
 }

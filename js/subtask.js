@@ -45,11 +45,7 @@ function toggleSubtaskIcon(event) {
     const subtaskInput = getElement(event.target,"input-subtask");
     const checkIcon    = getElement(event.target,"subtask-icon");
     const clearIcon    = getElement(event.target,"add-subtask-clear");
-/*
-    const subtaskInput = getElement(event.currentTarget,"input-subtask");
-    const checkIcon    = getElement(event.currentTarget,"subtask-icon");
-    const clearIcon    = getElement(event.currentTarget,"add-subtask-clear");
-*/
+
     const src="./assets/img/desktop/add_subtask.svg";
  
     if (subtaskInput.value == "") {

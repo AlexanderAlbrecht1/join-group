@@ -9,8 +9,14 @@ main {
 
 .highlight-join {
     color: rgb(41, 171, 226);
-  }
-
+}
+a {
+    color: rgb(41, 171, 226);
+    cursor: pointer;
+}
+a:hover {
+    filter: brightness(1.2);
+}
 
 @media (max-width:1100px) {
     main {

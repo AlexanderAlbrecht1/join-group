@@ -109,7 +109,7 @@ async function addNewTask() {
     if (!showRequiredText()) return;
     tasks = await loadData("taskstorage");
     if (tasks === null) tasks = [];
-    // tasks.push(prepareTaskData());
+    tasks.push(prepareTaskData());
     // await saveData("taskstorage", tasks);
     // clearTaskInputs();
     // openKanbanboard();
@@ -158,6 +158,8 @@ function showRequiredText() {
  * 
  * Prevent in forms that Form ist submitten when pressing Enter key
  * Handels Subtask via Enter Key
+ * Where ist it called: 
+ * BUG: inned a reset doNotSubmit when leaving the Input
  * 
  * @param {*} event - keydown event that triggers
  * @param {*} key   - key to disable/action
@@ -165,13 +167,14 @@ function showRequiredText() {
 function noSubmit(event,key) {
     doNotSubmit=false
     if (event.code == key && event.target.tagName== "INPUT") {
-       console.log("noSubmit");
        if (event.target.classList.contains("input-subtask")) {
           addSubtasks(event);
           doNotSubmit=true;
- 
        } 
        event.preventDefault();
     }
  }
+ document.addEventListener("focusout",() => {
+    doNotSubmit=false;
+ })
  

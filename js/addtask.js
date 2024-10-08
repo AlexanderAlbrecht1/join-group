@@ -2,13 +2,8 @@ let doNotSubmit= false;
 let tasks= [];
 async function addNewTask() {
    if (doNotSubmit) return;
-
-   console.log("addTask");
-   showRequiredText();
-
-   if (!showRequiredText()) {
-      return;
-   }
+   if (!showRequiredText()) return;
+   
 
    let title = document.getElementById("title");
    let description = document.getElementById("description");
@@ -21,7 +16,7 @@ async function addNewTask() {
 
    tasks = await loadData("taskstorage");
 
-   if (tasks === null) { // Hiermit löschst du alle Tasks
+   if (tasks === null) { 
       tasks = [];
    }
    tasks.push({
@@ -78,7 +73,6 @@ function showCheckboxes() {
 
 async function init() {
    if (isLogged()) {
-      // initContactList(contacts);
       contacts=await loadSortedContactList();
       logedUserMonogram();
       date = new Date().toISOString().split('T')[0];
@@ -101,15 +95,6 @@ function renderSubtasks(subtaskList) {
                <img onclick="deleteSubtask(${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
            </div>
        </div>`;
-/*     
-      subtaskList.innerHTML += `<div id="subtask-con" class="list-item">
-                                 <li ondblclick="editSubtask(${i})">${subtasks[i].name}</li>
-                                 <div class="subtask-icon">
-                                 <img onclick="editSubtask(${i})" src="./assets/img/desktop/subtask-edit.svg" alt="">
-                                 <img onclick="deleteSubtask(${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
-                             </div>
-                             </div>`;
-*/
    }
 }
 
@@ -152,7 +137,7 @@ async function openKanbanboard() {
    window.location = "./kanbanboard.html";
 }
 
-function showRequiredText() {
+function XshowRequiredText() {
    let title = document.getElementById("title");
    let titleSpan = document.getElementById("title-span");
    let dueDate = document.getElementById("due-date");
@@ -187,58 +172,38 @@ function showRequiredText() {
    return true;
 }
 
-/*
-function toggleIcon() {
-   const subtaskInput = document.getElementById("subtasks");
-   const checkIcon = document.getElementById("subtask-icon");
-   const clearIcon = document.getElementById("add-subtask-clear");
-   const src="./assets/img/desktop/add_subtask.svg";
 
 
-
-   if (subtaskInput.value == "") {
-      checkIcon.src = src;
-      clearIcon.classList.add("hidden");
+function faultDisplay(field,msg,border) {
+   if (border == null) border=field;
+   if (field.value) {
+       border.style.border = "";
+       msg.classList.add("d-none"); 
    } else {
-      checkIcon.src = "./assets/img/desktop/add-subtask-check.svg";
-      clearIcon.classList.remove("hidden");
+       border.style.border = "1px solid red";
+       msg.classList.remove("d-none");     
    }
+   return !field.value
 }
 
-function clearSubtaskInput() {
-   document.getElementById("subtasks").value = "";
+
+function showRequiredText() {
+   let field,msg;
+   let err=false;
+
+   field = document.getElementById("title");
+   msg = document.getElementById("title-span");
+   err   = faultDisplay(field,msg) || err;
+   field = document.getElementById("due-date");
+   msg = document.getElementById("due-date-span");
+   err   = faultDisplay(field,msg) || err;
+   field = document.getElementById("category");
+   border = document.getElementById("select-box");
+   msg = document.getElementById("category-span");
+   err   = faultDisplay(field,msg,border) || err;
+   return !err;
 }
 
-window.addEventListener("mouseup", function (event) {
-   let checkboxes = document.getElementById("checkboxes");
-   let selectBox = document.querySelector(".selectBox");
-
-   // Falls die Checkboxes sichtbar sind und man außerhalb klickt
-   if (
-      expanded &&
-      !checkboxes.contains(event.target) &&
-      !selectBox.contains(event.target)
-   ) {
-      checkboxes.style.display = "none";
-      expanded = false;
-   }
-});
-
-function toggleCheckbox(divElement) {
-   const checkbox = divElement.querySelector('input[type="checkbox"]');
-
-   checkbox.checked = !checkbox.checked;
-
-   if (checkbox.checked) {
-      divElement.style.backgroundColor = "#2A3647";
-      divElement.style.color = "white";
-   } else {
-      divElement.style.backgroundColor = "";
-      divElement.style.color = "";
-   }
-}
-
-*/
 
 
 /**

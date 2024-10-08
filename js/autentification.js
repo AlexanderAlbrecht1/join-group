@@ -17,19 +17,35 @@ function logout() {
 
 /**
  * 
- * @public - from HTML
+ * @public - from Event
  * 
- * load next HTML, login success
+ * load Dashboard, login success
  * 
  */
 function openDashboard() {
    openPage("./dashboard.html");
 }
 
+
+/**
+ * 
+ * @public - from Eevent
+ * 
+ * load registration, user has no account
+ * 
+ */
 function openSignup() {
    openPage("./registration.html");
 }
 
+
+/**
+ * 
+ * @public - from Eevent
+ * 
+ * load Login, user ist not Logged 
+ * 
+ */
 function openLogin() {
    openPage("./index.html");
 }
@@ -194,16 +210,6 @@ function saveUserToLocalStorage() {
       password: user.password,
       username: user.user
    });
-
-   /*
-   let password = document.getElementById("password");
-   let email = document.getElementById("email");
-
-   saveToLocalStorage(PROJECT, {
-      email: email.value,
-      password: password.value,
-   });
-   */
 }
 
 
@@ -250,9 +256,6 @@ function activateFormErrors(formid) {
    inputs = form.querySelectorAll('input');
    inputs.forEach(element => {
       element.parentElement.classList.add("invalid");
-      // customMessage(element);
-      // setErrorMsg(element); // mit dem prevent ?
-
    });
    disableFormEvents(formid);
 }

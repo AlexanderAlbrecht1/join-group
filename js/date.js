@@ -54,3 +54,19 @@ function getGreetingPos() {
     }
 
 }
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Disable to select a Date before today
+ * 
+ * changes the Element 
+ * 
+ * @param {element} element HTML - Element to set the min Date
+ */
+function setMinDate(element) {
+    let today = new Date().toISOString().split('T')[0];
+    element.setAttribute('min', today);
+}
+

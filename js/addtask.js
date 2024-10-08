@@ -1,7 +1,5 @@
 let doNotSubmit= false;
-let tasks = [];
-// let subtasks = [];
-
+let tasks= [];
 async function addNewTask() {
    if (doNotSubmit) return;
 
@@ -23,7 +21,7 @@ async function addNewTask() {
 
    tasks = await loadData("taskstorage");
 
-   if (tasks === null) {
+   if (tasks === null) { // Hiermit löschst du alle Tasks
       tasks = [];
    }
    tasks.push({

@@ -1,4 +1,4 @@
-let tasks = [];
+// let tasks = [];
 let statusList=[
    "to-do",
    "in-progress",

@@ -71,3 +71,4 @@ function logedUserMonogram() {
    // document.getElementById('loggedUserMonogram').innerHTML = '';
    document.getElementById('loggedUserMonogram').innerHTML = `<span> ${userMonogram} </span>`;
 }
+

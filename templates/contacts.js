@@ -191,65 +191,6 @@ function addContactHTML() {
     `
 }
 
-// function createEditContactDialogHTML(array) {
-//    return /*html*/ `
-        
-//    <div class="editContactLogoContainer" onclick="dontClose(event)">
-//    <div class="closeMobile" onclick="closeContactCreation()">
-//                <img src="/assets/img/desktop/close_white.svg" alt="">
-//          </div>
-//       <div>
-//          <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
-//          <div class="flexColumn">
-//             <h1>Edit contact</h1>
-//             <div class="vector5EditContact"></div>
-//          </div>
-//          <div class="contactLogo"></div>
-//       </div>
-//    </div>
-
-// <div class="addContactInputContainer">
-//       <div class="detailMonogramContainer">
-//             <span class="detailMonogramSpan" style="background-color: ${array.backgroundColor}">${array.initial1}${array.initial2}</span>
-//       </div>
-
-//     <div class="addContactInputContainer2">
-//         <div class="close" onclick="closeContactCreation()">
-//             <img src="/assets/img/desktop/close.svg" alt="">
-//         </div>
-        
-//         <div id="input-field-container" class="input-container">
-//             <input id="name" type="text" required placeholder="Name">
-//             <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
-//         </div>
-
-//         <div id="input-field-container" class="input-container">
-//             <input id="email" type="email" required placeholder="Email">
-//             <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
-//         </div>
-
-//         <div id="input-field-container" class="input-container">
-//             <input id="phone" type="tel" pattern="[0-9]*" maxlength="20" required placeholder="Phone">
-//             <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
-//         </div>
-
-//         <div class="editContactbuttons ">
-//             <div class="deleteButton" onclick="deleteContact(${array.id})">
-//                 <span>Delete </span>
-//             </div>
-
-//             <button class="safeEditContactButton" onclick="saveEditedContact(${array.id})">
-//                 <span>Safe</span>
-//                 <div class="checkSVGContainer">
-//                 </div>
-//             </button>
-//         </div>
-//     </div>
-// </div>
-// </div>
-//    `
-// }
-
 function createEditContactDialogMobileHTML(array) {
    return /*html*/ `
         

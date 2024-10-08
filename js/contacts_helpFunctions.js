@@ -1,16 +1,9 @@
 let contacts = [];
 let taskStorage = [];
 
-function getInput() {
-    let newName = document.getElementById("name");
-    let newEmail = document.getElementById("email");
-    let newPhone = document.getElementById("phone");
-    return newName, newEmail, newPhone
-}
-
 /**
  * 
- * changes the way the phone number ist displayed on detail view
+ * changes the way the phone number is displayed on detail view
  * 
  * @param {string} replacedPhone 
  * @returns styled telephon number
@@ -208,8 +201,7 @@ function openEditContactDialogMobile(id) {
     document.getElementById('mobileDialogBackground').style.display = 'flex';
     let editContactContainer = document.getElementById('mobileWorkContactContainer');
     editContactContainer.innerHTML = '';
-    editContactContainer.innerHTML = createEditContactDialogMobileHTML(array); // <from> bis fertigstellung der eigntlichen funktion entfernt, wird später hinzugefügt für edit funktion
-    preFilledInputs(inventoryData);
+    editContactContainer.innerHTML = createEditContactDialogMobileHTML(array); 
     editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
 }
 
@@ -226,7 +218,6 @@ function closeMobileDialogBackground() {
  * 
  * hidden dialog container becomes visible
  */
-
 function showHiddenDialog() {
     let dialogBackground = document.getElementById('dialogBackground');
     document.getElementById('body').classList.add('overflowHidden');
@@ -283,7 +274,6 @@ function generateArray(id, index) {
 * @param {number} index - position in 'contacts'-object
 * @returns - array for pre-filled input fields
 */
-
 function generateInventoryDataArray(index) {
     let inventoryData = {
         name: contacts[index].name,
@@ -335,7 +325,12 @@ async function deleteContactFromTask(tasks, id) {
     }
 }
 
-
+/**
+ * 
+ * Deletes the contact and the user from the contact book and the tasks, logs out and deletes the session
+ * 
+ * @param {number} id 
+ */
 async function confirmDelete(id) {
     let userList = await getUserList();
     let indexUserlist = getIndexUser(userList, id);
@@ -351,9 +346,71 @@ async function confirmDelete(id) {
     isLogged();
 }
 
+/**
+ * 
+ * deletes the user from the user list and updates it, deletes the session and local storage (logout)
+ * 
+ * @param {object} userList 
+ * @param {number} index 
+ */
 async function removeUser(userList, index) {
     userList.splice(index, 1); // Remove User self 
     saveData("user", userList);
     clearLocalStorage();
     sessionDestroy();
 }
+
+/**
+ * 
+ * creates and reads all the necessary information to create a new contact
+ * 
+ * @param {number} id 
+ * @returns object with ne user data
+ */
+function getNewContactData(id) {
+    let newName = document.getElementById("name");
+    let newEmail = document.getElementById("email");
+    let newPhone = document.getElementById("phone");
+    let fullname = newName.value;
+    let splittedName = fullname.split(' ');
+    let newFirstname = splittedName[0];
+    let newLastname = splittedName[1];
+    let color = generateDarkColor();
+    let newContact = {
+        id: id,
+        name: newFirstname,
+        lastname: newLastname,
+        email: newEmail.value,
+        phone: newPhone.value,
+        color: color,
+    };
+    return newContact;
+}
+
+/**
+ * 
+ * generates an object with new contacts infos to push it in cotancts array
+ * 
+ * @param {number} id 
+ * @returns object with new contact data
+ */
+function createNewContactObject(id) {
+    let newName = document.getElementById("name");
+    let newEmail = document.getElementById("email");
+    let newPhone = document.getElementById("phone");
+    let fullname = newName.value;
+    let splittedName = fullname.split(' ');
+    let newFirstname = splittedName[0];
+    let newLastname = splittedName[1];
+    let index = getCurrentContact(id);
+    let color = contacts[index].color
+    let newContact = {
+       id: id,
+       name: newFirstname,
+       lastname: newLastname,
+       email: newEmail.value,
+       phone: newPhone.value,
+       color: color,
+    }
+    return newContact;
+ }

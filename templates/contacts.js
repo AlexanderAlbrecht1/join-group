@@ -359,3 +359,28 @@ function warningHTML(array) {
 
    `
 }
+
+/**
+ *
+ * put each line a contact for the add task
+ *
+ * @param {object} contact - put one contact to the dropdown
+ * @returns - a line of contact in html
+ */
+function getHTMLContactSelection(contact) {
+   let name = contact.name + ' ' + contact.lastname;
+   return `
+   <div class="contact-checkbox" onclick="toggleCheckbox(this)">
+       <div>
+           <div class="monogrammicon" style="background-color: ${contact.color}">
+               ${getMonogram(name)}
+           </div>
+           ${name}
+       </div>
+       <label class="custom-checkbox">
+           <input type="checkbox" name="assign" value="${contact.id}" />
+           <span class="checkbox-image"></span>
+       </label>
+   </div>
+`;
+}

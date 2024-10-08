@@ -137,7 +137,7 @@ async function openKanbanboard() {
    window.location = "./kanbanboard.html";
 }
 
-function showRequiredText() {
+function XshowRequiredText() {
    let title = document.getElementById("title");
    let titleSpan = document.getElementById("title-span");
    let dueDate = document.getElementById("due-date");
@@ -171,6 +171,39 @@ function showRequiredText() {
 
    return true;
 }
+
+
+
+function faultDisplay(field,msg,border) {
+   if (border == null) border=field;
+   if (field.value) {
+       border.style.border = "";
+       msg.classList.add("d-none"); 
+   } else {
+       border.style.border = "1px solid red";
+       msg.classList.remove("d-none");     
+   }
+   return !field.value
+}
+
+
+function showRequiredText() {
+   let field,msg;
+   let err=false;
+
+   field = document.getElementById("title");
+   msg = document.getElementById("title-span");
+   err   = faultDisplay(field,msg) || err;
+   field = document.getElementById("due-date");
+   msg = document.getElementById("due-date-span");
+   err   = faultDisplay(field,msg) || err;
+   field = document.getElementById("category");
+   border = document.getElementById("select-box");
+   msg = document.getElementById("category-span");
+   err   = faultDisplay(field,msg,border) || err;
+   return !err;
+}
+
 
 
 /**

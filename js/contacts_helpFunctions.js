@@ -1,13 +1,6 @@
 let contacts = [];
 let taskStorage = [];
 
-function getInput() {
-    let newName = document.getElementById("name");
-    let newEmail = document.getElementById("email");
-    let newPhone = document.getElementById("phone");
-    return newName, newEmail, newPhone
-}
-
 /**
  * 
  * changes the way the phone number ist displayed on detail view
@@ -357,3 +350,51 @@ async function removeUser(userList, index) {
     clearLocalStorage();
     sessionDestroy();
 }
+
+function getNewContactData(id) {
+    let newName = document.getElementById("name");
+    let newEmail = document.getElementById("email");
+    let newPhone = document.getElementById("phone");
+    let fullname = newName.value;
+    let splittedName = fullname.split(' ');
+    let newFirstname = splittedName[0];
+    let newLastname = splittedName[1];
+    let color = generateDarkColor();
+    let newContact = {
+        id: id,
+        name: newFirstname,
+        lastname: newLastname,
+        email: newEmail.value,
+        phone: newPhone.value,
+        color: color,
+    };
+    return newContact;
+}
+
+/**
+ * 
+ * generates an array with new contacts infos to push it in cotancts array
+ * 
+ * @param {number} id 
+ * @returns array with new contact data
+ */
+function createNewContactObject(id) {
+    let newName = document.getElementById("name");
+    let newEmail = document.getElementById("email");
+    let newPhone = document.getElementById("phone");
+    let fullname = newName.value;
+    let splittedName = fullname.split(' ');
+    let newFirstname = splittedName[0];
+    let newLastname = splittedName[1];
+    let index = getCurrentContact(id);
+    let color = contacts[index].color
+    let newContact = {
+       id: id,
+       name: newFirstname,
+       lastname: newLastname,
+       email: newEmail.value,
+       phone: newPhone.value,
+       color: color,
+    }
+    return newContact;
+ }

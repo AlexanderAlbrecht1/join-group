@@ -15,28 +15,27 @@ async function initContacts() {
  * 
  */
 async function displayContacts() {
-   contacts = await loadContacts();
-   contacts = contacts.filter(
-      (contact) =>
-         contact &&
-         contact.id &&
-         contact.name &&
-         contact.lastname &&
-         contact.email &&
-         contact.phone
-   );
-   document.getElementById('showContacts').innerHTML = '';
-   document.getElementById('contactDetail').innerHTML = '';
-   contacts.sort((a, b) => a.name.localeCompare(b.name));
-   let groupedContacts = contacts.reduce((groups, contact) => {
-      const firstLetter = contact.name[0].toUpperCase();
-      if (!groups[firstLetter]) {
-         groups[firstLetter] = [];
-      }
-      groups[firstLetter].push(contact);
+   try {
+      // contacts = filterValidContacts(await tryLoadCatchErr());
+      contacts = await loadContacts();
+      contacts = filterValidContacts(contacts);
+      document.getElementById('showContacts').innerHTML = '';
+      document.getElementById('contactDetail').innerHTML = '';
+      contacts = sortContactsByName(contacts);
+      let groupedContacts = groupContactsByFirstLetter(contacts);
+      renderContacts(groupedContacts);
+   } catch (error) {
+      console.error("Fehler beim Laden der Kontakte:", error);
+   }
+}
 
-      return groups;
-   }, {});
+/**
+ * 
+ * load, filter and display contacts
+ * 
+ * @param {object} groupedContacts 
+ */
+function renderContacts(groupedContacts) {
    for (let [letter, contacts] of Object.entries(groupedContacts)) {
       document.getElementById('showContacts').innerHTML += generateGroupLetterHTML(letter);
       for (let i = 0; i < contacts.length; i++) {
@@ -51,27 +50,60 @@ async function displayContacts() {
 
 /**
  * 
+ * groups the sorted contacts according to the first letter of the first name
+ * 
+ * @param {*} contacts 
+ * @returns 
+ */
+function groupContactsByFirstLetter(contacts) {
+   return contacts.reduce((groups, contact) => {
+      const firstLetter = contact.name[0].toUpperCase();
+      if (!groups[firstLetter]) {
+         groups[firstLetter] = [];
+      }
+      groups[firstLetter].push(contact);
+      return groups;
+   }, {});
+}
+
+/**
+ * 
+ * sorts the contacts alphabetically
+ * 
+ * @param {object} contacts 
+ * @returns sorted object
+ */
+function sortContactsByName(contacts) {
+   return contacts.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/**
+ * 
+ * filters the contacts with the specified characteristics
+ * 
+ * @param {object} contacts 
+ * @returns filtered object
+ */
+function filterValidContacts(contacts) {
+   return contacts.filter(
+      (contact) =>
+         contact &&
+         contact.id &&
+         contact.name &&
+         contact.lastname &&
+         contact.email
+      // contact.phone
+   );
+}
+
+/**
+ * 
  * add new contact to contactbook
  */
 async function addNewContact() {
    await loadContacts();
    let id = await getIncrementedId("contact");
-   let newName = document.getElementById("name");
-   let newEmail = document.getElementById("email");
-   let newPhone = document.getElementById("phone");
-   let fullname = newName.value;
-   let splittedName = fullname.split(' ');
-   let newFirstname = splittedName[0];
-   let newLastname = splittedName[1];
-   let color = generateDarkColor();
-   let newContact = {
-      id: id,
-      name: newFirstname,
-      lastname: newLastname,
-      email: newEmail.value,
-      phone: newPhone.value,
-      color: color,
-   };
+   let newContact = getNewContactData(id);
    contacts.push(newContact);
    await saveData("Contacts", contacts);
    clearInput();
@@ -137,21 +169,40 @@ async function deleteContact(id) {
    let index = getCurrentContact(id);
    tasks = await loadData("taskstorage");
    if (id == currentSession.id) {
-      let array = generateArray(id, index);
-      document.getElementById('mobileDialogBackground').style.display = 'flex';
-      let ContactContainer = document.getElementById('mobileWorkContactContainer');
-      ContactContainer.innerHTML = '';
-      ContactContainer.innerHTML = warningHTML(array);
-      ContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
-      document.getElementById('contactBook').style.overflowY = "hidden";
+      createWarningPopUp(id, index);
    } else {
-      contacts.splice(index, 1);
-      await deleteContactFromTask(tasks, id);
-      await saveContacts();
-      await saveData("taskstorage", tasks);
-      displayContacts();
-      document.getElementById('mobileDialogBackground').style.display = 'none';
+      deleteSafeReload(index, id, tasks);
    }
+}
+
+/**
+ * det´lete contact, safe to firebase, relode contactbook
+ * 
+ */
+async function deleteSafeReload(index, id, tasks) {
+   contacts.splice(index, 1);
+   await deleteContactFromTask(tasks, id);
+   await saveContacts();
+   await saveData("taskstorage", tasks);
+   displayContacts();
+   document.getElementById('mobileDialogBackground').style.display = 'none';
+}
+
+/**
+ * 
+ * creates and shows an html wanring pop up to confirm delete sessionuser
+ * 
+ * @param {number} id 
+ * @param {number} index 
+ */
+function createWarningPopUp(id, index) {
+   let array = generateArray(id, index);
+   document.getElementById('mobileDialogBackground').style.display = 'flex';
+   let ContactContainer = document.getElementById('mobileWorkContactContainer');
+   ContactContainer.innerHTML = '';
+   ContactContainer.innerHTML = warningHTML(array);
+   ContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
+   document.getElementById('contactBook').style.overflowY = "hidden";
 }
 
 /**
@@ -235,32 +286,4 @@ async function saveEditedContact(id) {
    await displayContacts();
    document.getElementById(`contact${id}`).click();
    closeMobileDialogBackground();
-}
-
-/**
- * 
- * generates an array with new contacts infos to push it in cotancts array
- * 
- * @param {number} id 
- * @returns array with new contact data
- */
-function createNewContactObject(id) {
-   let newName = document.getElementById("name");
-   let newEmail = document.getElementById("email");
-   let newPhone = document.getElementById("phone");
-   let fullname = newName.value;
-   let splittedName = fullname.split(' ');
-   let newFirstname = splittedName[0];
-   let newLastname = splittedName[1];
-   let index = getCurrentContact(id);
-   let color = contacts[index].color
-   let newContact = {
-      id: id,
-      name: newFirstname,
-      lastname: newLastname,
-      email: newEmail.value,
-      phone: newPhone.value,
-      color: color,
-   }
-   return newContact;
 }

@@ -64,7 +64,6 @@
     Font Size, colors, Boxsizes
 */
 #add-task label,
-#add-task span,
 input,
 textarea,
 select {
@@ -81,7 +80,10 @@ select {
 }
 
 .required-text {
+    font-family: Poppins;
     font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
     color: #ff8190;
  }
  

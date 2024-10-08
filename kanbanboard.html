@@ -31,7 +31,6 @@
         <script src="./js/contacts.js"></script>
         <script src="./js/contactAddons.js"></script>
         <script src="./js/assignSelector.js"></script>
-        <script src="./js/addtask.js"></script>
         <script src="./js/kanbanboard.js"></script>
         <script src="./js/kanbanTaskView.js"></script>
         <script src="./js/kanbanTaskEdit.js"></script>
@@ -68,8 +67,8 @@
                         <div class="add-task-left">
                             <div class="label-input-con">
                                 <label for="title">Title<span class="required-asterisk">*</span></label>
-                                <input type="text" id="title" placeholder="Enter a title">
-                                <span id="title-span" class="required-text d-none">This field is required</span>
+                                <input type="text" id="title" class="input-title" placeholder="Enter a title">
+                                <span id="title-span" class="input-title-msg required-text d-none">This field is required</span>
                             </div>
                             <div class="label-input-con">
                                 <label for="subtaskPopupDescription">Description</label>
@@ -97,8 +96,8 @@
                         <div class="add-task-right">
                             <div class="label-input-con">
                                 <label for="due-date">Due Date<span class="required-asterisk">*</span></label>
-                                <input type="date" id="due-date">
-                                <span id="due-date-span" class="required-text d-none">This field is required</span>
+                                <input type="date" id="due-date" class="input-date">
+                                <span id="due-date-span" class="input-date-msg required-text d-none">This field is required</span>
                             </div>
     
                             <div class="priority label-input-con">
@@ -120,14 +119,14 @@
     
                             <div class="label-input-con">
                                 <label for="category">Category<span class="required-asterisk">*</span></label>
-                                <div id="select-box" class="selectBox">
-                                    <select id="category" class="category">
+                                <div id="select-box" class="selectBox input-category-border">
+                                    <select id="category" class="category input-category">
                                         <option value="" disabled selected>Select task category</option>
                                         <option value="technical-task">Technical Task</option>
                                         <option value="user-story">User Story</option>
                                     </select>
                                 </div>
-                                <span id="category-span" class="required-text d-none">This field is required</span>
+                                <span id="category-span" class="input-category-msg required-text d-none">This field is required</span>
                             </div>
     
     

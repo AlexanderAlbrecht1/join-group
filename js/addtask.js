@@ -2,13 +2,8 @@ let doNotSubmit= false;
 let tasks= [];
 async function addNewTask() {
    if (doNotSubmit) return;
-
-   console.log("addTask");
-   showRequiredText();
-
-   if (!showRequiredText()) {
-      return;
-   }
+   if (!showRequiredText()) return;
+   
 
    let title = document.getElementById("title");
    let description = document.getElementById("description");
@@ -21,7 +16,7 @@ async function addNewTask() {
 
    tasks = await loadData("taskstorage");
 
-   if (tasks === null) { // Hiermit löschst du alle Tasks
+   if (tasks === null) { 
       tasks = [];
    }
    tasks.push({
@@ -78,7 +73,6 @@ function showCheckboxes() {
 
 async function init() {
    if (isLogged()) {
-      // initContactList(contacts);
       contacts=await loadSortedContactList();
       logedUserMonogram();
       date = new Date().toISOString().split('T')[0];
@@ -101,15 +95,6 @@ function renderSubtasks(subtaskList) {
                <img onclick="deleteSubtask(${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
            </div>
        </div>`;
-/*     
-      subtaskList.innerHTML += `<div id="subtask-con" class="list-item">
-                                 <li ondblclick="editSubtask(${i})">${subtasks[i].name}</li>
-                                 <div class="subtask-icon">
-                                 <img onclick="editSubtask(${i})" src="./assets/img/desktop/subtask-edit.svg" alt="">
-                                 <img onclick="deleteSubtask(${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
-                             </div>
-                             </div>`;
-*/
    }
 }
 
@@ -186,59 +171,6 @@ function showRequiredText() {
 
    return true;
 }
-
-/*
-function toggleIcon() {
-   const subtaskInput = document.getElementById("subtasks");
-   const checkIcon = document.getElementById("subtask-icon");
-   const clearIcon = document.getElementById("add-subtask-clear");
-   const src="./assets/img/desktop/add_subtask.svg";
-
-
-
-   if (subtaskInput.value == "") {
-      checkIcon.src = src;
-      clearIcon.classList.add("hidden");
-   } else {
-      checkIcon.src = "./assets/img/desktop/add-subtask-check.svg";
-      clearIcon.classList.remove("hidden");
-   }
-}
-
-function clearSubtaskInput() {
-   document.getElementById("subtasks").value = "";
-}
-
-window.addEventListener("mouseup", function (event) {
-   let checkboxes = document.getElementById("checkboxes");
-   let selectBox = document.querySelector(".selectBox");
-
-   // Falls die Checkboxes sichtbar sind und man außerhalb klickt
-   if (
-      expanded &&
-      !checkboxes.contains(event.target) &&
-      !selectBox.contains(event.target)
-   ) {
-      checkboxes.style.display = "none";
-      expanded = false;
-   }
-});
-
-function toggleCheckbox(divElement) {
-   const checkbox = divElement.querySelector('input[type="checkbox"]');
-
-   checkbox.checked = !checkbox.checked;
-
-   if (checkbox.checked) {
-      divElement.style.backgroundColor = "#2A3647";
-      divElement.style.color = "white";
-   } else {
-      divElement.style.backgroundColor = "";
-      divElement.style.color = "";
-   }
-}
-
-*/
 
 
 /**

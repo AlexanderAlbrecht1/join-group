@@ -77,20 +77,19 @@ function clearTaskInputs() {
  */
 function prepareTaskData() {
     let card=document.getElementById("add-task-form");
-    
     return {
-        id:          getNewId(tasks), //tasks.length,
+        id:          getNewId(tasks), 
         title:       card.querySelector("#title").value,
         description: card.querySelector("textarea").value,
         assignedTo:  Array.from(card.querySelectorAll('input[name="assign"]:checked')).map(checkbox => +checkbox.value),
         dueDate:     card.querySelector("input[type=date]").value,
-        prio:        card.querySelector('input[name="prio"]:checked'),
+        prio:        card.querySelector('input[name="prio"]:checked').value,
         category:    card.querySelector(".category").value,
         status:      "to-do",
         subtasks:    subtasks,
      };
-  
 }
+
 
 /**
  * 
@@ -110,13 +109,25 @@ async function addNewTask() {
     tasks = await loadData("taskstorage");
     if (tasks === null) tasks = [];
     tasks.push(prepareTaskData());
-    // await saveData("taskstorage", tasks);
-    // clearTaskInputs();
-    // openKanbanboard();
- }
+    await saveData("taskstorage", tasks);
+    clearTaskInputs();
+    addContainerData(tasks,tasks[tasks.length-1].status);
+    closeAddTask();
+}
  
 
-
+/**
+ * 
+ * PRIVATE
+ * 
+ * Displays an Error and Highlights teh fField red if something is wrong
+ * returns true if we have errors else false
+ * 
+ * @param {element} field  - input field for value can also be border 
+ * @param {element} msg    - the error message area when wrong input given
+ * @param {element} border - border to red field
+ * @returns -  true = worng input  or false all correct
+ */
 function faultDisplay(field,msg,border) {
     if (border == null) border=field;
 
@@ -127,11 +138,18 @@ function faultDisplay(field,msg,border) {
         border.style.border = "1px solid red";
         msg.classList.remove("d-none");     
     }
-
     return !field.value
 }
 
 
+/**
+ * 
+ * PUBLIC
+ * 
+ * Prepares Fields for Error analysis
+ * 
+ * @returns 
+ */
 function showRequiredText() {
     let card=document.getElementById("add-task-form");
     let field,msg;
@@ -150,7 +168,6 @@ function showRequiredText() {
     return !err;
  }
  
-
 
  /**
  * 
@@ -174,6 +191,16 @@ function noSubmit(event,key) {
        event.preventDefault();
     }
  }
+
+ 
+ /**
+  * 
+  * PUBLIC EVENT
+  * 
+  * Deletes the preventation that we submit, when we loose the focus auf any field
+  * it was set because ENTER Key, see noSuBmit, was hit at entree of add Submit 
+  * 
+  */
  document.addEventListener("focusout",() => {
     doNotSubmit=false;
  })

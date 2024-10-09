@@ -124,7 +124,7 @@ function getNewId(data) {
     if (data.length == 0) return -1;
     let max=0;
     for (let i=0;i<data.length;i++) {
-        if (data.id>max) max=+data.id;
+        if (data[i].id>max) max=+data[i].id;
     }
     return max+1;
 }

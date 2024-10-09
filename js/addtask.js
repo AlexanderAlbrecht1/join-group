@@ -1,40 +1,61 @@
 let doNotSubmit= false;
 let tasks= [];
+
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Prepares effective a new Dataset for the new Task
+ * 
+ * @returns prepared Dataset
+ */
+function prepareDataset() {
+   return {
+      id: getNewId(tasks), 
+      title: document.getElementById("title").value,
+      description: document.getElementById("description").value,
+      assignedTo: Array.from(
+         document.querySelectorAll('input[name="assign"]:checked')
+      ).map((checkbox) => +checkbox.value),
+      dueDate: document.getElementById("due-date").value,
+      prio: document.querySelector('input[name="prio"]:checked').value,
+      category: document.getElementById("category").value,
+      status: "to-do",
+      subtasks: subtasks
+   }
+}
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Adds a new Task to the database
+ * - checks the input fields before and returns before end if something wrong
+ * - clears the Inputfields
+ * 
+ * @returns -nothing
+ */
 async function addNewTask() {
    if (doNotSubmit) return;
-   if (!showRequiredText()) return;
-   
-
-   let title = document.getElementById("title");
-   let description = document.getElementById("description");
-   let assignedTo = Array.from(
-      document.querySelectorAll('input[name="assign"]:checked')
-   ).map((checkbox) => +checkbox.value);
-   let dueDate = document.getElementById("due-date");
-   let selectedPrio = document.querySelector('input[name="prio"]:checked');
-   let category = document.getElementById("category");
-
+   if (!showRequiredText()) return;   
    tasks = await loadData("taskstorage");
-
-   if (tasks === null) { 
-      tasks = [];
-   }
-   tasks.push({
-      id: getNewId(tasks), //tasks.length,
-      title: title.value,
-      description: description.value,
-      assignedTo: assignedTo,
-      dueDate: dueDate.value,
-      prio: selectedPrio.value,
-      category: category.value,
-      status: "to-do",
-      subtasks: subtasks,
-   });
+   if (tasks === null) tasks = [];
+   tasks.push(prepareDataset());
    await saveData("taskstorage", tasks);
    clearTaskInputs();
    openKanbanboard();
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Clears all Input Fields AddTask
+ *  
+ * @returns - nothing
+ */
 function clearTaskInputs() {
    document.getElementById("title").value = "";
    document.getElementById("description").value = "";
@@ -55,11 +76,14 @@ function clearTaskInputs() {
    document.getElementById("subtask-list").innerHTML = "";
    document.getElementById("addtask-monogramlist").innerHTML = "";
    document.getElementById("subtask-list").innerHTML = "";
-   return;
 }
 
-let expanded = false;
 
+/**
+ * 
+ * Display Checkboxes
+ */
+let expanded = false;
 function showCheckboxes() {
    let checkboxes = document.getElementById("checkboxes");
    if (!expanded) {
@@ -71,6 +95,15 @@ function showCheckboxes() {
    }
 }
 
+
+/**
+ * 
+ * First Initialisation
+ * - Checks Login
+ * - Load Contactlist
+ * - Displays Monogram at Header
+ * - Inits AssignSelector/Contacts Events
+ */
 async function init() {
    if (isLogged()) {
       contacts=await loadSortedContactList();
@@ -81,6 +114,15 @@ async function init() {
    }
 }
 
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Renders The Subtask Edit and Display Section
+ * 
+ * @param {array} subtaskList - List of all Subtasks of the Task
+ */
 function renderSubtasks(subtaskList) {
    subtaskList.innerHTML = "";
 
@@ -98,6 +140,13 @@ function renderSubtasks(subtaskList) {
    }
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Delete Subtask from Array
+ */
 function deleteSubtask(i) {
    let subtaskList = document.getElementById("subtask-list");
    let subtaskEditInput = document.getElementById("subtask-edit-input");
@@ -109,6 +158,13 @@ function deleteSubtask(i) {
    subtaskEditInput.value = "";
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Open the Subtask input areae area
+ */
 function editSubtask(index) {
    let subtaskEditInput = document.getElementById("subtask-edit-input");
    let subtaskEditCon = document.getElementById("edit-input-con");
@@ -118,6 +174,13 @@ function editSubtask(index) {
    currentEditIndex = index;
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Save the Subtask we added to array
+ */
 function saveEditedSubtask() {
    let subtaskEditInput = document.getElementById("subtask-edit-input");
    let subtaskList = document.getElementById("subtask-list");
@@ -132,48 +195,31 @@ function saveEditedSubtask() {
    }
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Open Kanbanboard after Moving an Msg
+ */
 async function openKanbanboard() {
    await msgfly();
    window.location = "./kanbanboard.html";
 }
 
-function XshowRequiredText() {
-   let title = document.getElementById("title");
-   let titleSpan = document.getElementById("title-span");
-   let dueDate = document.getElementById("due-date");
-   let dueDateSpan = document.getElementById("due-date-span");
-   let category = document.getElementById("category");
-   let categoryBox = document.getElementById("select-box");
-   let categorySpan = document.getElementById("category-span");
 
-   if (!title.value) {
-      titleSpan.classList.remove("d-none");
-      title.style.border = "1px solid red";
-   } else {
-      titleSpan.classList.add("d-none");
-      title.style.border = "1px solid #d1d1d1";
-   }
-
-   if (!dueDate.value) {
-      dueDateSpan.classList.remove("d-none");
-      dueDate.style.border = "1px solid red";
-   } else {
-      dueDateSpan.classList.add("d-none");
-   }
-
-   if (!category.value) {
-      categorySpan.classList.remove("d-none");
-      categoryBox.style.border = "1px solid red";
-      return;
-   } else {
-      categorySpan.classList.add("d-none");
-   }
-
-   return true;
-}
-
-
-
+/**
+ * 
+ * PRIVATE
+ * 
+ * Displays an Error and Highlights teh fField red if something is wrong
+ * returns true if we have errors else false
+ * 
+ * @param {element} field  - input field for value can also be border 
+ * @param {element} msg    - the error message area when wrong input given
+ * @param {element} border - border to red field
+ * @returns -  true = worng input  or false all correct
+ */
 function faultDisplay(field,msg,border) {
    if (border == null) border=field;
    if (field.value) {
@@ -187,6 +233,14 @@ function faultDisplay(field,msg,border) {
 }
 
 
+/**
+ * 
+ * PUBLIC
+ * 
+ * Prepares Fields for Error analysis
+ * 
+ * @returns 
+ */
 function showRequiredText() {
    let field,msg;
    let err=false;
@@ -203,7 +257,6 @@ function showRequiredText() {
    err   = faultDisplay(field,msg,border) || err;
    return !err;
 }
-
 
 
 /**
@@ -223,8 +276,20 @@ function noSubmit(event,key) {
       if (event.target.classList.contains("input-subtask")) {
          addSubtasks(event);
          doNotSubmit=true;
-
       } 
       event.preventDefault();
    }
 }
+
+
+/**
+ * 
+ * PUBLIC EVENT
+ * 
+ * Deletes the preventation that we submit, when we loose the focus auf any field
+ * it was set because ENTER Key, see noSuBmit, was hit at entree of add Submit 
+ * 
+ */
+document.addEventListener("focusout",() => {
+   doNotSubmit=false;
+})

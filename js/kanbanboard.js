@@ -136,6 +136,7 @@ function allowDrop(ev) {
 function drag(ev) {
    ev.dataTransfer.setData('text', ev.target.id);
    hideNoTaskInfo(ev);
+   console.log(ev.target.style.border="5px solid black");
 }
 
 
@@ -230,7 +231,6 @@ function getTopParent(element,className) {
 
 function toggleBorder(event,status=null) {
    let e=getTopParent(event.target,"containers");
-
    // Only if container is completly leaving
    if (event.type === "dragleave" && e.contains(event.relatedTarget)) {
       return; 

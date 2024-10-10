@@ -273,6 +273,13 @@
 
             <div class="mbb">
                 <div>
+                    <div class="todo">
+                        To do
+                        <a class="btn-add" onclick="openAddTask('to-do')">
+                            <img src="./assets/img/desktop/add_subtask.svg">
+                        </a>
+                    </div>
+
                     <div class="containers" id="to-do-container" 
                         ondragleave="toggleBorder(event,false)"
                         ondragenter="toggleBorder(event,true)"
@@ -282,6 +289,12 @@
                 </div>
 
                 <div>
+                    <div class="todo">
+                        In progress
+                        <a class="btn-add" onclick="openAddTask('in-progress')">
+                            <img src="./assets/img/desktop/add_subtask.svg">
+                        </a>
+                    </div>
                     <div class="containers" id="in-progress-container" 
                         ondragleave="toggleBorder(event,false)"
                         ondragenter="toggleBorder(event,true)"
@@ -291,6 +304,12 @@
                 </div>
 
                 <div>
+                    <div class="todo">
+                        Await feedback
+                        <a class="btn-add" onclick="openAddTask('await-feedback')">
+                            <img src="./assets/img/desktop/add_subtask.svg">
+                        </a>
+                    </div>
                     <div class="containers" id="await-feedback-container" 
                         ondragleave="toggleBorder(event,false)"
                         ondragenter="toggleBorder(event,true)"
@@ -300,6 +319,10 @@
                 </div>
 
                 <div>
+                    <div class="todo">
+                        Done
+                    </div>
+
                     <div class="containers" id="done-container" 
                         ondragleave="toggleBorder(event,false)"
                         ondragenter="toggleBorder(event,true)"

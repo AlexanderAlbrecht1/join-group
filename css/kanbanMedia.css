@@ -1,0 +1,46 @@
+@media (max-width:1450px) {
+    .Xmbb {
+        padding:16px;
+    }
+}
+
+@media (max-width:1450px) {
+    .main-container {
+        margin-left: 216px;
+        width: calc(100% - 232px);
+    }  
+
+    .mbb {
+        padding:16px;
+        margin:auto;
+    }
+}
+
+@media (max-width:1400px) {
+    body {
+        overflow:hidden;
+    } 
+    .main-container {
+        margin-left: 232px;
+        width: calc(100% - 232px);
+        overflow: hidden;
+    } 
+
+    .mbb {
+        flex-direction: column;
+        overflow-x: hidden;
+        /*overflow-y:unset;*/
+        overflow-x:auto;
+        margin:unset;
+    }
+    
+    .mbb .containers {
+        flex-direction: row;
+        overflow-x: auto;
+        min-height:280px;
+    }
+    .mbb .card {
+        /* max-width: 252px;*/
+        min-width: 252px;
+    }
+}

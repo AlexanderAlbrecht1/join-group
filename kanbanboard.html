@@ -5,9 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Kanbanboard</title>
         <link rel="stylesheet" href="./css/kanbanboard.css">
+        <link rel="stylesheet" href="./css/kanbanAnimation.css">
+        <link rel="stylesheet" href="./css/progressbar.css">
+        <link rel="stylesheet" href="./css/kanbanCard.css">
         <link rel="stylesheet" href="./css/kanbanTaskView.css">
         <link rel="stylesheet" href="/styles.css">
-        <!-- link rel="stylesheet" href="./css/contacts.css"-->
         <link rel="stylesheet" href="./assets/font/inter.css">
         <link rel="stylesheet" href="./assets/font/poppins.css">
         <link rel="stylesheet" href="./css/nav.css">
@@ -19,6 +21,7 @@
         <link rel="stylesheet" href="./css/kanbanTaskAdd.css">
         <link rel="stylesheet" href="./css/priority.css">
         <link rel="stylesheet" href="./css/category.css" />
+        <link rel="stylesheet" href="./css/kanbanMedia.css" />
 
 
 
@@ -57,6 +60,7 @@
             </div>
             <div id="add-task" class="drive-in">
                 <form id="add-task-form" class="relative input-container task-view-card add" onkeydown="noSubmit(event,'Enter')" onsubmit="addNewTask();return false" >
+                    <input type="hidden" name="status">
 
                     <div class="top">
                         <h1>Add Task</h1>
@@ -243,19 +247,19 @@
                 <div>
                     <div class="todo">
                         To do
-                        <a class="btn-add">
+                        <a class="btn-add" onclick="openAddTask('to-do')">
                             <img src="./assets/img/desktop/add_subtask.svg">
                         </a>
                     </div>
                     <div class="todo">
                         In progress
-                        <a class="btn-add">
+                        <a class="btn-add" onclick="openAddTask('in-progress')">
                             <img src="./assets/img/desktop/add_subtask.svg">
                         </a>
                     </div>
                     <div class="todo">
                         Await feedback
-                        <a class="btn-add">
+                        <a class="btn-add" onclick="openAddTask('await-feedback')">
                             <img src="./assets/img/desktop/add_subtask.svg">
                         </a>
                     </div>

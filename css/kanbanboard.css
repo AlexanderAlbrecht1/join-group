@@ -1,8 +1,9 @@
 body {
     height: 100vh;
 }
+
+
 .mbc {
-    /* height: 100%; */
     display: flex;
     flex-direction: column;
     gap: 0px; 
@@ -10,11 +11,13 @@ body {
     height: calc(100% - 100px);
 } 
 
+
 .mbc>.mbh {
     display: flex; 
     flex-direction:column;   
     height: 232px;
 }
+
 
 .mbc>.mbh>div:nth-child(odd) {
     min-height: 24px;
@@ -24,9 +27,9 @@ body {
     margin-left:-4px;
     margin-right:4px;
     overflow: visible;
-
-
 }
+
+
 .mbc>.mbh>div:nth-child(2)  {
     flex:1;
     display: flex; 
@@ -37,6 +40,7 @@ body {
     gap: 26px;
 }
 
+
 .mbc .board {
     font-family: Inter;
     font-size: 61px;
@@ -46,16 +50,17 @@ body {
     align-items: center;
 }
 
+
 .mbc .buttons {
     display: flex;
     gap: 32px;
     height: 48px;
 }
 
+
 .mbc .find-button {
     box-sizing: border-box;
     display: flex;
-
     width: 312px;
     height: 48px;
     padding: 8px 16px;
@@ -64,12 +69,15 @@ body {
     border: 1px;
     background: rgba(255, 255, 255, 1);
 }
+
+
 .mbc .find-button>input  {
     outline: none;
     width: 100%;
     display: flex;
     border: 0px;
 }
+
 
 .mbs .submit-button {
     box-sizing: border-box;;
@@ -90,47 +98,45 @@ body {
     line-height: 25.2px;
 }
 
+
 .mbc .submit-button>img {
     margin-left: 8px;
     height: 18.67px;
     object-fit: contain;
-
 }
+
 
 /*
     Todo Headline
 */
 .mbc .todo {
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     text-align: left;
     height: 24px;
     line-height: 24px;
     font-family: Inter;
     font-size: 20px;
     font-weight: 700;
-
     width:260px;
     min-width: 260px;
     margin-bottom: 15.5px;
     box-sizing: border-box;
-
 }
+
 
 .mbc .todo>* {
     display: flex;
     align-items: center;
 }
 
+
 .btn-add {
     box-sizing: border-box;
     border-radius:8px;
     height: 24px;
     width: 24px;
-    border: 2px solid rgba(42, 54, 71, 1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,41 +144,46 @@ body {
     text-decoration: none;
 }
 
+
 .btn-add>img {
     justify-content: center;
-    height: 8px;
-    width: 8px;
-    color: rgba(42, 54, 71, 1);
-    filter:brightness(0.5); /**/
-   
+    height: 24px;
+    width: 24px;
 }
+
+
+.btn-add>img {
+    content: url("../assets/img/desktop/plus-border-black.svg");
+}
+
+
+.btn-add>img:hover {
+    content: url("../assets/img/desktop/plus-border-blue.svg");
+}
+
 
 /*
     Todo-Comtainer
 */
-
 .mbb {
     padding: 0 64px;
     display: flex;
     flex-direction: row;
-
     gap: 24px;
-    
     overflow-y:auto; /* hidden */
     height:100%;
-
 }
+
+
 .mbb>div  {
     display: flex; 
     flex-grow:1;
 }
 
 
-
 .mbb .containers {
     display: flex;
     flex-direction: column;
-
     box-sizing: border-box;
     width: 252px;
     min-height: 100%; 
@@ -182,12 +193,15 @@ body {
     gap:24px;
     overflow-x:visible;
 }
+
+
 .mbb .task-border {
     border: 1px dashed rgba(168, 168, 168, 1);
     border-radius: 25px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
     background-color: rgba(0, 0, 0, 0.02);
 }
+
 
 .mbb .containers::before {
     box-sizing: border-box;
@@ -208,221 +222,35 @@ body {
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
     background-color: rgba(0, 0, 0, 0.16);
     background-color: rgba(231, 231, 231, 1);
-
     margin-bottom:-48px;
     z-index:0;
 }
+
 
 .mbb #to-do-container::before {
     content: "No tasks To do";
 }
 
+
 .mbb #in-progress-container::before {
     content: "No tasks in progess";
 }
+
 
 .mbb #await-feedback-container::before {
     content: "No tasks await feedback";
 }
 
+
 .mbb #done-container::before {
     content: "No tasks Done";
 }
 
-/*
-    Add this if we drop the Container somwhere 
-    Remove this if there is no Container
-*/
+
 .mbb .hidden::before {
     z-index:-1;
 }
 
-/*
-.board-wrapper {
-    width: 100%;
-    margin-top: 96px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    justify-content: center;
-}
-*/
-
-/*
-    Cards
-*/
-/* .mbb > div {
-    display: flex; 
-    flex-direction: column;
-    gap: 24px;
-} */
-.mbb .card {
-    box-sizing: border-box;
-    width: 252px;
-    padding: 16px;
-    gap: 24px;
-    border-radius: 24px;
-    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
-    display: flex;
-    flex-direction: column;
-    background: rgba(255, 255, 255, 1);
-    z-index:1;
-    transform-origin: bottom left;
-    transition: 100ms ease-in-out;
-    cursor: pointer;
-}
-.mbb .card:active {
-    transform: rotate(5deg);
-}
-.rotate5 {
-    transform: rotate(5deg);
-}
-
-.mbb .card>h1 {
-    display: flex;
-    width:fit-content;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 4px 16px 4px 16px;
-    gap: 10px;
-    border-radius: 8px;    
-    
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2px;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(0, 56, 255, 1);
-    margin-block:0px;
-
-}
-
-.mbb .user-story>h1, 
-.task-view-card>.top>.user-story {
-    background: rgba(0, 56, 255, 1) !important;
-}
-
-.mbb .technical-task>h1, 
-.task-view-card>.top>.technical-task{
-    background: rgba(31, 215, 193, 1) !important;
-}
-
-.mbb-text {
-    display: flex;
-    flex-direction:column;
-    gap: 10px;
-    border-radius: 10px;    
-}
-
-.mbb-text>h1 {
-    display: flex;
-    align-items: center;
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 19.2px;
-    text-align: left;    
-    color: rgba(42, 54, 71, 1);
-    height: 38px;
-    margin:0;
-}
-.mbb-text>span {
-    display: flex;
-    align-items: center;
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2px;
-    text-align: left;
-    height: 38px;
-    color: rgba(168, 168, 168, 1);
-}
-
-/*
-    Progressbar
-*/
-.mbb .progress-container {
-    display: flex;
-    flex-direction: row;   
-    align-items:center; 
-    height: 16px;
-
-    font-family: Inter;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 14.4px;
-    text-align: left;
-    gap:10px;
-    
-}
-
-.mbb .progress-bar {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 128px;
-    height: 8px;
-    gap: 10px;
-    border-radius: 8px;
-    background: rgba(244, 244, 244, 1);
-}
-
-.mbb .progress {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    background: rgba(69, 137, 255, 1);
-    width: 50%; /* Example */
-    height: 8px;
-    border-radius: 16px;
-}
-
-/*
-    Icons of Card on bottom
-*/
-.mbb-icons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height:32px;
-    min-height: 32px;
-    gap:10px;
-}
-.mbb-icons>.monogram {
-    display: flex;
-    flex-direction: row;
-}
-.mbb-icons>.monogram>div {
-    box-sizing: border-box;
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right:-8px;
-    background-color: yellow; /* Example */
-    border: 1px solid #FFFFFF;
-    color:rgba(255, 255, 255, 1);
-
-
-    font-family: Inter;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 14.4px;
-    text-align: center;
-}
-.mbb-icons>.monogram>div.count {
-    color: black;
-    background-color: inherit;
-    border:none;
-    font-weight: 700;
-    margin-left:8px;
-    font-size: 14px;
-}
 
 .icon-prio-low {
     content: url('../assets/img/desktop//prio_low_green.svg');
@@ -430,11 +258,13 @@ body {
     object-fit: contain;
 }
 
+
 .icon-prio-medium {
     content: url('../assets/img/desktop/prio_medium_yellow.svg');
     width: 17px;
     object-fit: contain;
 }
+
 
 .icon-prio-urgent {
     content: url('../assets/img/desktop/prio_urgent_red.svg');
@@ -442,28 +272,12 @@ body {
     object-fit: contain;
 }
 
-
-.d-none {
-    display: none;
-}
-
 .register {
     text-decoration: none;
     color: black;
 }
 
-button {
-    cursor: pointer;
-}
 
-
-/*
-p {
-    width:200px;
-    height: 100px;
-    background-color: red;
-}
-*/
 .mbh .buttons .icon {
     padding-left:16px;
     border-left: 1px solid rgb(209,209,209);
@@ -471,6 +285,7 @@ p {
     width: 30px;
     justify-content: flex-end;
 }
+
 
 .mbh .buttons .icon img {
     height: 17.58px;
@@ -480,46 +295,12 @@ p {
     overflow:visible;
 }
 
+
 .mbh .buttons .icon img:hover {
     background-color: rgb(209,209,209);
 }
 
+
 #input-field-container {
     width: 312px;
-}
-
-.drive-in {
-    position: fixed;
-    top:0px;
-    left:0px;
-    right: 0px;
-    bottom: 0px;
-    display: flex;
-    justify-content: center;
-    align-items:center;
-    overflow: hidden;
-    background-color: rgba(0,0,0,0.15);
-    z-index: -1;
-    opacity: 0;
-
-    /* ACHTUNG Seperat */ 
-    transition: 600ms ease-in-out;
-}
-
-.drive-in>.task-view-card {
-    transform: translate(100vw,0);
-    transition: 600ms ease-in-out;
-}
-
-.drive-in.go {
-    transition-property:opacity;
-    z-index:5;
-    opacity:1;
-    transition: 600ms ease-in-out;
-}
-
-
-.drive-in.go>.task-view-card {
-    transform: translate(0,0);
-    transition: 600ms ease-in-out;
 }

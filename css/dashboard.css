@@ -163,7 +163,8 @@
 
 .dashboardusername {
    color: #29abe2;
-   font-size: 4rem;
+   font-size: 64px;
+   font-weight: 700;
 }
 
 .stats-text-deadline h3 {

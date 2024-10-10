@@ -81,7 +81,7 @@ async function updateDashboard() {
          awaitingFeedbackCount;
       document.getElementById('total-count').innerText = totalCount;
       
-      const deadlineElement = document.querySelector('.stats-text-deadline h3');
+      const deadlineElement = document.querySelector('.urgentDate');
       deadlineElement.innerText = nextDeadline
          ? nextDeadline
          : 'No upcoming deadlines';

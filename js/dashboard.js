@@ -34,8 +34,38 @@ async function loadCurrentUserName(currentUserEmail) {
       return 'Unknown User';
    }
    const userArray = Object.values(users);
+   if (currentUserEmail === 'guest') {
+      return 'Guest';
+   }
    const user = userArray.find((u) => u.email === currentUserEmail);
    return user ? user.user : 'Gast';
+}
+
+async function findNextDeadline() {
+   const tasks = await loadObjectData('taskstorage');
+   if (!tasks) return null;
+
+   const taskArray = Object.values(tasks).filter(
+      (task) => task && task.dueDate
+   );
+
+   const today = new Date();
+
+   const upcomingTask = taskArray
+      .map((task) => ({
+         ...task,
+         dueDate: new Date(task.dueDate),
+      }))
+      .filter((task) => task.dueDate >= today)
+      .sort((a, b) => a.dueDate - b.dueDate)[0];
+
+   return upcomingTask
+      ? upcomingTask.dueDate.toLocaleDateString('en-US', {
+           year: 'numeric',
+           month: 'long',
+           day: 'numeric',
+        })
+      : null;
 }
 
 async function updateDashboard() {
@@ -44,11 +74,11 @@ async function updateDashboard() {
       const doneCount = await countTasksByStatus('done');
       const urgentCount = await countTasksByPrio('urgent');
       const inProgressCount = await countTasksByStatus('in-progress');
-      const awaitingFeedbackCount = await countTasksByStatus(
-         'await-feedback'
-      );
+      const awaitingFeedbackCount = await countTasksByStatus('await-feedback');
       const totalCount = await countAllTasks();
-      const userName = await loadCurrentUserName();
+      const currentUserEmail = localStorage.getItem('currentUserEmail');
+      const userName = await loadCurrentUserName(currentUserEmail);
+      const nextDeadline = await findNextDeadline();
 
       document.getElementById('todo-count').innerText = todoCount;
       document.getElementById('done-count').innerText = doneCount;
@@ -57,7 +87,13 @@ async function updateDashboard() {
       document.getElementById('awaiting-feedback-count').innerText =
          awaitingFeedbackCount;
       document.getElementById('total-count').innerText = totalCount;
-      document.getElementById('user-name').innerText = userName;
+      document.querySelector(
+         '.greeting-text'
+      ).innerHTML = `Good Morning, <span class="dashboardusername" id="user-name">${userName}</span>`;
+      const deadlineElement = document.querySelector('.stats-text-deadline h3');
+      deadlineElement.innerText = nextDeadline
+         ? nextDeadline
+         : 'No upcoming deadlines';
    } catch (error) {
       console.error('Fehler beim Laden des Dashboards:', error);
    }

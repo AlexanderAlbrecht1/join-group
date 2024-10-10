@@ -3,20 +3,21 @@ function XisFormValid(formqs) {
    if (!form) return false;
 
    let inputs = form.querySelectorAll('input');
-   let status = Array.from(inputs).findIndex(input => !input.checkValidity()) == -1;
+   let status =
+      Array.from(inputs).findIndex((input) => !input.checkValidity()) == -1;
    return status;
-} 
+}
 /**
- * 
+ *
  * Initiates Dawn and logo Movement
  * Loads the User from local Storage
  * adds all needed Listeners for the Inputfields
- * 
+ *
  */
 function init2() {
-   document.getElementById("login-card").classList.add("dawn");
-   document.getElementById("login-master").classList.add("dawn");
-   document.getElementById("main-logo").classList.add("logo-position");
+   document.getElementById('login-card').classList.add('dawn');
+   document.getElementById('login-master').classList.add('dawn');
+   document.getElementById('main-logo').classList.add('logo-position');
 
    loadUserFromLocalStorage();
    addFormListener('#login-card');
@@ -30,7 +31,7 @@ function init2() {
  * else we clear the loclstorage
  */
 function rememberMe() {
-   if (document.getElementById("remember-me").checked) {
+   if (document.getElementById('remember-me').checked) {
       saveUserToLocalStorage();
    } else {
       clearLocalStorage();
@@ -38,18 +39,17 @@ function rememberMe() {
 }
 
 /**
- * 
+ *
  * Guest Login no need to enter user or Password
  * Some Data is also prepared
  */
 function guestLogin(event) {
    event.preventDefault();
    event.stopPropagation();
-   putLoginToValue("donotrespond@nodomain.tld", "");
-   document.getElementById("remember-me").checked = false;
+   putLoginToValue('donotrespond@nodomain.tld', '');
+   document.getElementById('remember-me').checked = false;
    login();
 }
-
 
 /**
  * put in Mask to have it later again, do we need it ?
@@ -58,18 +58,17 @@ function guestLogin(event) {
  * @param {password} pw
  */
 function putLoginToValue(email, pw) {
-   document.getElementById("password").value = pw;
-   document.getElementById("email").value = email;
+   document.getElementById('password').value = pw;
+   document.getElementById('email').value = email;
 }
-
 
 /**
  * Clear all Login fields ?
  */
 function clearLogin() {
-   document.getElementById("password").value = "";
-   document.getElementById("email").value = "";
-   document.getElementById("remember-me").checked = false;
+   document.getElementById('password').value = '';
+   document.getElementById('email').value = '';
+   document.getElementById('remember-me').checked = false;
 }
 
 /**
@@ -80,14 +79,23 @@ function clearLogin() {
  * output err to HTML output field
  */
 async function login() {
-   let password = document.getElementById("password");
-   let email = document.getElementById("email");
+   let password = document.getElementById('password');
+   let email = document.getElementById('email');
    user = await isLoginCorrect(email.value, password.value);
-   if ( user != false ) {
-      let obj={ "email": user.email, "password": user.password, "username": user.user, "id" : user.id };
-      sessionSave(PROJECT, obj );
+   if (user != false) {
+      let obj = {
+         email: user.email,
+         password: user.password,
+         username: user.user,
+         id: user.id,
+      };
+      sessionSave(PROJECT, obj);
       rememberMe();
       openDashboard();
    }
 }
 
+function saveUserToLocalStorage(user) {
+   localStorage.setItem('currentUserEmail', user.email);
+   localStorage.setItem('currentUserName', user.username);
+}

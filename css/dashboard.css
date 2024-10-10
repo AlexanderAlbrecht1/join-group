@@ -87,11 +87,21 @@
 }
 
 .stat-icon {
-   width: 3rem;
-   height: 3rem;
+   width: 4rem;
+   height: 4rem;
    background-color: #2a3647;
+   background-image: url('./assets/img/desktop/edit.svg');
+   background-size: contain;
+   background-position: center;
+   background-repeat: no-repeat;
    border-radius: 50%;
-   padding: 1.5rem;
+}
+
+.stat-icon img {
+   max-width: 100%;
+   max-height: 100%;
+   object-fit: contain;
+   object-position: center;
 }
 
 .stat-icon-urgent {
@@ -149,6 +159,11 @@
 .keynumber {
    font-size: 6rem;
    font-weight: bold;
+}
+
+.dashboardusername {
+   color: #29abe2;
+   font-size: 4rem;
 }
 
 .stats-text-deadline h3 {

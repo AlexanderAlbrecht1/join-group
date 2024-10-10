@@ -4,6 +4,7 @@
 let doNotSubmit= false;
 let tasks= [];
 
+
 /**
  * 
  * PUBLIC
@@ -38,9 +39,11 @@ function closeAddTask() {
  * Opens the PopUp AddTask from Bord
  * Inits the Listener and so on
  */
-function openAddTask() {
+function openAddTask(status="to-do") {
     document.getElementById("add-task").classList.add("go");
     initAddTask();
+    setStatus(status);
+
 }
 
 
@@ -66,6 +69,10 @@ function clearTaskInputs() {
     setMinDate(card.querySelector("input[type=date]"));
 }
 
+function setStatus(status="to-do") {
+    let card=document.getElementById("add-task-form");
+    card.querySelector('input[name="status"]').value=status;
+}
 
 /**
  * 
@@ -85,7 +92,7 @@ function prepareTaskData() {
         dueDate:     card.querySelector("input[type=date]").value,
         prio:        card.querySelector('input[name="prio"]:checked').value,
         category:    card.querySelector(".category").value,
-        status:      "to-do",
+        status:      card.querySelector('input[name="status"]').value,
         subtasks:    subtasks,
      };
 }
@@ -192,7 +199,7 @@ function noSubmit(event,key) {
     }
  }
 
- 
+
  /**
   * 
   * PUBLIC EVENT

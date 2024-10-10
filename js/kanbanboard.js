@@ -186,6 +186,7 @@ function setStyle(id) {
 
 
 function resizeContainer() {
+   if (document.querySelector(".mbb").style.flexDirection != "column") return; 
    let psc= (document.querySelector(".mbb").scrollHeight-0)+"px";
    document.querySelector(".mbb").height="100%";
 

@@ -159,7 +159,14 @@
     gap: 16px;
     padding: 6px 16px;
     border-radius: 10px;
+}
 
+.task-view-card .subtasks span {
+    height:19px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
 }
 
 .task-view-card .subtasks>div:hover {
@@ -168,8 +175,8 @@
 
 .task-view-card .subtasks img {
     border-radius: 50%;
-    height: 24px;
-    width: 24px;
+    height: 16px;
+    width: 16px;
     padding:2px;
     cursor: pointer;
     content:url("../assets/img/desktop/unchecked.svg");

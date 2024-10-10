@@ -10,6 +10,7 @@ a,input,button {
     cursor:pointer;
 }
 
+
 .flex-column {
     display: flex;
     flex-direction:column;

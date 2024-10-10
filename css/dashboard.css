@@ -1,7 +1,8 @@
 .dashboard-main {
    display: flex;
    flex-direction: column;
-   margin-left: 350px;
+   margin-left: 328px;
+   margin-top: 206px;
    gap: 40px;
 }
 
@@ -15,12 +16,13 @@
    display: flex;
    width: 100%;
    align-items: center;
-   margin: 2rem 0 0 0;
+   /* margin: 2rem 0 0 0; */
+   height: 73px
 }
 
 .dashboard-subtitle {
-   font-size: 2rem;
-   font-weight: bold;
+   font-size: 61px;
+   font-weight: 700;
    color: #091931;
 }
 
@@ -37,7 +39,8 @@
 }
 
 .dashboard-subtext {
-   font-size: 2rem;
+   font-size: 27px;
+   font-weight: 400;
    color: #6b6b6b;
 }
 
@@ -73,9 +76,8 @@
 }
 
 .greeting-text {
-   font-size: 2rem;
-   color: #091931;
-   margin: 0 0 0 2rem;
+   display: flex;
+   flex-direction: column;
 }
 
 .stat-icon {
@@ -159,6 +161,11 @@
 .keynumber {
    font-size: 6rem;
    font-weight: bold;
+}
+
+.greetingSalutation {
+   font-size: 47px;
+   font-weight: 500;
 }
 
 .dashboardusername {

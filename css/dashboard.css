@@ -156,6 +156,14 @@ p {
    padding: 34px 57px;
 }
 
+.iconTextWrapperColumn {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   padding: 22px 43px;
+}
+
 .iconTextWrapperUrgent {
    display: flex;
    flex-direction: row;
@@ -204,6 +212,7 @@ p {
    color: #fff;
    transform: translateY(-3px);
    box-shadow: 0px 3px 8px 0px #00000033;
+   cursor: pointer;
 }
 
 .toDoTile:hover .pencilIcon {
@@ -312,6 +321,7 @@ p {
    color: #fff;
    transform: translateY(-3px);
    box-shadow: 0px 3px 8px 0px #00000033;
+   cursor: pointer;
 }
 
 .urgentDate {
@@ -348,6 +358,7 @@ p {
    color: #fff;
    transform: translateY(-3px);
    box-shadow: 0px 3px 8px 0px #00000033;
+   cursor: pointer;
 }
 
 .stats3 .stats-text {

@@ -63,9 +63,12 @@ async function findNextDeadline() {
 
 async function updateDashboard() {
    try {
-      const todoCount = await countTasksByStatus('to-do');
-      const doneCount = await countTasksByStatus('done');
-      const urgentCount = await countTasksByPrio('urgent');
+      createToDoCount();
+      createDoneCount();
+      createUrgentCount();
+      // const todoCount = await countTasksByStatus('to-do');
+      // const doneCount = await countTasksByStatus('done');
+      // const urgentCount = await countTasksByPrio('urgent');
       const inProgressCount = await countTasksByStatus('in-progress');
       const awaitingFeedbackCount = await countTasksByStatus('await-feedback');
       const totalCount = await countAllTasks();
@@ -73,9 +76,9 @@ async function updateDashboard() {
       // const userName = await loadCurrentUserName(currentUserEmail);
       const nextDeadline = await findNextDeadline();
 
-      document.getElementById('todo-count').innerText = todoCount;
-      document.getElementById('done-count').innerText = doneCount;
-      document.getElementById('urgent-count').innerText = urgentCount;
+      // document.getElementById('todo-count').innerText = todoCount;
+      // document.getElementById('done-count').innerText = doneCount;
+      // document.getElementById('urgent-count').innerText = urgentCount;
       document.getElementById('in-progress-count').innerText = inProgressCount;
       document.getElementById('awaiting-feedback-count').innerText =
          awaitingFeedbackCount;
@@ -88,6 +91,21 @@ async function updateDashboard() {
    } catch (error) {
       console.error('Fehler beim Laden des Dashboards:', error);
    }
+}
+
+async function createToDoCount() {
+   const todoCount = await countTasksByStatus('to-do');
+   document.getElementById('todo-count').innerText = todoCount;
+}
+
+async function createDoneCount() {
+   const doneCount = await countTasksByStatus('done');
+   document.getElementById('done-count').innerText = doneCount;
+}
+
+async function createUrgentCount() {
+   const urgentCount = await countTasksByPrio('urgent');
+   document.getElementById('urgent-count').innerText = urgentCount;
 }
 
 // window.onload = updateDashboard; // <-- das sollte in init

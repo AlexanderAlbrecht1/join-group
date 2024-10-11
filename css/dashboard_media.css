@@ -24,6 +24,14 @@
     .dashboard-main {
         margin: 80px 8px 0 8px;
     }
+
+    .greetingSalutation {
+        font-size: 36px;
+    }
+
+    .dashboardusername {
+        font-size: 47px;
+    }
 }
 
 @media (max-width : 750px) {
@@ -31,8 +39,7 @@
         margin: 0 2px;
     }
 
-    .dashboard-subtitle,
-    .dashboardusername {
+    .dashboard-subtitle {
         font-size: 47px;
     }
 
@@ -40,12 +47,10 @@
         font-size: 20px;
     }
 
-    .greetingSalutation {
-        font-size: 36px;
-    }
+    
 }
 
-@media (max-width : 520px) {
+@media (max-width : 650px) {
 
     .dashboard-header {
         flex-direction: column;

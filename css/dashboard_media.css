@@ -8,7 +8,7 @@
         margin-top: 100px;
         margin-left: 232px;
         padding: 32px;
-        width: 100%;      
+        width: 100%;
     }
 
     .dashboard-container {
@@ -29,5 +29,90 @@
 @media (max-width : 750px) {
     .divider {
         margin: 0 2px;
+    }
+
+    .dashboard-subtitle,
+    .dashboardusername {
+        font-size: 47px;
+    }
+
+    .dashboard-subtext {
+        font-size: 20px;
+    }
+
+    .greetingSalutation {
+        font-size: 36px;
+    }
+}
+
+@media (max-width : 520px) {
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .dividerMobile {
+        display: flex;
+    }
+
+    .greeting-text {
+        display: none;
+    }
+
+    .checkIcon,
+    .pencilIcon,
+    .urgentIcon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .pencilIcon {
+        background-image: url('/assets/img/desktop/pencil_mobile.svg');
+        background-size: 28px 24px;
+    }
+
+    .checkIcon {
+        background-size: 17px 13px;
+    }
+
+    .urgentIcon {
+        background-size: 23px 17px;
+    }
+
+    .keynumber {
+        font-size: 47px;
+    }
+
+    .keyNumberText {
+        font-size: 14px;
+    }
+
+    .iconTextWrapper {
+        padding: 19px 48px;
+        gap: 10px;
+    }
+
+    .toDoTileText,
+    .doneTileText {
+        width: 40px;
+        height: 73px;
+    }
+
+    .iconTextWrapperUrgent {
+        padding: 19px 20px 19px 56px;
+    }
+
+    .stats-text-deadline {
+        padding: 33px 56px 33px 20px;
+        gap: 8px;
+    }
+
+    .iconTextWrapperColumn {
+        padding: 13px 31px;
     }
 }

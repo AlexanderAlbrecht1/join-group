@@ -30,6 +30,7 @@ p {
 .dashBoardWrapper {
    display: flex;
    flex-direction: row;
+   gap: 80px;
 }
 
 .dashboard-subtitle {
@@ -45,9 +46,11 @@ p {
 }
 
 .divider-urgent {
-   font-size: 4rem;
-   color: lightgrey;
-   margin: 0 2rem;
+   /* font-size: 4rem; */
+   /* border-color: lightgrey; */
+   border-right: 2px solid lightgrey ;
+   height: 102px;
+   /* margin: 0 2rem; */
 }
 
 .dashboard-subtext {
@@ -65,19 +68,20 @@ p {
 }
 
 .dashboard-left {
-   /* width: 70%; */
+   /* width: 548px; */
    display: flex;
    flex-direction: column;
-   gap: 40px;
+   gap: 28px;
 }
 
 .dashboard-right {
    /* width: 30%; */
    display: flex;
-   flex-direction: column;
+   /* flex-direction: column; */
    align-items: center;
-   justify-content: center;
-   text-align: center;
+   /* justify-content: center; */
+   /* text-align: center; */
+   /* gap: 80px; */
 }
 
 .dashboard h3 {
@@ -115,6 +119,17 @@ p {
    border-radius: 50%;
 }
 
+.urgentIcon {
+   width: 60px;
+   height: 60px;
+   background-color: rgba(255, 61, 0, 1);
+   border-radius: 100%;
+   background-image: url("/assets/img/desktop/prio_urgent_white.svg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 34px 25px;
+}
+
 .stat-icon img {
    max-width: 100%;
    max-height: 100%;
@@ -139,6 +154,23 @@ p {
    align-items: center;
    gap: 18px;
    padding: 34px 57px;
+}
+
+.iconTextWrapperColumn {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   padding: 22px 43px;
+}
+
+.iconTextWrapperUrgent {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   gap: 18px;
+   padding: 36px 61px 36px 65px;
 }
 
 .toDoTile,
@@ -170,7 +202,7 @@ p {
 }
 
 .keyNumberText {
-   font-size: 24;
+   font-size: 24px;
    font-weight: 400;
 }
 
@@ -180,6 +212,7 @@ p {
    color: #fff;
    transform: translateY(-3px);
    box-shadow: 0px 3px 8px 0px #00000033;
+   cursor: pointer;
 }
 
 .toDoTile:hover .pencilIcon {
@@ -209,7 +242,8 @@ p {
 .stats-text-deadline {
    display: flex;
    flex-direction: column;
-   gap: 1rem;
+   gap: 13px;
+   padding: 55px 65px 55px 61px;
 }
 
 
@@ -225,7 +259,7 @@ p {
    font-weight: 700;
 }
 
-.stats-text-deadline h3 {
+/* .stats-text-deadline h3 {
    font-size: 1.5rem;
    margin-block-start: 0;
    margin-block-end: 0;
@@ -235,26 +269,20 @@ p {
    font-size: 1rem;
    margin-block-start: 0;
    margin-block-end: 0;
-}
+} */
 
 .stats2-c {
    display: flex;
    align-items: center;
    justify-content: center;
-   gap: 2rem;
+   background-color: #fff;
+   box-shadow: 0px 0px 4px 0px #0000001a;
+   border-radius: 2rem;
+   transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
+   /* gap: 2rem; */
 }
 
-.stats1 .stats-text h3 {
-   font-size: 1.3rem;
-   margin-block-start: 0;
-   margin-block-end: 0;
-}
 
-.stats1 .stats-text p {
-   font-size: 2rem;
-   margin-block-start: 0;
-   margin-block-end: 0;
-}
 
 .stats2 .stats-text h3 {
    font-size: 1.3rem;
@@ -271,15 +299,15 @@ p {
 /* Styling für Stats 2 */
 .stats2 {
    display: flex;
-   justify-content: space-evenly;
+   /* justify-content: space-evenly; */
    align-items: center;
-   height: 117px;
-   padding: 19px 34px;
-   margin: 2rem 0;
-   background-color: #fff;
+   /* height: 117px; */
+   /* padding: 19px 34px; */
+   /* margin: 2rem 0; */
+   /* background-color: #fff;
    box-shadow: 0px 0px 4px 0px #0000001a;
    border-radius: 2rem;
-   transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
+   transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out; */
 }
 
 .stats2:hover {
@@ -287,13 +315,24 @@ p {
    color: #fff;
    transform: translateY(-3px);
    box-shadow: 0px 3px 8px 0px #00000033;
+   cursor: pointer;
+}
+
+.urgentDate {
+   font-size: 21px;
+   font-weight: 700;
+}
+
+.urgentDeadline {
+   font-size: 16px;
+   font-weight: 400;
 }
 
 /* Styling für Stats 3 */
 .stats3 {
    display: flex;
    justify-content: space-evenly;
-   gap: 20px;
+   gap: 28px;
 }
 
 .stats3_inner {
@@ -313,6 +352,7 @@ p {
    color: #fff;
    transform: translateY(-3px);
    box-shadow: 0px 3px 8px 0px #00000033;
+   cursor: pointer;
 }
 
 .stats3 .stats-text {

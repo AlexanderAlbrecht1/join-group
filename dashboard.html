@@ -8,8 +8,10 @@
    <link rel="stylesheet" href="/styles.css" />
    <link rel="stylesheet" href="./css/nav.css" />
    <link rel="stylesheet" href="./css/dashboard.css" />
+   <link rel="stylesheet" href="/css/dashboard_media.css">
    <link rel="stylesheet" href="./assets/font/inter.css" />
    <link rel="stylesheet" href="./css/contacts.css" />
+   <link rel="stylesheet" href="./css/contacs_media.css">
    <link rel="icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon" />
 
    <script src="./js/localStorage.js"></script>
@@ -72,74 +74,81 @@
       <div class="dashboard-container">
 
          <div class="dashboard-header">
-            <h2 class="dashboard-subtitle">Join 360</h2>
+            <h2 class="dashboard-subtitle">Join 326</h2>
             <span class="divider">|</span>
             <p class="dashboard-subtext">Key Metrics at a glance</p>
          </div>
-<div class="dashBoardWrapper">
-         <div class="dashboard-left">
-            <div class="dashboard">
-               <div class="stats1">
-                  <div class="toDoTile" onclick="forwardingToBoard()">
-                     <div class="iconTextWrapper">
-                        <div class="pencilIcon"></div>
-                        <div class="toDoTileText">
-                           <p class="keynumber" id="todo-count">0</p>
-                           <p class="keyNumberText">To-do</p>
+         <div class="dashBoardWrapper">
+            <div class="dashboard-left">
+               <!-- <div class="dashboard"> -->
+                  <div class="stats1">
+                     <div class="toDoTile" onclick="forwardingToBoard()">
+                        <div class="iconTextWrapper">
+                           <div class="pencilIcon"></div>
+                           <div class="toDoTileText">
+                              <p class="keynumber" id="todo-count">0</p>
+                              <p class="keyNumberText">To-do</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="doneTile" onclick="forwardingToBoard()">
+                        <div class="iconTextWrapper">
+                           <div class="checkIcon"></div>
+                           <div class="doneTileText">
+                              <p class="keynumber" id="done-count">0</p>
+                              <p class="keyNumberText">Done</p>
+                           </div>
                         </div>
                      </div>
                   </div>
-                  <div class="doneTile" onclick="forwardingToBoard()">
-                     <div class="iconTextWrapper">
-                        <div class="checkIcon"></div>
-                        <div class="doneTileText">
-                           <p class="keynumber" id="done-count">0</p>
-                           <p class="keyNumberText">Done</p>
+
+                  <div class="stats2" onclick="forwardingToBoard()">
+                     <div class="stats2-c">
+                        <div class="iconTextWrapperUrgent">
+                           <div class="urgentIcon"></div>
+                           <div class="doneTileText">
+                              <p class="keynumber" id="urgent-count">0</p>
+                              <p class="keyNumberText">Urgent</p>
+                           </div>
+                        </div>
+                        <div class="divider-urgent"></div>
+                        <div class="stats-text-deadline">
+                           <p class="urgentDate">October 04, 2024</p>
+                           <p class="urgentDeadline">Upcoming Deadline</p>
                         </div>
                      </div>
                   </div>
-               </div>
 
-               <div class="stats2" onclick="forwardingToBoard()">
-                  <div class="stats2-c">
-                     <img src="./assets/img/desktop/prio_urgent_white.svg" alt="Urgent Icon"
-                        class="stat-icon stat-icon-urgent" />
-                     <div class="stats-text">
-                        <p class="keynumber" id="urgent-count">0</p>
-                        <h3>Urgent</h3>
+                  <div class="stats3">
+                     <div class="stats3_inner" onclick="forwardingToBoard()">
+                        <div class="iconTextWrapperColumn">
+                           <p class="keynumber" id="total-count">0</p>
+                           <p class="keyNumberText">Tasks in Board</p>
+                        </div>
+                     </div>
+                     <div class="stats3_inner" onclick="forwardingToBoard()">
+                        <div class="iconTextWrapperColumn">
+                           <p class="keynumber" id="in-progress-count">0</p>
+                           <p class="keyNumberText">In Progress</p>
+                        </div>
+                     </div>
+                     <div class="stats3_inner" onclick="forwardingToBoard()">
+                        <div class="iconTextWrapperColumn">
+                           <p class="keynumber" id="awaiting-feedback-count">0</p>
+                           <p class="keyNumberText">Awaiting Feedback</p>
+                        </div>
                      </div>
                   </div>
-                  <span class="divider-urgent">|</span>
-                  <div class="stats-text-deadline">
-                     <h3>October 04, 2024</h3>
-                     <p>Upcoming Deadline</p>
-                  </div>
-               </div>
+               <!-- </div> -->
+            </div>
 
-               <div class="stats3">
-                  <div class="stats3_inner" onclick="forwardingToBoard()">
-                     <p id="total-count">0</p>
-                     <h3>Gesamtanzahl Aufgaben</h3>
-                  </div>
-                  <div class="stats3_inner" onclick="forwardingToBoard()">
-                     <p id="in-progress-count">0</p>
-                     <h3>In Progress</h3>
-                  </div>
-                  <div class="stats3_inner" onclick="forwardingToBoard()">
-                     <p id="awaiting-feedback-count">0</p>
-                     <h3>Awaiting Feedback</h3>
-                  </div>
+            <div class="dashboard-right">
+               <div class="greeting-text">
+                  <span class="greetingSalutation" id="greetingSalutation"></span>
+                  <span class="dashboardusername" id="userName"></span>
                </div>
             </div>
          </div>
-
-         <div class="dashboard-right">
-            <div class="greeting-text">
-               <span class="greetingSalutation" id="greetingSalutation"></span>
-               <span class="dashboardusername" id="userName"></span>
-            </div>
-         </div>
-</div>
       </div>
    </div>
 </body>

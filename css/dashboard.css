@@ -40,9 +40,15 @@ p {
 }
 
 .divider {
-   font-size: 3rem;
-   color: #29abe2;
-   margin: 0 3rem;
+   border-right: 3px solid rgba(41, 171, 226, 1);
+   height: 59px;
+   margin: 0 30px;
+}
+
+.dividerMobile {
+   display: none;
+   width: 90px;
+   border-bottom: 3px solid rgba(41, 171, 226, 1);
 }
 
 .divider-urgent {
@@ -183,7 +189,7 @@ p {
    border-radius: 2rem;
    transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
    flex-direction: row;
-   /* width: 100%; */
+   width: 100%;
    height: auto;
 }
 
@@ -243,7 +249,7 @@ p {
    display: flex;
    flex-direction: column;
    gap: 13px;
-   padding: 55px 65px 55px 61px;
+   padding: 55px 65px 55px 52px;
 }
 
 

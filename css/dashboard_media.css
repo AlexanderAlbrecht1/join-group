@@ -2,12 +2,13 @@
     .dashBoardWrapper {
         flex-direction: column-reverse;
         gap: 40px;
+        margin-bottom: 90px;
     }
 
     .dashboard-main {
         margin-top: 100px;
         margin-left: 232px;
-        padding: 32px;
+        padding: 28px 16px 16px 16px;
         width: 100%;
     }
 
@@ -22,7 +23,7 @@
 
 @media (max-width : 1100px) {
     .dashboard-main {
-        margin: 80px 8px 0 8px;
+        margin: 100px 8px 0 8px;
     }
 
     .greetingSalutation {
@@ -36,7 +37,7 @@
 
 @media (max-width : 750px) {
     .divider {
-        margin: 0 2px;
+        margin: 0 10px;
     }
 
     .dashboard-subtitle {
@@ -57,12 +58,24 @@
         align-items: flex-start;
     }
 
+    .dashboard-subtitle {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        /* margin-top: 128px; */
+        margin-bottom: 16px;
+    }
+
+    .dashboard-header {
+        height: unset;
+    }
+
     .divider {
         display: none;
     }
 
     .dividerMobile {
         display: flex;
+        margin-top: 16px;
     }
 
     .greeting-text {
@@ -98,7 +111,7 @@
     }
 
     .iconTextWrapper {
-        padding: 19px 48px;
+        padding: 18px 43px;
         gap: 10px;
     }
 
@@ -118,6 +131,47 @@
     }
 
     .iconTextWrapperColumn {
-        padding: 13px 31px;
+        padding: 13px 28px;
+    }
+}
+
+@media (max-width : 500px) {
+    .urgentDate {
+        font-size: 16px;
+    }
+
+    .urgentDeadline {
+        font-size: 14px;
+    }
+
+    .stats3 {
+        gap: 16px;
+    }
+
+    .dashboard-main {
+        margin: 100px 0 0 0;
+    }
+
+    .divider-urgent {
+        height: 68px;
+    }
+
+    .dashboard-container {
+        gap: 0;
+    }
+}
+
+@media (max-width : 415px) {
+    .stats1,
+    .stats3 {
+        gap: 8px;
+    }
+
+    .iconTextWrapper {
+        padding: 18px 24px;
+    }
+
+    .iconTextWrapperColumn {
+        padding: 12px 24px;
     }
 }

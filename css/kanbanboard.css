@@ -19,7 +19,8 @@ body {
 }
 
 
-.mbc>.mbh>div:nth-child(odd) {
+.mbc>.mbh>div:nth-child(odd),
+.mbh .todos {
     min-height: 24px;
     display:flex;
     padding: 0px 64px;   

@@ -1,8 +1,11 @@
-@media (max-width:1450px) {
-    .Xmbb {
-        padding:16px;
-    }
+.mbb .todo {
+    display:none !important;
 }
+
+#input-field-container-alt {
+    display: none;
+}
+
 
 @media (max-width:1450px) {
     .main-container {
@@ -20,6 +23,9 @@
 @media (max-width:1400px) {
     .mbh .todo {
         display: none;
+    }
+    .mbb .todo {
+        display: flex !important;
     }
 
     .mbb>div {
@@ -79,16 +85,53 @@
         padding:0px 16px !important ;
     }
 
+    .mbb {
+        margin-bottom:80px; 
+    }
+
+    .mbb .containers {
+        padding-bottom:4px;
+    }
+
 }
 
-@media (max-width:850px) {
-    .mbc>.mbh>div:nth-child(2) {
-        flex-wrap: wrap;
+@media (max-width:780px) {
+    #input-field-container {
+        display: none;
     }
-    .mbc .buttons {
+
+    #input-field-container-alt {
+        display: flex;
+        margin-right:32px;
+    }
+
+    .mbh>div:nth-last-of-type(2) {
         justify-content: space-between;
         gap: unset;
         width: 100%;
+    }
+
+}
+
+@media (max-width:450px) {
+    .addtask-button-text {
+        display: none;
+    }
+    .addtask-button-text+img {
+        margin:0;
+    }
+    .mbh .darkbutton  {
+        height: 48px;
+        width: 48px;
+        margin:0;
+        padding:0;
+        display:flex;
+        justify-content: center;
+        align-items:center;
+        gap:0;
+    }
+    .mbh .darkbutton img  {
+        margin:0;
     }
 
 }

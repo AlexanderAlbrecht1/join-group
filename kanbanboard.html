@@ -235,16 +235,23 @@
                     <div class="buttons">
                         <div id="input-field-container" class="input-container">
                             <input id="find" type="text"  placeholder="Find Task" oninput="filterTasks()">
-                            <span class="icon" onclick="filterTasks()"><img src="./assets/img/desktop/search.svg"></span>
+                            <span class="icon" onclick="filterTasks('input-field-container')"><img src="./assets/img/desktop/search.svg"></span>
                         </div>
                         <div onclick="openAddTask()" class="submit-button darkbutton">
-                            Add Task
+                            <span class="addtask-button-text">Add Task</span>
                             <img src="./assets/img/desktop/white-plus.svg">
                         </div>
                     </div>
                 </div>
 
                 <div>
+                    <div id="input-field-container-alt" class="input-container">
+                        <input id="find" type="text"  placeholder="Find Task" oninput="filterTasks()">
+                        <span class="icon" onclick="filterTasks('input-field-container-alt')"><img src="./assets/img/desktop/search.svg"></span>
+                    </div>
+                </div>
+
+                <div class="todos">
                     <div class="todo">
                         To do
                         <a class="btn-add" onclick="openAddTask('to-do')">

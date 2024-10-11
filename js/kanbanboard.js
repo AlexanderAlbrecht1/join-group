@@ -1,10 +1,18 @@
-// let tasks = [];
 let statusList=[
    "to-do",
    "in-progress",
    "await-feedback",
    "done"];
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Init, when open Kanbanboard
+ * load Contacts 
+ * display monogram
+ */
 async function init() {
    if (isLogged()) {
 
@@ -15,11 +23,15 @@ async function init() {
    }
 }
 
-// function init() {
-//    if (isLogged()) {
-//       fetchTasks();
-//    }
-// }
+
+/**
+ * 
+ * PRIVATE 
+ * 
+ * Organise Tasks in each category
+ * 
+ * @param {object} tasks - List of Tasks
+ */
 function displayTasks(tasks) {
    for(let status of statusList) {
       addContainerData(tasks,status);
@@ -27,23 +39,48 @@ function displayTasks(tasks) {
    resizeContainer();
 }
 
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Load Tasks from Firebase
+ * save them in a global Variable 
+ */
 async function fetchTasks() {
    // tasks = await loadData('taskstorage');
    tasks = await loadObjectData('taskstorage');
 
    if (tasks) {
       displayTasks(tasks);
-   } else {
-      console.log('Es sind keine Aufgaben vorhanden');
-   }
+   } 
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Filter Tasks by given Input Field
+ */
 function filterTasks() {
    let search=document.getElementById("find").value.toLowerCase();
    let filteredTasks=tasks.filter(e => e.title.toLowerCase().includes(search) || e.description.toLowerCase().includes(search) )
    displayTasks(filteredTasks);
 }
 
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Prepares the Contact Icons in one Card
+ * - Creates a List of overlayed Contact Icons
+ * - Maximum 5 Contacts will be shown
+ *  
+ * @param {array} assigns - array of Object: contacts 
+ * @returns 
+ */
 function getContacts(assigns) {
    if (assigns == null) return "";
    let html=``;
@@ -58,10 +95,30 @@ function getContacts(assigns) {
    }
    return html;
 }
+
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * creates a classnaame from the Catrgory given
+ * 
+ * @param {array} category - a list of Categorys 
+ * @returns - classname for the given Headline/Category
+ */
 function getCategoryClass(category) {
    return category.toLowerCase().replace(" ","-");
 }
 
+
+/**
+ * PRIVATE
+ * 
+ * Creates HTML Code for teh Progressbar
+ * 
+ * @param {object} task - one Task that we want to analyse  
+ * @returns 
+ */
 function getSubBar(task) {
    let subbar="";
    if (task.subtasks != null) {
@@ -79,6 +136,15 @@ function getSubBar(task) {
 }
 
 
+/**
+ * 
+ * PRIVATE
+ * 
+ * Creates a HTML Code for one Task Card
+ * 
+ * @param {object} task - one task for teh card 
+ * @returns 
+ */
 function getTaskOutput(task) {
    let contacts=getContacts(task.assignedTo);
    let categoryClass=getCategoryClass(task.category);
@@ -111,11 +177,21 @@ function getTaskOutput(task) {
 
 }
 
+
+/**
+ *
+ * PRIVATE
+ * 
+ * Creates A Container width Tasks for each status
+ * 
+ * @param {array} tasks - array of tasks - ful tasklist 
+ * @param {*} status - status of the task as category
+ * 
+ */
 function addContainerData(tasks,status) {
    let task = tasks.filter((t) => t['status'] == status);
    let container = document.getElementById(`${status}-container`);
    container.innerHTML = '';
-
    for (let i = 0; i < task.length; i++) {
       container.innerHTML += getTaskOutput(task[i]);
    }
@@ -123,26 +199,59 @@ function addContainerData(tasks,status) {
       container.classList.add("hidden");
    } else {
       container.classList.remove("hidden");
-
    }
-
 }
 
+
+/**
+ * PUBLIC EVENT
+ * 
+ * Makes one Crad Dropable
+ * 
+ * @param {event} ev - drop event 
+ */
 function allowDrop(ev) {
    ev.preventDefault();
 }
 
 
+/**
+ * 
+ * PUBLIC EVENT
+ * 
+ * is triggered, when dragging is active
+ * 
+ * @param {event} ev  - drag event
+ */
 function drag(ev) {
    ev.dataTransfer.setData('text', ev.target.id);
    hideNoTaskInfo(ev);
-   console.log(ev.target.style.border="5px solid black");
+   resizeContainer();
 }
 
 
 /**
  * 
- * Categorie: local event
+ * PUBLIC EVENT
+ * 
+ * is triggered, when we drop the dragged task
+ * 
+ * @param {event} ev      - drop event
+ * @param {string} status - status wher the task is in
+ *  
+ */
+function drop(ev, status) {
+   let data = ev.dataTransfer.getData('text');
+   saveTask(data,status);
+   appendTask(ev,data);
+   resizeContainer();
+   toggleBorder(ev,false);
+}
+
+
+/**
+ * 
+ * PRIVATE EVENT
  * 
  * put the dragged Card to the new position
  *  
@@ -166,31 +275,48 @@ function appendTask(event,id) {
  * @param {*} status    - category/stats of the task in the timeline 
  */
 function saveTask(data,status) {
-   let id = data.split('-');
-   let convertedId = Number(id[1]);
-   tasks[convertedId].status = status;
+   let textid=data.split('-')
+   let id = Number(textid[1]);
+   let index = tasks.findIndex(e => e.id == id);
+
+   tasks[index].status = status;
    saveData('taskstorage', tasks);
 }
 
-function drop(ev, status) {
-   let data = ev.dataTransfer.getData('text');
-   saveTask(data,status);
-   appendTask(ev,data);
-   resizeContainer();
-   toggleBorder(ev,false);
-}
 
+/**
+ * 
+ * PRIVATE
+ * 
+ * sets the new scrollheight,
+ * this is not automated so e have to handle it here
+ * 
+ * @param {id} id - element id 
+ */
 function setStyle(id) {
    let psc= (document.querySelector(".mbb").scrollHeight-0)+"px";
    document.getElementById(id).style.height=psc;
 }
 
 
+/**
+ * 
+ * PRIVATE 
+ * 
+ * Rezize te complete DIV Container, 
+ * because it is not done automated
+ * 
+ */
 function resizeContainer() {
-   if (document.querySelector(".mbb").style.flexDirection != "column") return; 
+   let container=document.querySelector(".mbb").querySelector(".containers");   
    let psc= (document.querySelector(".mbb").scrollHeight-0)+"px";
-   document.querySelector(".mbb").height="100%";
+   let height="100%";
 
+   if (window.getComputedStyle(container).flexDirection != "column") {
+      psc="";
+      height="";
+   }
+   document.querySelector(".mbb").height=height;
    for (let id of statusList) {
       document.getElementById(`${id}-container`).style.height=psc;
    }

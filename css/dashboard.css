@@ -275,7 +275,6 @@ p {
    display: flex;
    align-items: center;
    justify-content: center;
-   background-color: #fff;
    box-shadow: 0px 0px 4px 0px #0000001a;
    border-radius: 2rem;
    transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
@@ -304,10 +303,10 @@ p {
    /* height: 117px; */
    /* padding: 19px 34px; */
    /* margin: 2rem 0; */
-   /* background-color: #fff;
+   background-color: #fff;
    box-shadow: 0px 0px 4px 0px #0000001a;
    border-radius: 2rem;
-   transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out; */
+   transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
 }
 
 .stats2:hover {
@@ -316,6 +315,7 @@ p {
    transform: translateY(-3px);
    box-shadow: 0px 3px 8px 0px #00000033;
    cursor: pointer;
+   border-radius: 2rem;
 }
 
 .urgentDate {

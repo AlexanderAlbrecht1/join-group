@@ -136,6 +136,23 @@ async function createNextDeadline() {
    deadlineElement.innerText = nextDeadline ? nextDeadline : 'No upcoming deadlines';
 }
 
+/**
+ * redirects the user to the kanban board when clicked
+ * 
+ */
+
+function forwardingToBoard() {
+   window.location.href = './kanbanboard.html';
+}
+
+/**
+ * 
+ * filters tasks by status and returns the amount per status
+ * 
+ * @param {string} status 
+ * @returns amount of tasks per status 
+ */
+
 async function countTasksByStatus(status) {
    const tasks = await loadData('taskstorage');
    if (!tasks) {
@@ -145,6 +162,14 @@ async function countTasksByStatus(status) {
    return taskArray.filter((task) => task && task.status === status).length;
 }
 
+/**
+ * 
+ * filters tasks by priority status and returns the amount per status
+ * 
+ * @param {string} prio 
+ * @returns amount of tasks per status
+ */
+
 async function countTasksByPrio(prio) {
    const tasks = await loadData('taskstorage');
    if (!tasks) {
@@ -153,6 +178,13 @@ async function countTasksByPrio(prio) {
    const taskArray = Object.values(tasks);
    return taskArray.filter((task) => task && task.prio === prio).length;
 }
+
+/**
+ * 
+ * count all tasks in kanbanbord
+ * 
+ * @returns number of tasks
+ */
 
 async function countAllTasks() {
    const tasks = await loadData('taskstorage');
@@ -187,10 +219,6 @@ async function findNextDeadline() {
 }
 
 
-
-function forwardingToBoard() {
-   window.location.href = './kanbanboard.html';
-}
 
 
 

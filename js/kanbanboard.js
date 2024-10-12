@@ -323,13 +323,19 @@ function resizeContainer() {
 
 }
 
-/*
-   Task Info Container Grey
-*/ 
+
+/**
+ * Hides the gray Note "no task" or displays it
+ * 
+ * @param {event} e - drag event
+ */
 function hideNoTaskInfo(e) {
+   console.log(e.target)
    let parent=e.target.parentElement;
    if (parent.childElementCount == 1) {
       parent.classList.remove("hidden");
+   } else {
+      parent.classList.add("hidden");
    }
 }
 
@@ -355,6 +361,15 @@ function getTopParent(element,className) {
 }
 
 
+/**
+ * PUBLIC
+ * 
+ * shows possible drop ability
+ * 
+ * @param {event} event - dragover event   
+ * @param {string} status - column status
+ * @returns 
+ */
 function toggleBorder(event,status=null) {
    let e=getTopParent(event.target,"containers");
    // Only if container is completly leaving

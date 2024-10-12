@@ -4,6 +4,7 @@
 
 #input-field-container-alt {
     display: none;
+    margin-top: 16px;
 }
 
 
@@ -92,6 +93,9 @@
     .mbb .containers {
         padding-bottom:4px;
     }
+    .task-view-card.add {
+        width: 95%;
+    }
 
 }
 
@@ -113,7 +117,66 @@
 
 }
 
+@media (max-width: 600px) {
+    
+    .task-view-card p,
+    .task-view-card input,
+    .task-view-card textarea,
+    .task-view-card select,    
+    .task-view-card option,
+    .task-view-card .label {
+        font-size:16px;
+        line-height: 19px;
+    }
+
+    .task-view-card h1,
+    .mbc .board {
+        font-size:40px;
+        line-height: 42px;
+    }
+    .task-view-card .darkbutton {
+        height: 40px;
+    }
+    .task-view-card.add .darkbutton {
+        /* height: unset; */
+    }
+    
+    #add-task .priority .button-label,
+    #task-view .priority .button-label {
+        font-size: 14px;
+        line-height: 19px;
+        padding:0px; 
+        height: 48px;
+        width: 90px;
+    }
+    .priority .button-label img {
+        width: 20px;
+        object-fit:contain;
+    }
+    .task-view-card {
+        padding:24px;
+        width: 99%;
+    }
+    
+    .mbb {
+        overflow: unset;
+    }
+    .mbc {
+        overflow:auto;
+    }
+
+}
+
 @media (max-width:450px) {
+    #add-task .priority .button-label,
+    #task-view .priority .button-label {
+        width: 85px;
+        font-size: 12px;
+    }
+
+    .task-view-card {
+        padding:24px 12px;
+    }
     .addtask-button-text {
         display: none;
     }
@@ -121,7 +184,7 @@
         margin:0;
     }
     .mbh .darkbutton  {
-        height: 48px;
+        height: 48px; 
         width: 48px;
         margin:0;
         padding:0;
@@ -133,5 +196,43 @@
     .mbh .darkbutton img  {
         margin:0;
     }
+    .task-view-card.add {
+        width: 99%;
+    }
 
+    .whitebutton {
+        display:none;
+    }
+    .task-view-card.add .top {
+        width: 100%;
+    }
+    .task-view-card.add .add-task-main  {
+        width: 98%;
+    } 
+    .add-task-left,
+    .add-task-right {
+        width:98%;
+    }
+    #add-task-main {
+        /* flex-direction: column;*/
+        gap: 8px;
+        /* flex-wrap: nowrap; */
+        box-sizing: border-box;
+        /* padding: 16px;
+        margin: 16px;*/
+
+    }
+    
+    #add-task .button-con {
+        gap: 6px;
+        width:98%;
+    }
+    details input::placeholder {
+        font-size: 16px !important;
+    }
+    .priority {
+        gap:2px;
+        justify-content: space-between;
+    } 
 }
+

@@ -1,3 +1,141 @@
+/**
+ * 
+ * is executed when the page loads, checks whether and which user is logged in, generates the user monogram, the welcome text and updates the dashboard
+ * 
+ */
+
+function init() {
+   if (isLogged()) {
+      logedUserMonogram();
+      greetingUser();
+      updateDashboard();
+   }
+}
+
+/**
+ * 
+ * checks which user is logged in and generates the personal greeting
+ * 
+ */
+
+function greetingUser() {
+   salutation();
+   let data= JSON.parse(sessionStorage.getItem(PROJECT));  
+   let userName = data.username; 
+   document.getElementById('userName').innerHTML = '';
+   document.getElementById('userName').innerHTML = userName;
+}
+
+/**
+ * 
+ * generates different greetings depending on the time of day
+ * 
+ */
+
+function salutation() {
+   let hello = getGreeting(greetingPos=getGreetingPos());
+   document.getElementById('greetingSalutation').innerHTML = '';
+   document.getElementById('greetingSalutation').innerHTML = hello;
+}
+
+/**
+ * 
+ * creates and updates each tile, will give an error if loading is not possible
+ * 
+ */
+
+async function updateDashboard() {
+   try {
+      createToDoCount();
+      createDoneCount();
+      createUrgentCount();
+      createInProgressCount();
+      createAwaitingFeedbackCount();
+      createTotalCount();
+      createNextDeadline();
+      const deadlineElement = document.querySelector('.urgentDate');
+   } catch (error) {
+      console.error('Fehler beim Laden des Dashboards:', error);
+   }
+}
+
+/**
+ * 
+ * creates the ToDo tasks counter value HTML
+ * 
+ */
+
+async function createToDoCount() {
+   const todoCount = await countTasksByStatus('to-do');
+   document.getElementById('todo-count').innerText = todoCount;
+}
+
+/**
+ * 
+ * creates the Done tasks counter value HTML
+ * 
+ */
+
+async function createDoneCount() {
+   const doneCount = await countTasksByStatus('done');
+   document.getElementById('done-count').innerText = doneCount;
+}
+
+/**
+ * 
+ * creates the urgent tasks counter value HTML
+ * 
+ */
+
+async function createUrgentCount() {
+   const urgentCount = await countTasksByPrio('urgent');
+   document.getElementById('urgent-count').innerText = urgentCount;
+}
+
+/**
+ * 
+ * creates the on progress tasks counter value HTML
+ * 
+ */
+
+async function createInProgressCount() {
+   const inProgressCount = await countTasksByStatus('in-progress');
+   document.getElementById('in-progress-count').innerText = inProgressCount;
+}
+
+/**
+ * 
+ * creates the awaiting feedback tasks counter value HTML
+ * 
+ */
+
+async function createAwaitingFeedbackCount() {
+   const awaitingFeedbackCount = await countTasksByStatus('await-feedback');
+   document.getElementById('awaiting-feedback-count').innerText = awaitingFeedbackCount;
+}
+
+/**
+ * 
+ * creates the total number of tasks counter value HTML
+ * 
+ */
+
+async function createTotalCount() {
+   const totalCount = await countAllTasks();
+   document.getElementById('total-count').innerText = totalCount;
+}
+
+/**
+ * 
+ * creates the next deadline value HTML
+ * 
+ */
+
+async function createNextDeadline() {
+   const nextDeadline = await findNextDeadline();
+   deadlineElement.innerText = nextDeadline ? nextDeadline : 'No upcoming deadlines';
+}
+
 async function countTasksByStatus(status) {
    const tasks = await loadData('taskstorage');
    if (!tasks) {
@@ -25,19 +163,6 @@ async function countAllTasks() {
    return taskArray.length;
 }
 
-// async function loadCurrentUserName(currentUserEmail) {
-//    const users = await loadData('user');
-//    if (!users) {
-//       return 'Unknown User';
-//    }
-//    const userArray = Object.values(users);
-//    if (currentUserEmail === 'guest') {
-//       return 'Guest';
-//    }
-//    const user = userArray.find((u) => u.email === currentUserEmail);
-//    return user ? user.user : 'Gast';
-// }
-
 async function findNextDeadline() {
    const tasks = await loadObjectData('taskstorage');
    if (!tasks) return null;
@@ -61,78 +186,11 @@ async function findNextDeadline() {
       : null;
 }
 
-async function updateDashboard() {
-   try {
-      createToDoCount();
-      createDoneCount();
-      createUrgentCount();
-      // const todoCount = await countTasksByStatus('to-do');
-      // const doneCount = await countTasksByStatus('done');
-      // const urgentCount = await countTasksByPrio('urgent');
-      const inProgressCount = await countTasksByStatus('in-progress');
-      const awaitingFeedbackCount = await countTasksByStatus('await-feedback');
-      const totalCount = await countAllTasks();
-      const currentUserEmail = localStorage.getItem('currentUserEmail');
-      // const userName = await loadCurrentUserName(currentUserEmail);
-      const nextDeadline = await findNextDeadline();
 
-      // document.getElementById('todo-count').innerText = todoCount;
-      // document.getElementById('done-count').innerText = doneCount;
-      // document.getElementById('urgent-count').innerText = urgentCount;
-      document.getElementById('in-progress-count').innerText = inProgressCount;
-      document.getElementById('awaiting-feedback-count').innerText =
-         awaitingFeedbackCount;
-      document.getElementById('total-count').innerText = totalCount;
-      
-      const deadlineElement = document.querySelector('.urgentDate');
-      deadlineElement.innerText = nextDeadline
-         ? nextDeadline
-         : 'No upcoming deadlines';
-   } catch (error) {
-      console.error('Fehler beim Laden des Dashboards:', error);
-   }
-}
-
-async function createToDoCount() {
-   const todoCount = await countTasksByStatus('to-do');
-   document.getElementById('todo-count').innerText = todoCount;
-}
-
-async function createDoneCount() {
-   const doneCount = await countTasksByStatus('done');
-   document.getElementById('done-count').innerText = doneCount;
-}
-
-async function createUrgentCount() {
-   const urgentCount = await countTasksByPrio('urgent');
-   document.getElementById('urgent-count').innerText = urgentCount;
-}
-
-// window.onload = updateDashboard; // <-- das sollte in init
-
-function init() {
-   if (isLogged()) {
-      logedUserMonogram();
-      greetingUser();
-      updateDashboard();
-   }
-}
 
 function forwardingToBoard() {
    window.location.href = './kanbanboard.html';
 }
 
-function greetingUser() {
-   salutation();
-   let data= JSON.parse(sessionStorage.getItem(PROJECT));  
-   let userName = data.username; 
-   document.getElementById('userName').innerHTML = '';
-   document.getElementById('userName').innerHTML = userName;
-}
 
-function salutation() {
-   let hello = getGreeting(greetingPos=getGreetingPos());
-   document.getElementById('greetingSalutation').innerHTML = '';
-   document.getElementById('greetingSalutation').innerHTML = hello;
-}
 

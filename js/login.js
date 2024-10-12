@@ -1,3 +1,4 @@
+/*
 function XisFormValid(formqs) {
    let form = document.querySelector(formqs);
    if (!form) return false;
@@ -7,6 +8,7 @@ function XisFormValid(formqs) {
       Array.from(inputs).findIndex((input) => !input.checkValidity()) == -1;
    return status;
 }
+*/
 /**
  *
  * Initiates Dawn and logo Movement
@@ -91,7 +93,7 @@ async function login() {
       };
       sessionSave(PROJECT, obj);
       rememberMe();
-      openDashboard();
+      openDashboard("?login=1");
    }
 }
 

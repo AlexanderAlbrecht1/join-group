@@ -22,8 +22,8 @@ function logout() {
  * load Dashboard, login success
  * 
  */
-function openDashboard() {
-   openPage("./dashboard.html");
+function openDashboard(parameter="") {
+   openPage(`./dashboard.html${parameter}`);
 }
 
 

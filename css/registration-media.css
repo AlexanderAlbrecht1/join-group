@@ -9,3 +9,20 @@
     }
     
 }
+
+@media (max-width: 450px) {
+    .login-headline-before {
+        margin-left:0;
+        z-index:2;
+    }
+
+
+    .login-headline {
+        margin-left: -32px;   
+    }
+    .login-headline>span {
+        font-size: 47px;
+        font-weight: 700;
+        line-height: 56.4px;     
+    }
+}

@@ -1,3 +1,16 @@
+@keyframes logo-position {
+    0% {
+    }
+    100% {
+        opacity: 1;
+        transform:none;
+        width: 100px; /* calc(274px / 4); */
+        height: 122px; /* calc(334px / 4); */
+        left: 20px;
+        top: 20px;
+    }
+}
+
 @media screen and (max-height:1050px) {
     @keyframes logo-position {
         0% {
@@ -45,5 +58,19 @@
 @media screen and (max-width:375px) {
     .login-headline-before {
         margin-left: 0px;
+    }
+}
+
+@media screen and (max-height:850px) {
+    .input.area,
+    .login-buttons,
+    {
+        gap:16px;
+    }
+
+    .login-card {
+        padding-top:16px;
+        padding-bottom:16px;   
+        gap: 16px;     
     }
 }

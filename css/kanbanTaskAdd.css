@@ -123,17 +123,24 @@ select {
     .task-view-card.add .vertical-line-wrapper {
         display: none;
     }
+    
 
     .task-view-card.add .top {
         width: 440px; 
-    }    
+    }   
+    
+
     .task-view-card.add {
         align-items: center;   
     }
+
+
     #add-task .button-con {
         width: 440px; 
         justify-content: center;
     }
+
+
     #add-task-main {
         flex-wrap: wrap;
     }

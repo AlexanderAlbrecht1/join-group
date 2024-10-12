@@ -133,7 +133,8 @@ async function createTotalCount() {
 
 async function createNextDeadline() {
    const nextDeadline = await findNextDeadline();
-   deadlineElement.innerText = nextDeadline ? nextDeadline : 'No upcoming deadlines';
+   const deadlineElement = document.getElementById('deadline'); 
+   deadlineElement.innerText = nextDeadline || 'No upcoming deadlines';
 }
 
 /**
@@ -195,22 +196,64 @@ async function countAllTasks() {
    return taskArray.length;
 }
 
+/**
+ * 
+ * Finds and returns the next upcoming task deadline or null
+ *
+ * @returns next task deadline or null
+ */
+
 async function findNextDeadline() {
    const tasks = await loadObjectData('taskstorage');
    if (!tasks) return null;
-   const taskArray = Object.values(tasks).filter(
-      (task) => task && task.dueDate
-   );
    const today = new Date();
-   const upcomingTask = taskArray
-      .map((task) => ({
-         ...task,
-         dueDate: new Date(task.dueDate),
-      }))
+   const upcomingTask = Object.values(tasks)
+      .filter(hasValidDueDate)
+      .map(convertDueDate)
       .filter((task) => task.dueDate >= today)
       .sort((a, b) => a.dueDate - b.dueDate)[0];
-   return upcomingTask
-      ? upcomingTask.dueDate.toLocaleDateString('en-US', {
+   return formatDueDate(upcomingTask);
+}
+
+/**
+ * 
+ * Checks if a task has a valid due date
+ * 
+ * @param {Object} task - The task object to check
+ * @param {string|Date} task.dueDate - The due date of the task
+ * @returns {boolean} - Returns true if the task and its due date are valid, otherwise false
+ */
+
+function hasValidDueDate(task) {
+   return task && task.dueDate;
+}
+
+/**
+ * Converts the task's due date to a Date object.
+ * 
+ * @param {Object} task - The task object to convert.
+ * @param {string|Date} task.dueDate - The due date of the task, which may be a string or a Date object.
+ * @returns {Object} - Returns a new task object with the due date as a Date object.
+ */
+
+function convertDueDate(task) {
+   return {
+      ...task,
+      dueDate: new Date(task.dueDate),
+   };
+}
+
+/**
+ * Formats the task's due date as a localized string.
+ * 
+ * @param {Object} task - The task object containing the due date
+ * @param {Date} task.dueDate - The due date of the task
+ * @returns {string|null} - Returns the formatted due date string in 'en-US' format, or null if no task is provided
+ */
+
+function formatDueDate(task) {
+   return task
+      ? task.dueDate.toLocaleDateString('en-US', {
            year: 'numeric',
            month: 'long',
            day: 'numeric',

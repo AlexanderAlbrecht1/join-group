@@ -1,11 +1,13 @@
 @keyframes logo-position {
     0% {
     }
+
+    
     100% {
         opacity: 1;
         transform:none;
-        width: 100px; /* calc(274px / 4); */
-        height: 122px; /* calc(334px / 4); */
+        width: 100px; 
+        height: 122px; 
         left: 20px;
         top: 20px;
     }
@@ -15,11 +17,13 @@
     @keyframes logo-position {
         0% {
         }
+
+
         100% {
             opacity: 1;
             transform:none;
-            width: 68px; /* calc(274px / 4); */
-            height: 83px; /* calc(334px / 4); */
+            width: 68px; 
+            height: 83px;
             left: 20px;
             top: 20px;
         }
@@ -31,15 +35,20 @@
         height: 20px;
     }
 
+
     .login-master>div:nth-child(3) {
         padding-bottom: 8px;
         height: 40px;
         align-items: flex-start;
     }
+
+
     .login-headline>span {
         font-size: 32px;
         line-height: 40px;
     } 
+
+
     .login-headline>div {
         width: 100px;
     } 
@@ -50,10 +59,13 @@
     .signup-small {
         display: flex;
     }
+
+
     .login-master>div>div {
         visibility: hidden !important;
     }
 }
+
 
 @media screen and (max-width:375px) {
     .login-headline-before {
@@ -61,12 +73,14 @@
     }
 }
 
+
 @media screen and (max-height:850px) {
     .input.area,
-    .login-buttons,
+    .login-buttons
     {
         gap:16px;
     }
+
 
     .login-card {
         padding-top:16px;

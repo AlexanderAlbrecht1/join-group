@@ -33,7 +33,7 @@ function greetingUser() {
  * 
  */
 function salutation() {
-   let hello = getGreeting(greetingPos=getGreetingPos());
+   let hello = getGreeting();
    document.getElementById('greetingSalutation').innerHTML = hello;
 }
 
@@ -43,7 +43,7 @@ function salutation() {
  * 
  */
 async function updateDashboard() {
-   try {
+   try { // AUA: do you know what you are doing here ?
       createToDoCount();
       createDoneCount();
       createUrgentCount();
@@ -248,9 +248,8 @@ function convertDueDate(task) {
  * @param {Date} task.dueDate - The due date of the task
  * @returns {string|null} - Returns the formatted due date string in 'en-US' format, or null if no task is provided
  */
-
 function formatDueDate(task) {
-   return task
+   return task 
       ? task.dueDate.toLocaleDateString('en-US', {
            year: 'numeric',
            month: 'long',
@@ -261,32 +260,60 @@ function formatDueDate(task) {
 
 
 
+/**
+ * 
+ * PRIVATE
+ * 
+ * Checks if Phone is in Landscape
+ * Checks if User comes from login page
+ * 
+ * @returns 
+ * - true if: 
+ *    Phone is in landsacpe
+ *    AND
+ *    User comes from Login
+ */
 function mustShowMobileGreeting() {
    let firstlogin=(new URLSearchParams(window.location.search)).get('login') != null
-   let width = window.innerHeight; //  window.getComputedStyle().width;
-
-   firstlogin=true;
-   width=400;
+   let width = +window.innerWidth;
 
    return firstlogin && width<=450;
 
 }
 
+/**
+ * 
+ * PRIVATE
+ * 
+ * Sets a greeting on a Mobile Phone, 
+ * sleeps a while and
+ * then open then hides the message 
+ */
 async function showMobileGreeting() {
-   const greeting = document.getElementById("mobile-greeting");
+   const greeting = document.querySelector(".mobile-greeting");
    const welcome=getGreeting();
-   const user=getUsername();
-
-   greeting.html=`${welcome}<br>${user}`;
-   greeting.style.display="flex";
-   await new Promise(e => setTimeout(e,1000));
+   const   user=getUsername();
+   if (user=="guest") {
+      greeting.innerHTML=`<span>${welcome}!</span><span></span>`;
+   } else {
+      greeting.innerHTML=`<span>${welcome},</span><span>${user}</span>`;      
+   }
+   greeting.style.opacity=0;
+   await new Promise(e => setTimeout(e,2000));
    greeting.style.display="none";
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * If we are on Mobile Phone we send a greeting , before we continue
+ */
 async function mobileGreeting() {
-   const hiddenContainer=document.getElementById("dashboard");
    if (mustShowMobileGreeting() ) {
-      await showMobileGreeting();
+      showMobileGreeting();
+   } else {
+      document.querySelector(".mobile-greeting").style.display="none";
    }
-   hiddenContainer.opacity=1;
 }

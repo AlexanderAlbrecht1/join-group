@@ -246,6 +246,7 @@ function drop(ev, status) {
    appendTask(ev,data);
    resizeContainer();
    toggleBorder(ev,false);
+   ev.preventDefault();
 }
 
 

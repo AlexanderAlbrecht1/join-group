@@ -1,32 +1,48 @@
+/*
+    Position / Display
+*/
 .relative {
     position:relative;
 }
+
 
 .absolute {
     position: absolute;
 }
 
+
+.d-none {
+    display: none !important;
+}
+
+
+/*
+    Buttons
+*/
 a,input,button {
     cursor:pointer;
 }
 
 
+a {
+    text-decoration: none;
+}
+
+
+/*
+    Flex 
+*/
 .flex-column {
     display: flex;
     flex-direction:column;
 }
+
+
 .flex-row {
     display: flex;
     flex-direction:row;
 }
 
-a {
-    text-decoration: none;
-}
-
-.fs16 {
-    font-size: 16px !important;
-}
 
 .top-left {
     display: flex;
@@ -34,24 +50,56 @@ a {
     justify-content: flex-start;
 }
 
-.gap16 {
-    gap:16px;
-}
-.gap8 {
-    gap:8px;
-}
+
+/* 
+    Filter
+*/
 .invert {
     filter:invert();
 }
+
+
+/*
+    Sizes
+*/
+.fs16 {
+    font-size: 16px !important;
+}
+
+
+.gap8 {
+    gap:8px;
+}
+
+
+.gap16 {
+    gap:16px;
+}
+
+
 .h32 {
     height:32px;
 }
+
+
 .h48 {
     height:48px;
 }
+
+
+.w180 {
+    width: 180px;
+}
+
+
 .mb32 {
     margin-bottom: 32px;
 }
+
+
+/*
+    Special Items
+*/
 .circle-monogram {
     box-sizing: border-box;
     display: flex;
@@ -68,9 +116,7 @@ a {
     min-height: 42px;
     min-width:42px;   
 }
-.d-none {
-    display: none !important;
-}
+
 
 .h-line24 {
     border: 1px solid rgba(209,209,209,1);

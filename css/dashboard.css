@@ -389,13 +389,36 @@ p {
    bottom:0;
    right:0;
    left:0;
-   display: none;
+   display: flex;
    justify-content: center;
    align-items: center;
    flex-direction: column;
    gap: 16px;
    background-color: white;
    color: black;
-   font-size: 24px;
    overflow:hidden;
+
+   font-family: Inter;
+   font-size: 36px;
+   font-weight: 400;
+   line-height: 43.2px;
+
+   z-index:1;
+   transition:ease-in-out 1400ms;
+   transition-property: opacity;
+   transition-delay: 1500ms;
+   opacity: 1;  
 }
+
+.mobile-greeting>span:last-of-type {
+   font-family: Inter;
+   font-size: 47px;
+   font-weight: 700;
+   line-height: 56.4px;   
+   color: rgba(41, 171, 226, 1);
+}
+
+.Xanimated-opacity {
+   opacity:0;
+}
+

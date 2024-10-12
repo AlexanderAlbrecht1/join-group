@@ -61,7 +61,6 @@
     .mbb {
         flex-direction: column;
         overflow-x: hidden;
-        /*overflow-y:unset;*/
         overflow-x:auto;
         margin:unset;
     }
@@ -76,7 +75,6 @@
 
 
     .mbb .card {
-        /* max-width: 252px;*/
         min-width: 252px;
         width: 252px;
         opacity: 1;
@@ -159,11 +157,6 @@
     .task-view-card .darkbutton {
         height: 40px;
     }
-
-
-    .task-view-card.add .darkbutton {
-        /* height: unset; */
-    }
     
 
     #add-task .priority .button-label,
@@ -194,16 +187,21 @@
 
 
     .mbc {
-        overflow:auto;
+        overflow-y:auto;
     }
 }
 
 
 @media (max-width:450px) {
+    body {
+        justify-content:center;
+    }
+
+
     #add-task .priority .button-label,
     #task-view .priority .button-label {
-        width: 85px;
-        font-size: 12px;
+        font-size:4vw;
+        width: calc((100vw - 64px) / 3)
     }
 
 
@@ -247,6 +245,8 @@
     .whitebutton {
         display:none;
     }
+
+
     .task-view-card.add .top {
         width: 100%;
     }
@@ -290,5 +290,14 @@
         padding-bottom:80px !important; 
     }
 
+
+    .mbc .todo {
+        width: unset;
+    }
+
+    
+    .mbb .containers::before {
+        width: 100%;
+    }
 }
 

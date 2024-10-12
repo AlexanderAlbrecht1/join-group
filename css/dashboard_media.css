@@ -51,8 +51,6 @@
     .dashboard-header {
         height: 46px;
     }
-
-    
 }
 
 @media (max-width : 650px) {
@@ -68,7 +66,6 @@
     .dashboard-subtitle {
         margin-block-start: 0;
         margin-block-end: 0;
-        /* margin-top: 128px; */
         margin-bottom: 16px;
     }
 
@@ -164,7 +161,6 @@
     }
 }
     
-
 @media (max-width : 415px) {
     .stats1,
     .stats3 {

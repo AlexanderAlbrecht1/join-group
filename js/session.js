@@ -61,14 +61,27 @@ function isLogged() {
    return true;
 }
 
+/**
+ * 
+ * loads the current user from the session storage
+ * 
+ * @returns current user
+ */
 function getUsername() {
    return sessionLoad(PROJECT).username;
 }
 
+/**
+ * Retrieves the logged-in user's monogram and displays it in the DOM.
+ * 
+ * Loads the user data from the session, generates the user's monogram from their username,
+ * and updates the element with the ID 'loggedUserMonogram' to display the monogram.
+ * 
+ * @returns {void}
+ */
 function logedUserMonogram() {
    let user = sessionLoad(PROJECT);
    let userMonogram = getMonogram(user.username);
-   // document.getElementById('loggedUserMonogram').innerHTML = '';
    document.getElementById('loggedUserMonogram').innerHTML = `<span> ${userMonogram} </span>`;
 }
 

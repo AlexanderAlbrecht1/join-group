@@ -9,23 +9,48 @@ function disableCheck(submit,id="submit") {
     if (button == null) return
 
     if (submit) {
-        button.disabled=false;
-        button.classList.remove("disable");
-        button.style.color="";
-        button.style.filter="";
-        button.style.cursor="pointer";
-        button.style.backgroundColor="";
+        enableButton(button);
     } else 
     if (!button.disabled) {
-        button.disabled=true;
-        button.classList.add("disable");
-        // button.style.filter="grayscale(100%) brightness(1.6)";
-        button.style.cursor="not-allowed";
-        button.style.backgroundColor="#A0A0A0";
-
+        disableButton(button);
     }
 
 }
+
+
+/**
+ * 
+ * PUBLIC 
+ * 
+ * Disables the Button
+ * 
+ * @param {element} button - elementof the button to disable/enable
+ */
+function disableButton(button) {
+    button.disabled=true;
+    button.classList.add("disable");
+    button.style.cursor="not-allowed";
+    button.style.backgroundColor="#A0A0A0";
+}
+
+
+/**
+ * 
+ * PUBLIC 
+ * 
+ * Enable the Button
+ * 
+ * @param {element} button - elementof the button to disable/enable
+ */
+function enableButton(button) {
+    button.disabled=false;
+    button.classList.remove("disable");
+    button.style.color="";
+    button.style.filter="";
+    button.style.cursor="pointer";
+    button.style.backgroundColor="";
+}
+
 
 /**
  * Check fields if they could be sent, 
@@ -48,6 +73,7 @@ function inputFilled(list) {
     return true;
 }
 
+
 /**
  * 1. check if all fields are valid
  * 2. if valid Submit Button is enabled otherwise disabled an greyed out
@@ -60,6 +86,13 @@ function sendButton(event,list) {
     addValidationMessage(event.target);
 }
 
+
+/**
+ * 
+ * Pust out message that the field iis invalid
+ * 
+ * @param {element} element - from inputfield the message
+ */
 function addValidationMessage(element) {
     let msg=document.getElementById(element.id+"-msg");
     if (msg) {
@@ -71,10 +104,15 @@ function addValidationMessage(element) {
     }
 }    
 
-/*
-    Das soll die Eventlistener Killen von Formms 
-    
-*/
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Disable some FormEvents
+ * 
+ * @param {text} formid - the name ginven th the FORM Tag
+ */
 function disableFormEvents(formid) {
     let form=document.getElementById(formid);
     inputs = form.querySelectorAll('input, textarea');
@@ -84,10 +122,17 @@ function disableFormEvents(formid) {
     });
  }
 
-/* -------------------------------- */
-/* 
-    Neu
-*/
+
+ /**
+ * 
+ * PUBLIC
+ * 
+ * Add some Listeners for the input
+ * 
+ * @param {element} formSelector - The FORM we want to analyse
+ * @param {object} styleObject   - givin style for the Errors
+ * @returns 
+ */
 function addFormListener(formSelector, styleObject) {
     let form = document.querySelector(formSelector);
     if (!form) return false;
@@ -126,6 +171,16 @@ function customMessage(element) {
     }
 }
 
+
+/**
+ * PUBLIC
+ * 
+ * Style an Elemet wid an Object
+ * 
+ * @param {element} node - Element that should be styleds
+ * @param {*} styles - Object of Styles
+ * @returns 
+ */
 function styleElement(node, styles) {
     if (styles == null) return;
     for (let [key, value] of Object.entries(styles)) {
@@ -133,12 +188,24 @@ function styleElement(node, styles) {
     }
 }
 
+
+/**
+ * 
+ * PRIVATE 
+ * 
+ * Finds the element for the custom message and sets the Message+
+ * 
+ * @param {string} id 
+ * @param {string} customMsg 
+ * @returns 
+ */
 function customErrorMsg(id=null,customMsg=null) {
     if (typeof(id) !== "string" || typeof(customMsg) !== "string") return;
     let sibling=document.getElementById(id);
     sibling.setCustomValidity(customMsg);
     setErrorMsg(sibling);
 }
+
 
 /**
  * 
@@ -158,11 +225,30 @@ function getFormId(element) {
     return false;
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Finds the Form ID of Code starting by the given element
+ * Returns the found element as ID QUERY TAG
+ * 
+ * @param {element} element 
+ * @returns 
+ */
 function getFormQs(element) {
     return "#" + (getFormId(element) || "login-card");
 }
 
 
+/**
+ * 
+ * PUBLIC EVENT
+ * 
+ * Checks if the Form is allowed to send an error to each field
+ * 
+ * @param {event} event - input event 
+ */
 function eventErrorMsg(event) {
     let formquery=getFormQs(event.target);
     customMessage(event.target);
@@ -172,6 +258,16 @@ function eventErrorMsg(event) {
     event.preventDefault();
 }
 
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Displays the error message
+ * 
+ * @param {eement} element - set the Errormessage to the nearest SPAN TAG 
+ * @returns 
+ */
 function setErrorMsg(element) {
     sibling=element;
     while (sibling.nextElementSibling && sibling.nextElementSibling.tagName == 'SPAN') {
@@ -181,6 +277,15 @@ function setErrorMsg(element) {
     return sibling;
 }
 
+
+/**
+ * 
+ * shows the ser waht Password ist entered
+ * 
+ * @param {*} event - mouse event that triggered
+ * @param {*} container  - No fnuction
+ * @returns 
+ */
 function togglePasswordView(event,container) {
     let passwordContainer=event.target.parentElement;
     let passwordInput=event.target.previousElementSibling;
@@ -195,11 +300,29 @@ function togglePasswordView(event,container) {
     event.stopPropagation();
  }
 
+
+/**
+ * 
+ * PUBLIC 
+ * 
+ * Clears error status 
+ *  
+ * @param {element} input - input element that has to clear the error 
+ */
 function removeCustomErrorCode(input) {
     input.setCustomValidity('');
 } 
 
-function removeCustomMsg(input) { // on Focus lost
+
+/**
+ * 
+ * PRIVATE 
+ * 
+ * Clears the custom Error state
+ * Triggert on Focus Lost
+ * @param {element} input - error message element
+ */
+function removeCustomMsg(input) { 
         input.setCustomValidity('');
     if (input.checkValidity()) {
         setErrorMsg(input);
@@ -208,6 +331,14 @@ function removeCustomMsg(input) { // on Focus lost
     disableCheck(valid);
 }
 
+
+/**
+ * 
+ * PUBLIC 
+ * 
+ * Clears all custom Error states in the form
+ * @param {element} input - error message element
+ */
 function removeAllCustomMsg(formid) {
     let form = document.querySelector(formid);
     if (!form) return false;
@@ -218,6 +349,16 @@ function removeAllCustomMsg(formid) {
     })
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Marks all Fields text or input 
+ * 
+ * @param {string} formid - id for the FORM tag 
+ * @returns 
+ */
 function markAllFieds(formid) {
     let form = document.querySelector(formid);
     if (!form) return false;
@@ -229,6 +370,17 @@ function markAllFieds(formid) {
     })
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Checks if all Fields in the form are valid
+ * 
+ * @param {string} formqs gets the nearest TAG / ID / Class
+ * 
+ * @returns elemet of the form
+ */
 function isFormValid(formqs) {
     let form = document.querySelector(formqs);
     if (!form) return false;
@@ -236,4 +388,4 @@ function isFormValid(formqs) {
     let inputs = form.querySelectorAll('input, textarea');
     let status = Array.from(inputs).findIndex(input => !input.checkValidity()) == -1;
     return status;
- } 
+} 

@@ -7,9 +7,6 @@
  * Empty Monogramlist
  * 
  */
-
-
-
 function initAssignSelector(selector) {
     let listId;
     let monogramId;

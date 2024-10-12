@@ -26,6 +26,7 @@ function prepareDataset() {
    }
 }
 
+
 /**
  * 
  * PUBLIC
@@ -240,7 +241,7 @@ function faultDisplay(field,msg,border) {
  * 
  * Prepares Fields for Error analysis
  * 
- * @returns 
+ * @returns - true if there is an error
  */
 function showRequiredText() {
    let field,msg;

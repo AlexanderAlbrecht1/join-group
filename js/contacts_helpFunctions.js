@@ -1,6 +1,7 @@
 let contacts = [];
 let taskStorage = [];
 
+
 /**
  * 
  * changes the way the phone number is displayed on detail view
@@ -22,6 +23,7 @@ function formatPhoneNumber(replacedPhone) {
     }
 }
 
+
 /**
  *
  * Compare 2 Contacts by last name and name
@@ -40,6 +42,7 @@ function compareContactNames(a, b) {
     return c;
 }
 
+
 /**
  * 
  * save contact array to Firebase
@@ -50,6 +53,7 @@ function compareContactNames(a, b) {
 async function saveContacts(table = 'Contacts') {
     return await saveData(table, contacts);
 }
+
 
 /**
  * 
@@ -64,6 +68,7 @@ function generateDarkColor() {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
+
 /**
  * 
  * clears the input fields
@@ -73,6 +78,7 @@ function clearInput() {
     document.getElementById("email").value = '';
     document.getElementById("phone").value = '';
 }
+
 
 /**
  * 
@@ -87,6 +93,7 @@ function changeBgColor(id) {
     })
     document.getElementById(`contact${id}`).classList.add('contactActive');
 }
+
 
 /**
  * 
@@ -107,6 +114,7 @@ function createContactArray(contact, i) {
     return contactArray;
 }
 
+
 /**
  * 
  * takes the unique ID from contact and search the position at the contact array
@@ -123,6 +131,7 @@ function getCurrentContact(id) {
     return null;
 }
 
+
 /**
  * 
  * @param {object} userList - list of all registed users
@@ -137,6 +146,7 @@ function getIndexUser(userList, id) {
     }
     return null;
 }
+
 
 /**
  * 
@@ -158,6 +168,7 @@ async function loadContacts(table = 'Contacts') {
     return [];
 }
 
+
 /**
  *
  * creates a contact form to add a new contact
@@ -171,12 +182,18 @@ function openCreateContactDialogMobile() {
     document.getElementById('contactBook').style.overflowY = "hidden";
 }
 
+
+/**
+ *
+ * creates a contact form to add a new contact for mobile version
+ */
 function openMobileContactDetail(singleContactArray, id) {
     document.getElementById('contactBook').style.display = 'none';
     document.getElementById('workingArea').style.display = 'none';
     document.getElementById('contactDetail').innerHTML = '';
     document.getElementById('contactDetail').innerHTML = createSingleContactMobileHTML(singleContactArray, id);
 }
+
 
 /**
   * 
@@ -187,6 +204,7 @@ function closeContactCreation() {
     document.getElementById('dialogBackground').classList.remove('displayFlex');
     document.getElementById('body').classList.remove('overflowHidden');
 }
+
 
 /**
  * 
@@ -205,6 +223,7 @@ function openEditContactDialogMobile(id) {
     editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
 }
 
+
 /**
  * close mobile dialog window
  * 
@@ -213,6 +232,7 @@ function closeMobileDialogBackground() {
     document.getElementById('mobileDialogBackground').style.display = 'none';
     document.getElementById('contactBook').style.overflowY = "scroll";
 }
+
 
 /**
  * 
@@ -225,6 +245,7 @@ function showHiddenDialog() {
     dialogBackground.classList.add('displayFlex');
 }
 
+
 /**
  * takes the user back from contact detail to contac book on mobile
  * 
@@ -235,6 +256,7 @@ function backToContactBook() {
     document.getElementById('mobileButton').style.display = 'none';
 }
 
+
 /**
  * opens a little pop up on mobile view
  */
@@ -242,12 +264,14 @@ function openPopUpEdit() {
     document.getElementById('popUpWarpper').style.display = 'flex';
 }
 
+
 /**
  * closes the little pop up on mobile view
  */
 function closeMobileEditPopUp() {
     document.getElementById('popUpWarpper').style.display = 'none';
 }
+
 
 /**
 * 
@@ -267,6 +291,7 @@ function generateArray(id, index) {
     return array;
 }
 
+
 /**
 * 
 * creates an array with the existing data
@@ -284,6 +309,7 @@ function generateInventoryDataArray(index) {
     return inventoryData;
 }
 
+
 /**
  * 
  * writes the loaded data into the input fields
@@ -296,6 +322,7 @@ function preFilledInputs(inventoryData) {
     document.getElementById('phone').value = inventoryData.phone;
 }
 
+
 /**
  * 
  * prevent close dialog by click buttons or input fields
@@ -305,6 +332,7 @@ function preFilledInputs(inventoryData) {
 function dontClose(event) {
     event.stopPropagation();
 }
+
 
 /**
  * 
@@ -324,6 +352,7 @@ async function deleteContactFromTask(tasks, id) {
         }
     }
 }
+
 
 /**
  * 
@@ -346,6 +375,7 @@ async function confirmDelete(id) {
     isLogged();
 }
 
+
 /**
  * 
  * deletes the user from the user list and updates it, deletes the session and local storage (logout)
@@ -359,6 +389,7 @@ async function removeUser(userList, index) {
     clearLocalStorage();
     sessionDestroy();
 }
+
 
 /**
  * 
@@ -386,6 +417,7 @@ function getNewContactData(id) {
     };
     return newContact;
 }
+
 
 /**
  * 

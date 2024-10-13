@@ -1,13 +1,17 @@
-
 body {
     margin:0;
     height: 100vh;
     box-sizing: border-box;
     scroll-behavior: smooth;
     overflow-x: hidden;
-    width: 100%;    
     background-color: rgba(246, 247, 248, 1);
+    width: 96vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    display: flex;
+    justify-content: center;
 }
+
 
 .body {
     display: flex;
@@ -17,7 +21,9 @@ body {
     height: 100%;
     max-width: 1440px;
     margin: auto;
+    width: 100%;
 }
+
 
 .logo-container {
     margin:0;
@@ -26,12 +32,14 @@ body {
     box-sizing: border-box;
 }
 
+
 .main-logo {
     width: 274px;
     height: 334.07px;
     opacity: 1;
     z-index: 5;
 }
+
 
 .relative {
     position:relative;
@@ -44,7 +52,6 @@ body {
 }
     
 
-
 .absolute {
     position: absolute;
     top:0;
@@ -56,20 +63,22 @@ body {
     justify-content:center;
 }
 
+
 .login-card {
+    box-sizing: border-box;
     width: 652px;
     min-height: 493px;
-    max-width: calc(100% - 32px); /* Siehe Handy ansicht 32px? */
-    padding: 48px min(115px,calc((100% - 300px) / 2));
+    /* max-width: calc(100% - 32px);*/ /* Siehe Handy ansicht 32px? */
+    padding: 48px min(115px,calc((100% - 280px) / 2));
     gap: 32px;
     border-radius: 30px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
     opacity: 0;
 }
+
 
 .login-headline {
     display: flex;
@@ -87,6 +96,8 @@ body {
     border: 3px solid rgba(41, 171, 226, 1);
     border-radius: 3px;
 }
+
+
 .login-headline>span {
     font-family: Inter;
     font-size: 61px;
@@ -95,13 +106,14 @@ body {
     color: rgba(0, 0, 0, 1);
     text-align: center;
 }
+
+
 .login-card .input-area {
     gap:20px;
-    /* width: 422px; */
-    /* max-width: calc(100% - 16px); */
     display:flex;
     flex-direction: column;
 }
+
 
 .login-card .input-area>div {
     display: flex;
@@ -109,6 +121,7 @@ body {
     gap: 16px;
     flex: 1;
 }
+
 
 .login-card>.input-area>.remember {
     height: 24px;
@@ -118,6 +131,7 @@ body {
     display: flex;
     flex-direction: row;    
 }
+
 
 .login-card>.input-area>.remember span {
     font-family: Inter;
@@ -130,6 +144,7 @@ body {
     align-items: center;
 }
 
+
 .login-buttons {
     display: flex;
     gap: 35px;
@@ -138,6 +153,7 @@ body {
     flex-wrap: wrap;
 
 }
+
 
 .login-master {
     display: flex;
@@ -160,6 +176,8 @@ body {
     padding-top: 50px;
     padding-right: min(80px, max(32px,calc((100% - 300px) / 2)));
 }
+
+
 .login-master>div:nth-child(1)>div {
     display: flex;
     align-items: center;
@@ -170,6 +188,8 @@ body {
     
     
 }
+
+
 .login-master>div:nth-child(2) {
     display: flex;
     /* flex:1; */
@@ -178,6 +198,7 @@ body {
     width: 100%;
     /* height: 100%; */
 }
+
 
 .login-master>div:last-child {
     display: flex;
@@ -188,12 +209,14 @@ body {
     height: 80px;
 }
 
+
 .login-master>div:last-child>div {
     gap: 16px;
     display: flex;
     height: 35px;
 }
-/* legal Notice */
+
+
 .login-master>div:last-child a {
     padding:8px;
     color: rgba(168, 168, 168, 1);
@@ -204,10 +227,12 @@ body {
     text-decoration: none;
 }
 
+
 .login-master>div:last-child a:hover {
     font: weight 700px;
     color: rgba(41, 171, 226, 1);
 }
+
 
 .signup-small {
     display: flex; 
@@ -218,6 +243,8 @@ body {
     gap: 16px;
     padding:16px;
 }
+
+
 .signup-small>span {
     font-size: 18px;
     line-height: 24px;

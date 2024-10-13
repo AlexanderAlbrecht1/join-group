@@ -5,6 +5,9 @@
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <title>Summary</title>
+
+   <link rel="icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon" />
+
    <link rel="stylesheet" href="/styles.css" />
    <link rel="stylesheet" href="./css/nav.css" />
    <link rel="stylesheet" href="./css/dashboard.css" />
@@ -12,7 +15,7 @@
    <link rel="stylesheet" href="./assets/font/inter.css" />
    <link rel="stylesheet" href="./css/contacts.css" />
    <link rel="stylesheet" href="./css/contacs_media.css">
-   <link rel="icon" href="/assets/img/desktop/join-logo.svg" type="image/x-icon" />
+   <link rel="stylesheet" href="./css/landscape.css" />
 
    <script src="./js/localStorage.js"></script>
    <script src="./js/dashboard.js"></script>
@@ -21,10 +24,13 @@
    <script src="./js/contacts.js"></script>
    <script src="./js/nav_header.js"></script>
    <script src="./js/date.js"></script>
-   <script src="./js/session.js"></script>
+   
 </head>
 
 <body onload="init()">
+   <div class="landscape"></div>
+   <div class="mobile-greeting"></div>
+
    <header>
       <div class="max-width">
          <img class="pd-16" src="./assets/img/desktop/join-logo_header.svg" />
@@ -67,7 +73,7 @@
       </div>
    </nav>
 
-   <div class="dashboard-main">
+   <div class="dashboard-main" id="dashboard">
       <!-- <h1 class="dashboard-headline">
          Willkommen, <span id="user-name"></span>
       </h1> -->
@@ -75,8 +81,9 @@
 
          <div class="dashboard-header">
             <h2 class="dashboard-subtitle">Join 326</h2>
-            <span class="divider">|</span>
+            <span class="divider"></span>
             <p class="dashboard-subtext">Key Metrics at a glance</p>
+            <span class="dividerMobile"></span>
          </div>
          <div class="dashBoardWrapper">
             <div class="dashboard-left">
@@ -113,7 +120,7 @@
                         </div>
                         <div class="divider-urgent"></div>
                         <div class="stats-text-deadline">
-                           <p class="urgentDate">October 04, 2024</p>
+                           <p class="urgentDate" id="deadline">October 04, 2024</p>
                            <p class="urgentDeadline">Upcoming Deadline</p>
                         </div>
                      </div>

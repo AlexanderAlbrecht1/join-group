@@ -19,7 +19,8 @@ body {
 }
 
 
-.mbc>.mbh>div:nth-child(odd) {
+.mbc>.mbh>div:nth-child(odd),
+.mbh .todos {
     min-height: 24px;
     display:flex;
     padding: 0px 64px;   
@@ -220,7 +221,6 @@ body {
     border: 1px dashed rgba(168, 168, 168, 1);
     border-radius: 10px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-    background-color: rgba(0, 0, 0, 0.16);
     background-color: rgba(231, 231, 231, 1);
     margin-bottom:-48px;
     z-index:0;

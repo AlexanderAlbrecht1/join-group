@@ -22,6 +22,7 @@ function getGreeting(greetingPos=getGreetingPos()) {
     return text[greetingPos];
 }
 
+
 /**
  * 
  * Get the  time position for greeting of the hour we have
@@ -54,6 +55,7 @@ function getGreetingPos() {
     }
 
 }
+
 
 /**
  * 

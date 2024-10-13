@@ -33,7 +33,7 @@ function greetingUser() {
  * 
  */
 function salutation() {
-   let hello = getGreeting();
+   let hello = getGreeting(greetingPos=getGreetingPos());
    document.getElementById('greetingSalutation').innerHTML = hello;
 }
 
@@ -43,7 +43,7 @@ function salutation() {
  * 
  */
 async function updateDashboard() {
-   try { // AUA: do you know what you are doing here ?
+   try {
       createToDoCount();
       createDoneCount();
       createUrgentCount();
@@ -131,26 +131,8 @@ async function createTotalCount() {
 
 async function createNextDeadline() {
    const nextDeadline = await findNextDeadline();
-   const deadlineElement = document.getElementById('deadline'); 
-   deadlineElement.innerText = nextDeadline || 'No upcoming deadlines';
+   deadlineElement.innerText = nextDeadline ? nextDeadline : 'No upcoming deadlines';
 }
-
-/**
- * redirects the user to the kanban board when clicked
- * 
- */
-
-function forwardingToBoard() {
-   window.location.href = './kanbanboard.html';
-}
-
-/**
- * 
- * filters tasks by status and returns the amount per status
- * 
- * @param {string} status 
- * @returns amount of tasks per status 
- */
 
 async function countTasksByStatus(status) {
    const tasks = await loadData('taskstorage');
@@ -161,14 +143,6 @@ async function countTasksByStatus(status) {
    return taskArray.filter((task) => task && task.status === status).length;
 }
 
-/**
- * 
- * filters tasks by priority status and returns the amount per status
- * 
- * @param {string} prio 
- * @returns amount of tasks per status
- */
-
 async function countTasksByPrio(prio) {
    const tasks = await loadData('taskstorage');
    if (!tasks) {
@@ -177,13 +151,6 @@ async function countTasksByPrio(prio) {
    const taskArray = Object.values(tasks);
    return taskArray.filter((task) => task && task.prio === prio).length;
 }
-
-/**
- * 
- * count all tasks in kanbanbord
- * 
- * @returns number of tasks
- */
 
 async function countAllTasks() {
    const tasks = await loadData('taskstorage');
@@ -194,63 +161,24 @@ async function countAllTasks() {
    return taskArray.length;
 }
 
-/**
- * 
- * Finds and returns the next upcoming task deadline or null
- *
- * @returns next task deadline or null
- */
-
 async function findNextDeadline() {
    const tasks = await loadObjectData('taskstorage');
    if (!tasks) return null;
+   const taskArray = Object.values(tasks).filter(
+      (task) => task && task.dueDate
+   );
    const today = new Date();
-   const upcomingTask = Object.values(tasks)
-      .filter(hasValidDueDate)
-      .map(convertDueDate)
+   
+   const upcomingTask = taskArray
+      .map((task) => ({
+         ...task,
+         dueDate: new Date(task.dueDate),
+      }))
       .filter((task) => task.dueDate >= today)
       .sort((a, b) => a.dueDate - b.dueDate)[0];
-   return formatDueDate(upcomingTask);
-}
-
-/**
- * 
- * Checks if a task has a valid due date
- * 
- * @param {Object} task - The task object to check
- * @param {string|Date} task.dueDate - The due date of the task
- * @returns {boolean} - Returns true if the task and its due date are valid, otherwise false
- */
-
-function hasValidDueDate(task) {
-   return task && task.dueDate;
-}
-
-/**
- * Converts the task's due date to a Date object.
- * 
- * @param {Object} task - The task object to convert.
- * @param {string|Date} task.dueDate - The due date of the task, which may be a string or a Date object.
- * @returns {Object} - Returns a new task object with the due date as a Date object.
- */
-
-function convertDueDate(task) {
-   return {
-      ...task,
-      dueDate: new Date(task.dueDate),
-   };
-}
-
-/**
- * Formats the task's due date as a localized string.
- * 
- * @param {Object} task - The task object containing the due date
- * @param {Date} task.dueDate - The due date of the task
- * @returns {string|null} - Returns the formatted due date string in 'en-US' format, or null if no task is provided
- */
-function formatDueDate(task) {
-   return task 
-      ? task.dueDate.toLocaleDateString('en-US', {
+      
+   return upcomingTask
+      ? upcomingTask.dueDate.toLocaleDateString('en-US', {
            year: 'numeric',
            month: 'long',
            day: 'numeric',
@@ -260,60 +188,36 @@ function formatDueDate(task) {
 
 
 
-/**
- * 
- * PRIVATE
- * 
- * Checks if Phone is in Landscape
- * Checks if User comes from login page
- * 
- * @returns 
- * - true if: 
- *    Phone is in landsacpe
- *    AND
- *    User comes from Login
- */
+function forwardingToBoard() {
+   window.location.href = './kanbanboard.html';
+}
+
 function mustShowMobileGreeting() {
    let firstlogin=(new URLSearchParams(window.location.search)).get('login') != null
-   let width = +window.innerWidth;
+   let width = window.innerHeight; //  window.getComputedStyle().width;
+
+   firstlogin=true;
+   width=400;
 
    return firstlogin && width<=450;
 
 }
 
-/**
- * 
- * PRIVATE
- * 
- * Sets a greeting on a Mobile Phone, 
- * sleeps a while and
- * then open then hides the message 
- */
 async function showMobileGreeting() {
-   const greeting = document.querySelector(".mobile-greeting");
+   const greeting = document.getElementById("mobile-greeting");
    const welcome=getGreeting();
-   const   user=getUsername();
-   if (user=="guest") {
-      greeting.innerHTML=`<span>${welcome}!</span><span></span>`;
-   } else {
-      greeting.innerHTML=`<span>${welcome},</span><span>${user}</span>`;      
-   }
-   greeting.style.opacity=0;
-   await new Promise(e => setTimeout(e,2000));
+   const user=getUsername();
+
+   greeting.html=`${welcome}<br>${user}`;
+   greeting.style.display="flex";
+   await new Promise(e => setTimeout(e,1000));
    greeting.style.display="none";
 }
 
-
-/**
- * 
- * PUBLIC
- * 
- * If we are on Mobile Phone we send a greeting , before we continue
- */
 async function mobileGreeting() {
+   const hiddenContainer=document.getElementById("dashboard");
    if (mustShowMobileGreeting() ) {
-      showMobileGreeting();
-   } else {
-      document.querySelector(".mobile-greeting").style.display="none";
+      await showMobileGreeting();
    }
+   hiddenContainer.opacity=1;
 }

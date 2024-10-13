@@ -48,7 +48,7 @@ function getGreetingPos() {
             return 1; // Good Morning
         case (d<18): 
             return 2; // Good Afternoon
-        case (d<21): 
+        case (d<22): 
             return 3; // Good Evening
         default:
             return 0; //Hello

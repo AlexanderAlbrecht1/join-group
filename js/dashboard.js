@@ -24,7 +24,12 @@ function greetingUser() {
    salutation();
    let data= JSON.parse(sessionStorage.getItem(PROJECT));  
    let userName = data.username; 
-   document.getElementById('userName').innerHTML = userName;
+   if (userName == "guest") {
+      document.getElementById('greetingSalutation').innerHTML+="!";
+   } else {
+      document.getElementById('greetingSalutation').innerHTML+=",";
+      document.getElementById('userName').innerHTML = userName;
+   }
 }
 
 /**

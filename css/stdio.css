@@ -16,6 +16,11 @@
 }
 
 
+.vhidden {
+    visibility: hidden;
+}
+
+
 /*
     Buttons
 */

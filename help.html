@@ -28,7 +28,7 @@
 
 <body onload="initSessionMonogram(), highlightJoin()">
    <header>
-      <div class="max-width">
+      <div class="max-width relative">
          <img class="pd-16" src="./assets/img/desktop/join-logo_header.svg">
          <span>Kanban Project Management Tool</span>
          <div class="headerHelpUser">
@@ -37,22 +37,22 @@
             </div>
             <div id="loggedUserMonogram" class="userMonogramicon" onclick="openUserMenu()"></div>
          </div>
+         <div class="popUpUser" id="popUpUser">
+            <div class="linkBox">
+               <a href="./help.html">Help</a>
+            </div>
+            <div class="linkBox">
+               <a onclick="checkUser('./legal-notice.html')">Legal Notice</a>
+           </div>
+           <div class="linkBox">
+               <a onclick="checkUser('./privacy-policy.html')">Privacy Policy</a>
+           </div>
+            <div class="linkBox">
+               <a onclick="logOut()" href="./index.html">Log out</a>
+            </div>
+         </div>
       </div>
    </header>
-   <div class="popUpUser" id="popUpUser">
-      <div class="linkBox">
-         <a href="./help.html">Help</a>
-      </div>
-      <div class="linkBox">
-         <a onclick="checkUser('./legal-notice.html')">Legal Notice</a>
-     </div>
-     <div class="linkBox">
-         <a onclick="checkUser('./privacy-policy.html')">Privacy Policy</a>
-     </div>
-      <div class="linkBox">
-         <a onclick="logOut()" href="./index.html">Log out</a>
-      </div>
-   </div>
 
    <main id="main">
       <div class="wrapHead">

@@ -220,6 +220,9 @@ function openEditContactDialogMobile(id) {
     let editContactContainer = document.getElementById('mobileWorkContactContainer');
     editContactContainer.innerHTML = '';
     editContactContainer.innerHTML = createEditContactDialogMobileHTML(array); 
+    document.getElementById('name').value = inventoryData.name + ' ' + inventoryData.lastname;
+    document.getElementById('email').value = inventoryData.mail;
+    document.getElementById('phone').value = inventoryData.phone;
     editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
 }
 

@@ -47,18 +47,24 @@ body {
 }
 
 a {
-    color: rgb(42,54,71);
+    color: rgb(42, 54, 71);
     text-decoration: none;
 }
 
 @media (max-width: 1100px) {
     .legal-notice-content {
-       margin-left: 0px !important;
+        margin-left: 0px !important;
     }
 }
 
 @media (max-width: 580px) {
     .legal-notice-headline {
         font-size: 48px;
+    }
+
+    .legal-notice-content {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        margin-bottom: 100px;
     }
 }

@@ -13,6 +13,14 @@ function initSessionMonogram() {
     logedUserMonogram();
 }
 
+function checkUser(url) {
+    if (getUsername() === "guest") {
+        window.open(url, '_blank');
+    } else {
+        window.location.href = url;
+    }
+}
+
 /**
  *
  * returns the monogram of a Name
@@ -23,8 +31,8 @@ function initSessionMonogram() {
 function getMonogram(name) {
     let na = name.toUpperCase().split(' ', 2);
     if (na.length == 1) {
-       return na[0][0];
+        return na[0][0];
     } else {
-       return na[0][0] + na[1][0];
+        return na[0][0] + na[1][0];
     }
- }
+}

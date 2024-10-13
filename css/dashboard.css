@@ -5,6 +5,7 @@ p {
    font-style: normal;
 }
 
+
 .dashboard-main {
    display: flex;
    flex-direction: column;
@@ -13,19 +14,21 @@ p {
    gap: 40px;
 }
 
+
 .dashboard-headline {
    font-size: 2rem;
    color: #091931;
    margin-bottom: 20px;
 }
 
+
 .dashboard-header {
    display: flex;
    width: 100%;
    align-items: center;
-   /* margin: 2rem 0 0 0; */
    height: 73px
 }
+
 
 .dashBoardWrapper {
    display: flex;
@@ -33,11 +36,13 @@ p {
    gap: 80px;
 }
 
+
 .dashboard-subtitle {
    font-size: 61px;
    font-weight: 700;
    color: #091931;
 }
+
 
 .divider {
    border-right: 3px solid rgba(41, 171, 226, 1);
@@ -45,25 +50,26 @@ p {
    margin: 0 30px;
 }
 
+
 .dividerMobile {
    display: none;
    width: 90px;
    border-bottom: 3px solid rgba(41, 171, 226, 1);
 }
 
+
 .divider-urgent {
-   /* font-size: 4rem; */
-   /* border-color: lightgrey; */
    border-right: 2px solid lightgrey ;
    height: 102px;
-   /* margin: 0 2rem; */
 }
+
 
 .dashboard-subtext {
    font-size: 27px;
    font-weight: 400;
    color: #6b6b6b;
 }
+
 
 .dashboard-container {
    display: flex;
@@ -73,35 +79,30 @@ p {
    gap: 40px;
 }
 
+
 .dashboard-left {
-   /* width: 548px; */
    display: flex;
    flex-direction: column;
    gap: 28px;
 }
 
+
 .dashboard-right {
-   /* width: 30%; */
    display: flex;
-   /* flex-direction: column; */
    align-items: center;
-   /* justify-content: center; */
-   /* text-align: center; */
-   /* gap: 80px; */
 }
+
 
 .dashboard h3 {
    font-size: 1.3rem;
 }
 
-/* .dashboard p {
-   font-size: 2rem;
-} */
 
 .greeting-text {
    display: flex;
    flex-direction: column;
 }
+
 
 .checkIcon {
    width: 69px;
@@ -114,6 +115,7 @@ p {
    background-size: 30px 22px;
 }
 
+
 .pencilIcon {
    width: 69px;
    height: 69px;
@@ -124,6 +126,7 @@ p {
    background-repeat: no-repeat;
    border-radius: 50%;
 }
+
 
 .urgentIcon {
    width: 60px;
@@ -136,6 +139,7 @@ p {
    background-size: 34px 25px;
 }
 
+
 .stat-icon img {
    max-width: 100%;
    max-height: 100%;
@@ -143,15 +147,18 @@ p {
    object-position: center;
 }
 
+
 .stat-icon-urgent {
    background-color: #ff3d00;
 }
+
 
 .stats1 {
    display: flex;
    justify-content: space-between;
    gap: 20px;
 }
+
 
 .iconTextWrapper {
    display: flex;
@@ -162,6 +169,7 @@ p {
    padding: 34px 57px;
 }
 
+
 .iconTextWrapperColumn {
    display: flex;
    flex-direction: column;
@@ -169,6 +177,7 @@ p {
    align-items: center;
    padding: 22px 42px;
 }
+
 
 .iconTextWrapperUrgent {
    display: flex;
@@ -178,6 +187,7 @@ p {
    gap: 18px;
    padding: 36px 61px 36px 65px;
 }
+
 
 .toDoTile,
 .doneTile {
@@ -193,6 +203,7 @@ p {
    height: auto;
 }
 
+
 .toDoTileText,
 .doneTileText {
    display: flex;
@@ -202,15 +213,18 @@ p {
    height: 101px;
 }
 
+
 .keynumber {
    font-size: 64px;
    font-weight: 600;
 }
 
+
 .keyNumberText {
    font-size: 20px;
    font-weight: 400;
 }
+
 
 .toDoTile:hover,
 .doneTile:hover {
@@ -221,22 +235,18 @@ p {
    cursor: pointer;
 }
 
+
 .toDoTile:hover .pencilIcon {
    background-color: rgb(255, 255, 255);
    background-image: url('/assets/img/desktop/pencil.svg');
 }
+
 
 .doneTile:hover .checkIcon {
    background-color: rgb(255, 255, 255);
    background-image: url("/assets/img/desktop/check_hover.svg");
 }
 
-/* .stats1 .stats-text {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   gap: 1rem;
-} */
 
 .stats2 .stats-text {
    display: flex;
@@ -244,6 +254,7 @@ p {
    align-items: center;
    gap: 1rem;
 }
+
 
 .stats-text-deadline {
    display: flex;
@@ -253,11 +264,11 @@ p {
 }
 
 
-
 .greetingSalutation {
    font-size: 47px;
    font-weight: 500;
 }
+
 
 .dashboardusername {
    color: #29abe2;
@@ -265,28 +276,15 @@ p {
    font-weight: 700;
 }
 
-/* .stats-text-deadline h3 {
-   font-size: 1.5rem;
-   margin-block-start: 0;
-   margin-block-end: 0;
-}
-
-.stats-text-deadline p {
-   font-size: 1rem;
-   margin-block-start: 0;
-   margin-block-end: 0;
-} */
 
 .stats2-c {
    display: flex;
    align-items: center;
-   justify-content: center;
-   box-shadow: 0px 0px 4px 0px #0000001a;
+   justify-content: space-between;
    border-radius: 2rem;
    transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
-   /* gap: 2rem; */
+   width:100%;
 }
-
 
 
 .stats2 .stats-text h3 {
@@ -295,25 +293,24 @@ p {
    margin-block-end: 0;
 }
 
+
 .stats2 .stats-text p {
    font-size: 2rem;
    margin-block-start: 0;
    margin-block-end: 0;
 }
 
+
 /* Styling für Stats 2 */
 .stats2 {
    display: flex;
-   /* justify-content: space-evenly; */
    align-items: center;
-   /* height: 117px; */
-   /* padding: 19px 34px; */
-   /* margin: 2rem 0; */
    background-color: #fff;
    box-shadow: 0px 0px 4px 0px #0000001a;
    border-radius: 2rem;
    transition: transform 0.08s ease-in-out, box-shadow 0.08s ease-in-out;
 }
+
 
 .stats2:hover {
    background-color: #2a3647;
@@ -324,15 +321,18 @@ p {
    border-radius: 2rem;
 }
 
+
 .urgentDate {
    font-size: 21px;
    font-weight: 700;
 }
 
+
 .urgentDeadline {
    font-size: 16px;
    font-weight: 400;
 }
+
 
 /* Styling für Stats 3 */
 .stats3 {
@@ -340,6 +340,7 @@ p {
    justify-content: space-evenly;
    gap: 28px;
 }
+
 
 .stats3_inner {
    display: flex;
@@ -353,6 +354,7 @@ p {
    height: auto;
 }
 
+
 .stats3_inner:hover {
    background-color: #2a3647;
    color: #fff;
@@ -360,6 +362,7 @@ p {
    box-shadow: 0px 3px 8px 0px #00000033;
    cursor: pointer;
 }
+
 
 .stats3 .stats-text {
    display: flex;
@@ -369,11 +372,13 @@ p {
    margin-block-end: 0;
 }
 
+
 .stats3 .stats-text h3 {
    font-size: 1.3rem;
    margin-block-start: 0;
    margin-block-end: 0;
 }
+
 
 .stats3 .stats-text p {
    font-size: 2rem;
@@ -396,18 +401,17 @@ p {
    background-color: white;
    color: black;
    overflow:hidden;
-
    font-family: Inter;
    font-size: 36px;
    font-weight: 400;
    line-height: 43.2px;
-
    z-index:1;
    transition:ease-in-out 1400ms;
    transition-property: opacity;
    transition-delay: 1500ms;
    opacity: 1;  
 }
+
 
 .mobile-greeting>span:last-of-type {
    font-family: Inter;
@@ -416,8 +420,3 @@ p {
    line-height: 56.4px;   
    color: rgba(41, 171, 226, 1);
 }
-
-.Xanimated-opacity {
-   opacity:0;
-}
-

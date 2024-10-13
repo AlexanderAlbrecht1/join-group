@@ -289,4 +289,4 @@ async function saveEditedContact(id) {
    await displayContacts();
    document.getElementById(`contact${id}`).click();
    closeMobileDialogBackground();
-}
+}  

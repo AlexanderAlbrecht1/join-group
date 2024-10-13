@@ -56,4 +56,10 @@ body {
     .privacy-headline {
         font-size: 48px;
     }
+
+    .privacy-policy-content {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        margin-bottom: 100px;
+    }
 }

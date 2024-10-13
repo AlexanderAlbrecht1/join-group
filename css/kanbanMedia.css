@@ -182,7 +182,8 @@
 
     
     .mbb {
-        overflow: unset;
+        overflow: auto;
+        margin-bottom: 80px;
     }
 
 

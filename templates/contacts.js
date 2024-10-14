@@ -248,7 +248,7 @@ function createEditContactDialogMobileHTML(array) {
             <div class="close" onclick="closeContactCreation(), closeMobileDialogBackground()">
                <img src="/assets/img/desktop/close.svg" alt="">
             </div>
-            <form class="form-input">
+            <form class="form-input" onsubmit="saveEditedContact(${array.id});return false;">
                <div id="input-field-container" class="input-container">
                   <input id="name" type="text" required placeholder="Name">
                   <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
@@ -265,7 +265,7 @@ function createEditContactDialogMobileHTML(array) {
                   <div class="deleteButton" onclick="deleteContact(${array.id})">
                      <span>Delete </span>
                   </div>
-                  <button class="safeEditContactButton" onclick="saveEditedContact(${array.id})">
+                  <button class="safeEditContactButton" type="submit" >
                      <span>Safe</span>
                      <div class="checkSVGContainer">
                      </div>

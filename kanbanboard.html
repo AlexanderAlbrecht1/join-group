@@ -56,12 +56,10 @@
             <form id="add-task-form" class="relative input-container task-view-card add"
                 onkeydown="noSubmit(event,'Enter')" onsubmit="addNewTask();return false">
                 <input type="hidden" name="status">
-
                 <div class="top">
                     <h1>Add Task</h1>
                     <img class="exit" onclick="closeAddTask()" src="./assets/img/desktop/close.svg">
                 </div>
-
                 <div id="add-task-main" class="slider">
                     <div class="add-task-left">
                         <div class="label-input-con">
@@ -74,7 +72,6 @@
                             <label for="subtaskPopupDescription">Description</label>
                             <textarea id="subtaskPopupDescription" placeholDer="Enter a Description"></textarea>
                         </div>
-
                         <div class="label-input-con">
                             <label>Assigned to</label>
                             <div class="relative addtask-assign">
@@ -89,20 +86,16 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="vertical-line-wrapper">
                         <div class="vertical-line"></div>
                     </div>
-
                     <div class="add-task-right">
-
                         <div class="label-input-con">
                             <label for="due-date">Due Date<span class="required-asterisk">*</span></label>
                             <input type="date" id="due-date" class="input-date">
                             <span id="due-date-span" class="input-date-msg required-text d-none">This field is
                                 required</span>
                         </div>
-
                         <div class="priority label-input-con">
                             <span>Priority</span>
                             <div class="d-flex">
@@ -119,7 +112,6 @@
                                         src="./assets/img/desktop/prio_low_green.svg"></label>
                             </div>
                         </div>
-
                         <div class="label-input-con">
                             <label for="category">Category<span class="required-asterisk">*</span></label>
                             <div id="select-box" class="selectBox input-category-border">
@@ -132,13 +124,10 @@
                             <span id="category-span" class="input-category-msg required-text d-none">This field is
                                 required</span>
                         </div>
-
-
                         <div class="subtask-container label-input-con">
                             <label>Subtasks</label>
                             <input class="input-subtask" oninput="toggleSubtaskIcon(event)" type="text" id="subtasks"
                                 placeholder="Add new subtask">
-
                             <button type="button" id="add-subtask" class="btn-add-subtask">
                                 <img onclick="clearSubtaskInput(event)" class="add-subtask-clear d-none"
                                     src="./assets/img/desktop/add-subtask-clear.svg" alt="">
@@ -146,28 +135,21 @@
                                 <img onclick="addSubtasks(event)" class="subtask-icon"
                                     src="./assets/img/desktop/add_subtask.svg">
                             </button>
-
                             <ul id="subtask-list" class="subtask-list">
                             </ul>
-
                             <div class="edit-input-con d-none">
                                 <input type="text" class="subtask-edit-input">
                                 <div>
                                     <img class="edit-delete" onclick="deleteSubtask(event)"
                                         src="./assets/img/desktop/subtask-delete.svg" alt="">
-
                                     <div class="h-line24"></div>
-
                                     <img class="edit-check" onclick="saveEditedSubtask(event)"
                                         src="./assets/img/desktop/add-subtask-check.svg" alt="">
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="button-con">
                     <p><span class="required-asterisk">*</span>this field is required</p>
                     <div>
@@ -180,10 +162,10 @@
             </form>
         </div>
     </div>
-
     <header>
         <div class="max-width relative">
-            <img onclick = "window.location.href = 'dashboard.html'"; class="pd-16" src="./assets/img/desktop/join-logo_header.svg">
+            <img onclick="window.location.href = 'dashboard.html'" ; class="pd-16"
+                src="./assets/img/desktop/join-logo_header.svg">
             <span>Kanban Project Management Tool</span>
             <div class="headerHelpUser">
                 <div class="helparea">
@@ -199,18 +181,17 @@
                     <a href='./legal-notice.html'>Legal Notice</a>
                 </div>
                 <div class="linkBox">
-                    <a  href='./privacy-policy.html'>Privacy Policy</a>
+                    <a href='./privacy-policy.html'>Privacy Policy</a>
                 </div>
                 <div class="linkBox">
                     <a onclick="logOut()" href="./index.html">Log out</a>
                 </div>
-            </div>            
+            </div>
         </div>
     </header>
-
-
     <nav>
-        <img onclick = "window.location.href = 'dashboard.html'" src="/assets\img\desktop\join-logo_navbar.svg" alt="Join-Logo">
+        <img onclick="window.location.href = 'dashboard.html'" src="/assets\img\desktop\join-logo_navbar.svg"
+            alt="Join-Logo">
         <div class="mainLinks">
             <a href="/dashboard.html"><img src="/assets/img/desktop/summary_logo.svg" alt="Summary Logo">Summary</a>
             <a href="/addtask.html"><img src="/assets/img/desktop/logo_add_task.svg" alt="Add task Logo">Add
@@ -224,8 +205,6 @@
             <a href="./legal-notice.html">Legal Notice</a>
         </div>
     </nav>
-
-
     <div class="main-container mbc">
         <div class="mbh">
             <div></div>
@@ -243,7 +222,6 @@
                     </div>
                 </div>
             </div>
-
             <div>
                 <div id="input-field-container-alt" class="input-container">
                     <input id="find" type="text" placeholder="Find Task" oninput="filterTasks()">
@@ -251,7 +229,6 @@
                             src="./assets/img/desktop/search.svg"></span>
                 </div>
             </div>
-
             <div class="todos">
                 <div class="todo">
                     To do
@@ -275,10 +252,7 @@
                     Done
                 </div>
             </div>
-
         </div>
-
-
         <div class="mbb">
             <div>
                 <div class="todo">
@@ -287,12 +261,10 @@
                         <img src="./assets/img/desktop/add_subtask.svg">
                     </a>
                 </div>
-
                 <div class="containers" id="to-do-container" ondragleave="toggleBorder(event,false)"
                     ondragenter="toggleBorder(event,true)" ondrop="drop(event, 'to-do')" ondragover="allowDrop(event)">
                 </div>
             </div>
-
             <div>
                 <div class="todo">
                     In progress
@@ -305,7 +277,6 @@
                     ondragover="allowDrop(event)">
                 </div>
             </div>
-
             <div>
                 <div class="todo">
                     Await feedback
@@ -318,12 +289,10 @@
                     ondragover="allowDrop(event)">
                 </div>
             </div>
-
             <div>
                 <div class="todo">
                     Done
                 </div>
-
                 <div class="containers" id="done-container" ondragleave="toggleBorder(event,false)"
                     ondragenter="toggleBorder(event,true)" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
                 </div>

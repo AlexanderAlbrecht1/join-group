@@ -34,27 +34,25 @@
     <script src="./js/nav_header.js"></script>
     <script src="./js/stdio.js"></script>
     <script src="./js/customSelector.js"></script>
-    <script src="./js/assignSelector.js"></script>   
+    <script src="./js/assignSelector.js"></script>
     <script src="./js/contactAddons.js"></script>
     <script src="./js/subtask.js"></script>
 </head>
 
 <body onload="init();">
-    <div class="landscape"></div>            
-
+    <div class="landscape"></div>
     <div class="relative">
         <div id="msgfly">
-           <div class="msgfly">
-              <span>Task added to board</span>
-              <img src="./assets/img/desktop/board_logo.svg">
-           </div>
-         </div>   
-     </div>
-
-
+            <div class="msgfly">
+                <span>Task added to board</span>
+                <img src="./assets/img/desktop/board_logo.svg">
+            </div>
+        </div>
+    </div>
     <header>
         <div class="max-width relative">
-            <img onclick = "window.location.href = 'dashboard.html'"; class="pd-16" src="./assets/img/desktop/join-logo_header.svg">
+            <img onclick="window.location.href = 'dashboard.html'" ; class="pd-16"
+                src="./assets/img/desktop/join-logo_header.svg">
             <span>Kanban Project Management Tool</span>
             <div class="headerHelpUser">
                 <div class="helparea">
@@ -70,7 +68,7 @@
                     <a href='./legal-notice.html'>Legal Notice</a>
                 </div>
                 <div class="linkBox">
-                    <a  href='./privacy-policy.html'>Privacy Policy</a>
+                    <a href='./privacy-policy.html'>Privacy Policy</a>
                 </div>
                 <div class="linkBox">
                     <a onclick="logOut()" href="./index.html">Log out</a>
@@ -78,9 +76,9 @@
             </div>
         </div>
     </header>
-
     <nav>
-        <img onclick = "window.location.href = 'dashboard.html'" src="/assets\img\desktop\join-logo_navbar.svg" alt="Join-Logo">
+        <img onclick="window.location.href = 'dashboard.html'" src="/assets\img\desktop\join-logo_navbar.svg"
+            alt="Join-Logo">
         <div class="mainLinks">
             <a href="/dashboard.html"><img src="/assets/img/desktop/summary_logo.svg" alt="Summary Logo">Summary</a>
             <a href="/addtask.html" style=" background-color: rgba(9, 25, 49, 1);"><img
@@ -93,11 +91,9 @@
             <a href="./legal-notice.html">Legal Notice</a>
         </div>
     </nav>
-
     <div class="main-container">
-
         <div class="add-task-container">
-            <form id="add-task-form" onkeydown="noSubmit(event,'Enter')" onsubmit="addNewTask();return false" >
+            <form id="add-task-form" onkeydown="noSubmit(event,'Enter')" onsubmit="addNewTask();return false">
                 <h1>Add Task</h1>
                 <div id="add-task-main">
                     <div class="add-task-left">
@@ -110,32 +106,29 @@
                             <label for="description">Description</label>
                             <textarea id="description" placeholder="Enter a Description"></textarea>
                         </div>
-
-                        <div class="label-input-con" >
+                        <div class="label-input-con">
                             <label>Assigned to</label>
-                            <div class="relative addtask-assign" >
+                            <div class="relative addtask-assign">
                                 <details class="absolute" style="width:100%;">
-                                    <summary><input class="assigned-to-input" type="text" placeholder="Select contacts to assign"></summary>
+                                    <summary><input class="assigned-to-input" type="text"
+                                            placeholder="Select contacts to assign"></summary>
                                     <div id="add-task-assignToList" class="selectors">
                                     </div>
                                 </details>
                             </div>
                             <div id="addtask-monogramlist" class="monogramlist flex-row gap8">
                             </div>
-                        </div>        
+                        </div>
                     </div>
-
                     <div class="vertical-line-wrapper">
                         <div class="vertical-line"></div>
                     </div>
-
                     <div class="add-task-right">
                         <div class="label-input-con">
                             <label for="due-date">Due Date<span class="required-asterisk">*</span></label>
                             <input type="date" id="due-date">
                             <span id="due-date-span" class="required-text d-none">This field is required</span>
                         </div>
-
                         <div class="button-group label-input-con">
                             <span>Priority</span>
                             <div class="d-flex">
@@ -152,7 +145,6 @@
                                         src="./assets/img/desktop/prio_low_green.svg"></label>
                             </div>
                         </div>
-
                         <div class="label-input-con">
                             <label for="category">Category<span class="required-asterisk">*</span></label>
                             <div id="select-box" class="selectBox">
@@ -164,67 +156,32 @@
                             </div>
                             <span id="category-span" class="required-text d-none">This field is required</span>
                         </div>
-
-
                         <div class="subtask-container label-input-con">
                             <label>Subtasks</label>
-                            <input class="input-subtask" oninput="toggleSubtaskIcon(event)" type="text" id="subtasks" placeholder="Add new subtask">
-                            
+                            <input class="input-subtask" oninput="toggleSubtaskIcon(event)" type="text" id="subtasks"
+                                placeholder="Add new subtask">
                             <button type="button" id="add-subtask" class="btn-add-subtask">
-                                <img 
-                                    onclick="clearSubtaskInput(event)" class="add-subtask-clear d-none"
+                                <img onclick="clearSubtaskInput(event)" class="add-subtask-clear d-none"
                                     src="./assets/img/desktop/add-subtask-clear.svg" alt="">
-                                <div class="h-line24"></div>    
+                                <div class="h-line24"></div>
                                 <img onclick="addSubtasks(event)" class="subtask-icon"
                                     src="./assets/img/desktop/add_subtask.svg">
                             </button>
-                            
                             <ul id="subtask-list" class="subtask-list">
                             </ul>
-        
                             <div class="edit-input-con d-none">
                                 <input type="text" class="subtask-edit-input">
                                 <div>
                                     <img class="edit-delete" onclick="deleteSubtask(event)"
                                         src="./assets/img/desktop/subtask-delete.svg" alt="">
-                                    
-                                    <div class="h-line24"></div>    
-                                    
+                                    <div class="h-line24"></div>
                                     <img class="edit-check" onclick="saveEditedSubtask(event)"
                                         src="./assets/img/desktop/add-subtask-check.svg" alt="">
-                            
                                 </div>
                             </div>
                         </div>
-        
-
-
-
-
-                        <!-- div class="subtask-container label-input-con">
-                            <label for="subtasks">Subtasks</label>
-                            <input oninput="toggleIcon()" type="text" id="subtasks" placeholder="Add new subtask">
-
-                            <button type="button" id="add-subtask"><img id="add-subtask-clear"
-                                    onclick="clearSubtaskInput()" class="add-subtask-clear hidden"
-                                    src="./assets/img/desktop/add-subtask-clear.svg" alt="">
-                                <img onclick="addSubtasks()" id="subtask-icon"
-                                    src="./assets/img/desktop/add_subtask.svg">
-                            </button>
-                            <ul id="subtask-list">
-                            </ul>
-                            <div id="edit-input-con" class="edit-input-con d-none">
-                                <input type="text" id="subtask-edit-input" class="subtask-edit-input">
-                                <img id="edit-delete" onclick="deleteSubtask()" src="./assets/img/desktop/subtask-delete.svg" alt="">
-                                <img id="edit-check" onclick="saveEditedSubtask()" src="./assets/img/desktop/add-subtask-check.svg" alt="">
-                            </div>
-                        </div-->
                     </div>
-
                 </div>
-
-
-
                 <div class="button-con">
                     <p><span class="required-asterisk">*</span>this field is required</p>
                     <div>

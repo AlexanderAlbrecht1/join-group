@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="./css/registration-media.css" />
     <link rel="stylesheet" href="./css/msgfly.css" />
 
-
     <script src="./js/firebase.js"></script>
     <script src="./js/localStorage.js"></script>
     <script src="./js/session.js"></script>
@@ -30,13 +29,11 @@
 
   </head>
   <body onload="init()">
-
     <div class="body">
       <div class="relative">
         <div id="msgfly">
           <div class="msgfly">You Signed Up successfully
         </div>
-
         </div>   
         <div id="login-master" class="absolute login-master">
           <div>
@@ -51,7 +48,6 @@
                   <div></div>
                 </div>
               </div>
-
               <div class="input-area">
                 <div>
                   <div id="user-container" class="input-container name">
@@ -59,36 +55,29 @@
                     <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
                     <span class="error-msg visible"></span>
                   </div>
-
                   <div id="email-container" class="input-container">
                     <input id="email" type="email" required placeholder="Email" autocomplete="email">
                     <span class="icon"  ><img src="./assets/img/desktop/letter.svg"></span>
                     <span class="error-msg visible"></span>
                   </div>
-
                   <div id="sign-password-container" class="input-container password new">
                     <input id="sign-password" type="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W]{8,}$"  placeholder="Password" autocomplete="new-password">
                     <span class="icon" onmousedown="togglePasswordView(event)">👁️</span>
                     <span id="sign-password-msg" class="error-msg visible"></span>
                   </div>
-
                   <div id="confirm-password-container" class="input-container password new">
                     <input id="confirm-password" type="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\W]{8,}$" placeholder="Password" autocomplete="new-password">
                     <span class="icon" onmousedown="togglePasswordView(event)">👁️</span>
                     <span id="confirm-password-msg" class="error-msg visible"></span>
                   </div>
-
                 </div>
-
-                <div class="remember"><!-- Remember Me area-->
+                <div class="remember">
                   <label class="custom-checkbox">
                     <input type="checkbox" id="remember-me">
                     <span class="checkbox-image"></span>
                   </label>
-
                   <span>I accept the <a href="privacy-policy-extern.html" class="privacy" target="privacy-policy"> Privacy policy</a></span>
                 </div>
-
               </div>
               <div class="login-buttons">
                 <button onmousedown="activateFormErrors('login-card')" id="submit" type="submit"
@@ -102,7 +91,6 @@
               <a  target="_blank" href='./legal-notice-unlocked.html'>Legal Notice</a>
             </div>
             </div>
-
         </div>
         <img id="main-logo" class="main-logo logo-position" src="./assets/img/desktop/join-logo.svg">
       </div>

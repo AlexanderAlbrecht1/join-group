@@ -1,6 +1,3 @@
-/*
-    Cards
-*/
 .mbb .card {
     box-sizing: border-box;
     width: 252px;
@@ -93,11 +90,6 @@
 }
 
 
-
-
-/*
-    Icons of Card on bottom
-*/
 .mbb-icons {
     display: flex;
     flex-direction: row;

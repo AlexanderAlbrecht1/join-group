@@ -1,10 +1,13 @@
-
 .checkbox-image {
    display: flex;
 }
+
+
 .custom-checkbox:hover .checkbox-image {
    background-color: transparent;
 }
+
+
 .custom-checkbox input:checked + .checkbox-image {
    background-color: transparent;   
 }
@@ -31,53 +34,53 @@ details  {
    line-height: 24px;
 }
 
+
 details * {
    box-sizing: border-box;
    outline: unset;
 }
+
+
 details[open] {
    background-color: white;
    border: 0px 0px 1px 0px;
    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-   /* overflow:visible; */
    z-index:1;
 }
+
+
 details summary {      
    display: flex; 
    align-items: center;
-
    justify-content: space-between;
    list-style: none;
    border-radius: var(--corner-top);
-
 }
+
 
 details summary::after {
    content:"";
-
    background-image: url("../assets/img/desktop/dropdown.svg");
    background-repeat: no-repeat;   
    background-position: center center;
    display: inline-block;
    width: 32px;
    height: 32px;
-   
    margin-left: -32px;
    cursor: pointer;
-
 }
+
 
 details[open] summary::after {
    transform:rotate(180deg);
 }
 
+
 details:not([open]) summary input::placeholder {
    color: rgba(0,0,0,1) !important;
 }
-/* details[open] summary input::placeholder {
-   color: #D1D1D1 !important;
-}
-*/
+
+
 details input {
    width: 100%;
    height: 48px;
@@ -92,17 +95,21 @@ details input {
    line-height: 24px;
 }
 
+
 details input:focus {
    border: var(--border-focus);
 }
+
 
 details[open] input {
    border: var(--border-focus);      
 }
 
+
 details input:invalid {
    border: var(--border-invalid);
 }
+
 
 details .selectors {
    display: flex;
@@ -113,18 +120,23 @@ details .selectors {
    gap: 2px;
 }
 
+
 .selector {
    display:flex;
 }
+
+
 .selector * {
    display:flex;
    align-items: center;
 }
+
+
 .selector input[type="checkbox"] {
    display: none;
 }
 
-/* Monogram and Name / Checkbox */
+
 .selector .checkbox-design {
    flex:1;
    display: flex;
@@ -136,7 +148,7 @@ details .selectors {
    background-color: aqua;
 }
 
-/* Monogram and Name */
+
 .selector .checkbox-design>div {
    gap:16px;
 }
@@ -145,13 +157,19 @@ details .selectors {
 .selector .custom-checkbox ~ .checkbox-design {
    background-color: transparent;
 }
+
+
 .selector .custom-checkbox:hover ~ .checkbox-design {
    background-color: var(--hover);
 }
+
+
 .selector .custom-checkbox:checked ~ .checkbox-design {
    background-color: var(--checked);
    color: white;
 }
+
+
 .selector .custom-checkbox:checked:hover ~ .checkbox-design {
    background-color: var(--hover-checked);
 }
@@ -160,25 +178,28 @@ details .selectors {
    content:url("../assets/img/desktop/unchecked.svg");
 }
 
+
 .selector .custom-checkbox:checked ~ .checkbox-design>img {
    content:url("../assets/img/desktop/checked.svg");
 }
+
 
 .selector .custom-checkbox:checked ~ .checkbox-design>img {
    filter: invert(100%);
 }
 
+
 details .monogram {
-      box-sizing: border-box;
-      width: 42px;
-      height: 42px;
-      border: 2px solid white;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items:center;
-      background-color: blue;
-      border-radius: 50%;
+   box-sizing: border-box;
+   width: 42px;
+   height: 42px;
+   border: 2px solid white;
+   color: white;
+   display: flex;
+   justify-content: center;
+   align-items:center;
+   background-color: blue;
+   border-radius: 50%;
 } 
 
 
@@ -187,6 +208,7 @@ details .monogram {
    flex-direction: column;
    margin-bottom: 40px;
 }
+
 
 .monogramlist {
    display: flex;

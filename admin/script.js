@@ -40,6 +40,7 @@ function saveTasks() {
     let tasks = [
         {
             "id": 0,
+            "title": "User Login Feature",
             "assignedTo": [1, 3],
             "category": "user-story",
             "description": "As a user, I want to log into my account using email and password",
@@ -54,6 +55,7 @@ function saveTasks() {
           },
           {
             "id": 1,
+            "title": "Optimize Database Performance",
             "assignedTo": [2, 5, 6],
             "category": "technical-task",
             "description": "Database optimization for better query performance",
@@ -68,6 +70,7 @@ function saveTasks() {
           },
           {
             "id": 2,
+            "title": "Fix Payment Module Bugs",
             "assignedTo": [1, 4],
             "category": "technical-task",
             "description": "Bug fixing for payment module to resolve failed transactions",
@@ -82,6 +85,7 @@ function saveTasks() {
           },
           {
             "id": 3,
+            "title": "Set Up CI/CD Pipeline",
             "assignedTo": [3],
             "category": "technical-task",
             "description": "Set up CI/CD pipeline for automated deployments",
@@ -96,6 +100,7 @@ function saveTasks() {
           },
           {
             "id": 4,
+            "title": "Improve Dashboard Loading Time",
             "assignedTo": [2, 4, 5],
             "category": "user-story",
             "description": "As a user, I want a faster loading dashboard",
@@ -110,6 +115,7 @@ function saveTasks() {
           },
           {
             "id": 5,
+            "title": "Write API Documentation",
             "assignedTo": [1, 2],
             "category": "technical-task",
             "description": "Write and publish API documentation",
@@ -124,6 +130,7 @@ function saveTasks() {
           },
           {
             "id": 6,
+            "title": "Security Audit Preparation",
             "assignedTo": [3, 7],
             "category": "user-story",
             "description": "As a security officer, I want the application to pass a full security audit",
@@ -138,6 +145,7 @@ function saveTasks() {
           },
           {
             "id": 7,
+            "title": "Mobile Accessibility Enhancements",
             "assignedTo": [2, 4],
             "category": "user-story",
             "description": "As a user, I want the app to be more accessible on mobile devices",
@@ -152,6 +160,7 @@ function saveTasks() {
           },
           {
             "id": 8,
+            "title": "Server Infrastructure Upgrade",
             "assignedTo": [4],
             "category": "technical-task",
             "description": "Upgrade server infrastructure for higher scalability",
@@ -166,6 +175,7 @@ function saveTasks() {
           },
           {
             "id": 9,
+            "title": "Create Unit Tests",
             "assignedTo": [1, 2, 3],
             "category": "technical-task",
             "description": "Create unit tests for newly implemented features",
@@ -177,7 +187,7 @@ function saveTasks() {
               { "name": "Run tests locally", "done": true },
               { "name": "Integrate with CI/CD", "done": true }
             ]
-          }      
+          } 
     ];
     
     saveData("Tasks",tasks); //Create Userlist

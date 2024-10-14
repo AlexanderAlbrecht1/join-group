@@ -4,17 +4,16 @@
     --line-height: 24px;
     position: relative;
     display: flex;
-    flex-direction: column; /* Stack input and error message */
-    /* margin-bottom: 20px; /* Margin below the entire input-container */
+    flex-direction: column; 
     width: 100%;
-    
 }
+
 
 .input-container input,
 .input-container textarea
  {
-    width: 100%; /* Makes the input take up the full width of the container */
-    padding:  var(--padding-vertical) 51px  var(--padding-vertical) 21px; /* 8px padding on left, right padding adjusted for the icon */
+    width: 100%; 
+    padding:  var(--padding-vertical) 51px  var(--padding-vertical) 21px;
     border-radius: 10px;
     border: 1px solid var(--border-color);
     box-sizing: border-box;
@@ -25,13 +24,13 @@
     font-weight: 400;
     line-height: var(--line-height);
     text-align: left;    
-
     outline:none;
 }
 
+
 .input-container .icon {
     position: absolute;
-    right: 21px; /* Position the icon with 8px padding from the right edge */
+    right: 21px;
     top: var(--padding-vertical);
     cursor: pointer;
     display: flex;
@@ -41,6 +40,7 @@
     object-fit: contain;
 }
 
+
 .input-container.password input + span,
 .input-container.password input + span:disabled
  {
@@ -49,11 +49,12 @@
     cursor:not-allowed;
 }
 
+
 .input-container.password input:focus + span {
     content: url("../assets/img/desktop/eye-no.svg");
-    /* transform: translate(4px,2px); */
     cursor:pointer;
 }
+
 
 .input-container.password.visible input:focus + span {
     content: url("../assets/img/desktop/eye.svg");
@@ -62,10 +63,7 @@
     flex-direction: row;
     align-items: center;
     cursor:pointer;
-    transform: 
-        translate(4px,4px)
-    ; 
-    
+    transform: translate(4px,4px);     
 }
 
 
@@ -78,18 +76,18 @@
 }
 
 
-
-/* Per JS hinzufuegen nach dem Senden*/
 .input-container.invalid input:invalid,
 .input-container.invalid textarea:invalid
  {
     border-color: red;
 }
 
+
 .input-container input:valid,
 .input-container textarea:valid {
         border: 1px solid var(--border-color);
 }
+
 
 .input-container input:focus,
 .input-container textarea:focus
@@ -98,9 +96,11 @@
      outline: none;
  }
  
+
 .input-container .icon:hover {
         border-color: rgba(41, 171, 226, 1);
 }
+
 
 .error-msg {
     font-family: Poppins;
@@ -109,15 +109,17 @@
     line-height: 14.4px;
     text-align: left;
     color: red;
-    min-height: 20px; /* Reserve space for the error message */
+    min-height: 20px; 
     margin-left: 0px;
-    margin-top: 5px; /* Space between input field and error message */
-    visibility: hidden; /* Hide error message when not needed */
+    margin-top: 5px; 
+    visibility: hidden; 
 }
 
+
 .error-msg.visible {
-    visibility: visible; /* Show error message */
+    visibility: visible; 
 }
+
 
 form {
     display: flex;

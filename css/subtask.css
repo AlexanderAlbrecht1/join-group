@@ -109,7 +109,6 @@
 .subtask-container ul {
    margin:0;
    align-items: center;
-
    padding:0;
    list-style:none;
 }
@@ -187,7 +186,6 @@
 } 
 
 
-/* PLUS + */
 .subtask-container .btn-add-subtask {
     all: unset;
     position: absolute;

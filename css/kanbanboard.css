@@ -107,9 +107,6 @@ body {
 }
 
 
-/*
-    Todo Headline
-*/
 .mbc .todo {
     display: flex;
     align-items: center;
@@ -163,15 +160,12 @@ body {
 }
 
 
-/*
-    Todo-Comtainer
-*/
 .mbb {
     padding: 0 64px;
     display: flex;
     flex-direction: row;
     gap: 24px;
-    overflow-y:auto; /* hidden */
+    overflow-y:auto; 
     height:100%;
 }
 

@@ -103,15 +103,15 @@ function createSingleContactHTML(singleContactArray, id) {
  */
 function createSingleContactMobileHTML(singleContactArray, id) {
    return /*html*/ `
-    <div class="name">
+   <div class="name">
       <div class="detailMonogramContainer">
-        <span class="detailMonogramSpan" style="background-color: ${singleContactArray.backgroundColor}">${singleContactArray.initial1}${singleContactArray.initial2}</span>
+         <span class="detailMonogramSpan" style="background-color: ${singleContactArray.backgroundColor}">${singleContactArray.initial1}${singleContactArray.initial2}</span>
       </div>
-        <div class="fullNameAndButtons">
-         	<div class="fullname">
-               <span>${singleContactArray.name} ${singleContactArray.lastname}</span>
-            </div>
-          <div class="editButtons">
+      <div class="fullNameAndButtons">
+         <div class="fullname">
+            <span>${singleContactArray.name} ${singleContactArray.lastname}</span>
+         </div>
+         <div class="editButtons">
             <div onclick="openEditContactDialog(${id})" class="editButton">
                <div></div>
                <span>Edit</span>
@@ -120,50 +120,42 @@ function createSingleContactMobileHTML(singleContactArray, id) {
                <div></div>
                <span>Delete</span>
             </div>
-            
-          </div>
-        </div>
+         </div>
       </div>
-      <div class="contactInformation">
-         <span>Contact Information</span>
-      </div>
-      <div class="emailAndPhone">
-         <div class="emailAdressContainer">
-            <span class="spanHeading">Email</span>
-            <a href="mailto:${singleContactArray.mail}?
-                           &subject=Hello from the other side ...">
+   </div>
+   <div class="contactInformation">
+      <span>Contact Information</span>
+   </div>
+   <div class="emailAndPhone">
+      <div class="emailAdressContainer">
+         <span class="spanHeading">Email</span>
+         <a href="mailto:${singleContactArray.mail}? &subject=Hello from the other side ...">
             <span class="emailSpan">${singleContactArray.mail}</span>
-            </a>
-         </div>
-         <div class="phoneNumberContainer">
-            <span class="spanHeading">Phone</span>
-            <a href="tel:${singleContactArray.phone}">
+         </a>
+      </div>
+      <div class="phoneNumberContainer">
+         <span class="spanHeading">Phone</span>
+         <a href="tel:${singleContactArray.phone}">
             <span class="phoneSpan">${singleContactArray.phone}</span>
-            </a>
+         </a>
+      </div>
+   </div>
+   <div class="wrapperMobileButton">
+      <div class="mobileButton" id="mobileButton" onclick="openPopUpEdit()">
+      </div>
+   </div>
+   <div class="popUpWrapper" id="popUpWarpper" onclick="closeMobileEditPopUp()">
+      <div class="popUpEdit" id="popUpEdit">
+         <div onclick="openEditContactDialogMobile(${id})" class="editButtonMobile">
+            <div></div>
+            <span>Edit</span>
+         </div>
+         <div onclick="deleteContact(${id})" class="trashButtonMobile">
+            <div></div>
+            <span>Delete</span>
          </div>
       </div>
-
-    </div>
-
-      <div class="wrapperMobileButton">
-         <div class="mobileButton" id="mobileButton" onclick="openPopUpEdit()">
-            
-            </div>
-      </div>
-
-         <div class="popUpWrapper" id="popUpWarpper" onclick="closeMobileEditPopUp()">
-    <div class="popUpEdit" id="popUpEdit">
-    <div onclick="openEditContactDialogMobile(${id})" class="editButtonMobile">
-               <div></div>
-               <span>Edit</span>
-            </div>
-            <div onclick="deleteContact(${id})" class="trashButtonMobile">
-               <div></div>
-               <span>Delete</span>
-            </div>
-            </div>
-    </div> 
-     
+   </div>
     `
 }
 

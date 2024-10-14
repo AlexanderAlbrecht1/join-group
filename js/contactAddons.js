@@ -9,6 +9,6 @@
  */
 function getFullNameInContact(contact) {
     let name=contact.name + " " + contact.lastname;
-    //if (name == getLoginname()) name+=" (You)";
+    if (name == getUsername()) name+=" (You)";
     return name;
 }

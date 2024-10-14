@@ -53,7 +53,6 @@ function getGreetingPos() {
         default:
             return 0; //Hello
     }
-
 }
 
 
@@ -71,4 +70,3 @@ function setMinDate(element) {
     let today = new Date().toISOString().split('T')[0];
     element.setAttribute('min', today);
 }
-

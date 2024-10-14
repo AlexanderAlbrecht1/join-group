@@ -199,7 +199,7 @@ function addToggleSelectListener(rootId) {
 function displaySelectorMonograms(event) {
     let checkboxes=Array.from(event.currentTarget.querySelectorAll('input[name="assign"]'));
     let checked=checkboxes.filter(e => e.checked);
-    let monogramList=event.currentTarget.parentElement.nextElementSibling; // .querySelector("monogram-list");
+    let monogramList=event.currentTarget.parentElement.nextElementSibling; 
     monogramList.innerHTML="";
     checked.forEach (checkbox => {
         let monogram=checkbox.parentElement.querySelector("SPAN").cloneNode(true);

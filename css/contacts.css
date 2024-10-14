@@ -15,10 +15,12 @@
 }
 
 
+
 a {
    color: white;
    text-decoration: none;
 }
+
 
 
 .displayNone {
@@ -26,9 +28,11 @@ a {
 }
 
 
+
 .overflowHidden {
    overflow: hidden;
 }
+
 
 
 .warningHeadline {
@@ -47,6 +51,7 @@ a {
 }
 
 
+
 .wrapperHeading {
    display: flex;
    align-items: flex-start;
@@ -54,6 +59,7 @@ a {
    width: 100%;
    margin-right: 16px;
 }
+
 
 
 .warpperArrowLeft {
@@ -68,9 +74,11 @@ a {
 }
 
 
+
 .warpperArrowLeft:hover {
    cursor: pointer;
 }
+
 
 
 .heading {
@@ -78,6 +86,7 @@ a {
    align-items: center;
    gap: 16px;
 }
+
 
 
 .heading h1 {
@@ -88,10 +97,12 @@ a {
 }
 
 
+
 .headingLineDesktop {
    border-right: 3px solid rgba(41, 171, 226, 1);
    height: 59px;
 }
+
 
 
 .heading span {
@@ -108,12 +119,14 @@ a {
 }
 
 
+
 .name {
    display: flex;
    flex-direction: row;
    height: 120px;
    gap: 54px;
 }
+
 
 
 .detailMonogramSpan {
@@ -130,6 +143,7 @@ a {
 }
 
 
+
 .fullNameAndButtons {
    display: flex;
    flex-direction: column;
@@ -137,9 +151,11 @@ a {
 }
 
 
+
 .fullname {
    margin-right: 8px;
 }
+
 
 
 .fullname>span {
@@ -156,11 +172,13 @@ a {
 }
 
 
+
 .contactInformation>span {
    font-size: 20px;
    font-weight: 400;
    line-height: 24px;
 }
+
 
 
 .emailAndPhone {
@@ -172,6 +190,7 @@ a {
 }
 
 
+
 .emailAdressContainer,
 .phoneNumberContainer {
    display: flex;
@@ -179,6 +198,7 @@ a {
    height: 53px;
    justify-content: space-between;
 }
+
 
 
 .emailAdressContainer>a {
@@ -189,11 +209,13 @@ a {
 }
 
 
+
 .spanHeading {
    height: 19px;
    font-size: 16px !important;
    font-weight: 700 !important;
 }
+
 
 
 .phoneNumberContainer>a {
@@ -203,11 +225,13 @@ a {
 }
 
 
+
 .emailspan {
    height: 19px;
    font-size: 16px;
    color: rgba(0, 124, 238, 1);
 }
+
 
 
 .phoneSpan {
@@ -227,6 +251,7 @@ a {
 }
 
 
+
 .contactBook {
    display: flex;
    flex-direction: column;
@@ -239,6 +264,7 @@ a {
 }
 
 
+
 .contactsOverview {
    display: flex;
    flex-direction: column;
@@ -248,6 +274,7 @@ a {
 }
 
 
+
 .groupLetter {
    width: 352px;
    height: 58px;
@@ -255,6 +282,7 @@ a {
    display: flex;
    align-items: center;
 }
+
 
 
 .groupLetter span {
@@ -267,6 +295,7 @@ a {
 }
 
 
+
 .breakingLineContainer {
    display: flex;
    align-items: center;
@@ -275,22 +304,24 @@ a {
 }
 
 
+
 .breakingLine {
    border-bottom: 1px solid rgba(209, 209, 209, 1);
    width: 352px;
 }
 
 
+
 .contact {
    display: flex;
    flex-direction: row;
    align-items: center;
-
    width: -webkit-fill-available;
    padding: 15px 24px;
    gap: 35px;
    border-radius: 10px;
 }
+
 
 
 .contact:not(.contactActive):hover {
@@ -299,11 +330,13 @@ a {
 }
 
 
+
 .contactActive {
    cursor: pointer;
    background-color: rgba(42, 54, 71, 1) !important;
    color: rgba(255, 255, 255, 1) !important;
 }
+
 
 
 .monogrammicon {
@@ -318,10 +351,12 @@ a {
 }
 
 
+
 .nameAndMail {
    display: flex;
    flex-direction: column;
 }
+
 
 
 .nameOverviev {
@@ -331,11 +366,13 @@ a {
 }
 
 
+
 .mailOverviewContainer {
    white-space: nowrap;
    overflow: hidden;
    max-width: 224px;
 }
+
 
 
 .mailOverview {
@@ -347,6 +384,7 @@ a {
    overflow: hidden;
    text-overflow: ellipsis;
 }
+
 
 
 .scrollWrapper {

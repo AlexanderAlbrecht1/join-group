@@ -349,7 +349,6 @@ async function deleteContactFromTask(tasks, id) {
         if (tasks[i].assignedTo == null) continue;
         for (let x = 0; x < tasks[i].assignedTo.length; x++) {
             if (tasks[i].assignedTo[x] == Number(`${id}`)) {
-                console.log(i, x);
                 tasks[i].assignedTo.splice(x, 1);
             }
         }

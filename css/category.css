@@ -8,9 +8,12 @@
     align-items: center;
     justify-content: space-between;
 }
+
+
 .selectBox:focus-within {
     border: 1px solid #29abe2;
 }
+
 
 .selectBox select {
     width: 100%;
@@ -24,15 +27,13 @@
 
  
 .selectBox::after {
-    content: url("/assets/img/desktop/assign_to_arrow.svg"); /* Downward arrow */
+    content: url("/assets/img/desktop/assign_to_arrow.svg");
     color: #2a3647;
     position: absolute;
     right: 20px;
 }
 
-/*
-    Global Setting
-*/
+
 select,
 input {
     outline:none;

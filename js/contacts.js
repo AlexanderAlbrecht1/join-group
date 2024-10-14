@@ -182,7 +182,7 @@ async function deleteContact(id) {
 
 
 /**
- * det´lete contact, safe to firebase, relode contactbook
+ * delete contact, safe to firebase, relode contactbook
  * 
  */
 async function deleteSafeReload(index, id, tasks) {

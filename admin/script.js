@@ -18,8 +18,8 @@ function saveUser() {
     saveData("user",ul); //Create Userlist
 }
 
-function saveContacts() {
-    let contacts = [
+async function saveContacts() {
+        let contacts = [
         { color : "rgb(255,122,0)" , id: 1, name: "Zoe", lastname: "Zimmerman", email: "zoe.zimmerman@gmail.com", phone: "+4916167986534" },
         { color : "rgb(255,94,179)" , id: 2, name: "Anna", lastname: "Anderson", email: "anna.anderson@example.com", phone: "+4914367986534" },
         { color : "rgb(110,82,255)" , id: 3, name: "Zora", lastname: "Baker", email: "zora.baker@example.com", phone: "+4915867986534" },
@@ -33,7 +33,8 @@ function saveContacts() {
         { color : "rgb(255,199,1)" , id: 11, name: "Julia", lastname: "Jones", email: "julia.jones@example.com", phone: "+4914367986534" },
     ];
     
-    saveData("Contacts",contacts); //Create Userlist
+    await saveData("Contacts",contacts); //Create Userlist
+    setHighestId("contact", 12);
 }
 
 function saveTasks() {

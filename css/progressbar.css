@@ -3,7 +3,6 @@
     flex-direction: row;   
     align-items:center; 
     height: 16px;
-
     font-family: Inter;
     font-size: 12px;
     font-weight: 400;
@@ -11,6 +10,7 @@
     text-align: left;
     gap:10px;    
 }
+
 
 .progress-bar {
     position: relative;
@@ -35,4 +35,3 @@
     height: 8px;
     border-radius: 16px;
 }
-

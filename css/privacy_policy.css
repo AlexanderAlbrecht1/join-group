@@ -3,6 +3,7 @@ body {
     padding: 0;
 }
 
+
 .privacy-policy-content {
     margin-top: 96px;
     margin-left: 232px;
@@ -12,18 +13,19 @@ body {
     width: 100%;
 }
 
+
 .privacy-headline {
     margin: 0;
     font-size: 61px;
     font-weight: 700;
 }
 
+
 .privacy-subheadline {
     font-size: 27px;
     font-weight: 700;
 }
 
-/* arrow back to summary */
 
 .wrapHead {
     width: 100%;
@@ -32,6 +34,7 @@ body {
     align-items: center;
     margin-bottom: 64px;
 }
+
 
 .arrowBack {
     width: 37px;
@@ -42,9 +45,11 @@ body {
     background-repeat: no-repeat;
 }
 
+
 .arrowBack:hover {
     cursor: pointer;
 }
+
 
 @media (max-width: 1100px) {
     .privacy-policy-content {
@@ -52,10 +57,12 @@ body {
     }
 }
 
+
 @media (max-width: 580px) {
     .privacy-headline {
         font-size: 48px;
     }
+    
 
     .privacy-policy-content {
         padding-left: 8px !important;

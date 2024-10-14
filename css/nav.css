@@ -5,6 +5,7 @@ body {
    box-sizing: border-box;
 }
 
+
 body {
    display: flex;
    flex-direction: row;
@@ -13,17 +14,13 @@ body {
    position:relative;
 }
 
+
 .main-container {
    display: flex;
-   /* justify-content: center;*/
    width: 100%;
    margin-top: 100px;
    margin-left: 232px;
 }
-
-/*
-******header******
-*/
 
 
 header {
@@ -31,14 +28,13 @@ header {
    position: fixed;
    top: 0;
    width: 100%;
-   /* max-width: 1440px; */
    height: 96px;
    justify-content: space-between;
    align-items: center;
    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
    background-color: rgba(255, 255, 255, 1);
-   ;
 }
+
 
 .max-width {
    display: flex;
@@ -48,14 +44,17 @@ header {
    max-width: 1440px;
 }
 
+
 header span {
    font-size: 20px;
    font-weight: 400;
 }
 
+
 .headerHelpUser {
    padding-right: 40px;
 }
+
 
 .headerHelpUser,
 .headerHelpUser * {
@@ -65,20 +64,24 @@ header span {
    gap: 16px;
 }
 
+
 .helparea {
    width: 32px;
    height: 32px;
 }
+
 
 .helparea a {
    text-decoration: none;
    cursor: pointer;
 }
 
+
 .helparea img:hover {
    width: 32px;
    height: 32px;
 }
+
 
 .userMonogramicon {
    min-width: 42px;
@@ -91,6 +94,7 @@ header span {
    color: rgba(41, 171, 226, 1);
 }
 
+
 .userMonogramicon:hover {
    cursor: pointer;
    border: 3px solid rgba(42, 54, 71, 1);
@@ -98,14 +102,17 @@ header span {
    box-shadow: rgba(226,230,236, 1) 0px 8px 24px;
 }
 
+
 .userMonogramicon>span {
    padding: 0 !important;
 }
+
 
 .popUpUser-relative {
    max-width: 1440px;
    display: flex;
 }
+
 
 .popUpUser {
    display: none;
@@ -125,6 +132,7 @@ header span {
    justify-content: space-around;
 }
 
+
 .linkBox {
    width: 130px;
    height: 46px;
@@ -134,26 +142,23 @@ header span {
    justify-content: flex-start;
    align-items: center;
    border-radius: 20px 0 20px 20px;
-   
-
 }
+
 
 .linkBox>a {
    color: rgba(205, 205, 205, 1) !important;
 }
 
+
 .dFlex {
    display: flex;
 }
+
 
 .linkBox:hover {
    background-color: #2A3D59;
    cursor: pointer;
 }
-
-/*
- *******Navbar - left side******
- */
 
 
 nav {
@@ -171,8 +176,8 @@ nav {
    padding: 64px 0 64px 0;
    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
    z-index: 3;
-
 }
+
 
 .mainLinks {
    display: flex;
@@ -182,6 +187,7 @@ nav {
    width: 100%;
    align-items: center;
 }
+
 
 .mainLinks a {
    height: 46px;
@@ -196,13 +202,16 @@ nav {
    border-radius: 8px;
 }
 
+
 .mainLinks img {
    padding-left: 56px;
 }
 
+
 .mainLinks a:hover {
    background-color: #2A3D59;
 }
+
 
 .adviceLinks a:hover {
    color: #29ABE2;
@@ -219,6 +228,7 @@ nav {
    gap: 8px;
 }
 
+
 .adviceLinks a {
    color: rgba(168, 168, 168, 1);
    font-size: 16px;
@@ -230,6 +240,7 @@ nav {
    justify-content: flex-start;
 }
 
+
 .pd-16 {
    padding-left: 16px;
 }
@@ -239,6 +250,8 @@ nav {
    header span {
       display: none;
    }
+
+
    nav {
       flex-direction: row;
       width: 100%;
@@ -248,9 +261,12 @@ nav {
       padding: 2px;
       height: 80px;
    }
+
+
    nav>img {
       display: none;
    }
+
 
    .mainLinks {
       flex-direction: row;
@@ -259,29 +275,33 @@ nav {
       width: 100%;
    }
 
+
    .mainLinks a {
       flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 76px;
       gap: 4px;
-      }
+   }
+
 
    .mainLinks>a>img {
       padding: 0;
    }
 
+ 
    .adviceLinks {
       display: none;
    }
-
 }
+
 
 @media (max-width: 330px ) {
    .mainLinks a {
       font-size: 14px;
    }
 }
+
 
 @media (max-height: 900px ) {
    .adviceLinks {

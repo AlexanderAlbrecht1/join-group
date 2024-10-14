@@ -1,4 +1,3 @@
-
 @media screen and (max-height:1050px) {
     .logo-position {
         transform:none;
@@ -6,8 +5,7 @@
         height: 83px; /* calc(334px / 4); */
         left: 20px;
         top: 20px;
-    }
-    
+    }    
 }
 
 @media (max-width: 450px) {
@@ -20,6 +18,8 @@
     .login-headline {
         margin-left: -32px;   
     }
+
+
     .login-headline>span {
         font-size: 47px;
         font-weight: 700;

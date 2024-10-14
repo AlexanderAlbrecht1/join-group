@@ -28,7 +28,6 @@ body {
 .logo-container {
     margin:0;
     height: 100vh;
-    /* width: 100vw; */
     box-sizing: border-box;
 }
 
@@ -68,7 +67,6 @@ body {
     box-sizing: border-box;
     width: 652px;
     min-height: 493px;
-    /* max-width: calc(100% - 32px);*/ /* Siehe Handy ansicht 32px? */
     padding: 48px min(115px,calc((100% - 280px) / 2));
     gap: 32px;
     border-radius: 30px;
@@ -84,7 +82,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding: 48px 115px 48px 115px; */
     gap: 16px;
     border-radius: 30px;
     opacity: 0px;
@@ -151,7 +148,6 @@ body {
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-
 }
 
 
@@ -172,7 +168,7 @@ body {
     justify-content: flex-end;
     align-items: flex-start;
     height: 80px;
-    width: 100%; /* Bringt vielleicht probleme */
+    width: 100%; 
     padding-top: 50px;
     padding-right: min(80px, max(32px,calc((100% - 300px) / 2)));
 }
@@ -184,19 +180,15 @@ body {
     gap: 32px;
     font-size: 20px;
     line-height: 24px;
-    justify-content: space-between;
-    
-    
+    justify-content: space-between;    
 }
 
 
 .login-master>div:nth-child(2) {
     display: flex;
-    /* flex:1; */
     justify-content: center;
     align-items: center;
     width: 100%;
-    /* height: 100%; */
 }
 
 

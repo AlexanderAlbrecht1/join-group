@@ -178,6 +178,13 @@ nav {
    z-index: 3;
 }
 
+nav>img:hover {
+   cursor: pointer;
+}
+
+header>div>img:hover {
+   cursor: pointer;
+}
 
 .mainLinks {
    display: flex;

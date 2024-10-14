@@ -3,7 +3,6 @@
  * is executed when the page loads, checks whether and which user is logged in, generates the user monogram, the welcome text and updates the dashboard
  * 
  */
-
 function init() {
    if (isLogged()) {
       logedUserMonogram();
@@ -14,12 +13,12 @@ function init() {
    }
 }
 
+ 
 /**
  * 
  * checks which user is logged in and generates the personal greeting
  * 
  */
-
 function greetingUser() {
    salutation();
    let data= JSON.parse(sessionStorage.getItem(PROJECT));  
@@ -32,6 +31,7 @@ function greetingUser() {
    }
 }
 
+
 /**
  * 
  * generates different greetings depending on the time of day
@@ -41,6 +41,7 @@ function salutation() {
    let hello = getGreeting();
    document.getElementById('greetingSalutation').innerHTML = hello;
 }
+
 
 /**
  * 
@@ -62,78 +63,78 @@ async function updateDashboard() {
    }
 }
 
+
 /**
  * 
  * creates the ToDo tasks counter value HTML
  * 
  */
-
 async function createToDoCount() {
    const todoCount = await countTasksByStatus('to-do');
    document.getElementById('todo-count').innerText = todoCount;
 }
+
 
 /**
  * 
  * creates the Done tasks counter value HTML
  * 
  */
-
 async function createDoneCount() {
    const doneCount = await countTasksByStatus('done');
    document.getElementById('done-count').innerText = doneCount;
 }
+
 
 /**
  * 
  * creates the urgent tasks counter value HTML
  * 
  */
-
 async function createUrgentCount() {
    const urgentCount = await countTasksByPrio('urgent');
    document.getElementById('urgent-count').innerText = urgentCount;
 }
+
 
 /**
  * 
  * creates the on progress tasks counter value HTML
  * 
  */
-
 async function createInProgressCount() {
    const inProgressCount = await countTasksByStatus('in-progress');
    document.getElementById('in-progress-count').innerText = inProgressCount;
 }
+
 
 /**
  * 
  * creates the awaiting feedback tasks counter value HTML
  * 
  */
-
 async function createAwaitingFeedbackCount() {
    const awaitingFeedbackCount = await countTasksByStatus('await-feedback');
    document.getElementById('awaiting-feedback-count').innerText = awaitingFeedbackCount;
 }
+
 
 /**
  * 
  * creates the total number of tasks counter value HTML
  * 
  */
-
 async function createTotalCount() {
    const totalCount = await countAllTasks();
    document.getElementById('total-count').innerText = totalCount;
 }
+
 
 /**
  * 
  * creates the next deadline value HTML
  * 
  */
-
 async function createNextDeadline() {
    const nextDeadline = await findNextDeadline();
    const deadlineElement = document.getElementById('deadline'); 
@@ -156,7 +157,6 @@ function forwardingToBoard() {
  * @param {string} status 
  * @returns amount of tasks per status 
  */
-
 async function countTasksByStatus(status) {
    const tasks = await loadData('taskstorage');
    if (!tasks) {
@@ -166,6 +166,7 @@ async function countTasksByStatus(status) {
    return taskArray.filter((task) => task && task.status === status).length;
 }
 
+
 /**
  * 
  * filters tasks by priority status and returns the amount per status
@@ -173,7 +174,6 @@ async function countTasksByStatus(status) {
  * @param {string} prio 
  * @returns amount of tasks per status
  */
-
 async function countTasksByPrio(prio) {
    const tasks = await loadData('taskstorage');
    if (!tasks) {
@@ -183,13 +183,13 @@ async function countTasksByPrio(prio) {
    return taskArray.filter((task) => task && task.prio === prio).length;
 }
 
+
 /**
  * 
  * count all tasks in kanbanbord
  * 
  * @returns number of tasks
  */
-
 async function countAllTasks() {
    const tasks = await loadData('taskstorage');
    if (!tasks || Object.keys(tasks).length === 0) {
@@ -199,13 +199,13 @@ async function countAllTasks() {
    return taskArray.length;
 }
 
+
 /**
  * 
  * Finds and returns the next upcoming task deadline or null
  *
  * @returns next task deadline or null
  */
-
 async function findNextDeadline() {
    const tasks = await loadObjectData('taskstorage');
    if (!tasks) return null;
@@ -218,6 +218,7 @@ async function findNextDeadline() {
    return formatDueDate(upcomingTask);
 }
 
+
 /**
  * 
  * Checks if a task has a valid due date
@@ -226,10 +227,10 @@ async function findNextDeadline() {
  * @param {string|Date} task.dueDate - The due date of the task
  * @returns {boolean} - Returns true if the task and its due date are valid, otherwise false
  */
-
 function hasValidDueDate(task) {
    return task && task.dueDate;
 }
+
 
 /**
  * Converts the task's due date to a Date object.
@@ -238,13 +239,13 @@ function hasValidDueDate(task) {
  * @param {string|Date} task.dueDate - The due date of the task, which may be a string or a Date object.
  * @returns {Object} - Returns a new task object with the due date as a Date object.
  */
-
 function convertDueDate(task) {
    return {
       ...task,
       dueDate: new Date(task.dueDate),
    };
 }
+
 
 /**
  * Formats the task's due date as a localized string.
@@ -262,7 +263,6 @@ function formatDueDate(task) {
         })
       : null;
 }
-
 
 
 /**
@@ -285,6 +285,7 @@ function mustShowMobileGreeting() {
    return firstlogin && width<=450;
 
 }
+
 
 /**
  * 

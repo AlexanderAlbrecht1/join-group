@@ -69,6 +69,15 @@ function clearTaskInputs() {
     setMinDate(card.querySelector("input[type=date]"));
 }
 
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Displays "status"
+ * 
+ * @param {string} status  - id of column
+ */
 function setStatus(status="to-do") {
     let card=document.getElementById("add-task-form");
     card.querySelector('input[name="status"]').value=status;

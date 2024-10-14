@@ -294,51 +294,43 @@ function createEditContactDialogMobileHTML(array) {
  */
 function warningHTML(array) {
    return /*html*/ `
-        
-        <div class="editContactLogoContainer" onclick="dontClose(event)">
-
-<div>
-   <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
-   <div class="flexColumn">
-      <h1 class="warningHeadline">Warning!</h1>
-      <div class="vector5EditContact"></div>
-   </div>
-   <div class="contactLogo"></div>
-</div>
-</div>
-
-<div class="addContactInputContainer">
-<div class="detailMonogramContainer">
-      <span class="detailMonogramSpan" style="background-color: ${array.backgroundColor}">${array.initial1}${array.initial2}</span>
-</div>
-
-<div class="addContactInputContainer2">
-  <div class="close" onclick="closeContactCreation()">
-      <img src="/assets/img/desktop/close.svg" alt="">
-  </div>
-
-   <div>
-      <h2>Attention! <br><br> 
-      If you delete yourself, your account will be deleted an you will be logged out! <br><br>
-      Do you realy want to go on?
-   </h2>
-   </div>
-
-  <div class="editContactbuttons ">
-      <div class="deleteAnywayButton" onclick="confirmDelete(${array.id})">
-          <span>Delete anyway!</span>
+   <div class="editContactLogoContainer" onclick="dontClose(event)">
+      <div>
+         <img class="contactLogo" src="/assets/img/desktop/join-logo_navbar.svg" alt="">
+      <div class="flexColumn">
+         <h1 class="warningHeadline">Warning!</h1>
+         <div class="vector5EditContact"></div>
       </div>
-
-      <button class="safeEditContactButton" onclick="closeMobileDialogBackground()">
-          <span>ABORT</span>
-          <div class="checkSVGContainer">
-          </div>
-      </button>
-  </div>
-</div>
-</div>
-</div>
-
+        <div class="contactLogo"></div>
+      </div>
+   </div>
+   <div class="addContactInputContainer">
+      <div class="detailMonogramContainer">
+         <span class="detailMonogramSpan" style="background-color: ${array.backgroundColor}">${array.initial1}${array.initial2}</span>
+      </div>
+         <div class="addContactInputContainer2">
+            <div class="close" onclick="closeContactCreation()">
+               <img src="/assets/img/desktop/close.svg" alt="">
+            </div>
+            <div>
+               <h2>Attention! <br><br>
+               If you delete yourself, your account will be deleted an you will be logged out! <br><br>
+               Do you realy want to go on?
+               </h2>
+            </div>
+            <div class="editContactbuttons ">
+               <div class="deleteAnywayButton" onclick="confirmDelete(${array.id})">
+                  <span>Delete anyway!</span>
+               </div>
+               <button class="safeEditContactButton" onclick="closeMobileDialogBackground()">
+                  <span>ABORT</span>
+                  <div class="checkSVGContainer">
+                  </div>
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
    `
 }
 
@@ -351,18 +343,18 @@ function warningHTML(array) {
  */
 function getHTMLContactSelection(contact) {
    let name = contact.name + ' ' + contact.lastname;
-   return `
+   return /*html*/`
    <div class="contact-checkbox" onclick="toggleCheckbox(this)">
-       <div>
-           <div class="monogrammicon" style="background-color: ${contact.color}">
-               ${getMonogram(name)}
-           </div>
-           ${name}
-       </div>
-       <label class="custom-checkbox">
-           <input type="checkbox" name="assign" value="${contact.id}" />
-           <span class="checkbox-image"></span>
-       </label>
+      <div>
+         <div class="monogrammicon" style="background-color: ${contact.color}"> 
+         ${getMonogram(name)}
+         </div>
+            ${name}
+      </div>
+      <label class="custom-checkbox">
+         <input type="checkbox" name="assign" value="${contact.id}" />
+         <span class="checkbox-image"></span>
+      </label>
    </div>
 `;
 }

@@ -188,15 +188,15 @@ function addContactHTML() {
                <img src="/assets/img/desktop/close.svg" alt="">
             </div>
             <form class="form-input" onsubmit="addNewContact();return false;">
-               <div id="input-field-container" class="input-container">
+               <div id="input-field-container" class="input-container invalid">
                   <input id="name" type="text" required placeholder="Name">
                   <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
                </div>
-               <div id="input-field-container" class="input-container">
+               <div id="input-field-container" class="input-container invalid">
                   <input id="email" type="email" required placeholder="Email">
                   <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
                </div>
-               <div id="input-field-container" class="input-container">
+               <div id="input-field-container" class="input-container invalid">
                   <input id="phone" type="tel" pattern="[0-9]*" maxlength="20" placeholder="Phone">
                   <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
                </div>
@@ -249,15 +249,15 @@ function createEditContactDialogMobileHTML(array) {
                <img src="/assets/img/desktop/close.svg" alt="">
             </div>
             <form class="form-input" onsubmit="saveEditedContact(${array.id});return false;">
-               <div id="input-field-container" class="input-container">
+               <div id="input-field-container" class="input-container invalid">
                   <input id="name" type="text" required placeholder="Name">
                   <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
                </div>
-               <div id="input-field-container" class="input-container">
+               <div id="input-field-container" class="input-container invalid">
                   <input id="email" type="email" required placeholder="Email">
                   <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
                </div>
-               <div id="input-field-container" class="input-container">
+               <div id="input-field-container" class="input-container invalid">
                   <input id="phone" type="tel" pattern="[0-9]*" maxlength="20" required placeholder="Phone">
                   <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
                </div>

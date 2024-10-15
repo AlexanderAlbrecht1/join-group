@@ -1,6 +1,7 @@
 let subtasks=[]
 let currentEditIndex=null;
 
+
 /**
  * 
  * PRIVATE
@@ -45,19 +46,14 @@ function toggleSubtaskIcon(event) {
     const subtaskInput = getElement(event.target,"input-subtask");
     const checkIcon    = getElement(event.target,"subtask-icon");
     const clearIcon    = getElement(event.target,"add-subtask-clear");
-
     const src="./assets/img/desktop/add_subtask.svg";
- 
     if (subtaskInput.value == "") {
-       checkIcon.src = src; // Ersetze das Icon mit einem anderen Bild
+       checkIcon.src = src; 
        clearIcon.classList.add("d-none");
-       // clearIcon.classList.add("opacity");
        clearIcon.nextElementSibling.classList.add("d-none");
-
     } else {
        checkIcon.src = "./assets/img/desktop/add-subtask-check.svg";
-       clearIcon.classList.remove("d-none"); // Setze das ursprüngliche Icon zurück
-       // clearIcon.classList.remove("opacity");
+       clearIcon.classList.remove("d-none"); 
        clearIcon.nextElementSibling.classList.remove("d-none");
     }
 }
@@ -88,11 +84,7 @@ function addSubtasks(event) {
     let subtaskInput = getElement(event.target,"input-subtask");
     let subtaskList = getElement(event.target,"subtask-list");
     let subtaskIcon = getElement(event.target,"subtask-icon");
-/*
-    let subtaskInput = getElement(event.currentTarget,"input-subtask");
-    let subtaskList = getElement(event.currentTarget,"subtask-list");
-    let subtaskIcon = getElement(event.currentTarget,"subtask-icon");
-*/    
+
     const src="add_subtask.svg";   
     if (subtaskIcon.src.indexOf(src) != -1) {
        subtaskInput.focus();      
@@ -209,10 +201,8 @@ function displaySubtaskInput(element) {
     let container  = element.closest(".subtask-container").querySelector(".edit-input-con");
     let target     = element.closest(".list-item");
     let input      = container.querySelector("INPUT");
-
     container.classList.remove("d-none");
     container.style.marginTop=0;
-
     let rectTarget    = target.getBoundingClientRect();
     let rectContainer = container.getBoundingClientRect(); // Hier Ok
     container.style.marginTop=`${(rectTarget.top - rectContainer.top)}px`;
@@ -245,9 +235,7 @@ function editSubtask(event,index) {
  */
 function renderSubtasks(subtaskList) {
     if (subtasks== null) return;
-
     subtaskList.innerHTML = "";
- 
     for (let i = 0; i < subtasks.length; i++) {
         subtaskList.innerHTML +=/*html*/ `
             <div class="list-item relative">

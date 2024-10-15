@@ -7,6 +7,7 @@ function openUserMenu() {
     document.getElementById('popUpUser').classList.toggle('dFlex');
 }
 
+
 /**
  * 
  * logs the user out by emptying the session storage and local storage and then checks whether the user is logged in
@@ -18,6 +19,7 @@ function logOut() {
     isLogged();
 }
 
+
 /**
  * 
  * creates the user monogram in the header by checking which user is logged in
@@ -27,6 +29,7 @@ function initSessionMonogram() {
     isLogged();
     logedUserMonogram();
 }
+
 
 /**
  *

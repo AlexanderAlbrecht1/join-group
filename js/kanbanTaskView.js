@@ -154,7 +154,7 @@ async function openTaskView(json) {
  * 
  * PUBLIC
  * 
- * Opens the Task View
+ * Opens the Task View Card
  * 
  * @param {*} event 
  * @returns 
@@ -172,6 +172,12 @@ async function openTask(event) {
 }
 
 
+/**
+ * 
+ * PUBLIC
+ * 
+ * Close Task Edit Card
+ */
 async function closeTaskEdit() {
     closeTaskView();
     await new Promise(e=>setTimeout(e,600));    
@@ -179,15 +185,42 @@ async function closeTaskEdit() {
     
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Close Task View Card
+ */
 function closeTaskView() {
     document.getElementById("task-view").classList.remove("go");
 }
 
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * make selection visible or not
+ * 
+ * @param {*} event 
+ */
 function toggleActiveKanbanTask(event) {
     event.currentTarget.classList.toggle("dark-selection");
 }
 
 
+/**
+ * 
+ * PUBLIC
+ * 
+ * toggles the formatation for the Subtask checkbbox
+ * 
+ * @param {element} element - elemenmt of the Subtask to toggle the checkbox
+ * @param {*} state 
+ * @returns true if checked, false if not checked
+ * 
+ */
 function toggleSubtaskState(element,state=null) {
     if (state === null) {
         return element.classList.toggle("checked");
@@ -199,9 +232,14 @@ function toggleSubtaskState(element,state=null) {
 
 /**
  * 
- * @param {*} event 
- * @param {*} id 
- * @param {*} subId 
+ * PUBLIC
+ * 
+ * Toggles the State of the Subtask done or not
+ * Saves the changed values
+ * 
+ * @param {event} event - The event of the subtask triggered 
+ * @param {integer} id - id of the task
+ * @param {integer} subId - subid the index of the subtask
  */
 async function toggleSubtaskStateEvent(event,id,subId) {
     let state = toggleSubtaskState(event.currentTarget);
@@ -218,6 +256,10 @@ async function toggleSubtaskStateEvent(event,id,subId) {
 
 /**
  * 
+ * PUBLIC
+ * 
+ * Deletes the Task and close the window
+ * 
  * @param {*} id 
  */
 async function deleteTask(id) {
@@ -229,4 +271,3 @@ async function deleteTask(id) {
     addContainerData(tasks,status);
     closeTaskView();
 }
-

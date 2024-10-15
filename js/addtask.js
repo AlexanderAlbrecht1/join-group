@@ -74,7 +74,7 @@ function clearTaskInputs() {
    });
    document.getElementById("category").selectedIndex = 0;
    subtasks = [];
-   document.getElementById("subtask-list").innerHTML = "";
+   document.getElementById("subtasks").value = "";
    document.getElementById("addtask-monogramlist").innerHTML = "";
    document.getElementById("subtask-list").innerHTML = "";
 }
@@ -288,7 +288,7 @@ function noSubmit(event,key) {
  * 
  * PUBLIC EVENT
  * 
- * Deletes the preventation that we submit, when we loose the focus auf any field
+ * Deletes the preventation that we submit, when we loose the focus f any field
  * it was set because ENTER Key, see noSuBmit, was hit at entree of add Submit 
  * 
  */

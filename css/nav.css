@@ -257,6 +257,9 @@ header>div>img:hover {
    header span {
       display: none;
    }
+   .helparea {
+      display: none;
+   }
 
 
    nav {

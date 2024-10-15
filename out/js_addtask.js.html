@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: js/firebase.js</title>
+    <title>JSDoc: Source: js/addtask.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: js/firebase.js</h1>
+    <h1 class="page-title">Source: js/addtask.js</h1>
 
     
 
@@ -26,20 +26,122 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * PRIVATE 
+            <pre class="prettyprint source linenums"><code>let doNotSubmit= false;
+let tasks= [];
+
+
+/**
  * 
- * Returns the full path of the table in the firebase
+ * PRIVATE
  * 
- * @param {object} table 
- * @returns - full path of the table in the firebase
+ * Prepares effective a new Dataset for the new Task
+ * 
+ * @returns prepared Dataset
  */
-function getPath(table,id=null) {
-    let url='https://join-group-10487-default-rtdb.europe-west1.firebasedatabase.app/';
-    let project='join-group/';
-    let where= id==null?"":`?orderBy="id"&amp;equalTo=${id}`;
-    let path=url+project+table+".json"+where;// +`?orderBy="id"&amp;id=10`;
-    return path;
+function prepareDataset() {
+   return {
+      id: getNewId(tasks), 
+      title: document.getElementById("title").value,
+      description: document.getElementById("description").value,
+      assignedTo: Array.from(
+         document.querySelectorAll('input[name="assign"]:checked')
+      ).map((checkbox) => +checkbox.value),
+      dueDate: document.getElementById("due-date").value,
+      prio: document.querySelector('input[name="prio"]:checked').value,
+      category: document.getElementById("category").value,
+      status: "to-do",
+      subtasks: subtasks
+   }
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Adds a new Task to the database
+ * - checks the input fields before and returns before end if something wrong
+ * - clears the Inputfields
+ * 
+ * @returns -nothing
+ */
+async function addNewTask() {
+   if (doNotSubmit) return;
+   if (!showRequiredText()) return;   
+   tasks = await loadData("taskstorage");
+   if (tasks === null) tasks = [];
+   tasks.push(prepareDataset());
+   await saveData("taskstorage", tasks);
+   clearTaskInputs();
+   openKanbanboard();
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Clears all Input Fields AddTask
+ *  
+ * @returns - nothing
+ */
+function clearTaskInputs() {
+   document.getElementById("title").value = "";
+   document.getElementById("description").value = "";
+   document
+      .querySelectorAll('input[name="assign"]')
+      .forEach((checkbox) => (checkbox.checked = false));
+   document.getElementById("due-date").value = "";
+   document.getElementById('addtask-monogramlist').innerHTML="";
+   document.querySelectorAll('input[name="prio"]').forEach((radio) => {
+      if (radio.id == "medium") {
+         radio.checked = true;
+      } else {
+         radio.checked = false;
+      }
+   });
+   document.getElementById("category").selectedIndex = 0;
+   subtasks = [];
+   document.getElementById("subtasks").value = "";
+   document.getElementById("addtask-monogramlist").innerHTML = "";
+   document.getElementById("subtask-list").innerHTML = "";
+}
+
+
+/**
+ * 
+ * Display Checkboxes
+ */
+let expanded = false;
+function showCheckboxes() {
+   let checkboxes = document.getElementById("checkboxes");
+   if (!expanded) {
+      checkboxes.style.display = "block";
+      expanded = true;
+   } else {
+      checkboxes.style.display = "none";
+      expanded = false;
+   }
+}
+
+
+/**
+ * 
+ * First Initialisation
+ * - Checks Login
+ * - Load Contactlist
+ * - Displays Monogram at Header
+ * - Inits AssignSelector/Contacts Events
+ */
+async function init() {
+   if (isLogged()) {
+      contacts=await loadSortedContactList();
+      logedUserMonogram();
+      date = new Date().toISOString().split('T')[0];
+      document.getElementById('due-date').setAttribute('min', date);
+      initAssignSelector();
+
+   }
 }
 
 
@@ -47,20 +149,92 @@ function getPath(table,id=null) {
  * 
  * PRIVATE
  * 
- * fetch action
+ * Renders The Subtask Edit and Display Section
  * 
- * @param {string} table   - name of table or key
- * @param {object} options - get / put / UFT-8
- * @returns {object} - answer with content of file
-*/
-async function fetchUrl(table,options,id=null) {
-    let url=getPath(table,id);
-    if (options != null) {
-        response = await fetch(url,options);
-    } else  {
-        response = await fetch(url);
-    }
-    return response;
+ * @param {array} subtaskList - List of all Subtasks of the Task
+ */
+function renderSubtasks(subtaskList) {
+   subtaskList.innerHTML = "";
+
+   for (let i = 0; i &lt; subtasks.length; i++) {
+      subtaskList.innerHTML += `
+      &lt;div id="subtask-con" class="list-item">
+           &lt;li ondblclick="editSubtask(${i})">
+               &lt;input type="text" value="${subtasks[i].name}">
+           &lt;/li>
+           &lt;div class="subtask-icon">
+               &lt;img onclick="editSubtask(${i})" src="./assets/img/desktop/subtask-edit.svg" alt="">
+               &lt;img onclick="deleteSubtask(${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
+           &lt;/div>
+       &lt;/div>`;
+   }
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Delete Subtask from Array
+ */
+function deleteSubtask(i) {
+   let subtaskList = document.getElementById("subtask-list");
+   let subtaskEditInput = document.getElementById("subtask-edit-input");
+   let subtaskEditCon = document.getElementById("edit-input-con");
+
+   subtasks.splice(i, 1);
+   subtaskEditCon.classList.add("d-none");
+   renderSubtasks(subtaskList);
+   subtaskEditInput.value = "";
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Open the Subtask input areae area
+ */
+function editSubtask(index) {
+   let subtaskEditInput = document.getElementById("subtask-edit-input");
+   let subtaskEditCon = document.getElementById("edit-input-con");
+
+   subtaskEditCon.classList.remove("d-none");
+   subtaskEditInput.value = subtasks[index].name;
+   currentEditIndex = index;
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Save the Subtask we added to array
+ */
+function saveEditedSubtask() {
+   let subtaskEditInput = document.getElementById("subtask-edit-input");
+   let subtaskList = document.getElementById("subtask-list");
+   let subtaskEditCon = document.getElementById("edit-input-con");
+
+   if (currentEditIndex !== null &amp;&amp; subtaskEditInput.value !== "") {
+      subtasks[currentEditIndex].name = subtaskEditInput.value;
+      subtaskEditCon.classList.add("d-none");
+      renderSubtasks(subtaskList);
+      currentEditIndex = null;
+      subtaskEditInput.value = "";
+   }
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Open Kanbanboard after Moving an Msg
+ */
+async function openKanbanboard() {
+   await msgfly();
+   window.location = "./kanbanboard.html";
 }
 
 
@@ -68,25 +242,24 @@ async function fetchUrl(table,options,id=null) {
  * 
  * PRIVATE
  * 
- * fetch an url, translate to a json and give it back
+ * Displays an Error and Highlights teh fField red if something is wrong
+ * returns true if we have errors else false
  * 
- * @param {string} table   - name of table or key
- * @param {object} options - get / put / UFT-8
- * @returns - json array, false, if fails 
+ * @param {element} field  - input field for value can also be border 
+ * @param {element} msg    - the error message area when wrong input given
+ * @param {element} border - border to red field
+ * @returns -  true = worng input  or false all correct
  */
-async function getResponse(table,options,id=null) {
-    try {
-        response=await fetchUrl(table,options,id);
-        if (response.ok) { // 404 = page does not exist, 2XX = OK 
-            const data= response.json();
-            return data; // Bei Objekten, die möglicherweise nicht als Array vorliegen
-        } else {
-            throw new Error(`Response status: ${response.status}`);
-        }
-    } catch (error) {
-        console.error(error.message);
-        return false;
-    }
+function faultDisplay(field,msg,border) {
+   if (border == null) border=field;
+   if (field.value) {
+       border.style.border = "";
+       msg.classList.add("d-none"); 
+   } else {
+       border.style.border = "1px solid red";
+       msg.classList.remove("d-none");     
+   }
+   return !field.value
 }
 
 
@@ -94,232 +267,63 @@ async function getResponse(table,options,id=null) {
  * 
  * PUBLIC
  * 
- * Userinterface for fetching Data
+ * Prepares Fields for Error analysis
  * 
- * @returns {object} - JSON arrary of data
+ * @returns - true if there is an error
  */
-async function loadData(table,id=null) {
-    let options={
-        method: "GET",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    };
-    let data=await getResponse(table,options,id);
-    if (Array.isArray(data)) data = data.filter(element => element !== null);
+function showRequiredText() {
+   let field,msg;
+   let err=false;
 
-    return data;
+   field = document.getElementById("title");
+   msg = document.getElementById("title-span");
+   err   = faultDisplay(field,msg) || err;
+   field = document.getElementById("due-date");
+   msg = document.getElementById("due-date-span");
+   err   = faultDisplay(field,msg) || err;
+   field = document.getElementById("category");
+   border = document.getElementById("select-box");
+   msg = document.getElementById("category-span");
+   err   = faultDisplay(field,msg,border) || err;
+   return !err;
 }
 
 
 /**
  * 
- * PUBLIC
+ * PUBLIC EVENT 
  * 
- * Userinterface for fetching Data DELETE
+ * Prevent in forms that Form ist submitten when pressing Enter key
+ * Handels Subtask via Enter Key
  * 
- * Explanaition:
- *      we need to get the key from the Id, to delete by key
- *      It ist not possible to delete by a given Id 
- * 
- * We need first to get 
- * @returns {object} - JSON arrary of data
+ * @param {*} event - keydown event that triggers
+ * @param {*} key   - key to disable/action
  */
-async function deleteData(table,id=null) {
-    let json=await loadData(table,id);
-    table+="/"+Object.keys(json)[0];
-    let options={
-        method: "DELETE",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    };
-    return await getResponse(table,options);
-}
- 
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for saving Data overwrite
- * 
- * @param {string} table - table or key
- * @param {object} data  - json array
- * @returns {object} - false if failes, true if succes
- */
-async function saveData(table,data = {},id=null) {
-    let options=  {
-        method: "PUT",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        },
-        body: JSON.stringify(data)
-    };
-    return await getResponse(table,options,id);    
+function noSubmit(event,key) {
+   doNotSubmit=false
+   if (event.code == key &amp;&amp; event.target.tagName== "INPUT") {
+      console.log("noSubmit");
+      if (event.target.classList.contains("input-subtask")) {
+         addSubtasks(event);
+         doNotSubmit=true;
+      } 
+      event.preventDefault();
+   }
 }
 
 
 /**
  * 
- * PUBLIC
+ * PUBLIC EVENT
  * 
- * Returns the next available ID of a Table by iterating
- * 
- * @param {object} data JSON Arra width Data that contains id 
- * @returns - highest ID + 1
- */
-function getNewId(data) {
-    if (data.length == 0) return -1;
-    let max=0;
-    for (let i=0;i&lt;data.length;i++) {
-        if (data[i].id>max) max=+data[i].id;
-    }
-    return max+1;
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Returns the saved Highes Id of a database table
- * the higest id we store in a seperate File
- * 
- * @param {string} table - the name of the table the id we use from
- * @returns -  the saved Highes Id of a database table
- */
-async function getHighestId(table) {
-    let setupContact=await loadData(`tablesetup/${table}`);
-    if (setupContact == null) return 0;
-    return setupContact.lastId;
- }
- 
-
-/**
- * PUBLIC (admin) / PRIVATE
- * 
- * saves the new id in the setuptable
- * @param {string} table 
- * @param {integer} id 
- */
- async function setHighestId(table,id) {
-    let row={lastId:id};
-    await saveData(`tablesetup/${table}`,row);
- }
- 
-
-/**
- * 
- * PRIVATE
- * 
- * increments the Id of a table and gives back th highest id + 1
- * then we returns the ne id  
- * the higest id we store in a seperate File
- * 
- * @param {string} table - the name of the table the id we use from
- * @returns -  the saved Highes Id of a database table 
- */
-async function getIncrementedId(table) {
-    let id=await getHighestId(table)+1;
-    await setHighestId(table,id);
-    return id;
- }
- 
-
-/**
- *
- * PUBLIC
- * 
- * Load the Dataset of a Table by ID
- *   
- * @param {string} table - tablename of database
- * @param {integer} id - id in table
- */
-async function getDatasetById(table,id) {
-    let content=loadData(table+"/"+id);
-    return content;
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Saves the complete Table
- * 
- * @param {string} table  - tablename of database
- * @param {object} data  - Json Array Array of Datasets
- */
-async function saveObjectData(table,data) {
-    await saveData(table,arrayToObject(data));
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * @param {string} table  - table of database
- * @param {object} data  - Json Array Array of Datasets
- */
-async function saveObjectDataById(table,data) {
-    promises=[];
-    for (let d of data) {
-        promises.push(saveData(`${table}/${d.id}`,d));
-    }
-    await Promise.all(promises);
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * loads the whole table as object
- * 
- * @param {string} table  - table of database
- * @returns the whole data of a table in one Object
+ * Deletes the preventation that we submit, when we loose the focus f any field
+ * it was set because ENTER Key, see noSuBmit, was hit at entree of add Submit 
  * 
  */
-async function loadObjectData(table) {
-    return Object.values(await loadData(table));
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * Loads a Table Dataset from database
- * if id is give we get only one dataset
- * if not the whole table
- * 
- * @param {*} table - table of database
- * @param {*} id    - id of the dataset
- * @returns - object width data
- */
-async function loadObjectDataById(table,id=null) {
-    return Object.values(await loadData(table,id));
-} 
-
-
-/**
- * 
- * PRIVATE
- * 
- * @param {array} array removes unallowed data from array
- * 
- * @returns - cleaned array of objects
- */
-function arrayToObject(array) {  
-    return array.reduce((result, item) => {
-        if (item &amp;&amp; typeof item === 'object' &amp;&amp; item.id != null) {      
-            result[item.id] = item;
-        }
-        return result;  
-    }, {});
-}</code></pre>
+document.addEventListener("focusout",() => {
+   doNotSubmit=false;
+})
+</code></pre>
         </article>
     </section>
 

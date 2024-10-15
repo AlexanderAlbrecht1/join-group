@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: js/firebase.js</title>
+    <title>JSDoc: Source: js/subtask.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: js/firebase.js</h1>
+    <h1 class="page-title">Source: js/subtask.js</h1>
 
     
 
@@ -26,20 +26,132 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * PRIVATE 
+            <pre class="prettyprint source linenums"><code>let subtasks=[]
+let currentEditIndex=null;
+
+
+/**
  * 
- * Returns the full path of the table in the firebase
+ * PRIVATE
  * 
- * @param {object} table 
- * @returns - full path of the table in the firebase
+ * instead of using IDs we find out where we are and use classes
+ * 
+ * we can use subtasks on different places, wehn we have no unique id
+ * 
+ * this function is for handling thing easiely and reducing mistakes
+ * 
+ * @param {element} target - the element that triggered the event 
+ * @param {*} classname    - the classname
+ * @returns - the element we need like id
  */
-function getPath(table,id=null) {
-    let url='https://join-group-10487-default-rtdb.europe-west1.firebasedatabase.app/';
-    let project='join-group/';
-    let where= id==null?"":`?orderBy="id"&amp;equalTo=${id}`;
-    let path=url+project+table+".json"+where;// +`?orderBy="id"&amp;id=10`;
-    return path;
+function getElement(target,classname) {
+    switch(classname) {
+        case "subtask-edit-input":
+        case "edit-input-con":
+        case "subtask-list":
+        case "input-subtask":    // id subtasks
+        case "subtask-icon":
+        case "add-subtask-clear":
+            return target.closest(".subtask-container").querySelector(`.${classname}`);
+
+    }
+    return null;
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * TRIGGERS: when input is made in Subtask entry field
+ * 
+ * INTERNAL Call from: addSubtasks()
+ * 
+ * CHANGES: toggleSubtaskIcon() was toggleIcon()
+ * 
+ */
+function toggleSubtaskIcon(event) {
+    const subtaskInput = getElement(event.target,"input-subtask");
+    const checkIcon    = getElement(event.target,"subtask-icon");
+    const clearIcon    = getElement(event.target,"add-subtask-clear");
+    const src="./assets/img/desktop/add_subtask.svg";
+    if (subtaskInput.value == "") {
+       checkIcon.src = src; 
+       clearIcon.classList.add("d-none");
+       clearIcon.nextElementSibling.classList.add("d-none");
+    } else {
+       checkIcon.src = "./assets/img/desktop/add-subtask-check.svg";
+       clearIcon.classList.remove("d-none"); 
+       clearIcon.nextElementSibling.classList.remove("d-none");
+    }
+}
+ 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Clear the main input of subtask
+ * 
+ * @param {event} event - main input of subtask  
+ */ 
+function clearSubtaskInput(event) {
+    getElement(event.currentTarget,"input-subtask").value ="";
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Adding new Subtasks to the array
+ * 
+ * @param {event} event - event, that is triggered from Buttons  
+ */
+function addSubtasks(event) {
+    let subtaskInput = getElement(event.target,"input-subtask");
+    let subtaskList = getElement(event.target,"subtask-list");
+    let subtaskIcon = getElement(event.target,"subtask-icon");
+
+    const src="add_subtask.svg";   
+    if (subtaskIcon.src.indexOf(src) != -1) {
+       subtaskInput.focus();      
+    }
+ 
+    if (subtaskInput.value !== "") {
+       subtaskList.innerHTML = "";
+       if (subtasks==null) subtasks=[];
+       subtasks.push({ name: subtaskInput.value, done: false });
+       renderSubtasks(subtaskList);
+       subtaskInput.value = "";
+       toggleSubtaskIcon(event);
+    } 
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Delete a Subtask in the Card
+ * 
+ * USES a Global Variable: currentEditIndex 
+ * 
+ * @param {event} event - event that triggers
+ * @param {integer} i   - index of the array, if null use global currentEditIndex 
+ */
+function deleteSubtask(event,i) {
+    let [subtaskEditInput,subtaskList,subtaskEditCon] = getSubtaskElements(event.currentTarget);
+
+    if (i == null &amp;&amp; currentEditIndex != null) {
+        i=currentEditIndex;
+    }
+    if (i === null) return;
+
+    subtasks.splice(i, 1);
+    subtaskEditCon.classList.add("d-none");
+    renderSubtasks(subtaskList);
+    subtaskEditInput.value = "";
 }
 
 
@@ -47,279 +159,128 @@ function getPath(table,id=null) {
  * 
  * PRIVATE
  * 
- * fetch action
+ * Returns a group of targets elements
  * 
- * @param {string} table   - name of table or key
- * @param {object} options - get / put / UFT-8
- * @returns {object} - answer with content of file
-*/
-async function fetchUrl(table,options,id=null) {
-    let url=getPath(table,id);
-    if (options != null) {
-        response = await fetch(url,options);
-    } else  {
-        response = await fetch(url);
-    }
-    return response;
+ * @param {element} target - element of the triggert event 
+ * @returns - Subtask- Information
+ * - Elements of Classes:
+ * - "subtask-edit-input"
+ * - "subtask-list"
+ * - "edit-input-con"
+ * 
+ */
+function getSubtaskElements(target) {
+    let subtaskEditInput = getElement(target,"subtask-edit-input");
+    let subtaskList = getElement(target,"subtask-list");
+    let subtaskEditCon = getElement(target,"edit-input-con");
+
+    return [subtaskEditInput,subtaskList,subtaskEditCon]
 }
 
 
 /**
  * 
+ * PUBLIC
+ * 
+ * save changes to the array
+ * returns to the normal view
+ * 
+ * @param {event} event - triggert from subtasks
+ */
+function saveEditedSubtask(event) {
+    let [subtaskEditInput,subtaskList,subtaskEditCon] = getSubtaskElements(event.currentTarget);
+
+    if (currentEditIndex !== null &amp;&amp; subtaskEditInput.value !== "") {
+       subtasks[currentEditIndex].name = subtaskEditInput.value;
+       subtaskEditCon.classList.add("d-none");
+       renderSubtasks(subtaskList);
+       currentEditIndex = null;
+       subtaskEditInput.value = "";
+    }
+}
+
+
+/**
+ *
  * PRIVATE
  * 
- * fetch an url, translate to a json and give it back
- * 
- * @param {string} table   - name of table or key
- * @param {object} options - get / put / UFT-8
- * @returns - json array, false, if fails 
+ * Moves the Selectet Content to a new Inputfield
+ *  
+ * @param {element} target    - The emlement we want to analyse
+ * @param {integer} index     - index of the subtask in array
  */
-async function getResponse(table,options,id=null) {
-    try {
-        response=await fetchUrl(table,options,id);
-        if (response.ok) { // 404 = page does not exist, 2XX = OK 
-            const data= response.json();
-            return data; // Bei Objekten, die möglicherweise nicht als Array vorliegen
-        } else {
-            throw new Error(`Response status: ${response.status}`);
-        }
-    } catch (error) {
-        console.error(error.message);
-        return false;
-    }
+function fillSubtaskInput(target,index) {
+    let container  = target.closest(".subtask-container").querySelector(".edit-input-con");
+    let input      = container.querySelector("INPUT");
+    input.value = subtasks[index].name;
+    currentEditIndex = index;
 }
 
 
 /**
- * 
- * PUBLIC
- * 
- * Userinterface for fetching Data
- * 
- * @returns {object} - JSON arrary of data
- */
-async function loadData(table,id=null) {
-    let options={
-        method: "GET",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    };
-    let data=await getResponse(table,options,id);
-    if (Array.isArray(data)) data = data.filter(element => element !== null);
-
-    return data;
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for fetching Data DELETE
- * 
- * Explanaition:
- *      we need to get the key from the Id, to delete by key
- *      It ist not possible to delete by a given Id 
- * 
- * We need first to get 
- * @returns {object} - JSON arrary of data
- */
-async function deleteData(table,id=null) {
-    let json=await loadData(table,id);
-    table+="/"+Object.keys(json)[0];
-    let options={
-        method: "DELETE",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    };
-    return await getResponse(table,options);
-}
- 
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for saving Data overwrite
- * 
- * @param {string} table - table or key
- * @param {object} data  - json array
- * @returns {object} - false if failes, true if succes
- */
-async function saveData(table,data = {},id=null) {
-    let options=  {
-        method: "PUT",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        },
-        body: JSON.stringify(data)
-    };
-    return await getResponse(table,options,id);    
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Returns the next available ID of a Table by iterating
- * 
- * @param {object} data JSON Arra width Data that contains id 
- * @returns - highest ID + 1
- */
-function getNewId(data) {
-    if (data.length == 0) return -1;
-    let max=0;
-    for (let i=0;i&lt;data.length;i++) {
-        if (data[i].id>max) max=+data[i].id;
-    }
-    return max+1;
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Returns the saved Highes Id of a database table
- * the higest id we store in a seperate File
- * 
- * @param {string} table - the name of the table the id we use from
- * @returns -  the saved Highes Id of a database table
- */
-async function getHighestId(table) {
-    let setupContact=await loadData(`tablesetup/${table}`);
-    if (setupContact == null) return 0;
-    return setupContact.lastId;
- }
- 
-
-/**
- * PUBLIC (admin) / PRIVATE
- * 
- * saves the new id in the setuptable
- * @param {string} table 
- * @param {integer} id 
- */
- async function setHighestId(table,id) {
-    let row={lastId:id};
-    await saveData(`tablesetup/${table}`,row);
- }
- 
-
-/**
- * 
+ *
  * PRIVATE
  * 
- * increments the Id of a table and gives back th highest id + 1
- * then we returns the ne id  
- * the higest id we store in a seperate File
- * 
- * @param {string} table - the name of the table the id we use from
- * @returns -  the saved Highes Id of a database table 
+ * Displays the Inputfiled at the correct Position
+ *  
+ * @param {element} target  - The emlement we want to analyse
  */
-async function getIncrementedId(table) {
-    let id=await getHighestId(table)+1;
-    await setHighestId(table,id);
-    return id;
- }
- 
+function displaySubtaskInput(element) {
+    let container  = element.closest(".subtask-container").querySelector(".edit-input-con");
+    let target     = element.closest(".list-item");
+    let input      = container.querySelector("INPUT");
+    container.classList.remove("d-none");
+    container.style.marginTop=0;
+    let rectTarget    = target.getBoundingClientRect();
+    let rectContainer = container.getBoundingClientRect(); // Hier Ok
+    container.style.marginTop=`${(rectTarget.top - rectContainer.top)}px`;
+    input.focus();
+}
+
 
 /**
  *
  * PUBLIC
  * 
- * Load the Dataset of a Table by ID
- *   
- * @param {string} table - tablename of database
- * @param {integer} id - id in table
+ * UI: give the Option to edit a Subtask
+ *  
+ * @param {event} event       - Doubleclick/click event 
+ * @param {integer} index     - index of the subtask in array
  */
-async function getDatasetById(table,id) {
-    let content=loadData(table+"/"+id);
-    return content;
+function editSubtask(event,index) {
+    fillSubtaskInput(event.currentTarget,index);
+    displaySubtaskInput(event.currentTarget);
 }
-
-
-/**
- * 
- * PUBLIC
- * 
- * Saves the complete Table
- * 
- * @param {string} table  - tablename of database
- * @param {object} data  - Json Array Array of Datasets
- */
-async function saveObjectData(table,data) {
-    await saveData(table,arrayToObject(data));
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * @param {string} table  - table of database
- * @param {object} data  - Json Array Array of Datasets
- */
-async function saveObjectDataById(table,data) {
-    promises=[];
-    for (let d of data) {
-        promises.push(saveData(`${table}/${d.id}`,d));
-    }
-    await Promise.all(promises);
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * loads the whole table as object
- * 
- * @param {string} table  - table of database
- * @returns the whole data of a table in one Object
- * 
- */
-async function loadObjectData(table) {
-    return Object.values(await loadData(table));
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * Loads a Table Dataset from database
- * if id is give we get only one dataset
- * if not the whole table
- * 
- * @param {*} table - table of database
- * @param {*} id    - id of the dataset
- * @returns - object width data
- */
-async function loadObjectDataById(table,id=null) {
-    return Object.values(await loadData(table,id));
-} 
 
 
 /**
  * 
  * PRIVATE
  * 
- * @param {array} array removes unallowed data from array
+ * Renders the List of Subtasks, and abels it to do any action
  * 
- * @returns - cleaned array of objects
+ * @param {elemen} subtaskList - Target to fill the data
  */
-function arrayToObject(array) {  
-    return array.reduce((result, item) => {
-        if (item &amp;&amp; typeof item === 'object' &amp;&amp; item.id != null) {      
-            result[item.id] = item;
-        }
-        return result;  
-    }, {});
-}</code></pre>
+function renderSubtasks(subtaskList) {
+    if (subtasks== null) return;
+    subtaskList.innerHTML = "";
+    for (let i = 0; i &lt; subtasks.length; i++) {
+        subtaskList.innerHTML +=/*html*/ `
+            &lt;div class="list-item relative">
+                &lt;li ondblclick="editSubtask(event,${i})">
+                    &lt;input type="text" value="${subtasks[i].name}">
+                &lt;/li>
+                &lt;div class="subtask-icon">
+                    &lt;img onclick="editSubtask(event,${i})" src="./assets/img/desktop/subtask-edit.svg" alt="">
+                    &lt;div class="h-line24">&lt;/div>    
+                    &lt;img onclick="deleteSubtask(event,${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
+                &lt;/div>
+                &lt;div class="subtask-change d-none">&lt;/div>
+            &lt;/div>
+        `;
+    }
+ }
+ </code></pre>
         </article>
     </section>
 

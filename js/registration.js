@@ -52,7 +52,7 @@ function existUser(userList) {
  * Genertate an Object with seperated Info
  * 
  * @param {string} fullname 
- * @returns 
+ * @returns - seperated Name Object
  */
 function getNameObj(fullname) {
     let splittedName = fullname.split(' ');

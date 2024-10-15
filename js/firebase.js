@@ -174,12 +174,10 @@ async function getHighestId(table) {
  * saves the new id in the setuptable
  * @param {string} table 
  * @param {integer} id 
- * @returns 
  */
  async function setHighestId(table,id) {
     let row={lastId:id};
     await saveData(`tablesetup/${table}`,row);
-    return;
  }
  
 
@@ -271,7 +269,7 @@ async function loadObjectData(table) {
  * 
  * @param {*} table - table of database
  * @param {*} id    - id of the dataset
- * @returns 
+ * @returns - object width data
  */
 async function loadObjectDataById(table,id=null) {
     return Object.values(await loadData(table,id));

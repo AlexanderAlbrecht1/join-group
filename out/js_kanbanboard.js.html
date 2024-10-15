@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: js/firebase.js</title>
+    <title>JSDoc: Source: js/kanbanboard.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: js/firebase.js</h1>
+    <h1 class="page-title">Source: js/kanbanboard.js</h1>
 
     
 
@@ -26,20 +26,45 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
+            <pre class="prettyprint source linenums"><code>let statusList=[
+   "to-do",
+   "in-progress",
+   "await-feedback",
+   "done"];
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Init, when open Kanbanboard
+ * load Contacts 
+ * display monogram
+ */
+async function init() {
+   if (isLogged()) {
+
+      contacts = await loadData('Contacts');
+      fetchTasks();
+      logedUserMonogram();
+      //initSelector();
+   }
+}
+
+
+/**
+ * 
  * PRIVATE 
  * 
- * Returns the full path of the table in the firebase
+ * Organise Tasks in each category
  * 
- * @param {object} table 
- * @returns - full path of the table in the firebase
+ * @param {object} tasks - List of Tasks
  */
-function getPath(table,id=null) {
-    let url='https://join-group-10487-default-rtdb.europe-west1.firebasedatabase.app/';
-    let project='join-group/';
-    let where= id==null?"":`?orderBy="id"&amp;equalTo=${id}`;
-    let path=url+project+table+".json"+where;// +`?orderBy="id"&amp;id=10`;
-    return path;
+function displayTasks(tasks) {
+   for(let status of statusList) {
+      addContainerData(tasks,status);
+   }
+   resizeContainer();
 }
 
 
@@ -47,20 +72,29 @@ function getPath(table,id=null) {
  * 
  * PRIVATE
  * 
- * fetch action
+ * Load Tasks from Firebase
+ * save them in a global Variable 
+ */
+async function fetchTasks() {
+   // tasks = await loadData('taskstorage');
+   tasks = await loadObjectData('taskstorage');
+
+   if (tasks) {
+      displayTasks(tasks);
+   } 
+}
+
+
+/**
  * 
- * @param {string} table   - name of table or key
- * @param {object} options - get / put / UFT-8
- * @returns {object} - answer with content of file
-*/
-async function fetchUrl(table,options,id=null) {
-    let url=getPath(table,id);
-    if (options != null) {
-        response = await fetch(url,options);
-    } else  {
-        response = await fetch(url);
-    }
-    return response;
+ * PUBLIC
+ * 
+ * Filter Tasks by given Input Field
+ */
+function filterTasks() {
+   let search=document.getElementById("find").value.toLowerCase();
+   let filteredTasks=tasks.filter(e => e.title.toLowerCase().includes(search) || e.description.toLowerCase().includes(search) )
+   displayTasks(filteredTasks);
 }
 
 
@@ -68,257 +102,313 @@ async function fetchUrl(table,options,id=null) {
  * 
  * PRIVATE
  * 
- * fetch an url, translate to a json and give it back
- * 
- * @param {string} table   - name of table or key
- * @param {object} options - get / put / UFT-8
- * @returns - json array, false, if fails 
+ * Prepares the Contact Icons in one Card
+ * - Creates a List of overlayed Contact Icons
+ * - Maximum 5 Contacts will be shown
+ *  
+ * @param {array} assigns - array of Object: contacts 
+ * @returns - html output
  */
-async function getResponse(table,options,id=null) {
-    try {
-        response=await fetchUrl(table,options,id);
-        if (response.ok) { // 404 = page does not exist, 2XX = OK 
-            const data= response.json();
-            return data; // Bei Objekten, die möglicherweise nicht als Array vorliegen
-        } else {
-            throw new Error(`Response status: ${response.status}`);
-        }
-    } catch (error) {
-        console.error(error.message);
-        return false;
-    }
+function getContacts(assigns) {
+   if (assigns == null) return "";
+   let html=``;
+   for(i=0;i&lt;Math.min(assigns.length,5);i++) {
+      let contact=contacts.find(e => e.id == assigns[i]);
+      if (contact == null) continue;
+      let monogram=getMonogram(contact.name + " " + contact.lastname);
+      html+=`&lt;div style="background-color: ${contact.color};">${monogram}&lt;/div>`;
+   }
+   if (assigns.length>5) {
+      html+=`&lt;div class="count">+${(assigns.length-5)}&lt;/div>`;
+   }
+   return html;
 }
 
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for fetching Data
- * 
- * @returns {object} - JSON arrary of data
- */
-async function loadData(table,id=null) {
-    let options={
-        method: "GET",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    };
-    let data=await getResponse(table,options,id);
-    if (Array.isArray(data)) data = data.filter(element => element !== null);
-
-    return data;
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for fetching Data DELETE
- * 
- * Explanaition:
- *      we need to get the key from the Id, to delete by key
- *      It ist not possible to delete by a given Id 
- * 
- * We need first to get 
- * @returns {object} - JSON arrary of data
- */
-async function deleteData(table,id=null) {
-    let json=await loadData(table,id);
-    table+="/"+Object.keys(json)[0];
-    let options={
-        method: "DELETE",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    };
-    return await getResponse(table,options);
-}
- 
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for saving Data overwrite
- * 
- * @param {string} table - table or key
- * @param {object} data  - json array
- * @returns {object} - false if failes, true if succes
- */
-async function saveData(table,data = {},id=null) {
-    let options=  {
-        method: "PUT",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        },
-        body: JSON.stringify(data)
-    };
-    return await getResponse(table,options,id);    
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Returns the next available ID of a Table by iterating
- * 
- * @param {object} data JSON Arra width Data that contains id 
- * @returns - highest ID + 1
- */
-function getNewId(data) {
-    if (data.length == 0) return -1;
-    let max=0;
-    for (let i=0;i&lt;data.length;i++) {
-        if (data[i].id>max) max=+data[i].id;
-    }
-    return max+1;
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Returns the saved Highes Id of a database table
- * the higest id we store in a seperate File
- * 
- * @param {string} table - the name of the table the id we use from
- * @returns -  the saved Highes Id of a database table
- */
-async function getHighestId(table) {
-    let setupContact=await loadData(`tablesetup/${table}`);
-    if (setupContact == null) return 0;
-    return setupContact.lastId;
- }
- 
-
-/**
- * PUBLIC (admin) / PRIVATE
- * 
- * saves the new id in the setuptable
- * @param {string} table 
- * @param {integer} id 
- */
- async function setHighestId(table,id) {
-    let row={lastId:id};
-    await saveData(`tablesetup/${table}`,row);
- }
- 
 
 /**
  * 
  * PRIVATE
  * 
- * increments the Id of a table and gives back th highest id + 1
- * then we returns the ne id  
- * the higest id we store in a seperate File
+ * creates a classnaame from the Catrgory given
  * 
- * @param {string} table - the name of the table the id we use from
- * @returns -  the saved Highes Id of a database table 
+ * @param {array} category - a list of Categorys 
+ * @returns - classname for the given Headline/Category
  */
-async function getIncrementedId(table) {
-    let id=await getHighestId(table)+1;
-    await setHighestId(table,id);
-    return id;
- }
- 
+function getCategoryClass(category) {
+   return category.toLowerCase().replace(" ","-");
+}
+
+
+/**
+ * PRIVATE
+ * 
+ * Creates HTML Code for teh Progressbar
+ * 
+ * @param {object} task - one Task that we want to analyse  
+ * @returns -  html output
+ */
+function getSubBar(task) {
+   let subbar="";
+   if (task.subtasks != null) {
+      let done=task.subtasks.filter(e => e.done).length;
+      subbar=/*html*/`
+         &lt;div class="progress-container">
+            &lt;div class="progress-bar">
+               &lt;div id="progress" class="progress" style="width:${done*100/task.subtasks.length}%">&lt;/div>
+            &lt;/div>
+            &lt;span>${done}/${task.subtasks.length} Subtasks&lt;/span>
+         &lt;/div>
+      `;
+   }
+   return subbar;
+}
+
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Creates a HTML Code for one Task Card
+ * 
+ * @param {object} task - one task for teh card 
+ * @returns - html output
+ */
+function getTaskOutput(task) {
+   let contacts=getContacts(task.assignedTo);
+   let categoryClass=getCategoryClass(task.category);
+   let subbar=getSubBar(task);
+   let cat = getCategoryText(task);
+
+   //Now begin
+   return /*html*/`
+      &lt;div class="card ${categoryClass}" id="task-${task.id}" 
+      draggable="true" 
+      ondragstart="drag(event)"
+      ondragenter="toggleBorder(event,true)"
+      onmouseup="openTask(event)"
+     >
+         &lt;h1>${cat}&lt;/h1>
+         &lt;div class="mbb-text">
+            &lt;h1>${task.title}&lt;/h1>
+            &lt;span>${task.description}&lt;/span>
+         &lt;/div>
+         ${subbar}
+         &lt;div class="mbb-icons">
+            &lt;div class="monogram">&lt;!-- monograms-->
+               ${contacts}
+            &lt;/div>
+            &lt;div class="icon-prio-${task.prio}"> &lt;!-- prio -->
+            &lt;/div>
+         &lt;/div>
+      &lt;/div>
+   `;
+
+}
+
 
 /**
  *
- * PUBLIC
+ * PRIVATE
  * 
- * Load the Dataset of a Table by ID
- *   
- * @param {string} table - tablename of database
- * @param {integer} id - id in table
+ * Creates A Container width Tasks for each status
+ * 
+ * @param {array} tasks - array of tasks - ful tasklist 
+ * @param {*} status - status of the task as category
+ * 
  */
-async function getDatasetById(table,id) {
-    let content=loadData(table+"/"+id);
-    return content;
+function addContainerData(tasks,status) {
+   let task = tasks.filter((t) => t['status'] == status);
+   let container = document.getElementById(`${status}-container`);
+   container.innerHTML = '';
+   for (let i = 0; i &lt; task.length; i++) {
+      container.innerHTML += getTaskOutput(task[i]);
+   }
+   if (task.length >0)  {
+      container.classList.add("hidden");
+   } else {
+      container.classList.remove("hidden");
+   }
+}
+
+
+/**
+ * PUBLIC EVENT
+ * 
+ * Makes one Crad Dropable
+ * 
+ * @param {event} ev - drop event 
+ */
+function allowDrop(ev) {
+   ev.preventDefault();
 }
 
 
 /**
  * 
- * PUBLIC
+ * PUBLIC EVENT
  * 
- * Saves the complete Table
+ * is triggered, when dragging is active
  * 
- * @param {string} table  - tablename of database
- * @param {object} data  - Json Array Array of Datasets
+ * @param {event} ev  - drag event
  */
-async function saveObjectData(table,data) {
-    await saveData(table,arrayToObject(data));
-} 
+function drag(ev) {
+   ev.dataTransfer.setData('text', ev.target.id);
+   hideNoTaskInfo(ev);
+   resizeContainer();
+}
 
 
 /**
  * 
- * PUBLIC
+ * PUBLIC EVENT
  * 
- * @param {string} table  - table of database
- * @param {object} data  - Json Array Array of Datasets
+ * is triggered, when we drop the dragged task
+ * 
+ * @param {event} ev      - drop event
+ * @param {string} status - status wher the task is in
+ *  
  */
-async function saveObjectDataById(table,data) {
-    promises=[];
-    for (let d of data) {
-        promises.push(saveData(`${table}/${d.id}`,d));
-    }
-    await Promise.all(promises);
-} 
+function drop(ev, status) {
+   let data = ev.dataTransfer.getData('text');
+   saveTask(data,status);
+   appendTask(ev,data);
+   resizeContainer();
+   toggleBorder(ev,false);
+   ev.preventDefault();
+}
 
 
 /**
  * 
- * PUBLIC
+ * PRIVATE EVENT
  * 
- * loads the whole table as object
- * 
- * @param {string} table  - table of database
- * @returns the whole data of a table in one Object
- * 
+ * put the dragged Card to the new position
+ *  
+ * @param {event} event - ausgelöstes Event
+ * @param {string} id - position to append the card 
  */
-async function loadObjectData(table) {
-    return Object.values(await loadData(table));
-} 
+function appendTask(event,id) {
+   let t=event.currentTarget; 
+   t.appendChild(document.getElementById(id));
+   t.classList.add("hidden");
+}
 
 
 /**
  * 
- * PUBLIC
+ * category: local firebase storage
  * 
- * Loads a Table Dataset from database
- * if id is give we get only one dataset
- * if not the whole table
+ * saves the new information in the database
  * 
- * @param {*} table - table of database
- * @param {*} id    - id of the dataset
- * @returns - object width data
+ * @param {string} data - id of Task card 
+ * @param {*} status    - category/stats of the task in the timeline 
  */
-async function loadObjectDataById(table,id=null) {
-    return Object.values(await loadData(table,id));
-} 
+function saveTask(data,status) {
+   let textid=data.split('-')
+   let id = Number(textid[1]);
+   let index = tasks.findIndex(e => e.id == id);
+
+   tasks[index].status = status;
+   saveData('taskstorage', tasks);
+}
 
 
 /**
  * 
  * PRIVATE
  * 
- * @param {array} array removes unallowed data from array
+ * sets the new scrollheight,
+ * this is not automated so e have to handle it here
  * 
- * @returns - cleaned array of objects
+ * @param {id} id - element id 
  */
-function arrayToObject(array) {  
-    return array.reduce((result, item) => {
-        if (item &amp;&amp; typeof item === 'object' &amp;&amp; item.id != null) {      
-            result[item.id] = item;
-        }
-        return result;  
-    }, {});
+function setStyle(id) {
+   let psc= (document.querySelector(".mbb").scrollHeight-0)+"px";
+   document.getElementById(id).style.height=psc;
+}
+
+
+/**
+ * 
+ * PRIVATE 
+ * 
+ * Rezize te complete DIV Container, 
+ * because it is not done automated
+ * 
+ */
+function resizeContainer() {
+   let container=document.querySelector(".mbb").querySelector(".containers");   
+   let psc= (document.querySelector(".mbb").scrollHeight-0)+"px";
+   let height="100%";
+
+   if (window.getComputedStyle(container).flexDirection != "column") {
+      psc="";
+      height="";
+   }
+   document.querySelector(".mbb").height=height;
+   for (let id of statusList) {
+      document.getElementById(`${id}-container`).style.height=psc;
+   }
+
+}
+
+
+/**
+ * Hides the gray Note "no task" or displays it
+ * 
+ * @param {event} e - drag event
+ */
+function hideNoTaskInfo(e) {
+   console.log(e.target)
+   let parent=e.target.parentElement;
+   if (parent.childElementCount == 1) {
+      parent.classList.remove("hidden");
+   } else {
+      parent.classList.add("hidden");
+   }
+}
+
+
+/** 
+ * 
+ * Category: Library/Classes
+ * 
+ * returns the net top element with the given classname
+ * (this is querySelector reverse)
+ *  
+ * @param {element} element   - the start search element 
+ * @param {string} className  - the classname to find
+ * @returns                   - the found element
+ */
+function getTopParent(element,className) {
+   let e=element;
+   while (e) {
+      if (e.classList.contains(className)) return e;
+      e=e.parentElement;
+   }
+   return null;
+}
+
+
+/**
+ * PUBLIC
+ * 
+ * shows possible drop ability
+ * 
+ * @param {event} event - dragover event   
+ * @param {string} status - column status
+ */
+function toggleBorder(event,status=null) {
+   let e=getTopParent(event.target,"containers");
+   // Only if container is completly leaving
+   if (event.type === "dragleave" &amp;&amp; e.contains(event.relatedTarget)) {
+      return; 
+   }   
+   if (status == null) {
+      e.classList.toggle("task-border");
+   } else {
+      e.classList.toggle("task-border",status);
+   }
 }</code></pre>
         </article>
     </section>

@@ -14,7 +14,7 @@ let currentEditIndex=null;
  * 
  * @param {element} target - the element that triggered the event 
  * @param {*} classname    - the classname
- * @returns 
+ * @returns - the element we need like id
  */
 function getElement(target,classname) {
     switch(classname) {
@@ -134,7 +134,7 @@ function deleteSubtask(event,i) {
  * Returns a group of targets elements
  * 
  * @param {element} target - element of the triggert event 
- * @returns 
+ * @returns - Subtask- Information
  * - Elements of Classes:
  * - "subtask-edit-input"
  * - "subtask-list"

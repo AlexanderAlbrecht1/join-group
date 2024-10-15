@@ -6,7 +6,7 @@
  * 
  * @param {object} a - Assigned Contact
  * 
- * @returns 
+ * @returns - html ouitput
  */
 function getTaskViewAssign(a) {
     let contact=contacts.find(e => e.id == a);
@@ -157,7 +157,6 @@ async function openTaskView(json) {
  * Opens the Task View Card
  * 
  * @param {*} event 
- * @returns 
  */
 async function openTask(event) {
     if (event.type === "dragleave") {

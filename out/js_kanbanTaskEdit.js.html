@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: js/firebase.js</title>
+    <title>JSDoc: Source: js/kanbanTaskEdit.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: js/firebase.js</h1>
+    <h1 class="page-title">Source: js/kanbanTaskEdit.js</h1>
 
     
 
@@ -27,19 +27,236 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
+ * 
+ * @param {element} targetElement 
+ * @param {element} query 
+ * @returns - the id iunder main tadk-edit-card
+ */
+function getElementEdit(targetElement,query) {
+    let father=targetElement.closest(".task-edit-card");
+    return father.querySelector(query);     
+}
+
+
+/**
+ * 
+ * Checks all Contacts we need
+ * 
+ * @param {object} assignedList 
+ * @returns - html output
+ */
+function kanbanEditSelectors(assignedList) {
+    let html="";
+    for (let i=0;i&lt;contacts.length;i++) {
+        let checked="";
+        if (assignedList != null) {
+            if (assignedList.indexOf(contacts[i].id) != -1) {
+                checked="checked";
+            }
+        }
+        html+=kanbanEditSelector(contacts[i],checked);
+    };
+    return html;
+}
+
+
+/**
+ * 
+ * Checks one Contacts we need
+ * 
+ * @param {object} contact 
+ * @param {*} checked 
+ * @returns html - code
+ */
+function kanbanEditSelector(contact,checked) {
+    if (contact == null) return "";
+    let name=getFullNameInContact(contact);
+    return /*html*/ `
+        &lt;label class="selector">
+            &lt;input type="checkbox" class="custom-checkbox" name="assign" value="${contact.id}" ${checked}>
+            &lt;div class="checkbox-design">
+                &lt;div>
+                    &lt;span class="circle-monogram" style="background-color:${contact.color}">${getMonogram(name)}&lt;/span>  
+                    &lt;span class="selector-name">${name}&lt;/span>
+                &lt;/div>
+                &lt;img>
+            &lt;/div>
+        &lt;/label>`;
+}
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Render Task List (all Categorys)
+ * 
+ * @param {array} json 
+ * @returns - html output
+ */  
+function kanbanEditRenderTask(json) {
+    let cat = getCategoryText(json);
+    let mindate=getTaskDateMin(json.dueDate);
+
+    return /*html*/ `
+        &lt;div class="top">
+            &lt;div class="${json.category}">${cat}&lt;/div>
+            &lt;img class="exit" onclick="closeTaskEdit()" src="./assets/img/desktop/close.svg">
+        &lt;/div>
+            &lt;div class="center">
+                &lt;div>
+                    &lt;strong>Title&lt;/strong>
+                    &lt;div class="input-container invalid">
+                        &lt;input class="edit-title" type="text"  required placeholder="Title" value="${json.title}">
+                        &lt;span class="error-msg visible">&lt;/span>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div>
+                    &lt;strong>Description&lt;/strong>
+                    &lt;div class="input-container invalid">
+                        &lt;textarea class="edit-description" type="text" required rows="4"  placeholder="Description">${json.description}&lt;/textarea>
+                        &lt;span class="error-msg visible">&lt;/span>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div>
+                    &lt;strong>Due date&lt;/strong>
+                    &lt;div class="input-container invalid">
+                        &lt;input class="edit-date" type="date"  required placeholder="Title" width="100%" value="${json.dueDate}" min="${mindate}">
+                        &lt;span class="error-msg visible">&lt;/span>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div>
+                    &lt;strong>Priority&lt;/strong>
+                    &lt;div class="flex-row gap16 priority">
+                        &lt;label>
+                            &lt;input type="radio" name="edit-prio" value="urgent" ${json.prio=="urgent"?"checked":""}>
+                            &lt;div class="button-label urgent">
+                                Urgent
+                                &lt;img src="./assets/img/desktop/prio_urgent_red.svg">
+                            &lt;/div>
+                        &lt;/label>
+                        &lt;label>
+                            &lt;input type="radio" id="edit-medium" name="edit-prio" value="medium" ${json.prio=="medium"?"checked":""}>
+                            &lt;div class="button-label medium">
+                                Medium
+                                &lt;img src="./assets/img/desktop/prio_medium_yellow.svg">
+                            &lt;/div>
+                        &lt;/label>
+                        &lt;label>
+                            &lt;input type="radio" id="edit-low" name="edit-prio" value="low" ${json.prio=="low"?"checked":""}>
+                            &lt;div for="edit-low" class="button-label low">
+                                Low 
+                                &lt;img src="./assets/img/desktop/prio_low_green.svg">
+                            &lt;/div>
+                        &lt;/label>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div class="relative mb32" >
+                    &lt;strong>Assigned to&lt;/strong>
+                    &lt;details class="absolute" style="width:100%;">
+                        &lt;summary>&lt;input type="text" placeholder="Select contacts to assign">&lt;/summary>
+                        &lt;div class="selectors">
+                            ${kanbanEditSelectors(json.assignedTo)}
+                        &lt;/div>
+                    &lt;/details>
+                &lt;/div>
+                &lt;div class="monogramlist flex-row gap8">
+                    ${getTaskEditAssigns(json.assignedTo)}
+                &lt;/div>
+                &lt;div class="subtask-container label-input-con">
+                    &lt;label>Subtasks&lt;/label>
+                    &lt;input class="input-subtask" oninput="toggleSubtaskIcon(event)" type="text" id="subtasks" placeholder="Add new subtask">
+                    &lt;button type="button" id="add-subtask" class="btn-add-subtask">
+                        &lt;img 
+                            onclick="clearSubtaskInput(event)" class="add-subtask-clear d-none"
+                            src="./assets/img/desktop/add-subtask-clear.svg" alt="">
+                        &lt;div class="h-line24">&lt;/div>    
+                        &lt;img onclick="addSubtasks(event)" class="subtask-icon"
+                            src="./assets/img/desktop/add_subtask.svg">
+                    &lt;/button>
+                    &lt;ul class="subtask-list">
+                    &lt;/ul>
+                    &lt;div class="edit-input-con d-none">
+                        &lt;input type="text" class="subtask-edit-input">
+                        &lt;div>
+                            &lt;img class="edit-delete" onclick="deleteSubtask(event)"
+                                src="./assets/img/desktop/subtask-delete.svg" alt="">                            
+                            &lt;div class="h-line24">&lt;/div>                                
+                            &lt;img class="edit-check" onclick="saveEditedSubtask(event)"
+                                src="./assets/img/desktop/add-subtask-check.svg" alt="">                   
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>    
+            &lt;div class="bottom">
+                &lt;div class="darkbutton" onclick="saveEditTask(${json.id})">
+                    Ok
+                    &lt;img class="invert" src="./assets/img/desktop/add-subtask-check.svg">
+                &lt;/div>
+            &lt;/div>
+
+    `;
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Edit a Task and save it back
+ *  
+ * @param {*} id - id of the task
+ */
+async function editTask(id) {
+    let json = await loadObjectDataById("taskstorage",id);
+    let card=document.getElementById("task-edit-card");
+    subtasks=json[0].subtasks;
+    card.innerHTML=kanbanEditRenderTask(json[0]);
+    card.classList.add(json[0].category);
+    card.classList.remove("d-none");
+    initSelector();
+    addFormListener("#task-edit-card");
+    document.getElementById("task-view-card").style="display: none";
+    card.style="";
+    let subtaskElement=card.querySelector(".subtask-list");
+    renderSubtasks(subtaskElement);
+}
+
+
+/**
+ * 
  * PRIVATE 
  * 
- * Returns the full path of the table in the firebase
+ * Creates HTML: One monogram 
  * 
- * @param {object} table 
- * @returns - full path of the table in the firebase
+ * @param {*} a - assigned contact
+ * @returns - the generatetd HTML for one contact 
  */
-function getPath(table,id=null) {
-    let url='https://join-group-10487-default-rtdb.europe-west1.firebasedatabase.app/';
-    let project='join-group/';
-    let where= id==null?"":`?orderBy="id"&amp;equalTo=${id}`;
-    let path=url+project+table+".json"+where;// +`?orderBy="id"&amp;id=10`;
-    return path;
+function getTaskEditAssign(a) {
+    let contact=contacts.find(e => e.id == a);
+    if (contact == null) return "";
+    let name=getFullNameInContact(contact);
+
+    return /*html*/ `
+       &lt;span class="circle-monogram" style="background-color:${contact.color}">${getMonogram(name)}&lt;/span>`;
+}
+
+
+/**
+ * 
+ * PUBLIC 
+ * 
+ * Creates HTML: a row of contacts
+ * 
+ * @param {*} assigns  - contact.assignedTo List of assigned Contacts
+ * @returns - a row of contacts in HTML  
+ */
+function getTaskEditAssigns(assigns) {
+    if (assigns == null) return "";
+    let html="";
+    for (let assign of assigns) {
+        html+=getTaskEditAssign(assign);
+    }
+    return html;
 }
 
 
@@ -47,20 +264,58 @@ function getPath(table,id=null) {
  * 
  * PRIVATE
  * 
- * fetch action
+ * analysese and returnd the value of the Priority
  * 
- * @param {string} table   - name of table or key
- * @param {object} options - get / put / UFT-8
- * @returns {object} - answer with content of file
-*/
-async function fetchUrl(table,options,id=null) {
-    let url=getPath(table,id);
-    if (options != null) {
-        response = await fetch(url,options);
-    } else  {
-        response = await fetch(url);
+ * @param {element} element 
+ * @param {string} name 
+ * 
+ * @returns the value medium urgent or low
+ */
+function getRadioValue(element,name) {
+    radio = element.querySelectorAll(`input[name='${name}']`);
+    for (let i=0;i&lt;radio.length;i++) {
+        if (radio[i].checked) return radio[i].value;
     }
-    return response;
+    return "";
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Retruns a List of assigned Contacts
+ * 
+ * @param {element} father 
+ * @returns - a list of all inputfields of assinged contact s
+ */
+function getAssignedIdsFromUI(father) {
+    let selections=father.querySelectorAll('input[name="assign"]');
+    if (selections==null) return [];
+    assigned=[];
+    for (let i=0;i&lt;selections.length;i++) {
+        if (selections[i].checked) assigned.push(+selections[i].value);
+    }
+    return assigned;
+};
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Gets Task Infoirmation from Input
+ * 
+ * @param {object} task  - Task
+ */
+function taskEditToObj(task) {
+    let father=document.getElementById("task-edit-card");
+    task.subtasks=subtasks;
+    task.title=father.querySelector(".edit-title").value;
+    task.description=father.querySelector(".edit-description").value;
+    task.prio=getRadioValue(father,"edit-prio");
+    task.dueDate=father.querySelector(".edit-date").value
+    task.assignedTo=getAssignedIdsFromUI(father);
 }
 
 
@@ -68,258 +323,33 @@ async function fetchUrl(table,options,id=null) {
  * 
  * PRIVATE
  * 
- * fetch an url, translate to a json and give it back
+ * Replaces the new generated Tags in the List for Display
  * 
- * @param {string} table   - name of table or key
- * @param {object} options - get / put / UFT-8
- * @returns - json array, false, if fails 
+ * @param {object} task - one Task Object 
  */
-async function getResponse(table,options,id=null) {
-    try {
-        response=await fetchUrl(table,options,id);
-        if (response.ok) { // 404 = page does not exist, 2XX = OK 
-            const data= response.json();
-            return data; // Bei Objekten, die möglicherweise nicht als Array vorliegen
-        } else {
-            throw new Error(`Response status: ${response.status}`);
-        }
-    } catch (error) {
-        console.error(error.message);
-        return false;
-    }
+function updateTask(task) {
+    let index=tasks.findIndex(e => e.id==task.id);
+    tasks[index]=task;
+    addContainerData(tasks,task.status);
+
 }
 
 
 /**
- * 
  * PUBLIC
  * 
- * Userinterface for fetching Data
+ * Saves the Task by Id
  * 
- * @returns {object} - JSON arrary of data
+ * @param {integer} id - Task id
  */
-async function loadData(table,id=null) {
-    let options={
-        method: "GET",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    };
-    let data=await getResponse(table,options,id);
-    if (Array.isArray(data)) data = data.filter(element => element !== null);
-
-    return data;
+async function saveEditTask(id) {
+    let json = await loadObjectDataById("taskstorage",id);
+    taskEditToObj(json[0]);
+    updateTask(json[0]);
+    await saveObjectDataById("taskstorage",json);
+    openTaskView(json);
 }
-
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for fetching Data DELETE
- * 
- * Explanaition:
- *      we need to get the key from the Id, to delete by key
- *      It ist not possible to delete by a given Id 
- * 
- * We need first to get 
- * @returns {object} - JSON arrary of data
- */
-async function deleteData(table,id=null) {
-    let json=await loadData(table,id);
-    table+="/"+Object.keys(json)[0];
-    let options={
-        method: "DELETE",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    };
-    return await getResponse(table,options);
-}
- 
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for saving Data overwrite
- * 
- * @param {string} table - table or key
- * @param {object} data  - json array
- * @returns {object} - false if failes, true if succes
- */
-async function saveData(table,data = {},id=null) {
-    let options=  {
-        method: "PUT",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        },
-        body: JSON.stringify(data)
-    };
-    return await getResponse(table,options,id);    
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Returns the next available ID of a Table by iterating
- * 
- * @param {object} data JSON Arra width Data that contains id 
- * @returns - highest ID + 1
- */
-function getNewId(data) {
-    if (data.length == 0) return -1;
-    let max=0;
-    for (let i=0;i&lt;data.length;i++) {
-        if (data[i].id>max) max=+data[i].id;
-    }
-    return max+1;
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Returns the saved Highes Id of a database table
- * the higest id we store in a seperate File
- * 
- * @param {string} table - the name of the table the id we use from
- * @returns -  the saved Highes Id of a database table
- */
-async function getHighestId(table) {
-    let setupContact=await loadData(`tablesetup/${table}`);
-    if (setupContact == null) return 0;
-    return setupContact.lastId;
- }
- 
-
-/**
- * PUBLIC (admin) / PRIVATE
- * 
- * saves the new id in the setuptable
- * @param {string} table 
- * @param {integer} id 
- */
- async function setHighestId(table,id) {
-    let row={lastId:id};
-    await saveData(`tablesetup/${table}`,row);
- }
- 
-
-/**
- * 
- * PRIVATE
- * 
- * increments the Id of a table and gives back th highest id + 1
- * then we returns the ne id  
- * the higest id we store in a seperate File
- * 
- * @param {string} table - the name of the table the id we use from
- * @returns -  the saved Highes Id of a database table 
- */
-async function getIncrementedId(table) {
-    let id=await getHighestId(table)+1;
-    await setHighestId(table,id);
-    return id;
- }
- 
-
-/**
- *
- * PUBLIC
- * 
- * Load the Dataset of a Table by ID
- *   
- * @param {string} table - tablename of database
- * @param {integer} id - id in table
- */
-async function getDatasetById(table,id) {
-    let content=loadData(table+"/"+id);
-    return content;
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Saves the complete Table
- * 
- * @param {string} table  - tablename of database
- * @param {object} data  - Json Array Array of Datasets
- */
-async function saveObjectData(table,data) {
-    await saveData(table,arrayToObject(data));
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * @param {string} table  - table of database
- * @param {object} data  - Json Array Array of Datasets
- */
-async function saveObjectDataById(table,data) {
-    promises=[];
-    for (let d of data) {
-        promises.push(saveData(`${table}/${d.id}`,d));
-    }
-    await Promise.all(promises);
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * loads the whole table as object
- * 
- * @param {string} table  - table of database
- * @returns the whole data of a table in one Object
- * 
- */
-async function loadObjectData(table) {
-    return Object.values(await loadData(table));
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * Loads a Table Dataset from database
- * if id is give we get only one dataset
- * if not the whole table
- * 
- * @param {*} table - table of database
- * @param {*} id    - id of the dataset
- * @returns - object width data
- */
-async function loadObjectDataById(table,id=null) {
-    return Object.values(await loadData(table,id));
-} 
-
-
-/**
- * 
- * PRIVATE
- * 
- * @param {array} array removes unallowed data from array
- * 
- * @returns - cleaned array of objects
- */
-function arrayToObject(array) {  
-    return array.reduce((result, item) => {
-        if (item &amp;&amp; typeof item === 'object' &amp;&amp; item.id != null) {      
-            result[item.id] = item;
-        }
-        return result;  
-    }, {});
-}</code></pre>
+</code></pre>
         </article>
     </section>
 

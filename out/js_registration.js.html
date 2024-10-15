@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: js/firebase.js</title>
+    <title>JSDoc: Source: js/registration.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: js/firebase.js</h1>
+    <h1 class="page-title">Source: js/registration.js</h1>
 
     
 
@@ -26,41 +26,71 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * PRIVATE 
- * 
- * Returns the full path of the table in the firebase
- * 
- * @param {object} table 
- * @returns - full path of the table in the firebase
- */
-function getPath(table,id=null) {
-    let url='https://join-group-10487-default-rtdb.europe-west1.firebasedatabase.app/';
-    let project='join-group/';
-    let where= id==null?"":`?orderBy="id"&amp;equalTo=${id}`;
-    let path=url+project+table+".json"+where;// +`?orderBy="id"&amp;id=10`;
-    return path;
-}
-
-
-/**
- * 
- * PRIVATE
- * 
- * fetch action
- * 
- * @param {string} table   - name of table or key
- * @param {object} options - get / put / UFT-8
- * @returns {object} - answer with content of file
+            <pre class="prettyprint source linenums"><code>/*
+    REQUIRES: 
+    events.js
+    login.js
 */
-async function fetchUrl(table,options,id=null) {
-    let url=getPath(table,id);
-    if (options != null) {
-        response = await fetch(url,options);
-    } else  {
-        response = await fetch(url);
+/**
+ * msgBox Send a messag to the Interface
+ * 
+ * @param {string} msg - Display message in the Password Box 
+ */
+function msgBox(msg) {
+    // document.getElementById("msg-box").innerHTML=msg;
+}
+
+
+/**
+ * Checks if 2 passwords of the interface are equal
+ * 
+ * @returns - true if passwords are the same otherwise false
+ */
+function isEqualPassword() {
+    let password = document.getElementById("sign-password");
+    let confirmPassword = document.getElementById("confirm-password");;
+    if (password.value != confirmPassword.value) {
+        customErrorMsg("confirm-password", "passwords are different");
     }
-    return response;
+    return password.value == confirmPassword.value;
+}
+
+
+/**
+ * Look if the User already exist
+ * 
+ * @param {object} userList - The List of the user
+ * @param {string} email    - The Login email
+ * @returns - true if user exist, otherwise false
+ */
+function existUser(userList) {
+    let email = document.getElementById("email").value;
+    let index = userList.findIndex(element => element.email == email);
+    if (index != -1) {
+        customErrorMsg("email", `E-mail already exist. Please choose another e-mail. &lt;br>${email}, &lt;a href="./index.html">login at your existing account ?`);
+    }
+    return index != -1;
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Genertate an Object with seperated Info
+ * 
+ * @param {string} fullname 
+ * @returns - seperated Name Object
+ */
+function getNameObj(fullname) {
+    let splittedName = fullname.split(' ');
+    let newFirstname = splittedName[0];
+    let newLastname = splittedName.length == 1?' ':splittedName[1];
+    return {
+        fullname:fullname,
+        firstName:newFirstname,
+        lastName:newLastname
+    } 
 }
 
 
@@ -68,258 +98,156 @@ async function fetchUrl(table,options,id=null) {
  * 
  * PRIVATE
  * 
- * fetch an url, translate to a json and give it back
+ * Saves the Contacts width new Contact
  * 
- * @param {string} table   - name of table or key
- * @param {object} options - get / put / UFT-8
- * @returns - json array, false, if fails 
+ * @param {array} contacts - array of Objects
+ * @param {object} newContact  - one object
  */
-async function getResponse(table,options,id=null) {
-    try {
-        response=await fetchUrl(table,options,id);
-        if (response.ok) { // 404 = page does not exist, 2XX = OK 
-            const data= response.json();
-            return data; // Bei Objekten, die möglicherweise nicht als Array vorliegen
-        } else {
-            throw new Error(`Response status: ${response.status}`);
-        }
-    } catch (error) {
-        console.error(error.message);
-        return false;
-    }
+async function saveDataContacts(contacts,newContact) {
+    contacts.push(newContact);
+    await saveData("Contacts",contacts);
 }
-
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for fetching Data
- * 
- * @returns {object} - JSON arrary of data
- */
-async function loadData(table,id=null) {
-    let options={
-        method: "GET",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    };
-    let data=await getResponse(table,options,id);
-    if (Array.isArray(data)) data = data.filter(element => element !== null);
-
-    return data;
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for fetching Data DELETE
- * 
- * Explanaition:
- *      we need to get the key from the Id, to delete by key
- *      It ist not possible to delete by a given Id 
- * 
- * We need first to get 
- * @returns {object} - JSON arrary of data
- */
-async function deleteData(table,id=null) {
-    let json=await loadData(table,id);
-    table+="/"+Object.keys(json)[0];
-    let options={
-        method: "DELETE",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    };
-    return await getResponse(table,options);
-}
- 
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for saving Data overwrite
- * 
- * @param {string} table - table or key
- * @param {object} data  - json array
- * @returns {object} - false if failes, true if succes
- */
-async function saveData(table,data = {},id=null) {
-    let options=  {
-        method: "PUT",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        },
-        body: JSON.stringify(data)
-    };
-    return await getResponse(table,options,id);    
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Returns the next available ID of a Table by iterating
- * 
- * @param {object} data JSON Arra width Data that contains id 
- * @returns - highest ID + 1
- */
-function getNewId(data) {
-    if (data.length == 0) return -1;
-    let max=0;
-    for (let i=0;i&lt;data.length;i++) {
-        if (data[i].id>max) max=+data[i].id;
-    }
-    return max+1;
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Returns the saved Highes Id of a database table
- * the higest id we store in a seperate File
- * 
- * @param {string} table - the name of the table the id we use from
- * @returns -  the saved Highes Id of a database table
- */
-async function getHighestId(table) {
-    let setupContact=await loadData(`tablesetup/${table}`);
-    if (setupContact == null) return 0;
-    return setupContact.lastId;
- }
- 
-
-/**
- * PUBLIC (admin) / PRIVATE
- * 
- * saves the new id in the setuptable
- * @param {string} table 
- * @param {integer} id 
- */
- async function setHighestId(table,id) {
-    let row={lastId:id};
-    await saveData(`tablesetup/${table}`,row);
- }
- 
-
-/**
- * 
- * PRIVATE
- * 
- * increments the Id of a table and gives back th highest id + 1
- * then we returns the ne id  
- * the higest id we store in a seperate File
- * 
- * @param {string} table - the name of the table the id we use from
- * @returns -  the saved Highes Id of a database table 
- */
-async function getIncrementedId(table) {
-    let id=await getHighestId(table)+1;
-    await setHighestId(table,id);
-    return id;
- }
- 
-
-/**
- *
- * PUBLIC
- * 
- * Load the Dataset of a Table by ID
- *   
- * @param {string} table - tablename of database
- * @param {integer} id - id in table
- */
-async function getDatasetById(table,id) {
-    let content=loadData(table+"/"+id);
-    return content;
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Saves the complete Table
- * 
- * @param {string} table  - tablename of database
- * @param {object} data  - Json Array Array of Datasets
- */
-async function saveObjectData(table,data) {
-    await saveData(table,arrayToObject(data));
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * @param {string} table  - table of database
- * @param {object} data  - Json Array Array of Datasets
- */
-async function saveObjectDataById(table,data) {
-    promises=[];
-    for (let d of data) {
-        promises.push(saveData(`${table}/${d.id}`,d));
-    }
-    await Promise.all(promises);
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * loads the whole table as object
- * 
- * @param {string} table  - table of database
- * @returns the whole data of a table in one Object
- * 
- */
-async function loadObjectData(table) {
-    return Object.values(await loadData(table));
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * Loads a Table Dataset from database
- * if id is give we get only one dataset
- * if not the whole table
- * 
- * @param {*} table - table of database
- * @param {*} id    - id of the dataset
- * @returns - object width data
- */
-async function loadObjectDataById(table,id=null) {
-    return Object.values(await loadData(table,id));
-} 
 
 
 /**
  * 
  * PRIVATE
  * 
- * @param {array} array removes unallowed data from array
+ * Saves the User width new User
  * 
- * @returns - cleaned array of objects
+ * @param {array} userList - array of Objects
+ * @param {object} newUser  - one object
  */
-function arrayToObject(array) {  
-    return array.reduce((result, item) => {
-        if (item &amp;&amp; typeof item === 'object' &amp;&amp; item.id != null) {      
-            result[item.id] = item;
+async function saveDataUser(userList,newUser) {
+    userList.push(newUser);
+    await saveData("user", userList);
+}
+
+
+/**
+ * Add a User width all information to the table
+ * 
+ * @param {object} userList  List of Users 
+ */
+async function addUserToList(userList) {
+    let password = document.getElementById("sign-password");
+    let email = document.getElementById("email");
+    let user = document.getElementById("user");
+    contacts = await loadContacts();
+    let id = await getIncrementedId("contact");
+    let nameObj=getNameObj(user.value);
+    let newContact = {
+        id: id,
+        name: nameObj.firstName,
+        lastname: nameObj.lastName,
+        email: email.value,
+        phone: '0000000',
+        color: generateDarkColor()
+    };
+    await saveDataContacts(contacts,newContact);
+    await saveDataUser(userList,{ user: user.value, password: password.value, email: email.value, id: id });
+}
+
+
+/**
+ * Register new User 
+ * input: password, user, email
+ */
+async function register() {
+    if (!isFormValid) return;
+    if (!isEqualPassword()) return;
+    let userList = await getUserList();
+    console.log(userList);
+    if (existUser(userList)) return;
+    await msgfly();
+    await addUserToList(userList);
+    openLogin(); 
+}
+
+
+/**
+ * removeUser
+ * Remove all information of a user
+ * - in database, localstorage, session
+ * 
+ * @param {object} userList - List aof all Users
+ * @param {integer} index    - the found index from index search
+ */
+async function removeUser(userList, index) {
+    userList.splice(index, 1); // Remove User self 
+    saveData("user", userList);
+    clearLocalStorage();
+    sessionDestroy();
+    clearLoginFields();
+    msgBox(`Your data is completely deleted! Sorry to loose you !`);
+}
+
+
+/**
+ * passwordValidationOK
+ * validate the interface with the given Password
+ * 
+ * @param {array} passwordOfList 
+ */
+function passwordValidationOK(passwordOfList) {
+    let password = document.getElementById("sign-password");
+    if (passwordOfList != password.value) {
+        customErrorMsg("confirm-password", "The mail-password validation failed !");
+    }
+}
+
+
+/**
+ * Remove User from all permanent
+ * given Information from Interface
+ * redirect to Login at least
+ */
+async function unregister() {
+    let email = document.getElementById("email");
+    let userList = await getUserList();
+    let index = userList.findIndex(element => element.email == email.value);
+    if (index != -1) {
+        if (passwordValidationOK(userList[index].password)) {
+            removeTasksOf(email.value);    // Remove all Tasks of the user
+            removeUser(userList, index);    // remove all Userinformation and cleanup
+            openPage("./index.html");
         }
-        return result;  
-    }, {});
-}</code></pre>
+    } else {
+        msgBox(`User doesn't exist`);
+    }
+}
+
+
+/**
+ * PRIVATE
+ * 
+ * Checks if the Registration Form is withouit wrong Entries
+ * 
+ * @param {string} formqs - QuerySelector ofthe used form
+ * @returns - Valid (true) or invalid (false)
+ */
+function isFormValid(formqs) {
+    let form = document.querySelector(formqs);
+    if (!form) return false;
+    let inputs = form.querySelectorAll('input');
+    let status = Array.from(inputs).findIndex(input => !input.checkValidity()) == -1;
+    let cb = form.querySelector("#remember-me").checked;
+    return status &amp;&amp; cb;
+}
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Initialation of the Register html
+ * 
+ */
+function init() {
+    loadUserFromLocalStorage();
+    addFormListener('#login-card');
+}
+</code></pre>
         </article>
     </section>
 

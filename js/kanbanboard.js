@@ -79,7 +79,7 @@ function filterTasks() {
  * - Maximum 5 Contacts will be shown
  *  
  * @param {array} assigns - array of Object: contacts 
- * @returns 
+ * @returns - html output
  */
 function getContacts(assigns) {
    if (assigns == null) return "";
@@ -117,7 +117,7 @@ function getCategoryClass(category) {
  * Creates HTML Code for teh Progressbar
  * 
  * @param {object} task - one Task that we want to analyse  
- * @returns 
+ * @returns -  html output
  */
 function getSubBar(task) {
    let subbar="";
@@ -143,7 +143,7 @@ function getSubBar(task) {
  * Creates a HTML Code for one Task Card
  * 
  * @param {object} task - one task for teh card 
- * @returns 
+ * @returns - html output
  */
 function getTaskOutput(task) {
    let contacts=getContacts(task.assignedTo);
@@ -369,7 +369,6 @@ function getTopParent(element,className) {
  * 
  * @param {event} event - dragover event   
  * @param {string} status - column status
- * @returns 
  */
 function toggleBorder(event,status=null) {
    let e=getTopParent(event.target,"containers");

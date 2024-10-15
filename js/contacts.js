@@ -56,7 +56,7 @@ function renderContacts(groupedContacts) {
  * groups the sorted contacts according to the first letter of the first name
  * 
  * @param {*} contacts 
- * @returns 
+ * @returns - Uppercase Letter
  */
 function groupContactsByFirstLetter(contacts) {
    return contacts.reduce((groups, contact) => {

@@ -55,7 +55,7 @@ function enableButton(button) {
  * so all flields ust be valid
  * 
  * @param {array} list - List of ids of the interface 
- * @returns -true if all fields are valid and ready to work width
+ * @returns - true if all fields are valid and ready to work width
  */
 function inputFilled(list) {
     for (let item of list) {
@@ -129,7 +129,6 @@ function disableFormEvents(formid) {
 * 
 * @param {element} formSelector - The FORM we want to analyse
 * @param {object} styleObject   - givin style for the Errors
-* @returns 
 */
 function addFormListener(formSelector, styleObject) {
     let form = document.querySelector(formSelector);
@@ -177,7 +176,7 @@ function customMessage(element) {
  * 
  * @param {element} node - Element that should be styleds
  * @param {*} styles - Object of Styles
- * @returns 
+ * @returns - nothing
  */
 function styleElement(node, styles) {
     if (styles == null) return;
@@ -195,7 +194,7 @@ function styleElement(node, styles) {
  * 
  * @param {string} id 
  * @param {string} customMsg 
- * @returns 
+ * @returns - nothing
  */
 function customErrorMsg(id = null, customMsg = null) {
     if (typeof (id) !== "string" || typeof (customMsg) !== "string") return;
@@ -208,12 +207,12 @@ function customErrorMsg(id = null, customMsg = null) {
 /**
  * 
  * Find the Form TAG of the inputfield we are in
- * @private - called from:
+ * private - called from:
  * -  eventErrorMsg
  * 
  * @param {elment} element - inputfield we use  
- * @returns 
- * - false if no FORM Tag is found, otherwise the tagName of the Forrm
+ * @returns - false if no FORM Tag is found, otherwise the tagName of the Forrm
+ * 
  */
 function getFormId(element) {
     let e = element;
@@ -232,7 +231,7 @@ function getFormId(element) {
  * Returns the found element as ID QUERY TAG
  * 
  * @param {element} element 
- * @returns 
+ * @returns -id as Queryselöector
  */
 function getFormQs(element) {
     return "#" + (getFormId(element) || "login-card");
@@ -263,8 +262,8 @@ function eventErrorMsg(event) {
  * 
  * Displays the error message
  * 
- * @param {eement} element - set the Errormessage to the nearest SPAN TAG 
- * @returns 
+ * @param {element} element - set the Errormessage to the nearest SPAN TAG 
+ * @returns element we search for
  */
 function setErrorMsg(element) {
     sibling = element;
@@ -282,7 +281,7 @@ function setErrorMsg(element) {
  * 
  * @param {*} event - mouse event that triggered
  * @param {*} container  - No fnuction
- * @returns 
+ * @returns - nothing
  */
 function togglePasswordView(event, container) {
     let passwordContainer = event.target.parentElement;
@@ -355,7 +354,7 @@ function removeAllCustomMsg(formid) {
  * Marks all Fields text or input 
  * 
  * @param {string} formid - id for the FORM tag 
- * @returns 
+ * @returns -nothing
  */
 function markAllFieds(formid) {
     let form = document.querySelector(formid);
@@ -375,9 +374,9 @@ function markAllFieds(formid) {
  * 
  * Checks if all Fields in the form are valid
  * 
- * @param {string} formqs gets the nearest TAG / ID / Class
+ * @param {string} formqs - gets the nearest TAG / ID / Class
  * 
- * @returns elemet of the form
+ * @returns - elemet of the form
  */
 function isFormValid(formqs) {
     let form = document.querySelector(formqs);

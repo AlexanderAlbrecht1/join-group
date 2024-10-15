@@ -17,9 +17,12 @@ function logout() {
 
 /**
  * 
- * @public - from Event
  * 
+ * public  
+ *
+ *  
  * load Dashboard, login success
+ * - from Event
  * 
  */
 function openDashboard(parameter="") {
@@ -29,9 +32,10 @@ function openDashboard(parameter="") {
 
 /**
  * 
- * @public - from Eevent
+ * public 
  * 
  * load registration, user has no account
+ * - from Eevent
  * 
  */
 function openSignup() {
@@ -41,9 +45,10 @@ function openSignup() {
 
 /**
  * 
- * @public - from Eevent
+ * public 
  * 
  * load Login, user ist not Logged 
+ * - from Eevent
  * 
  */
 function openLogin() {
@@ -52,9 +57,10 @@ function openLogin() {
 
 
 /**
- * load next HTML, geneerell alias
  * 
- * @public - called from any js
+ * @ublic 
+ * load next HTML, geneerell alias
+ * - called from any js
  *
  * @param {url} url - open a HTML and exit from here
  */
@@ -65,9 +71,10 @@ function openPage(url) {
 
 /**
  * 
- * Check if given Login has success
+ * private 
  * 
- * @private - called fom login
+ * Check if given Login has success
+ * - called fom login
  *
  * @param {string} email     - email from the user who tries to login
  * @param {string} password  - the password that belongs to the user
@@ -88,9 +95,10 @@ async function isLoginCorrect(email, password, showmsg = true) {
 
 /**
  * 
- * Checks if the current Password ist correct
+ * private 
  * 
- * @private - used from: isLoginCorrect
+ * Checks if the current Password ist correct
+ * - used from: isLoginCorrect
  * 
  * @param {object} userList - the whole Userlist of the db
  * @param {string} email    - the login mail to check
@@ -105,9 +113,10 @@ function isPasswordCorrect(userList, email, password) {
 
 /**
  * 
- * add some customised Messages to the board and sets the focus
+ * private 
  * 
- * @private - used from isLoginCorrect
+ * add some customised Messages to the board and sets the focus
+ * - used from isLoginCorrect
  * 
  * @param {text} msg   - Message to display
  * @param {text} focus - id of the focused field 
@@ -122,9 +131,10 @@ function handleErrors(msg, focus) {
 
 /**
  * 
- * Gives Back the Errormessage as invalid Field
+ * private 
  * 
- * @private - called from isLoginCorrect
+ * Gives Back the Errormessage as invalid Field
+ * - called from isLoginCorrect
  * 
  * @param {object} userList - the whole Userlist of the db
  * @param {string} email    - the login mail to check
@@ -153,9 +163,9 @@ function validateUser(userList, email, password) {
 
 /**
  * 
- * Checks if mail is found in userlist
+ * private - called from isLoginCorrect
  * 
- * @private - called from isLoginCorrect
+ * Checks if mail is found in userlist
  * 
  * @param {object} userList - the whole Userlist of the db
  * @param {string} email    - the login mail to check
@@ -169,7 +179,7 @@ function userExists(userList, email) {
 /**
  * Alias to have better reading to get the Userlist
  *
- * @returns JSON array wth all user information
+ * @returns - JSON array wth all user information
  */
 async function getUserList() {
    return await loadData("user");
@@ -227,7 +237,6 @@ function clearLocalStorage() {
  * also displays an eye or strikethrough eye
  * 
  * @param {event} event - the event = of the icon
- * @returns 
  */
 function togglePasswordView(event) {
    let passwordContainer=event.target.parentElement;
@@ -246,9 +255,10 @@ function togglePasswordView(event) {
 
 /**
  * 
- * Activates Errors while in input field and red border
+ * private 
+ * - called form handleErrors
  * 
- * @private - called form handleErrors
+ * Activates Errors while in input field and red border
  * @param {*} formid - the id of the form we want no to errors and border live 
  */
 function activateFormErrors(formid) {

@@ -15,7 +15,7 @@ function getElementEdit(targetElement,query) {
  * Checks all Contacts we need
  * 
  * @param {object} assignedList 
- * @returns 
+ * @returns - html output
  */
 function kanbanEditSelectors(assignedList) {
     let html="";
@@ -63,7 +63,7 @@ function kanbanEditSelector(contact,checked) {
  * Render Task List (all Categorys)
  * 
  * @param {array} json 
- * @returns 
+ * @returns - html output
  */  
 function kanbanEditRenderTask(json) {
     let cat = getCategoryText(json);

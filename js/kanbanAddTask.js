@@ -164,7 +164,7 @@ function faultDisplay(field,msg,border) {
  * 
  * Prepares Fields for Error analysis
  * 
- * @returns 
+ * @returns - true if no error happens
  */
 function showRequiredText() {
     let card=document.getElementById("add-task-form");

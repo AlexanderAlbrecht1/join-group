@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: js/firebase.js</title>
+    <title>JSDoc: Source: js/dashboard.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: js/firebase.js</h1>
+    <h1 class="page-title">Source: js/dashboard.js</h1>
 
     
 
@@ -27,218 +27,314 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * PRIVATE 
  * 
- * Returns the full path of the table in the firebase
+ * is executed when the page loads, checks whether and which user is logged in, generates the user monogram, the welcome text and updates the dashboard
  * 
- * @param {object} table 
- * @returns - full path of the table in the firebase
  */
-function getPath(table,id=null) {
-    let url='https://join-group-10487-default-rtdb.europe-west1.firebasedatabase.app/';
-    let project='join-group/';
-    let where= id==null?"":`?orderBy="id"&amp;equalTo=${id}`;
-    let path=url+project+table+".json"+where;// +`?orderBy="id"&amp;id=10`;
-    return path;
+function init() {
+   if (isLogged()) {
+      logedUserMonogram();
+      mobileGreeting();
+
+      greetingUser();
+      updateDashboard();
+   }
 }
 
-
-/**
- * 
- * PRIVATE
- * 
- * fetch action
- * 
- * @param {string} table   - name of table or key
- * @param {object} options - get / put / UFT-8
- * @returns {object} - answer with content of file
-*/
-async function fetchUrl(table,options,id=null) {
-    let url=getPath(table,id);
-    if (options != null) {
-        response = await fetch(url,options);
-    } else  {
-        response = await fetch(url);
-    }
-    return response;
-}
-
-
-/**
- * 
- * PRIVATE
- * 
- * fetch an url, translate to a json and give it back
- * 
- * @param {string} table   - name of table or key
- * @param {object} options - get / put / UFT-8
- * @returns - json array, false, if fails 
- */
-async function getResponse(table,options,id=null) {
-    try {
-        response=await fetchUrl(table,options,id);
-        if (response.ok) { // 404 = page does not exist, 2XX = OK 
-            const data= response.json();
-            return data; // Bei Objekten, die möglicherweise nicht als Array vorliegen
-        } else {
-            throw new Error(`Response status: ${response.status}`);
-        }
-    } catch (error) {
-        console.error(error.message);
-        return false;
-    }
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for fetching Data
- * 
- * @returns {object} - JSON arrary of data
- */
-async function loadData(table,id=null) {
-    let options={
-        method: "GET",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    };
-    let data=await getResponse(table,options,id);
-    if (Array.isArray(data)) data = data.filter(element => element !== null);
-
-    return data;
-}
-
-
-/**
- * 
- * PUBLIC
- * 
- * Userinterface for fetching Data DELETE
- * 
- * Explanaition:
- *      we need to get the key from the Id, to delete by key
- *      It ist not possible to delete by a given Id 
- * 
- * We need first to get 
- * @returns {object} - JSON arrary of data
- */
-async function deleteData(table,id=null) {
-    let json=await loadData(table,id);
-    table+="/"+Object.keys(json)[0];
-    let options={
-        method: "DELETE",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        }
-    };
-    return await getResponse(table,options);
-}
  
-
 /**
  * 
- * PUBLIC
+ * checks which user is logged in and generates the personal greeting
  * 
- * Userinterface for saving Data overwrite
- * 
- * @param {string} table - table or key
- * @param {object} data  - json array
- * @returns {object} - false if failes, true if succes
  */
-async function saveData(table,data = {},id=null) {
-    let options=  {
-        method: "PUT",
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        },
-        body: JSON.stringify(data)
-    };
-    return await getResponse(table,options,id);    
+function greetingUser() {
+   salutation();
+   let data= JSON.parse(sessionStorage.getItem(PROJECT));  
+   let userName = data.username; 
+   if (userName == "guest") {
+      document.getElementById('greetingSalutation').innerHTML+="!";
+   } else {
+      document.getElementById('greetingSalutation').innerHTML+=",";
+      document.getElementById('userName').innerHTML = userName;
+   }
 }
 
 
 /**
  * 
- * PUBLIC
+ * generates different greetings depending on the time of day
  * 
- * Returns the next available ID of a Table by iterating
- * 
- * @param {object} data JSON Arra width Data that contains id 
- * @returns - highest ID + 1
  */
-function getNewId(data) {
-    if (data.length == 0) return -1;
-    let max=0;
-    for (let i=0;i&lt;data.length;i++) {
-        if (data[i].id>max) max=+data[i].id;
-    }
-    return max+1;
+function salutation() {
+   let hello = getGreeting();
+   document.getElementById('greetingSalutation').innerHTML = hello;
 }
 
 
 /**
  * 
- * PUBLIC
+ * creates and updates each tile, will give an error if loading is not possible
  * 
- * Returns the saved Highes Id of a database table
- * the higest id we store in a seperate File
- * 
- * @param {string} table - the name of the table the id we use from
- * @returns -  the saved Highes Id of a database table
  */
-async function getHighestId(table) {
-    let setupContact=await loadData(`tablesetup/${table}`);
-    if (setupContact == null) return 0;
-    return setupContact.lastId;
- }
- 
+async function updateDashboard() {
+   try { // AUA: do you know what you are doing here ?
+      createToDoCount();
+      createDoneCount();
+      createUrgentCount();
+      createInProgressCount();
+      createAwaitingFeedbackCount();
+      createTotalCount();
+      createNextDeadline();
+      const deadlineElement = document.querySelector('.urgentDate');
+   } catch (error) {
+      console.error('Fehler beim Laden des Dashboards:', error);
+   }
+}
 
-/**
- * PUBLIC (admin) / PRIVATE
- * 
- * saves the new id in the setuptable
- * @param {string} table 
- * @param {integer} id 
- */
- async function setHighestId(table,id) {
-    let row={lastId:id};
-    await saveData(`tablesetup/${table}`,row);
- }
- 
 
 /**
  * 
- * PRIVATE
+ * creates the ToDo tasks counter value HTML
  * 
- * increments the Id of a table and gives back th highest id + 1
- * then we returns the ne id  
- * the higest id we store in a seperate File
- * 
- * @param {string} table - the name of the table the id we use from
- * @returns -  the saved Highes Id of a database table 
  */
-async function getIncrementedId(table) {
-    let id=await getHighestId(table)+1;
-    await setHighestId(table,id);
-    return id;
- }
- 
+async function createToDoCount() {
+   const todoCount = await countTasksByStatus('to-do');
+   document.getElementById('todo-count').innerText = todoCount;
+}
+
 
 /**
+ * 
+ * creates the Done tasks counter value HTML
+ * 
+ */
+async function createDoneCount() {
+   const doneCount = await countTasksByStatus('done');
+   document.getElementById('done-count').innerText = doneCount;
+}
+
+
+/**
+ * 
+ * creates the urgent tasks counter value HTML
+ * 
+ */
+async function createUrgentCount() {
+   const urgentCount = await countTasksByPrio('urgent');
+   document.getElementById('urgent-count').innerText = urgentCount;
+}
+
+
+/**
+ * 
+ * creates the on progress tasks counter value HTML
+ * 
+ */
+async function createInProgressCount() {
+   const inProgressCount = await countTasksByStatus('in-progress');
+   document.getElementById('in-progress-count').innerText = inProgressCount;
+}
+
+
+/**
+ * 
+ * creates the awaiting feedback tasks counter value HTML
+ * 
+ */
+async function createAwaitingFeedbackCount() {
+   const awaitingFeedbackCount = await countTasksByStatus('await-feedback');
+   document.getElementById('awaiting-feedback-count').innerText = awaitingFeedbackCount;
+}
+
+
+/**
+ * 
+ * creates the total number of tasks counter value HTML
+ * 
+ */
+async function createTotalCount() {
+   const totalCount = await countAllTasks();
+   document.getElementById('total-count').innerText = totalCount;
+}
+
+
+/**
+ * 
+ * creates the next deadline value HTML
+ * 
+ */
+async function createNextDeadline() {
+   const nextDeadline = await findNextDeadline();
+   const deadlineElement = document.getElementById('deadline'); 
+   deadlineElement.innerText = nextDeadline || 'No upcoming deadlines';
+}
+
+/**
+ * redirects the user to the kanban board when clicked
+ * 
+ */
+
+function forwardingToBoard() {
+   window.location.href = './kanbanboard.html';
+}
+
+/**
+ * 
+ * filters tasks by status and returns the amount per status
+ * 
+ * @param {string} status 
+ * @returns amount of tasks per status 
+ */
+async function countTasksByStatus(status) {
+   const tasks = await loadData('taskstorage');
+   if (!tasks) {
+      return 0;
+   }
+   const taskArray = Object.values(tasks);
+   return taskArray.filter((task) => task &amp;&amp; task.status === status).length;
+}
+
+
+/**
+ * 
+ * filters tasks by priority status and returns the amount per status
+ * 
+ * @param {string} prio 
+ * @returns amount of tasks per status
+ */
+async function countTasksByPrio(prio) {
+   const tasks = await loadData('taskstorage');
+   if (!tasks) {
+      return 0;
+   }
+   const taskArray = Object.values(tasks);
+   return taskArray.filter((task) => task &amp;&amp; task.prio === prio).length;
+}
+
+
+/**
+ * 
+ * count all tasks in kanbanbord
+ * 
+ * @returns number of tasks
+ */
+async function countAllTasks() {
+   const tasks = await loadData('taskstorage');
+   if (!tasks || Object.keys(tasks).length === 0) {
+      return 0;
+   }
+   const taskArray = Object.values(tasks).filter((task) => task !== null);
+   return taskArray.length;
+}
+
+
+/**
+ * 
+ * Finds and returns the next upcoming task deadline or null
  *
- * PUBLIC
- * 
- * Load the Dataset of a Table by ID
- *   
- * @param {string} table - tablename of database
- * @param {integer} id - id in table
+ * @returns next task deadline or null
  */
-async function getDatasetById(table,id) {
-    let content=loadData(table+"/"+id);
-    return content;
+async function findNextDeadline() {
+   const tasks = await loadObjectData('taskstorage');
+   if (!tasks) return null;
+   const today = new Date();
+   const upcomingTask = Object.values(tasks)
+      .filter(hasValidDueDate)
+      .map(convertDueDate)
+      .filter((task) => task.dueDate >= today)
+      .sort((a, b) => a.dueDate - b.dueDate)[0];
+   return formatDueDate(upcomingTask);
+}
+
+
+/**
+ * 
+ * Checks if a task has a valid due date
+ * 
+ * @param {Object} task - The task object to check
+ * @param {string|Date} task.dueDate - The due date of the task
+ * @returns {boolean} - Returns true if the task and its due date are valid, otherwise false
+ */
+function hasValidDueDate(task) {
+   return task &amp;&amp; task.dueDate;
+}
+
+
+/**
+ * Converts the task's due date to a Date object.
+ * 
+ * @param {Object} task - The task object to convert.
+ * @param {string|Date} task.dueDate - The due date of the task, which may be a string or a Date object.
+ * @returns {Object} - Returns a new task object with the due date as a Date object.
+ */
+function convertDueDate(task) {
+   return {
+      ...task,
+      dueDate: new Date(task.dueDate),
+   };
+}
+
+
+/**
+ * Formats the task's due date as a localized string.
+ * 
+ * @param {Object} task - The task object containing the due date
+ * @param {Date} task.dueDate - The due date of the task
+ * @returns {string|null} - Returns the formatted due date string in 'en-US' format, or null if no task is provided
+ */
+function formatDueDate(task) {
+   return task 
+      ? task.dueDate.toLocaleDateString('en-US', {
+           year: 'numeric',
+           month: 'long',
+           day: 'numeric',
+        })
+      : null;
+}
+
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Checks if Phone is in Landscape
+ * Checks if User comes from login page
+ * 
+ * @returns 
+ * - true if: 
+ *    Phone is in landsacpe
+ *    AND
+ *    User comes from Login
+ */
+function mustShowMobileGreeting() {
+   let firstlogin=(new URLSearchParams(window.location.search)).get('login') != null
+   let width = +window.innerWidth;
+
+   return firstlogin &amp;&amp; width&lt;=450;
+
+}
+
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Sets a greeting on a Mobile Phone, 
+ * sleeps a while and
+ * then open then hides the message 
+ */
+async function showMobileGreeting() {
+   const greeting = document.querySelector(".mobile-greeting");
+   const welcome=getGreeting();
+   const   user=getUsername();
+   if (user=="guest") {
+      greeting.innerHTML=`&lt;span>${welcome}!&lt;/span>&lt;span>&lt;/span>`;
+   } else {
+      greeting.innerHTML=`&lt;span>${welcome},&lt;/span>&lt;span>${user}&lt;/span>`;      
+   }
+   greeting.style.opacity=0;
+   await new Promise(e => setTimeout(e,2000));
+   greeting.style.display="none";
 }
 
 
@@ -246,80 +342,16 @@ async function getDatasetById(table,id) {
  * 
  * PUBLIC
  * 
- * Saves the complete Table
- * 
- * @param {string} table  - tablename of database
- * @param {object} data  - Json Array Array of Datasets
+ * If we are on Mobile Phone we send a greeting , before we continue
  */
-async function saveObjectData(table,data) {
-    await saveData(table,arrayToObject(data));
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * @param {string} table  - table of database
- * @param {object} data  - Json Array Array of Datasets
- */
-async function saveObjectDataById(table,data) {
-    promises=[];
-    for (let d of data) {
-        promises.push(saveData(`${table}/${d.id}`,d));
-    }
-    await Promise.all(promises);
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * loads the whole table as object
- * 
- * @param {string} table  - table of database
- * @returns the whole data of a table in one Object
- * 
- */
-async function loadObjectData(table) {
-    return Object.values(await loadData(table));
-} 
-
-
-/**
- * 
- * PUBLIC
- * 
- * Loads a Table Dataset from database
- * if id is give we get only one dataset
- * if not the whole table
- * 
- * @param {*} table - table of database
- * @param {*} id    - id of the dataset
- * @returns - object width data
- */
-async function loadObjectDataById(table,id=null) {
-    return Object.values(await loadData(table,id));
-} 
-
-
-/**
- * 
- * PRIVATE
- * 
- * @param {array} array removes unallowed data from array
- * 
- * @returns - cleaned array of objects
- */
-function arrayToObject(array) {  
-    return array.reduce((result, item) => {
-        if (item &amp;&amp; typeof item === 'object' &amp;&amp; item.id != null) {      
-            result[item.id] = item;
-        }
-        return result;  
-    }, {});
-}</code></pre>
+async function mobileGreeting() {
+   if (mustShowMobileGreeting() ) {
+      showMobileGreeting();
+   } else {
+      document.querySelector(".mobile-greeting").style.display="none";
+   }
+}
+</code></pre>
         </article>
     </section>
 

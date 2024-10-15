@@ -48,7 +48,7 @@ function compareContactNames(a, b) {
  * save contact array to Firebase
  * 
  * @param {object} table 
- * @returns 
+ * @returns - contacts
  */
 async function saveContacts(table = 'Contacts') {
     return await saveData(table, contacts);
@@ -59,7 +59,7 @@ async function saveContacts(table = 'Contacts') {
  * 
  * generate the background color for new user monogram
  * 
- * @returns a color code
+ * @returns - a color code
  */
 function generateDarkColor() {
     const r = Math.floor(Math.random() * 129);
@@ -101,7 +101,7 @@ function changeBgColor(id) {
  * 
  * @param {Object} contact 
  * @param {Number} i 
- * @returns 
+ * @returns - contact array
  */
 function createContactArray(contact, i) {
     let contactArray = {
@@ -120,7 +120,7 @@ function createContactArray(contact, i) {
  * takes the unique ID from contact and search the position at the contact array
  * 
  * @param {Number} id 
- * @returns 
+ * @returns - returns index
  */
 function getCurrentContact(id) {
     for (let index = 0; index < contacts.length; index++) {
@@ -136,7 +136,7 @@ function getCurrentContact(id) {
  * 
  * @param {object} userList - list of all registed users
  * @param {number} id - a unique number for every person in Join
- * @returns 
+ * @returns - index of userlist
  */
 function getIndexUser(userList, id) {
     for (let index = 0; index < userList.length; index++) {

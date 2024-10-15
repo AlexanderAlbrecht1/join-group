@@ -302,7 +302,7 @@ function warningHTML(array) {
          <span class="detailMonogramSpan" style="background-color: ${array.backgroundColor}">${array.initial1}${array.initial2}</span>
       </div>
          <div class="addContactInputContainer2">
-            <div class="close" onclick="closeContactCreation()">
+            <div class="close" onclick="closeContactCreation(), closeMobileDialogBackground()">
                <img src="/assets/img/desktop/close.svg" alt="">
             </div>
             <div>

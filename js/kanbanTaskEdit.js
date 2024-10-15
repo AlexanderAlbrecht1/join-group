@@ -32,7 +32,6 @@ function kanbanEditSelectors(assignedList) {
 }
 
 
-
 /**
  * 
  * Checks one Contacts we need

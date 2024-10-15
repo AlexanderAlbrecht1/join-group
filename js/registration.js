@@ -2,10 +2,7 @@
     REQUIRES: 
     events.js
     login.js
-    
 */
-
-
 /**
  * msgBox Send a messag to the Interface
  * 
@@ -49,6 +46,57 @@ function existUser(userList) {
 
 
 /**
+ * 
+ * PUBLIC
+ * 
+ * Genertate an Object with seperated Info
+ * 
+ * @param {string} fullname 
+ * @returns 
+ */
+function getNameObj(fullname) {
+    let splittedName = fullname.split(' ');
+    let newFirstname = splittedName[0];
+    let newLastname = splittedName.length == 1?' ':splittedName[1];
+    return {
+        fullname:fullname,
+        firstName:newFirstname,
+        lastName:newLastname
+    } 
+}
+
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Saves the Contacts width new Contact
+ * 
+ * @param {array} contacts - array of Objects
+ * @param {object} newContact  - one object
+ */
+async function saveDataContacts(contacts,newContact) {
+    contacts.push(newContact);
+    await saveData("Contacts",contacts);
+}
+
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Saves the User width new User
+ * 
+ * @param {array} userList - array of Objects
+ * @param {object} newUser  - one object
+ */
+async function saveDataUser(userList,newUser) {
+    userList.push(newUser);
+    await saveData("user", userList);
+}
+
+
+/**
  * Add a User width all information to the table
  * 
  * @param {object} userList  List of Users 
@@ -57,34 +105,19 @@ async function addUserToList(userList) {
     let password = document.getElementById("sign-password");
     let email = document.getElementById("email");
     let user = document.getElementById("user");
-
-    // this part saves the new user to contacts -> contact book - start (Alex)
     contacts = await loadContacts();
     let id = await getIncrementedId("contact");
-    let fullname = user.value;
-    let splittedName = fullname.split(' ');
-    let newFirstname = splittedName[0];
-    let newLastname = [];
-    if (splittedName.length == 1) {
-        newLastname = ' ';
-     } else {
-        newLastname = splittedName[1]; 
-     }
-    let color = generateDarkColor();
+    let nameObj=getNameObj(user.value);
     let newContact = {
         id: id,
-        name: newFirstname,
-        lastname: newLastname,
+        name: nameObj.firstName,
+        lastname: nameObj.lastName,
         email: email.value,
         phone: '0000000',
-        color: color,
+        color: generateDarkColor()
     };
-    contacts.push(newContact);
-    await saveData("Contacts",contacts);
-    // await saveContacts();
-    // - end
-    userList.push({ user: user.value, password: password.value, email: email.value, id: id, });
-    await saveData("user", userList);
+    saveDataContacts(contacts,newContact);
+    saveDataUser(userList,{ user: user.value, password: password.value, email: email.value, id: id });
 }
 
 
@@ -95,16 +128,12 @@ async function addUserToList(userList) {
 async function register() {
     if (!isFormValid) return;
     if (!isEqualPassword()) return;
-
     let userList = await getUserList();
-
     console.log(userList);
-    
-
     if (existUser(userList)) return;
     await msgfly();
     await addUserToList(userList);
-    openLogin(); // autologin move to the page we need to go and exit here
+    openLogin(); 
 }
 
 
@@ -161,6 +190,14 @@ async function unregister() {
 }
 
 
+/**
+ * PRIVATE
+ * 
+ * Checks if the Registration Form is withouit wrong Entries
+ * 
+ * @param {string} formqs - QuerySelector ofthe used form
+ * @returns - Valid (true) or invalid (false)
+ */
 function isFormValid(formqs) {
     let form = document.querySelector(formqs);
     if (!form) return false;
@@ -171,6 +208,13 @@ function isFormValid(formqs) {
 }
 
 
+/**
+ * 
+ * PUBLIC
+ * 
+ * Initialation of the Register html
+ * 
+ */
 function init() {
     loadUserFromLocalStorage();
     addFormListener('#login-card');

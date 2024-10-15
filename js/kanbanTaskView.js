@@ -1,5 +1,13 @@
-
-
+/**
+ * 
+ * PRIVATE
+ * 
+ * Create a row of Contacts for he AssignList
+ * 
+ * @param {object} a - Assigned Contact
+ * 
+ * @returns 
+ */
 function getTaskViewAssign(a) {
     let contact=contacts.find(e => e.id == a);
     if (contact == null) return "";
@@ -11,12 +19,22 @@ function getTaskViewAssign(a) {
             <div style="background-color: ${contact.color}">${getMonogram(name)}</div>
             <span>${name}</span>
         </div>
-        <div><!--"checkbox"-->
+        <div>
         </div>
     </div>
     `;
 }
 
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Create the Assign List for the Selector
+ * 
+ * @param {array} assigns 
+ * @returns -html code
+ */
 function getTaskViewAssigns(assigns) {
     if (assigns == null) return "";
     let html="";
@@ -27,6 +45,15 @@ function getTaskViewAssigns(assigns) {
 }
 
 
+/**
+ * 
+ * PRIVATE
+ * 
+ * creates output for Subtask
+ * 
+ * @param {object} json - array of Objects
+ * @returns - html code
+ */
 function getTaskViewSubtasks(json) {
     if (json.subtasks == null) return "";
     let html="";
@@ -44,6 +71,16 @@ function getTaskViewSubtasks(json) {
     return html;
 }
 
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Creates the Text for Category 
+ * 
+ * @param {object} json -task
+ * @returns - teh category to show
+ */
 function getCategoryText(json) {
     let cat = "User Story";
     if (json.category == "technical-task") {
@@ -52,6 +89,14 @@ function getCategoryText(json) {
     return cat;
 }
 
+
+/**
+ * 
+ * Creates one Task Output
+ * 
+ * @param {object} json - Task 
+ * @returns - html output
+ */
 function getTaskView(json) {
     let cat = getCategoryText(json);
     return /*html*/ `
@@ -89,13 +134,31 @@ function getTaskView(json) {
 
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Opens the Task View
+ * 
+ * @param {object} json - Task
+ */
 async function openTaskView(json) {
     document.getElementById("task-edit-card").style="display: none";
     document.getElementById("task-view-card").innerHTML=getTaskView(json[0]);
     document.getElementById("task-view-card").style="";
-    
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Opens the Task View
+ * 
+ * @param {*} event 
+ * @returns 
+ */
 async function openTask(event) {
     if (event.type === "dragleave") {
         return

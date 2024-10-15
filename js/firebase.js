@@ -1,4 +1,6 @@
 /**
+ * PRIVATE 
+ * 
  * Returns the full path of the table in the firebase
  * 
  * @param {object} table 
@@ -14,6 +16,9 @@ function getPath(table,id=null) {
 
 
 /**
+ * 
+ * PRIVATE
+ * 
  * fetch action
  * 
  * @param {string} table   - name of table or key
@@ -32,7 +37,11 @@ async function fetchUrl(table,options,id=null) {
 
 
 /**
+ * 
+ * PRIVATE
+ * 
  * fetch an url, translate to a json and give it back
+ * 
  * @param {string} table   - name of table or key
  * @param {object} options - get / put / UFT-8
  * @returns - json array, false, if fails 
@@ -54,6 +63,9 @@ async function getResponse(table,options,id=null) {
 
 
 /**
+ * 
+ * PUBLIC
+ * 
  * Userinterface for fetching Data
  * 
  * @returns {object} - JSON arrary of data
@@ -71,7 +83,10 @@ async function loadData(table,id=null) {
     return data;
 }
 
+
 /**
+ * 
+ * PUBLIC
  * 
  * Userinterface for fetching Data DELETE
  * 
@@ -96,6 +111,9 @@ async function deleteData(table,id=null) {
  
 
 /**
+ * 
+ * PUBLIC
+ * 
  * Userinterface for saving Data overwrite
  * 
  * @param {string} table - table or key
@@ -115,6 +133,9 @@ async function saveData(table,data = {},id=null) {
 
 
 /**
+ * 
+ * PUBLIC
+ * 
  * Returns the next available ID of a Table by iterating
  * 
  * @param {object} data JSON Arra width Data that contains id 
@@ -132,6 +153,8 @@ function getNewId(data) {
 
 /**
  * 
+ * PUBLIC
+ * 
  * Returns the saved Highes Id of a database table
  * the higest id we store in a seperate File
  * 
@@ -146,6 +169,7 @@ async function getHighestId(table) {
  
 
 /**
+ * PUBLIC (admin) / PRIVATE
  * 
  * saves the new id in the setuptable
  * @param {string} table 
@@ -161,6 +185,8 @@ async function getHighestId(table) {
 
 /**
  * 
+ * PRIVATE
+ * 
  * increments the Id of a table and gives back th highest id + 1
  * then we returns the ne id  
  * the higest id we store in a seperate File
@@ -175,15 +201,42 @@ async function getIncrementedId(table) {
  }
  
 
+/**
+ *
+ * PUBLIC
+ * 
+ * Load the Dataset of a Table by ID
+ *   
+ * @param {string} table - tablename of database
+ * @param {integer} id - id in table
+ */
 async function getDatasetById(table,id) {
     let content=loadData(table+"/"+id);
-
+    return content;
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Saves the complete Table
+ * 
+ * @param {string} table  - tablename of database
+ * @param {object} data  - Json Array Array of Datasets
+ */
 async function saveObjectData(table,data) {
     await saveData(table,arrayToObject(data));
 } 
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * @param {string} table  - table of database
+ * @param {object} data  - Json Array Array of Datasets
+ */
 async function saveObjectDataById(table,data) {
     promises=[];
     for (let d of data) {
@@ -192,14 +245,47 @@ async function saveObjectDataById(table,data) {
     await Promise.all(promises);
 } 
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * loads the whole table as object
+ * 
+ * @param {string} table  - table of database
+ * @returns the whole data of a table in one Object
+ * 
+ */
 async function loadObjectData(table) {
     return Object.values(await loadData(table));
 } 
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Loads a Table Dataset from database
+ * if id is give we get only one dataset
+ * if not the whole table
+ * 
+ * @param {*} table - table of database
+ * @param {*} id    - id of the dataset
+ * @returns 
+ */
 async function loadObjectDataById(table,id=null) {
     return Object.values(await loadData(table,id));
 } 
 
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * @param {array} array removes unallowed data from array
+ * 
+ * @returns - cleaned array of objects
+ */
 function arrayToObject(array) {  
     return array.reduce((result, item) => {
         if (item && typeof item === 'object' && item.id != null) {      

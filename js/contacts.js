@@ -97,7 +97,6 @@ function filterValidContacts(contacts) {
          contact.name &&
          contact.lastname &&
          contact.email
-      // contact.phone
    );
 }
 

@@ -5,6 +5,7 @@
     
 */
 
+
 /**
  * msgBox Send a messag to the Interface
  * 
@@ -13,6 +14,7 @@
 function msgBox(msg) {
     // document.getElementById("msg-box").innerHTML=msg;
 }
+
 
 /**
  * Checks if 2 passwords of the interface are equal
@@ -27,6 +29,7 @@ function isEqualPassword() {
     }
     return password.value == confirmPassword.value;
 }
+
 
 /**
  * Look if the User already exist
@@ -43,6 +46,7 @@ function existUser(userList) {
     }
     return index != -1;
 }
+
 
 /**
  * Add a User width all information to the table
@@ -103,6 +107,7 @@ async function register() {
     openLogin(); // autologin move to the page we need to go and exit here
 }
 
+
 /**
  * removeUser
  * Remove all information of a user
@@ -120,6 +125,7 @@ async function removeUser(userList, index) {
     msgBox(`Your data is completely deleted! Sorry to loose you !`);
 }
 
+
 /**
  * passwordValidationOK
  * validate the interface with the given Password
@@ -132,6 +138,7 @@ function passwordValidationOK(passwordOfList) {
         customErrorMsg("confirm-password", "The mail-password validation failed !");
     }
 }
+
 
 /**
  * Remove User from all permanent
@@ -154,24 +161,17 @@ async function unregister() {
 }
 
 
-
 function isFormValid(formqs) {
     let form = document.querySelector(formqs);
     if (!form) return false;
-
     let inputs = form.querySelectorAll('input');
     let status = Array.from(inputs).findIndex(input => !input.checkValidity()) == -1;
     let cb = form.querySelector("#remember-me").checked;
-
-    /* if (!status || !cb) {
-        disableCheck(!status || !cb);
-    }*/
-    // let err=Array.from(inputs).findIndex(input =>input.validity.valid===false);
     return status && cb;
 }
 
+
 function init() {
     loadUserFromLocalStorage();
-    // initEventListenerLogin();
     addFormListener('#login-card');
 }

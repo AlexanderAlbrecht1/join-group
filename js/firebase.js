@@ -175,12 +175,12 @@ async function getIncrementedId(table) {
  }
  
 
- async function getDatasetById(table,id) {
+async function getDatasetById(table,id) {
     let content=loadData(table+"/"+id);
 
- }
+}
 
- async function saveObjectData(table,data) {
+async function saveObjectData(table,data) {
     await saveData(table,arrayToObject(data));
 } 
 
@@ -208,69 +208,3 @@ function arrayToObject(array) {
         return result;  
     }, {});
 }
-
-/**
- * Firebas Authenificatione
- * {
- *      "rules": {
- *          ".read": "auth != null",
- *          ".write": "auth != null"
- *      }
- * }
- * 
- */
-/*
-firebase.auth().createUserWithEmailAndPassword(email, password)
-  .then((userCredential) => {
-    const user = userCredential.user;
-    console.log("Benutzer registriert:", user);
-  })
-  .catch((error) => {
-    console.error("Fehler bei der Registrierung:", error.message);
-});
-*/
-
-/*
-function convertToTable(jsonArray) {
-    let data  = Object.fromEntries(
-        jsonArray.map(({id, ...other}) => [id, other])
-    ); 
-    
-    // data=Object.fromEntries(
-    //     jsonArray.map(item => [item.id, { vorname: item.vorname, nachname: item.nachname }])
-    // );
-    
-    return data;
-}
-
-
-function convertfromTable(jsonArray) {
-    let jsonArray = Object.entries(data).map(([id, rest]) => {
-        return { id: Number(id), ...rest };
-    });
-    return jsonArray;
-}
-
-async function saveIndexedData(table,jsonArray) {
-    data=convert2Table(jsonArray);
-    await saveData(table,data);
-
-}
-
-async function loadIndexedData(table) {
-    data=await loadData(table+"/"+id);
-    jsonArray=convertfromTable(data);
-    return jsonArray;
-}
-
-async function saveDataById(table,id,jsonArray) {
-    data=convert2Table(jsonArray);
-    await saveData(table+"/"+id,data);
-}
-
-async function loadDataById(table,id) {
-    data=await loadData(table+"/"+id);
-    jsonArray=convertfromTable(data);
-    return jsonArray;
-}
-    */

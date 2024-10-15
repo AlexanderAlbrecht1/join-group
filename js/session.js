@@ -3,6 +3,7 @@
 */
 const PROJECT = "join2024-326";
 
+
 /**
  * Remove the content of a key in the session
  *
@@ -12,6 +13,7 @@ function sessionDestroy(key = null) {
    if (key == null) sessionStorage.clear();
    else sessionStorage.removeItem(key);
 }
+
 
 /**
  * load a key from session
@@ -33,6 +35,7 @@ function sessionSave(key, value = {}) {
    sessionStorage.setItem(key, JSON.stringify(value));
 }
 
+
 /**
  * load next HTML, geneerell alias
  *
@@ -41,6 +44,7 @@ function sessionSave(key, value = {}) {
 function openPage(url) {
    window.location = url;
 }
+
 
 /**
  * Redirect to login, if not Logged
@@ -52,7 +56,7 @@ function isLogged() {
    user=sessionLoad(PROJECT);
    if (user == null) {
       if (loadFromLocalStorage(PROJECT) == null) { 
-         openPage("./index.html"); // or as Pop Up
+         openPage("./index.html"); 
          return false;
       } else {
          loadUserFromLocalStorage()
@@ -60,6 +64,7 @@ function isLogged() {
    }
    return true;
 }
+
 
 /**
  * 
@@ -70,6 +75,7 @@ function isLogged() {
 function getUsername() {
    return sessionLoad(PROJECT).username;
 }
+
 
 /**
  * Retrieves the logged-in user's monogram and displays it in the DOM.

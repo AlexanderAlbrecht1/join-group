@@ -1,21 +1,31 @@
+/**
+ * 
+ * @param {element} targetElement 
+ * @param {element} query 
+ * @returns - the id iunder main tadk-edit-card
+ */
 function getElementEdit(targetElement,query) {
     let father=targetElement.closest(".task-edit-card");
     return father.querySelector(query);     
 }
 
+
+/**
+ * 
+ * Checks all Contacts we need
+ * 
+ * @param {object} assignedList 
+ * @returns 
+ */
 function kanbanEditSelectors(assignedList) {
     let html="";
-    
-
     for (let i=0;i<contacts.length;i++) {
         let checked="";
         if (assignedList != null) {
-
             if (assignedList.indexOf(contacts[i].id) != -1) {
                 checked="checked";
             }
         }
-
         html+=kanbanEditSelector(contacts[i],checked);
     };
     return html;
@@ -23,11 +33,17 @@ function kanbanEditSelectors(assignedList) {
 
 
 
+/**
+ * 
+ * Checks one Contacts we need
+ * 
+ * @param {object} contact 
+ * @param {*} checked 
+ * @returns html - code
+ */
 function kanbanEditSelector(contact,checked) {
     if (contact == null) return "";
     let name=getFullNameInContact(contact);
-
-
     return /*html*/ `
         <label class="selector">
             <input type="checkbox" class="custom-checkbox" name="assign" value="${contact.id}" ${checked}>
@@ -41,7 +57,15 @@ function kanbanEditSelector(contact,checked) {
         </label>`;
 }
 
-  
+/**
+ * 
+ * PUBLIC
+ * 
+ * Render Task List (all Categorys)
+ * 
+ * @param {array} json 
+ * @returns 
+ */  
 function kanbanEditRenderTask(json) {
     let cat = getCategoryText(json);
     let mindate=getTaskDateMin(json.dueDate);
@@ -59,7 +83,6 @@ function kanbanEditRenderTask(json) {
                         <span class="error-msg visible"></span>
                     </div>
                 </div>
-                
                 <div>
                     <strong>Description</strong>
                     <div class="input-container invalid">
@@ -67,7 +90,6 @@ function kanbanEditRenderTask(json) {
                         <span class="error-msg visible"></span>
                     </div>
                 </div>
-                
                 <div>
                     <strong>Due date</strong>
                     <div class="input-container invalid">
@@ -75,7 +97,6 @@ function kanbanEditRenderTask(json) {
                         <span class="error-msg visible"></span>
                     </div>
                 </div>
-
                 <div>
                     <strong>Priority</strong>
                     <div class="flex-row gap16 priority">
@@ -86,7 +107,6 @@ function kanbanEditRenderTask(json) {
                                 <img src="./assets/img/desktop/prio_urgent_red.svg">
                             </div>
                         </label>
-
                         <label>
                             <input type="radio" id="edit-medium" name="edit-prio" value="medium" ${json.prio=="medium"?"checked":""}>
                             <div class="button-label medium">
@@ -94,7 +114,6 @@ function kanbanEditRenderTask(json) {
                                 <img src="./assets/img/desktop/prio_medium_yellow.svg">
                             </div>
                         </label>
-
                         <label>
                             <input type="radio" id="edit-low" name="edit-prio" value="low" ${json.prio=="low"?"checked":""}>
                             <div for="edit-low" class="button-label low">
@@ -104,12 +123,8 @@ function kanbanEditRenderTask(json) {
                         </label>
                     </div>
                 </div>
-
-
-
                 <div class="relative mb32" >
                     <strong>Assigned to</strong>
-
                     <details class="absolute" style="width:100%;">
                         <summary><input type="text" placeholder="Select contacts to assign"></summary>
                         <div class="selectors">
@@ -120,11 +135,9 @@ function kanbanEditRenderTask(json) {
                 <div class="monogramlist flex-row gap8">
                     ${getTaskEditAssigns(json.assignedTo)}
                 </div>
-
                 <div class="subtask-container label-input-con">
                     <label>Subtasks</label>
                     <input class="input-subtask" oninput="toggleSubtaskIcon(event)" type="text" id="subtasks" placeholder="Add new subtask">
-                    
                     <button type="button" id="add-subtask" class="btn-add-subtask">
                         <img 
                             onclick="clearSubtaskInput(event)" class="add-subtask-clear d-none"
@@ -133,27 +146,20 @@ function kanbanEditRenderTask(json) {
                         <img onclick="addSubtasks(event)" class="subtask-icon"
                             src="./assets/img/desktop/add_subtask.svg">
                     </button>
-                    
                     <ul class="subtask-list">
                     </ul>
-
                     <div class="edit-input-con d-none">
                         <input type="text" class="subtask-edit-input">
                         <div>
                             <img class="edit-delete" onclick="deleteSubtask(event)"
-                                src="./assets/img/desktop/subtask-delete.svg" alt="">
-                            
-                            <div class="h-line24"></div>    
-                            
+                                src="./assets/img/desktop/subtask-delete.svg" alt="">                            
+                            <div class="h-line24"></div>                                
                             <img class="edit-check" onclick="saveEditedSubtask(event)"
-                                src="./assets/img/desktop/add-subtask-check.svg" alt="">
-                    
+                                src="./assets/img/desktop/add-subtask-check.svg" alt="">                   
                         </div>
                     </div>
                 </div>
-
-            </div>
-    
+            </div>    
             <div class="bottom">
                 <div class="darkbutton" onclick="saveEditTask(${json.id})">
                     Ok
@@ -162,30 +168,32 @@ function kanbanEditRenderTask(json) {
             </div>
 
     `;
-
 }
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Edit a Task and save it back
+ *  
+ * @param {*} id - id of the task
+ */
 async function editTask(id) {
     let json = await loadObjectDataById("taskstorage",id);
     let card=document.getElementById("task-edit-card");
     subtasks=json[0].subtasks;
-
     card.innerHTML=kanbanEditRenderTask(json[0]);
     card.classList.add(json[0].category);
     card.classList.remove("d-none");
-    // document.getElementById("task-view").classList.add("go")   
-    // hier die  Event Listener aufrufen  für Selecor
-    // oder den EventListener global gestzalten aber nicht sinnvol
-    // await new Promise(e => setTimeout(e,1000));
     initSelector();
     addFormListener("#task-edit-card");
     document.getElementById("task-view-card").style="display: none";
     card.style="";
-
     let subtaskElement=card.querySelector(".subtask-list");
     renderSubtasks(subtaskElement);
-
 }
+
 
 /**
  * 
@@ -205,6 +213,7 @@ function getTaskEditAssign(a) {
        <span class="circle-monogram" style="background-color:${contact.color}">${getMonogram(name)}</span>`;
 }
 
+
 /**
  * 
  * PUBLIC 
@@ -223,6 +232,18 @@ function getTaskEditAssigns(assigns) {
     return html;
 }
 
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * analysese and returnd the value of the Priority
+ * 
+ * @param {element} element 
+ * @param {string} name 
+ * 
+ * @returns the value medium urgent or low
+ */
 function getRadioValue(element,name) {
     radio = element.querySelectorAll(`input[name='${name}']`);
     for (let i=0;i<radio.length;i++) {
@@ -230,6 +251,17 @@ function getRadioValue(element,name) {
     }
     return "";
 }
+
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Retruns a List of assigned Contacts
+ * 
+ * @param {element} father 
+ * @returns - a list of all inputfields of assinged contact s
+ */
 function getAssignedIdsFromUI(father) {
     let selections=father.querySelectorAll('input[name="assign"]');
     if (selections==null) return [];
@@ -240,6 +272,15 @@ function getAssignedIdsFromUI(father) {
     return assigned;
 };
 
+
+/**
+ * 
+ * PUBLIC
+ * 
+ * Gets Task Infoirmation from Input
+ * 
+ * @param {object} task  - Task
+ */
 function taskEditToObj(task) {
     let father=document.getElementById("task-edit-card");
     task.subtasks=subtasks;
@@ -250,6 +291,15 @@ function taskEditToObj(task) {
     task.assignedTo=getAssignedIdsFromUI(father);
 }
 
+
+/**
+ * 
+ * PRIVATE
+ * 
+ * Replaces the new generated Tags in the List for Display
+ * 
+ * @param {object} task - one Task Object 
+ */
 function updateTask(task) {
     let index=tasks.findIndex(e => e.id==task.id);
     tasks[index]=task;
@@ -257,19 +307,18 @@ function updateTask(task) {
 
 }
 
+
+/**
+ * PUBLIC
+ * 
+ * Saves the Task by Id
+ * 
+ * @param {integer} id - Task id
+ */
 async function saveEditTask(id) {
     let json = await loadObjectDataById("taskstorage",id);
     taskEditToObj(json[0]);
     updateTask(json[0]);
     await saveObjectDataById("taskstorage",json);
     openTaskView(json);
-
-
-
-
-
-    // save
-    // close
-
-
 }

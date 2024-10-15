@@ -1,24 +1,31 @@
+/**
+ * 
+ * changes the visibility of the popup menu when clicking on the usermongram
+ * 
+ */
 function openUserMenu() {
     document.getElementById('popUpUser').classList.toggle('dFlex');
 }
 
+/**
+ * 
+ * logs the user out by emptying the session storage and local storage and then checks whether the user is logged in
+ * 
+ */
 function logOut() {
     localStorage.removeItem(PROJECT);
     sessionStorage.removeItem(PROJECT);
     isLogged();
 }
 
+/**
+ * 
+ * creates the user monogram in the header by checking which user is logged in
+ * 
+ */
 function initSessionMonogram() {
     isLogged();
     logedUserMonogram();
-}
-
-function checkUser(url) {
-    if (getUsername() === "guest") {
-        window.open(url, '_blank');
-    } else {
-        window.location.href = url;
-    }
 }
 
 /**

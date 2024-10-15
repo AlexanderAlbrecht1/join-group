@@ -259,7 +259,6 @@ function renderSubtasks(subtaskList) {
                     <div class="h-line24"></div>    
                     <img onclick="deleteSubtask(event,${i})" src="./assets/img/desktop/subtask-delete.svg" alt="">
                 </div>
-                <!-- div class="subtask-change edit-input-con d-none"></div-->
                 <div class="subtask-change d-none"></div>
             </div>
         `;

@@ -1,14 +1,3 @@
-/*
-function XisFormValid(formqs) {
-   let form = document.querySelector(formqs);
-   if (!form) return false;
-
-   let inputs = form.querySelectorAll('input');
-   let status =
-      Array.from(inputs).findIndex((input) => !input.checkValidity()) == -1;
-   return status;
-}
-*/
 /**
  *
  * Initiates Dawn and logo Movement
@@ -20,13 +9,10 @@ function init2() {
    document.getElementById('login-card').classList.add('dawn');
    document.getElementById('login-master').classList.add('dawn');
    document.getElementById('main-logo').classList.add('logo-position');
-
    loadUserFromLocalStorage();
    addFormListener('#login-card');
-
-   // let valid=isFormValid("#login-card"); // ############# Faschge stelle ?
-   // disableCheck(valid);                  // ############# zusammen im Login nicht möglich ?
 }
+
 
 /**
  * if checked save user data to the local storage, get it back later
@@ -39,6 +25,7 @@ function rememberMe() {
       clearLocalStorage();
    }
 }
+
 
 /**
  *
@@ -53,6 +40,7 @@ function guestLogin(event) {
    login();
 }
 
+
 /**
  * put in Mask to have it later again, do we need it ?
  *
@@ -64,6 +52,7 @@ function putLoginToValue(email, pw) {
    document.getElementById('email').value = email;
 }
 
+
 /**
  * Clear all Login fields ?
  */
@@ -72,6 +61,7 @@ function clearLogin() {
    document.getElementById('email').value = '';
    document.getElementById('remember-me').checked = false;
 }
+
 
 /**
  * run this after given user and password
@@ -97,6 +87,13 @@ async function login() {
    }
 }
 
+
+/**
+ * 
+ * takes the data of the logged in user and saves it in the locla storage to enable the “remind me” function
+ * 
+ * @param {object} user - data of the logged in user
+ */
 function saveUserToLocalStorage(user) {
    localStorage.setItem('currentUserEmail', user.email);
    localStorage.setItem('currentUserName', user.username);

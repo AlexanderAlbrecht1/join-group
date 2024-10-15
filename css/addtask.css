@@ -320,16 +320,11 @@ textarea {
 .subtask-icon {
    width: 24px;
    display: flex;
-   justify-content: flex-end;
+   justify-content: space-between;
    gap: 16px;
    flex: 1;
 }
 
-
-.subtask-icon img:first-child {
-   padding-right: 12px;
-   border-right: 1px solid #d1d1d1;
-}
 
 
 .subtask-icon img {

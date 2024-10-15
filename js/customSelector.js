@@ -70,7 +70,7 @@ function detailsEventKey(event) {
     if (event.code === "Escape") {
         event.target.closest("details").open=false;
     }
-};
+}
 
 
 /**

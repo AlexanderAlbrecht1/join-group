@@ -4,17 +4,15 @@
  * 
  * @param {bool} submit - input is changed to false or tru (elemnt form interface)
  */
-function disableCheck(submit,id="submit") {
-    let button=document.getElementById(id)
+function disableCheck(submit, id = "submit") {
+    let button = document.getElementById(id)
     if (button == null) return
-
     if (submit) {
         enableButton(button);
-    } else 
-    if (!button.disabled) {
-        disableButton(button);
-    }
-
+    } else
+        if (!button.disabled) {
+            disableButton(button);
+        }
 }
 
 
@@ -27,10 +25,10 @@ function disableCheck(submit,id="submit") {
  * @param {element} button - elementof the button to disable/enable
  */
 function disableButton(button) {
-    button.disabled=true;
+    button.disabled = true;
     button.classList.add("disable");
-    button.style.cursor="not-allowed";
-    button.style.backgroundColor="#A0A0A0";
+    button.style.cursor = "not-allowed";
+    button.style.backgroundColor = "#A0A0A0";
 }
 
 
@@ -43,12 +41,12 @@ function disableButton(button) {
  * @param {element} button - elementof the button to disable/enable
  */
 function enableButton(button) {
-    button.disabled=false;
+    button.disabled = false;
     button.classList.remove("disable");
-    button.style.color="";
-    button.style.filter="";
-    button.style.cursor="pointer";
-    button.style.backgroundColor="";
+    button.style.color = "";
+    button.style.filter = "";
+    button.style.cursor = "pointer";
+    button.style.backgroundColor = "";
 }
 
 
@@ -61,11 +59,11 @@ function enableButton(button) {
  */
 function inputFilled(list) {
     for (let item of list) {
-        let d=document.getElementById(item);
+        let d = document.getElementById(item);
         if (d.type == "checkbox" && d.checked == false) {
             return false;
         }
-        if (!d.validity.valid ) {
+        if (!d.validity.valid) {
             return false;
         }
     }
@@ -80,7 +78,7 @@ function inputFilled(list) {
  * 
  * @param {array} list - List of ids in the interface 
  */
-function sendButton(event,list) {
+function sendButton(event, list) {
     let submit = inputFilled(list);
     disableCheck(submit);
     addValidationMessage(event.target);
@@ -94,15 +92,15 @@ function sendButton(event,list) {
  * @param {element} element - from inputfield the message
  */
 function addValidationMessage(element) {
-    let msg=document.getElementById(element.id+"-msg");
+    let msg = document.getElementById(element.id + "-msg");
     if (msg) {
         if (!element.checkValidity()) {
             msg.innerHTML = element.validationMessage;
         } else {
             msg.innerHTML = "";
-        }    
+        }
     }
-}    
+}
 
 
 /**
@@ -114,25 +112,25 @@ function addValidationMessage(element) {
  * @param {text} formid - the name ginven th the FORM Tag
  */
 function disableFormEvents(formid) {
-    let form=document.getElementById(formid);
+    let form = document.getElementById(formid);
     inputs = form.querySelectorAll('input, textarea');
     inputs.forEach(element => {
         element.addEventListener("invalid", e => e.preventDefault());
         element.addEventListener("submit", e => e.preventDefault());
     });
- }
+}
 
 
- /**
- * 
- * PUBLIC
- * 
- * Add some Listeners for the input
- * 
- * @param {element} formSelector - The FORM we want to analyse
- * @param {object} styleObject   - givin style for the Errors
- * @returns 
- */
+/**
+* 
+* PUBLIC
+* 
+* Add some Listeners for the input
+* 
+* @param {element} formSelector - The FORM we want to analyse
+* @param {object} styleObject   - givin style for the Errors
+* @returns 
+*/
 function addFormListener(formSelector, styleObject) {
     let form = document.querySelector(formSelector);
     if (!form) return false;
@@ -141,8 +139,8 @@ function addFormListener(formSelector, styleObject) {
     inputs.forEach(input => {
         styleElement(input, styleObject);
         input.addEventListener('input', eventErrorMsg);
-        input.addEventListener("focusin",e => removeCustomErrorCode(input)); // to be able te re Submit ohne ALL
-        input.addEventListener("blur",e => removeCustomMsg(input)); // to be able te re Submit ohne ALL
+        input.addEventListener("focusin", e => removeCustomErrorCode(input)); // to be able te re Submit ohne ALL
+        input.addEventListener("blur", e => removeCustomMsg(input)); // to be able te re Submit ohne ALL
     });
 }
 
@@ -157,15 +155,15 @@ function addFormListener(formSelector, styleObject) {
  * @returns - nothing
  */
 function customMessage(element) {
-    if (!element.validity.patternMismatch){
+    if (!element.validity.patternMismatch) {
         element.setCustomValidity(``);
         return;
     }
-    let cl=element.parentElement.classList;
+    let cl = element.parentElement.classList;
     if (cl.contains("new")) {
         element.setCustomValidity(`Minimum: 8 characters, 1 lowercase, 1 uppercase, 1 number, 1 special char`);
     } else if (cl.contains("name")) {
-        element.setCustomValidity(`no special chars, names has to begin width letters`);    
+        element.setCustomValidity(`no special chars, names has to begin width letters`);
     } else {
         element.setCustomValidity(``);
     }
@@ -199,9 +197,9 @@ function styleElement(node, styles) {
  * @param {string} customMsg 
  * @returns 
  */
-function customErrorMsg(id=null,customMsg=null) {
-    if (typeof(id) !== "string" || typeof(customMsg) !== "string") return;
-    let sibling=document.getElementById(id);
+function customErrorMsg(id = null, customMsg = null) {
+    if (typeof (id) !== "string" || typeof (customMsg) !== "string") return;
+    let sibling = document.getElementById(id);
     sibling.setCustomValidity(customMsg);
     setErrorMsg(sibling);
 }
@@ -218,8 +216,8 @@ function customErrorMsg(id=null,customMsg=null) {
  * - false if no FORM Tag is found, otherwise the tagName of the Forrm
  */
 function getFormId(element) {
-    let e=element;
-    while ((e=e.parentElement) !== null) {
+    let e = element;
+    while ((e = e.parentElement) !== null) {
         if (e.tagName == "FORM") return e.id;
     }
     return false;
@@ -250,10 +248,10 @@ function getFormQs(element) {
  * @param {event} event - input event 
  */
 function eventErrorMsg(event) {
-    let formquery=getFormQs(event.target);
+    let formquery = getFormQs(event.target);
     customMessage(event.target);
     setErrorMsg(event.target);
-    let valid=isFormValid(formquery); 
+    let valid = isFormValid(formquery);
     disableCheck(valid);
     event.preventDefault();
 }
@@ -269,11 +267,11 @@ function eventErrorMsg(event) {
  * @returns 
  */
 function setErrorMsg(element) {
-    sibling=element;
+    sibling = element;
     while (sibling.nextElementSibling && sibling.nextElementSibling.tagName == 'SPAN') {
         sibling = sibling.nextElementSibling;
     }
-    sibling.innerHTML=element.validity.valid?"":element.validationMessage;
+    sibling.innerHTML = element.validity.valid ? "" : element.validationMessage;
     return sibling;
 }
 
@@ -286,19 +284,19 @@ function setErrorMsg(element) {
  * @param {*} container  - No fnuction
  * @returns 
  */
-function togglePasswordView(event,container) {
-    let passwordContainer=event.target.parentElement;
-    let passwordInput=event.target.previousElementSibling;
+function togglePasswordView(event, container) {
+    let passwordContainer = event.target.parentElement;
+    let passwordInput = event.target.previousElementSibling;
     if (document.activeElement !== passwordInput) {
-       return;
+        return;
     }
-    let isVisible = passwordContainer.classList.toggle("visible");   
+    let isVisible = passwordContainer.classList.toggle("visible");
     passwordInput.type = isVisible ? "text" : "password";
     passwordInput.focus();
- 
+
     event.preventDefault();
     event.stopPropagation();
- }
+}
 
 
 /**
@@ -311,7 +309,7 @@ function togglePasswordView(event,container) {
  */
 function removeCustomErrorCode(input) {
     input.setCustomValidity('');
-} 
+}
 
 
 /**
@@ -322,12 +320,12 @@ function removeCustomErrorCode(input) {
  * Triggert on Focus Lost
  * @param {element} input - error message element
  */
-function removeCustomMsg(input) { 
-        input.setCustomValidity('');
+function removeCustomMsg(input) {
+    input.setCustomValidity('');
     if (input.checkValidity()) {
         setErrorMsg(input);
     }
-    let valid=isFormValid(getFormQs(input)); 
+    let valid = isFormValid(getFormQs(input));
     disableCheck(valid);
 }
 
@@ -384,7 +382,7 @@ function markAllFieds(formid) {
 function isFormValid(formqs) {
     let form = document.querySelector(formqs);
     if (!form) return false;
- 
+
     let inputs = form.querySelectorAll('input, textarea');
     let status = Array.from(inputs).findIndex(input => !input.checkValidity()) == -1;
     return status;

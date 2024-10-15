@@ -85,9 +85,6 @@ function getTaskView(json) {
                 <span>edit</span>
             </a>
         </div>
-
-
-
     `;
 
 }
@@ -137,7 +134,12 @@ function toggleSubtaskState(element,state=null) {
 }
 
 
-
+/**
+ * 
+ * @param {*} event 
+ * @param {*} id 
+ * @param {*} subId 
+ */
 async function toggleSubtaskStateEvent(event,id,subId) {
     let state = toggleSubtaskState(event.currentTarget);
     let json = await loadObjectDataById("taskstorage",id);
@@ -150,6 +152,11 @@ async function toggleSubtaskStateEvent(event,id,subId) {
     resizeContainer();
 }
 
+
+/**
+ * 
+ * @param {*} id 
+ */
 async function deleteTask(id) {
     await deleteData("taskstorage",id);
     let i=tasks.findIndex(e => e.id==id);

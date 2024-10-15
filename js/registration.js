@@ -116,8 +116,8 @@ async function addUserToList(userList) {
         phone: '0000000',
         color: generateDarkColor()
     };
-    saveDataContacts(contacts,newContact);
-    saveDataUser(userList,{ user: user.value, password: password.value, email: email.value, id: id });
+    await saveDataContacts(contacts,newContact);
+    await saveDataUser(userList,{ user: user.value, password: password.value, email: email.value, id: id });
 }
 
 

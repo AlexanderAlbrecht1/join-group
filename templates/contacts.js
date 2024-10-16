@@ -189,8 +189,8 @@ function addContactHTML() {
             </div>
             <form class="form-input" onsubmit="addNewContact();return false;" onload="removeEvent();return false" id="addContactCard" class="addContactCard">
                <div id="input-field-container" class="input-container">
-                  <input id="name" type="text" required placeholder="Name">
-                  <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
+                  <input id="name" type="text" required pattern="^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)*$" placeholder="Name">
+                  <span class="icon"><img src="./assets/img/desktop/person.svg"></span>   
                   <span class="error-msg visible"></span>
                </div>
                <div id="input-field-container" class="input-container">
@@ -268,7 +268,7 @@ function createEditContactDialogMobileHTML(array) {
                      <span>Delete </span>
                   </div>
                   <button class="safeEditContactButton" type="submit" >
-                     <span>Safe</span>
+                     <span>Save</span>
                      <div class="checkSVGContainer">
                      </div>
                   </button>

@@ -169,6 +169,7 @@ function saveEditedSubtask(event) {
        currentEditIndex = null;
        subtaskEditInput.value = "";
     }
+    setSubtaskScrollBar(subtaskEditCon);
 }
 
 
@@ -188,6 +189,23 @@ function fillSubtaskInput(target,index) {
     currentEditIndex = index;
 }
 
+/**
+ * 
+ * PRIVATE 
+ * 
+ * Toggles Scrollbar at Subtask
+ * 
+ * @param {element} element - element of the container width d-none (edit-input-con)
+ */
+function setSubtaskScrollBar(element) {
+    scrollContainer = element.closest(".subtask-container").querySelector("ul")
+    if (element.classList.contains("d-none")) {
+        scrollContainer.style.overflow="";
+    } else {
+        scrollContainer.style.overflow="hidden";
+    }
+}
+
 
 /**
  *
@@ -201,8 +219,11 @@ function displaySubtaskInput(element) {
     let container  = element.closest(".subtask-container").querySelector(".edit-input-con");
     let target     = element.closest(".list-item");
     let input      = container.querySelector("INPUT");
+    
     container.classList.remove("d-none");
     container.style.marginTop=0;
+    setSubtaskScrollBar(container);
+
     let rectTarget    = target.getBoundingClientRect();
     let rectContainer = container.getBoundingClientRect(); // Hier Ok
     container.style.marginTop=`${(rectTarget.top - rectContainer.top)}px`;

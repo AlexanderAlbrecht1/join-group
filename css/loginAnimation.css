@@ -10,6 +10,8 @@
     transform: translate(-50%,-50%);
     width: 274px;
     height: 334.07px;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 
@@ -35,6 +37,8 @@
     animation-duration: 500ms;
     animation-name: dawn;    
     animation-fill-mode: forwards; 
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 

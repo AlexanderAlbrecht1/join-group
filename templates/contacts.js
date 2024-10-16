@@ -187,19 +187,19 @@ function addContactHTML() {
             <div class="close" onclick="closeContactCreation(), closeMobileDialogBackground()">
                <img src="/assets/img/desktop/close.svg" alt="">
             </div>
-            <form class="form-input" onsubmit="addNewContact();return false;" onload="removeEvent();return false" id="addContactCard" class="addContactCard">
-               <div id="input-field-container" class="input-container">
+            <form id="contact-form" class="form-input" onsubmit="addNewContact();return false;" onload="removeEvent();return false" id="addContactCard" class="addContactCard">
+               <div class="input-container">
                   <input id="name" type="text" required pattern="^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)*$" placeholder="Name">
                   <span class="icon"><img src="./assets/img/desktop/person.svg"></span>   
-                  <span class="error-msg visible"></span>
+                  <span class="error-msg visible">Test</span>
                </div>
-               <div id="input-field-container" class="input-container">
+               <div  class="input-container">
                   <input id="email" type="email" required placeholder="Email">
                   <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
                   <span class="error-msg visible"></span>
                </div>
-               <div id="input-field-container" class="input-container invalid">
-                  <input id="phone" type="tel" pattern="[0-9]*" maxlength="20" placeholder="Phone">
+               <div  class="input-container">
+                  <input id="phone" type="tel" required pattern="[0-9+]*" maxlength="20" placeholder="Phone">
                   <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
                </div>
                <div class="buttons">
@@ -251,19 +251,19 @@ function createEditContactDialogMobileHTML(array) {
                <img src="/assets/img/desktop/close.svg" alt="">
             </div>
             <form class="form-input" onsubmit="saveEditedContact(${array.id});return false;">
-               <div id="input-field-container" class="input-container invalid">
+               <div class="input-container invalid">
                   <input id="name" type="text" required placeholder="Name">
                   <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
                </div>
-               <div id="input-field-container" class="input-container invalid">
+               <div class="input-container invalid">
                   <input id="email" type="email" required placeholder="Email">
                   <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
                </div>
-               <div id="input-field-container" class="input-container invalid">
+               <div  class="input-container invalid">
                   <input id="phone" type="tel" pattern="[0-9]*" maxlength="20" required placeholder="Phone">
                   <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
                </div>
-               <div class="editContactbuttons ">
+               <div class="editContactbuttons">
                   <div class="deleteButton" onclick="deleteContact(${array.id})">
                      <span>Delete </span>
                   </div>

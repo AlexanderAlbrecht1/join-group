@@ -80,7 +80,7 @@ function clearSubtaskInput(event) {
  * 
  * @param {event} event - event, that is triggered from Buttons  
  */
-function addSubtasks(event) {
+function addSubtasks(event,i) {
     let subtaskInput = getElement(event.target,"input-subtask");
     let subtaskList = getElement(event.target,"subtask-list");
     let subtaskIcon = getElement(event.target,"subtask-icon");
@@ -97,7 +97,7 @@ function addSubtasks(event) {
        renderSubtasks(subtaskList);
        subtaskInput.value = "";
        toggleSubtaskIcon(event);
-    } 
+    }
 }
 
 
@@ -159,7 +159,7 @@ function getSubtaskElements(target) {
  * 
  * @param {event} event - triggert from subtasks
  */
-function saveEditedSubtask(event) {
+function saveEditedSubtask(event,i) {
     let [subtaskEditInput,subtaskList,subtaskEditCon] = getSubtaskElements(event.currentTarget);
 
     if (currentEditIndex !== null && subtaskEditInput.value !== "") {
@@ -168,6 +168,10 @@ function saveEditedSubtask(event) {
        renderSubtasks(subtaskList);
        currentEditIndex = null;
        subtaskEditInput.value = "";
+    } else {
+        deleteSubtask(event, i)
+        subtaskEditInput.value = "";
+        subtaskEditCon.classList.add("d-none");
     }
     setSubtaskScrollBar(subtaskEditCon);
 }

@@ -73,6 +73,7 @@
    display: flex;
    box-sizing: border-box;
    position: relative;
+   margin-bottom: 100px;
 }
 
 
@@ -112,7 +113,7 @@
    padding:0;
    list-style:none;
    overflow-y: auto;
-   max-height: 200px;
+   max-height: 150px;
 }
 
 

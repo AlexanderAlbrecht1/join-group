@@ -121,7 +121,7 @@ function getCategoryClass(category) {
  */
 function getSubBar(task) {
    let subbar="";
-   if (task.subtasks != null) {
+   if (task.subtasks != null ) {
       let done=task.subtasks.filter(e => e.done).length;
       subbar=/*html*/`
          <div class="progress-container">

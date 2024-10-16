@@ -216,17 +216,6 @@ function getTaskEditAssign(a) {
 
 /**
  * 
- * PUBLIC 
- * 
- * Creates HTML: a row of contacts
- * 
- * @param {*} assigns  - contact.assignedTo List of assigned Contacts
- * @returns - a row of contacts in HTML  
- */
-
-
-/**
- * 
  * PRIVATE
  * 
  * analysese and returnd the value of the Priority

@@ -214,24 +214,6 @@ function createWarningPopUp(id, index) {
 
 /**
  *
- * returns the monogram of a Name
- *
- * @param {string} name first name and last name split by " "
- * @returns the first characters of the 2 first Names in uppercase
- */
-/*
-function getMonogram(name) {
-   let na = name.toUpperCase().split(' ', 2);
-   if (na.length == 1) {
-      return na[0][0];
-   } else {
-      return na[0][0] + na[1][0];
-   }
-}
-*/
-
-/**
- *
  * Sorts the contact list by last name and name
  *
  * @param {object} contacts - object list of contacts

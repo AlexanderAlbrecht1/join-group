@@ -1,16 +1,22 @@
 .logo-position {
     position: absolute; 
+    display: flex;
+
     animation-delay: 200ms;
     animation-timing-function: ease-in-out;
     animation-duration: 500ms;
     animation-name: logo-position; 
     animation-fill-mode: forwards; 
+
     top: 50%; 
     left: 50%;
-    transform: translate(-50%,-50%);
+   
+    transform: 
+        translate(-50%,-50%) 
+        translateZ(0);
+        
     width: 274px;
     height: 334.07px;
-    transform: translateZ(0);
     will-change: transform;
 }
 
@@ -21,12 +27,10 @@
 
 
     100% {
-        opacity: 1;
         width: 100.03px;
         height: 121.97px;
-        top: 60px; 
+        top: 100px; 
         left: 70px; 
-        transform:none;
     }
 }
 

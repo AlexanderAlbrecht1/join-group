@@ -193,6 +193,7 @@ function addToggleSelectListener(rootId) {
  * Displays all activated monograms in one Row
  * 
  * Changes in sibling from details selector
+ * This is used when closing the selector 
  *  
  * @param {event} event - Displays all activated monograms  in a row
  */
@@ -201,8 +202,11 @@ function displaySelectorMonograms(event) {
     let checked=checkboxes.filter(e => e.checked);
     let monogramList=event.currentTarget.parentElement.nextElementSibling; 
     monogramList.innerHTML="";
-    checked.forEach (checkbox => {
-        let monogram=checkbox.parentElement.querySelector("SPAN").cloneNode(true);
+    for (let i=0;i<Math.min(checked.length,5);i++) {
+        let monogram=checked[i].parentElement.querySelector("SPAN").cloneNode(true);
         monogramList.appendChild(monogram);
-    })
+    }
+    if (checked.length>5){
+        monogramList.innerHTML+=`<span style="margin-left:1em">+ ${checked.length-5}</span>`;
+    }
 }

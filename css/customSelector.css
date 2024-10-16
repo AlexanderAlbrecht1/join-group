@@ -213,4 +213,5 @@ details .monogram {
 .monogramlist {
    display: flex;
    flex-wrap: wrap;
+   align-items:center;
 }

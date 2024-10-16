@@ -9,7 +9,6 @@ function getElementEdit(targetElement,query) {
     return father.querySelector(query);     
 }
 
-
 /**
  * 
  * Checks all Contacts we need
@@ -28,6 +27,8 @@ function kanbanEditSelectors(assignedList) {
         }
         html+=kanbanEditSelector(contacts[i],checked);
     };
+
+
     return html;
 }
 
@@ -222,14 +223,6 @@ function getTaskEditAssign(a) {
  * @param {*} assigns  - contact.assignedTo List of assigned Contacts
  * @returns - a row of contacts in HTML  
  */
-function getTaskEditAssigns(assigns) {
-    if (assigns == null) return "";
-    let html="";
-    for (let assign of assigns) {
-        html+=getTaskEditAssign(assign);
-    }
-    return html;
-}
 
 
 /**

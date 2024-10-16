@@ -23,7 +23,7 @@ function initAssignSelector(selector) {
     let list=document.getElementById(listId)
     list.innerHTML=kanbanEditSelectors();
     let monograms=document.getElementById(monogramId);
-    monograms.innerHTML=""; // getTaskEditAssigns(json.assignedTo);
+    monograms.innerHTML=""; 
     addToggleSelectListener(rootId);
 }
 
@@ -63,8 +63,13 @@ function getTaskEditAssign(a) {
 function getTaskEditAssigns(assigns) {
     if (assigns == null) return "";
     let html="";
+    let count=0;
     for (let assign of assigns) {
         html+=getTaskEditAssign(assign);
+        if (++count == 5) break;
+    }
+    if (count<assigns.length){
+        html+=`<span style="margin-left:1em">+${assigns.length-count}</span>`;
     }
     return html;
 }

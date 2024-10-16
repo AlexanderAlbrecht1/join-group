@@ -219,6 +219,7 @@ function createWarningPopUp(id, index) {
  * @param {string} name first name and last name split by " "
  * @returns the first characters of the 2 first Names in uppercase
  */
+/*
 function getMonogram(name) {
    let na = name.toUpperCase().split(' ', 2);
    if (na.length == 1) {
@@ -227,7 +228,7 @@ function getMonogram(name) {
       return na[0][0] + na[1][0];
    }
 }
-
+*/
 
 /**
  *

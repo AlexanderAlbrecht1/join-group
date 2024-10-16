@@ -39,7 +39,7 @@ function initSessionMonogram() {
  * @returns the first characters of the 2 first Names in uppercase
  */
 function getMonogram(name) {
-    let na = name.toUpperCase().split(' ', 2);
+    let na = name.replace(/\s+/g, ' ').toUpperCase().trim().split(' ', 2);
     if (na.length == 1) {
         return na[0][0];
     } else {

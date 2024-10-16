@@ -149,27 +149,6 @@ function getIndexUser(userList, id) {
 
 
 /**
- * 
- * load contact array from Firebase
- * 
- */
-async function loadContacts(table = 'Contacts') {
-    let loadedContacts = await loadData(table);
-    if (!loadedContacts) {
-        return [];
-    }
-    if (Array.isArray(loadedContacts)) {
-        return loadedContacts.filter((contact) => contact !== null);
-    } else if (typeof loadedContacts === 'object' && loadedContacts !== null) {
-        return Object.values(loadedContacts).filter(
-            (contact) => contact !== null
-        );
-    }
-    return [];
-}
-
-
-/**
  *
  * creates a contact form to add a new contact
  */
@@ -180,29 +159,6 @@ function openCreateContactDialogMobile() {
     editContactContainer.innerHTML = addContactHTML();
     editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
     document.getElementById('contactBook').style.overflowY = "hidden";
-}
-
-
-/**
- *
- * creates a contact form to add a new contact for mobile version
- */
-function openMobileContactDetail(singleContactArray, id) {
-    document.getElementById('contactBook').style.display = 'none';
-    document.getElementById('workingArea').style.display = 'none';
-    document.getElementById('contactDetail').innerHTML = '';
-    document.getElementById('contactDetail').innerHTML = createSingleContactMobileHTML(singleContactArray, id);
-}
-
-
-/**
-  * 
-  * close dialog window
-  */
-function closeContactCreation() {
-    document.getElementById('dialogBackground').classList.add('displayNone');
-    document.getElementById('dialogBackground').classList.remove('displayFlex');
-    document.getElementById('body').classList.remove('overflowHidden');
 }
 
 
@@ -261,22 +217,6 @@ function backToContactBook() {
 
 
 /**
- * opens a little pop up on mobile view
- */
-function openPopUpEdit() {
-    document.getElementById('popUpWarpper').style.display = 'flex';
-}
-
-
-/**
- * closes the little pop up on mobile view
- */
-function closeMobileEditPopUp() {
-    document.getElementById('popUpWarpper').style.display = 'none';
-}
-
-
-/**
 * 
 * creates an array to pass the variables into the createHTML function
 * 
@@ -323,17 +263,6 @@ function preFilledInputs(inventoryData) {
     document.getElementById('name').value = inventoryData.name + ' ' + inventoryData.lastname;
     document.getElementById('email').value = inventoryData.mail;
     document.getElementById('phone').value = inventoryData.phone;
-}
-
-
-/**
- * 
- * prevent close dialog by click buttons or input fields
- * 
- * @param {click} event 
- */
-function dontClose(event) {
-    event.stopPropagation();
 }
 
 

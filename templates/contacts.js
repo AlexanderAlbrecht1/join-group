@@ -187,20 +187,26 @@ function addContactHTML() {
             <div class="close" onclick="closeContactCreation(), closeMobileDialogBackground()">
                <img src="/assets/img/desktop/close.svg" alt="">
             </div>
-            <form id="contact-form" class="form-input" onsubmit="addNewContact();return false;" onload="removeEvent();return false" id="addContactCard" class="addContactCard">
+            <form id="add-contact-form" class="form-input" onsubmit="addNewContact();return false;" onload="removeEvent();return false" id="addContactCard" class="addContactCard">
                <div class="input-container">
                   <input id="name" type="text" required pattern="^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)*$" placeholder="Name">
                   <span class="icon"><img src="./assets/img/desktop/person.svg"></span>   
-                  <span class="error-msg visible">Test</span>
+                  <span class="error-msg visible"></span>
                </div>
-               <div  class="input-container">
-                  <input id="email" type="email" required placeholder="Email">
+               <div  class="input-container email">
+                  <input 
+                     id="email" 
+                     type="mail" 
+                     required pattern="[\\-A-Za-z0-9_.]+@[\\-A-Za-z0-9_]+\\.[A-Za-z]{2,4}"  
+                     title="Format: user.name@domain.com" 
+                     placeholder="Email">
                   <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
                   <span class="error-msg visible"></span>
                </div>
                <div  class="input-container">
                   <input id="phone" type="tel" required pattern="[0-9+]*" maxlength="20" placeholder="Phone">
                   <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
+                  <span class="error-msg visible"></span>
                </div>
                <div class="buttons">
                   <div class="cancelButton" onclick="closeContactCreation(), closeMobileDialogBackground()">
@@ -208,7 +214,7 @@ function addContactHTML() {
                     <div class="cancelSVGContainer">
                     </div>
                   </div>
-                  <button onmousedown="activateFormErrors('addContactCard')"  class="createContactButton" type="submit">
+                  <button onmousedown="validateForm('add-contact-form')"  class="createContactButton" type="submit">
                     <span>Create contact</span>
                     <div class="checkSVGContainer">
                     </div>

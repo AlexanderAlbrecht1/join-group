@@ -163,6 +163,8 @@ function customMessage(element) {
         element.setCustomValidity(`Minimum: 8 characters, 1 lowercase, 1 uppercase, 1 number, 1 special char`);
     } else if (cl.contains("name")) {
         element.setCustomValidity(`no special chars, names has to begin width letters`);
+    } else if (cl.contains("email")) {
+        element.setCustomValidity(`please use a format like user@mail.com`);
     } else {
         element.setCustomValidity(``);
     }
@@ -386,3 +388,49 @@ function isFormValid(formqs) {
     let status = Array.from(inputs).findIndex(input => !input.checkValidity()) == -1;
     return status;
 } 
+
+
+
+function enableRedBorder(formqs) {
+    let form = document.querySelector(formqs);
+    if (!form) return;
+    let inputs = form.querySelectorAll('input-container');    
+    for (let input of inputs) {
+        input.classList.add("invalid");
+    }     
+}
+
+
+function disableRedBorder(formqs) {
+    let form = document.querySelector(formqs);
+    if (!form) return;
+    let inputs = form.querySelectorAll('input-container');    
+    for (let input of inputs) {
+        input.classList.remove("invalid");
+    }     
+}
+
+
+
+/**
+ * 
+ * private 
+ * - called form handleErrors
+ * 
+ * Activates Errors while in input field and red border
+ * @param {*} formid - the id of the form we want no to errors and border live 
+ */
+function activateFormErrors(formid) {
+    let form=document.getElementById(formid);
+    inputs = form.querySelectorAll('input');
+    inputs.forEach(element => {
+       element.parentElement.classList.add("invalid");
+    });
+    disableFormEvents(formid);
+ }
+ 
+
+ function validateForm(formid) {
+    activateFormErrors(formid);
+    markAllFieds("#"+formid);
+ }

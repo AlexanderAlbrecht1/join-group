@@ -253,19 +253,3 @@ function togglePasswordView(event) {
 }
 
 
-/**
- * 
- * private 
- * - called form handleErrors
- * 
- * Activates Errors while in input field and red border
- * @param {*} formid - the id of the form we want no to errors and border live 
- */
-function activateFormErrors(formid) {
-   let form=document.getElementById(formid);
-   inputs = form.querySelectorAll('input');
-   inputs.forEach(element => {
-      element.parentElement.classList.add("invalid");
-   });
-   disableFormEvents(formid);
-}

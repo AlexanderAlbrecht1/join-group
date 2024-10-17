@@ -26,7 +26,6 @@ async function displayContacts() {
       let groupedContacts = groupContactsByFirstLetter(contacts);
       renderContacts(groupedContacts);
    } catch (error) {
-      console.error("Fehler beim Laden der Kontakte:", error);
    }
 }
 

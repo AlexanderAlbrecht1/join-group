@@ -159,6 +159,8 @@ function openCreateContactDialogMobile() {
     editContactContainer.innerHTML = addContactHTML();
     editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
     document.getElementById('contactBook').style.overflowY = "hidden";
+    addFormListener("#add-contact-form");
+
 }
 
 

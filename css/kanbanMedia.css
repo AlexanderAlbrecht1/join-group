@@ -118,16 +118,15 @@
 
 @media (max-width:780px) {
     #input-field-container {
-        display: none;
+        position: absolute;
+        width: 90%;
+        top: 220px;
+        left: 5%;
     }
 
-
-    #input-field-container-alt {
-        display: flex;
-        margin-right:32px;
+    .mbb {
+        margin-top: 40px;
     }
-
-
     .mbh>div:nth-last-of-type(2) {
         justify-content: space-between;
         gap: unset;

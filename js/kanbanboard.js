@@ -145,19 +145,23 @@ function getSubBar(task) {
  * @param {object} task - one task for teh card 
  * @returns - html output
  */
+
+
 function getTaskOutput(task) {
    let contacts=getContacts(task.assignedTo);
    let categoryClass=getCategoryClass(task.category);
    let subbar=getSubBar(task);
    let cat = getCategoryText(task);
 
-   //Now begin
    return /*html*/`
       <div class="card ${categoryClass}" id="task-${task.id}" 
       draggable="true" 
       ondragstart="drag(event)"
       ondragenter="toggleBorder(event,true)"
-      onmouseup="openTask(event)"
+      onmouseup="openTask(event)"      
+      ontouchstart="startTouch(event)" 
+      ontouchmove="moveTouch(event)" 
+      ontouchend="endTouch(event)"
      >
          <h1>${cat}</h1>
          <div class="mbb-text">
@@ -166,10 +170,10 @@ function getTaskOutput(task) {
          </div>
          ${subbar}
          <div class="mbb-icons">
-            <div class="monogram"><!-- monograms-->
+            <div class="monogram">
                ${contacts}
             </div>
-            <div class="icon-prio-${task.prio}"> <!-- prio -->
+            <div class="icon-prio-${task.prio}">
             </div>
          </div>
       </div>
@@ -224,9 +228,18 @@ function allowDrop(ev) {
  * @param {event} ev  - drag event
  */
 function drag(ev) {
-   ev.dataTransfer.setData('text', ev.target.id);
+   if (ev.dataTransfer == null) {
+      touchdrag(ev);
+   } else {
+      ev.dataTransfer.setData('text', ev.target.id);    
+   }
    hideNoTaskInfo(ev);
    resizeContainer();
+}
+
+function touchdrag(ev) {
+   touchId=ev.target.id;
+   touchContainer=ev.target;
 }
 
 

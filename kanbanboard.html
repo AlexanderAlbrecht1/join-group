@@ -43,10 +43,30 @@
     <script src="./js/subtask.js"></script>
     <script src="./js/events.js"></script>
     <script src="./js/date.js"></script>
+    <script src="./js/touchEvent.js"></script>
 </head>
 
 <body onload="init()">
     <div class="relative">
+        <div id="touch-card" style="
+            position:absolute;
+            top:0;
+            left:0;
+            z-index:6;
+            box-sizing: border-box;
+    width: 252px;
+    padding: 16px;
+    gap: 24px;
+    border-radius: 24px;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 1);
+    transform-origin: bottom left;
+    transition: 100ms ease-in-out;
+    cursor: pointer;
+
+            "></div>
         <div class="landscape"></div>
         <div id="task-view" class="drive-in">
             <div id="task-view-card" class="task-view-card"></div>
@@ -272,9 +292,12 @@
                         <img src="./assets/img/desktop/add_subtask.svg">
                     </a>
                 </div>
-                <div class="containers" id="in-progress-container" ondragleave="toggleBorder(event,false)"
-                    ondragenter="toggleBorder(event,true)" ondrop="drop(event, 'in-progress')"
+                <div class="containers" id="in-progress-container" 
+                    ondragleave="toggleBorder(event,false)"
+                    ondragenter="toggleBorder(event,true)" 
+                    ondrop="drop(event, 'in-progress')"
                     ondragover="allowDrop(event)">
+
                 </div>
             </div>
             <div>

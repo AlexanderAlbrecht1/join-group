@@ -322,15 +322,16 @@ function setStyle(id) {
  * 
  */
 function resizeContainer() {
-   let container=document.querySelector(".mbb").querySelector(".containers");   
-   let psc= (document.querySelector(".mbb").scrollHeight-0)+"px";
+   let mbb=document.querySelectorAll(".mbb")[1];
+   let container=mbb.querySelector(".containers");   
+   let psc= (mbb.scrollHeight-0)+"px";
    let height="100%";
 
    if (window.getComputedStyle(container).flexDirection != "column") {
       psc="";
       height="";
    }
-   document.querySelector(".mbb").height=height;
+   mbb.height=height;
    for (let id of statusList) {
       document.getElementById(`${id}-container`).style.height=psc;
    }

@@ -26,7 +26,6 @@
     <link rel="stylesheet" href="./css/category.css" />
     <link rel="stylesheet" href="./css/kanbanMedia.css" />
     <link rel="stylesheet" href="./css/landscape.css" />
-    <link rel="stylesheet" href="./css/touchEvent.css" />
 
     <script src="./js/stdio.js"></script>
     <script src="./js/firebase.js"></script>
@@ -47,9 +46,27 @@
     <script src="./js/touchEvent.js"></script>
 </head>
 
-<body onload="init()" style="overflow: hidden;">
+<body onload="init()">
     <div class="relative">
-        <div id="touch-card" class="mbb touch-container"></div>
+        <div id="touch-card" style="
+            position:absolute;
+            top:0;
+            left:0;
+            z-index:6;
+            box-sizing: border-box;
+    width: 252px;
+    padding: 16px;
+    gap: 24px;
+    border-radius: 24px;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 1);
+    transform-origin: bottom left;
+    transition: 100ms ease-in-out;
+    cursor: pointer;
+
+            "></div>
         <div class="landscape"></div>
         <div id="task-view" class="drive-in">
             <div id="task-view-card" class="task-view-card"></div>

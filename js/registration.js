@@ -129,7 +129,6 @@ async function register() {
     if (!isFormValid) return;
     if (!isEqualPassword()) return;
     let userList = await getUserList();
-    console.log(userList);
     if (existUser(userList)) return;
     await msgfly();
     await addUserToList(userList);

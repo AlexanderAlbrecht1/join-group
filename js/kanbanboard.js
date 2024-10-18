@@ -345,7 +345,6 @@ function resizeContainer() {
  * @param {event} e - drag event
  */
 function hideNoTaskInfo(e) {
-   console.log(e.target)
    let parent=e.target.parentElement;
    if (parent.childElementCount == 1) {
       parent.classList.remove("hidden");

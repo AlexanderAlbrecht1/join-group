@@ -274,7 +274,6 @@ function showRequiredText() {
 function noSubmit(event,key) {
    doNotSubmit=false
    if (event.code == key && event.target.tagName== "INPUT") {
-      console.log("noSubmit");
       if (event.target.classList.contains("input-subtask")) {
          addSubtasks(event);
          doNotSubmit=true;

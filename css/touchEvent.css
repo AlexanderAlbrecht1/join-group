@@ -2,20 +2,20 @@
     position:absolute;
     top:0;
     left:0;
-    z-index:6;
     cursor: pointer;
     height: auto;
     margin:0;
     padding:0;
     overflow:visible;
-    z-index: 2;
 }
-.touch-overflow {
-    width: 100vw;
-    height: 100vh;
+
+#touch-overflow {
+    position: fixed;
     overflow: hidden;
-    position: absolute;
-    top:0;
     left:0;
-    background-color:blue;
+    right:0;
+    top:0;
+    bottom:0;
+    z-index: 2;
+    pointer-events: none;
 }

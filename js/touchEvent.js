@@ -6,7 +6,6 @@ let touchHighlight = null;
 function startTouch(event) {  
     originalItem=event.target.closest(".card");
     cloneItem = originalItem.cloneNode(true);
-    // document.getElementById("touch-card").appendChild(cloneItem);
     document.getElementById("touch-card").replaceChildren(cloneItem);
     draggingItem=document.getElementById("touch-card");
     initialX = event.touches[0].clientX;
@@ -16,6 +15,8 @@ function startTouch(event) {
     draggingItem.style.top=offsetY+"px";
     draggingItem.style.left=offsetX+"px";
     document.getElementById("touch-card").classList.remove("d-none");
+    document.getElementById("touch-overflow").style.zIndex=2;
+    
 
 }
 
@@ -53,7 +54,6 @@ function markTouchedContainer(event) {
  */
 function getTargetElement(event) {
     const touch = event.changedTouches[0];
-    // const touchedElement = document.elementFromPoint(touch.clientX, touch.clientY);
     draggingItem.style.pointerEvents = "none";
     let targetElement=document.elementFromPoint(touch.clientX, touch.clientY);
     draggingItem.style.pointerEvents = "auto";

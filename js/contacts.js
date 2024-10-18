@@ -116,6 +116,7 @@ async function addNewContact() {
    await loadContacts();
    document.getElementById(`contact${id}`).click();
    closeMobileDialogBackground();
+   document.getElementById('msgBox').innerHTML = 'Contact succesfully created';
    await msgfly();
 }
 
@@ -181,6 +182,8 @@ async function deleteContact(id) {
       backToContactBook();
       }
    }
+   document.getElementById('msgBox').innerHTML = 'Contact succesfully deleted';
+   await msgfly();
 }
 
 

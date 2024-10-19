@@ -268,6 +268,5 @@ async function deleteTask(id) {
     tasks.splice(i,1);
     addContainerData(tasks,status);
     closeTaskView();
-
     msgfly();
 }

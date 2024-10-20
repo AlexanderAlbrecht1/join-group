@@ -179,11 +179,11 @@ async function deleteContact(id) {
    } else {
       deleteSafeReload(index, id, tasks);
       if (width <= 840) {
-      backToContactBook();
+         backToContactBook();
+         document.getElementById('msgBox').innerHTML = 'Contact succesfully deleted';
+         await msgfly();
       }
    }
-   document.getElementById('msgBox').innerHTML = 'Contact succesfully deleted';
-   await msgfly();
 }
 
 

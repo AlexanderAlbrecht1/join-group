@@ -148,9 +148,7 @@ async function removeUser(userList, index) {
     userList.splice(index, 1); // Remove User self 
     saveData("user", userList);
     clearLocalStorage();
-    sessionDestroy();
-    clearLoginFields();
-    msgBox(`Your data is completely deleted! Sorry to loose you !`);
+    sessionDestroy();;
 }
 
 

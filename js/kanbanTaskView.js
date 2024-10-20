@@ -266,7 +266,7 @@ async function deleteTask(id) {
     let i=tasks.findIndex(e => e.id==id);
     let status=tasks[i].status;
     tasks.splice(i,1);
-
     addContainerData(tasks,status);
     closeTaskView();
+    msgfly();
 }

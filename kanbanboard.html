@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="./css/kanbanMedia.css" />
     <link rel="stylesheet" href="./css/landscape.css" />
     <link rel="stylesheet" href="./css/touchEvent.css" />
+    <link rel="stylesheet" href="./css/msgfly.css">
 
     <script src="./js/stdio.js"></script>
     <script src="./js/firebase.js"></script>
@@ -45,11 +46,17 @@
     <script src="./js/events.js"></script>
     <script src="./js/date.js"></script>
     <script src="./js/touchEvent.js"></script>
+    <script src="./js/msgfly.js"></script>
 </head>
 
 <body onload="init()" style="overflow: hidden;">
     <div class="relative">
-        <div id="touch-overflow"><div id="touch-card" class="mbb touch-container"></div></div>
+        <div id="msgfly">
+            <div class="msgfly">Task deleted</div>
+        </div>
+        <div id="touch-overflow">
+            <div id="touch-card" class="mbb touch-container"></div>
+        </div>
         <div class="landscape"></div>
         <div id="task-view" class="drive-in">
             <div id="task-view-card" class="task-view-card"></div>
@@ -226,7 +233,7 @@
                 </div>
             </div>
             <div>
-                
+
             </div>
             <div class="todos">
                 <div class="todo">
@@ -271,10 +278,8 @@
                         <img src="./assets/img/desktop/add_subtask.svg">
                     </a>
                 </div>
-                <div class="containers" id="in-progress-container" 
-                    ondragleave="toggleBorder(event,false)"
-                    ondragenter="toggleBorder(event,true)" 
-                    ondrop="drop(event, 'in-progress')"
+                <div class="containers" id="in-progress-container" ondragleave="toggleBorder(event,false)"
+                    ondragenter="toggleBorder(event,true)" ondrop="drop(event, 'in-progress')"
                     ondragover="allowDrop(event)">
 
                 </div>

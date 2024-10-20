@@ -1,26 +1,7 @@
-.Xmsgbox {
-   height: 100vh;
-   width: 100vw;
-   top: 0;
-   left: 0;
-   right: 0;
-   bottom: 0;
-   z-index: 9999;
-   background-color: blue;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   position: fixed;
-   display: none;
-}
-
-
-
 a {
    color: white;
    text-decoration: none;
 }
-
 
 
 .displayNone {
@@ -28,11 +9,9 @@ a {
 }
 
 
-
 .overflowHidden {
    overflow: hidden;
 }
-
 
 
 .warningHeadline {
@@ -51,7 +30,6 @@ a {
 }
 
 
-
 .wrapperHeading {
    display: flex;
    align-items: flex-start;
@@ -59,7 +37,6 @@ a {
    width: 100%;
    margin-right: 16px;
 }
-
 
 
 .warpperArrowLeft {
@@ -74,11 +51,9 @@ a {
 }
 
 
-
 .warpperArrowLeft:hover {
    cursor: pointer;
 }
-
 
 
 .heading {
@@ -86,7 +61,6 @@ a {
    align-items: center;
    gap: 16px;
 }
-
 
 
 .heading h1 {
@@ -97,12 +71,10 @@ a {
 }
 
 
-
 .headingLineDesktop {
    border-right: 3px solid rgba(41, 171, 226, 1);
    height: 59px;
 }
-
 
 
 .heading span {
@@ -119,14 +91,12 @@ a {
 }
 
 
-
 .name {
    display: flex;
    flex-direction: row;
    height: 120px;
    gap: 54px;
 }
-
 
 
 .detailMonogramSpan {
@@ -143,7 +113,6 @@ a {
 }
 
 
-
 .fullNameAndButtons {
    display: flex;
    flex-direction: column;
@@ -151,17 +120,16 @@ a {
 }
 
 
-
 .fullname {
    margin-right: 8px;
 }
-
 
 
 .fullname>span {
    font-weight: 500;
    font-size: 47px;
 }
+
 
 .contactInformation {
    margin-top: 21px;
@@ -172,13 +140,11 @@ a {
 }
 
 
-
 .contactInformation>span {
    font-size: 20px;
    font-weight: 400;
    line-height: 24px;
 }
-
 
 
 .emailAndPhone {
@@ -190,7 +156,6 @@ a {
 }
 
 
-
 .emailAdressContainer,
 .phoneNumberContainer {
    display: flex;
@@ -198,7 +163,6 @@ a {
    height: 53px;
    justify-content: space-between;
 }
-
 
 
 .emailAdressContainer>a {
@@ -209,13 +173,11 @@ a {
 }
 
 
-
 .spanHeading {
    height: 19px;
    font-size: 16px !important;
    font-weight: 700 !important;
 }
-
 
 
 .phoneNumberContainer>a {
@@ -225,7 +187,6 @@ a {
 }
 
 
-
 .emailspan {
    height: 19px;
    font-size: 16px;
@@ -233,11 +194,11 @@ a {
 }
 
 
-
 .phoneSpan {
    height: 19px;
    font-size: 16px;
 }
+
 
 /*
 ******contactbook area******
@@ -249,7 +210,6 @@ a {
    width: 456px;
    height: 100%;
 }
-
 
 
 .contactBook {
@@ -264,7 +224,6 @@ a {
 }
 
 
-
 .contactsOverview {
    display: flex;
    flex-direction: column;
@@ -274,7 +233,6 @@ a {
 }
 
 
-
 .groupLetter {
    width: 352px;
    height: 58px;
@@ -282,7 +240,6 @@ a {
    display: flex;
    align-items: center;
 }
-
 
 
 .groupLetter span {
@@ -295,7 +252,6 @@ a {
 }
 
 
-
 .breakingLineContainer {
    display: flex;
    align-items: center;
@@ -304,12 +260,10 @@ a {
 }
 
 
-
 .breakingLine {
    border-bottom: 1px solid rgba(209, 209, 209, 1);
    width: 352px;
 }
-
 
 
 .contact {
@@ -323,12 +277,10 @@ a {
 }
 
 
-
 .contact:not(.contactActive):hover {
    cursor: pointer;
    background-image: linear-gradient(#F0F0F0, #F9F9F9);
 }
-
 
 
 .contactActive {
@@ -336,7 +288,6 @@ a {
    background-color: rgba(42, 54, 71, 1) !important;
    color: rgba(255, 255, 255, 1) !important;
 }
-
 
 
 .monogrammicon {
@@ -351,12 +302,10 @@ a {
 }
 
 
-
 .nameAndMail {
    display: flex;
    flex-direction: column;
 }
-
 
 
 .nameOverviev {
@@ -366,7 +315,6 @@ a {
 }
 
 
-
 .mailOverviewContainer {
    white-space: nowrap;
    overflow: hidden;
@@ -374,7 +322,6 @@ a {
    text-overflow: ellipsis;
    color: rgba(0, 124, 238, 1);
 }
-
 
 
 .mailOverview {
@@ -387,7 +334,12 @@ a {
 }
 
 
-
 .scrollWrapper {
    width: 100%;
+}
+
+
+.mailOverviewContainer:hover {
+   text-align: left;
+   direction:rtl;
 }

@@ -1,7 +1,9 @@
 /**
  * 
- * @param {element} element 
- * @returns 
+ * Check Top Level Domain
+ * 
+ * @param {string} url - url of the input mail
+ * @returns - true if the TLD exists, false if not 
  */
 function isTLDAvailable(url) {
     let splitted_url=url.toLowerCase().split(".");

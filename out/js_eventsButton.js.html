@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: js/date.js</title>
+    <title>JSDoc: Source: js/eventsButton.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: js/date.js</h1>
+    <h1 class="page-title">Source: js/eventsButton.js</h1>
 
     
 
@@ -27,77 +27,71 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
+ * Design the Submit button 
+ * and give it the possiblility of Press or not (enable/disable)
  * 
- * Gived Back the Text of Greeting generated from hour of day
- *      0 = "hello", wrong hour
- *      1 = "Good Morning" 5 - 11
- *      2 = "Good Afternoon 12 - 17
- *      3 = "Good Evening" 18-21
- *      4 = "Good Night" 22-4
- *  
- * @param {int} greetingPos - Returns the Greeting Text
- * @returns - The Greeting Text of the Time we have 
+ * @param {bool} submit - input is changed to false or tru (elemnt form interface)
  */
-function getGreeting(greetingPos=getGreetingPos()) {
-    let text=[
-        "Hello",
-        "Good Morning",
-        "Good Afternoon",
-        "Good Evening",
-        "Good Night"
-    ];
-    if (greetingPos&lt;0 || greetingPos>4) greetingPos=0;
-    return text[greetingPos];
+function disableCheck(submit, id = "submit") {
+    let button = document.getElementById(id)
+    if (button == null) return
+    if (submit) {
+        enableButton(button);
+    } else
+        if (!button.disabled) {
+            disableButton(button);
+        }
 }
 
 
 /**
  * 
- * Get the  time position for greeting of the hour we have
- * Yes, some oversized check is in here
+ * PUBLIC 
  * 
- * @returns - time position  
- *      0 = "hello", wrong hour
- *      1 = "Good Morning" 5 - 11
- *      2 = "Good Afternoon 12 - 17
- *      3 = "Good Evening" 18-21
- *      4 = "Good Night" 22-4
+ * Disables the Button
+ * 
+ * @param {element} button - elementof the button to disable/enable
  */
-function getGreetingPos() {
-    let heute = new Date();
-    let d=heute.getHours();    
-    switch (true) {
-        case (d>23):
-            return 0; // Hello
-        case (d&lt;=4):
-        case (d>=22):
-            return 4; // Good Night
-        case (d&lt;12):  
-            return 1; // Good Morning
-        case (d&lt;18): 
-            return 2; // Good Afternoon
-        case (d&lt;22): 
-            return 3; // Good Evening
-        default:
-            return 0; //Hello
-    }
+function disableButton(button) {
+    button.disabled = true;
+    button.classList.add("disable");
+    button.style.cursor = "not-allowed";
+    button.style.backgroundColor = "#A0A0A0";
 }
 
 
 /**
  * 
- * PUBLIC
+ * PUBLIC 
  * 
- * Disable to select a Date before today
+ * Enable the Button
  * 
- * changes the Element 
- * 
- * @param {element} element HTML - Element to set the min Date
+ * @param {element} button - elementof the button to disable/enable
  */
-function setMinDate(element) {
-    let today = new Date().toISOString().split('T')[0];
-    element.setAttribute('min', today);
-}</code></pre>
+function enableButton(button) {
+    button.disabled = false;
+    button.classList.remove("disable");
+    button.style.color = "";
+    button.style.filter = "";
+    button.style.cursor = "pointer";
+    button.style.backgroundColor = "";
+}
+
+
+/**
+ * 1. check if all fields are valid
+ * 2. if valid Submit Button is enabled otherwise disabled an greyed out
+ * 
+ * @param {array} list - List of ids in the interface 
+ */
+function sendButton(event, list) {
+    let submit = inputFilled(list);
+    disableCheck(submit);
+    addValidationMessage(event.target);
+}
+
+
+</code></pre>
         </article>
     </section>
 

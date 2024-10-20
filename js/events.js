@@ -220,7 +220,6 @@ function isFormValid(formqs) {
  * 
  * Enables the Red Border on wrong input fields
  * @param {string} formqs - Query Selector like #test or .test 
- * @returns 
  */
 function enableRedBorder(formqs) {
     let form = document.querySelector(formqs);
@@ -238,7 +237,6 @@ function enableRedBorder(formqs) {
  * 
  * Disables the Red Border on wrong input fields
  * @param {string} formqs - Query Selector like #test or .test 
- * @returns 
  */
 function disableRedBorder(formqs) {
     let form = document.querySelector(formqs);

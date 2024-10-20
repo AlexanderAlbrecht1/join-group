@@ -197,7 +197,7 @@ function addContactHTML() {
                   <input 
                      id="email" 
                      type="mail" 
-                     required pattern="[\-A-Za-z0-9_][\-A-Za-z0-9_.][\-A-Za-z0-9]+@[\-A-Za-z0-9][\-A-Za-z0-9_]+\.[A-Za-z]{2,4}" 
+                     required pattern="(?!.*\\.\\.)[\\-A-Za-z0-9_][\\-A-Za-z0-9_\\.]+[\\-A-Za-z0-9]@[\\-A-Za-z0-9][\\-A-Za-z0-9_]+\\.[A-Za-z]{2,4}" 
                      title="Format: user.name@domain.com" 
                      placeholder="Email">
                   <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>

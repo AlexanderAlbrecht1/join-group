@@ -142,7 +142,6 @@ function moveTouch(event) {
  * Mak the overtouched Container and disable that scrolling
  * 
  * @param {event} event - touchmove  
- * @returns 
  */
 function markTouchedContainer(event) {
     if (event == null) {
@@ -163,8 +162,12 @@ function markTouchedContainer(event) {
 
 /**
  * 
+ * PRIVATE
+ * 
+ * gets the Container of the Card the event is triggert
+ * 
  * @param {event} event touchend - Release Touch screen 
- * @returns 
+ * @returns - targetElemen . Container of all Cards
  */
 function getTargetElement(event) {
     const touch = event.changedTouches[0];

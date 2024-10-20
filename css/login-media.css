@@ -15,6 +15,19 @@
 }
 
 @media screen and (max-height:800px) {
+    @keyframes logo-position {
+        0% {
+        }
+
+
+        100% {
+            width: auto; 
+            height: 60px;
+            left: 40px;
+            top: 50px;
+        }
+    }
+
     .login-master>div:nth-child(1) {
         height: 20px;
     }
@@ -23,7 +36,7 @@
     .login-master>div:nth-child(3) {
         padding-bottom: 8px;
         height: 40px;
-        align-items: flex-start;
+        /*  align-items: flex-start; */
     }
 
 
@@ -36,6 +49,9 @@
     .login-headline>div {
         width: 100px;
     } 
+    .login-master {
+        min-height:800px;
+    }
 }  
 
 
@@ -48,6 +64,20 @@
     .login-master>div>div {
         visibility: hidden !important;
     }
+
+    @keyframes logo-position {
+        0% {
+        }
+
+
+        100% {
+            width: auto; 
+            height: 60px;
+            left: 40px;
+            top: 50px;
+        }
+    }
+
 }
 
 
@@ -72,3 +102,4 @@
         gap: 16px;     
     }
 }
+

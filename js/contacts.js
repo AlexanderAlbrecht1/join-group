@@ -178,12 +178,14 @@ async function deleteContact(id) {
       createWarningPopUp(id, index);
    } else {
       deleteSafeReload(index, id, tasks);
+      document.getElementById('msgBox').innerHTML = 'Contact succesfully deleted';
+      await msgfly();
       if (width <= 840) {
-      backToContactBook();
+         backToContactBook();
+         document.getElementById('msgBox').innerHTML = 'Contact succesfully deleted';
+         await msgfly();
       }
    }
-   document.getElementById('msgBox').innerHTML = 'Contact succesfully deleted';
-   await msgfly();
 }
 
 

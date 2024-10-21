@@ -258,16 +258,30 @@ function createEditContactDialogMobileHTML(array) {
             </div>
             <form class="form-input" onsubmit="saveEditedContact(${array.id});return false;">
                <div class="input-container invalid">
-                  <input id="name" type="text" required placeholder="Name">
-                  <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
+                  <!-- <input id="name" type="text" required placeholder="Name">
+                  <span class="icon"><img src="./assets/img/desktop/person.svg"></span> -->
+                  <input id="name" type="text" required pattern="^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)*$" placeholder="Name">
+                  <span class="icon"><img src="./assets/img/desktop/person.svg"></span>   
+                  <span class="error-msg visible"></span>
                </div>
                <div class="input-container invalid">
-                  <input id="email" type="email" required placeholder="Email">
+                  <!-- <input id="email" type="email" required placeholder="Email">
+                  <span class="icon"><img src="./assets/img/desktop/letter.svg"></span> -->
+                  <input 
+                     id="email" 
+                     type="mail" 
+                     required pattern="(?!.*\\.\\.)[\\-A-Za-z0-9_][\\-A-Za-z0-9_\\.]+[\\-A-Za-z0-9]@[\\-A-Za-z0-9][\\-A-Za-z0-9_]+\\.[A-Za-z]{2,4}" 
+                     title="Format: user.name@domain.com" 
+                     placeholder="Email">
                   <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
+                  <span class="error-msg visible"></span>
                </div>
                <div  class="input-container invalid">
-                  <input id="phone" type="tel" pattern="[0-9]*" maxlength="20" required placeholder="Phone">
+                  <!-- <input id="phone" type="tel" pattern="[0-9]*" maxlength="20" required placeholder="Phone">
+                  <span class="icon"><img src="./assets/img/desktop/phone.svg"></span> -->
+                  <input id="phone" type="tel" required pattern="[0-9+]*" maxlength="20" placeholder="Phone">
                   <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
+                  <span class="error-msg visible"></span>
                </div>
                <div class="editContactbuttons">
                   <div class="deleteButton" onclick="deleteContact(${array.id})">

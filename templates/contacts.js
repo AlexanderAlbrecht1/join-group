@@ -256,13 +256,13 @@ function createEditContactDialogMobileHTML(array) {
             <div class="close" onclick="closeContactCreation(), closeMobileDialogBackground()">
                <img src="/assets/img/desktop/close.svg" alt="">
             </div>
-            <form id:="edit-contact-form" class="edit-input" onsubmit="saveEditedContact(${array.id});return false;" onload="removeEvent();return false" id="editContactCard" class="editContactCard">
-               <div class="input-container invalid">
+            <form id="add-contact-form" class="form-input" onsubmit="saveEditedContact(${array.id});return false;" onload="removeEvent();return false" id="editContactCard" class="editContactCard">
+               <div class="input-container">
                   <input id="name" type="text" required pattern="^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)*$" placeholder="Name">
                   <span class="icon"><img src="./assets/img/desktop/person.svg"></span>   
                   <span class="error-msg visible"></span>
                </div>
-               <div class="input-container invalid email">
+               <div class="input-container email">
                <input 
                      id="email" 
                      type="mail" 
@@ -272,7 +272,7 @@ function createEditContactDialogMobileHTML(array) {
                   <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
                   <span class="error-msg visible"></span>
                </div>
-               <div  class="input-container invalid">
+               <div  class="input-container">
                   <input id="phone" type="tel" required pattern="[0-9+]*" maxlength="20" placeholder="Phone">
                   <span class="icon"><img src="./assets/img/desktop/phone.svg"></span>
                   <span class="error-msg visible"></span>
@@ -281,7 +281,7 @@ function createEditContactDialogMobileHTML(array) {
                   <div class="deleteButton" onclick="deleteContact(${array.id})">
                      <span>Delete </span>
                   </div>
-                  <button onmousedown="validateForm('edit-contact-form')" class="safeEditContactButton" type="submit" >
+                  <button onmousedown="validateForm('add-contact-form')" class="safeEditContactButton" type="submit" >
                      <span>Save</span>
                      <div class="checkSVGContainer">
                      </div>

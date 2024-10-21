@@ -197,7 +197,7 @@ function addContactHTML() {
                   <input 
                      id="email" 
                      type="mail" 
-                     required pattern="(?!.*\\.\\.)[\\-A-Za-z0-9_][\\-A-Za-z0-9_\\.]+[\\-A-Za-z0-9]@[\\-A-Za-z0-9][\\-A-Za-z0-9_]+\\.[A-Za-z]{2,4}" 
+                     required pattern="(?![._\\-])(?!.*\\.\\.)[\\-A-Za-z0-9_]*[\\-A-Za-z0-9_\\.]*[A-Za-z0-9]+@[\\-A-Za-z0-9][\\-A-Za-z0-9_]+\\.[A-Za-z]{2,4}" 
                      title="Format: user.name@domain.com" 
                      placeholder="Email">
                   <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
@@ -261,8 +261,13 @@ function createEditContactDialogMobileHTML(array) {
                   <input id="name" type="text" required placeholder="Name">
                   <span class="icon"><img src="./assets/img/desktop/person.svg"></span>
                </div>
-               <div class="input-container invalid">
-                  <input id="email" type="email" required placeholder="Email">
+               <div class="input-container invalid email">
+               <input 
+                     id="email" 
+                     type="mail" 
+                     required pattern="(?![._\\-])(?!.*\\.\\.)[\\-A-Za-z0-9_]*[\\-A-Za-z0-9_\\.]*[A-Za-z0-9]+@[\\-A-Za-z0-9][\\-A-Za-z0-9_]+\\.[A-Za-z]{2,4}" 
+                     title="Format: user.name@domain.com" 
+                     placeholder="Email">
                   <span class="icon"><img src="./assets/img/desktop/letter.svg"></span>
                </div>
                <div  class="input-container invalid">

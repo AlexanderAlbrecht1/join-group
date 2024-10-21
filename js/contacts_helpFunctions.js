@@ -182,6 +182,7 @@ function openEditContactDialogMobile(id) {
     document.getElementById('email').value = inventoryData.mail;
     document.getElementById('phone').value = inventoryData.phone;
     editContactContainer.style.cssText = 'animation: slideIn .3s ease-out; animation-fill-mode: forwards;';
+    addFormListener("#add-contact-form");
 }
 
 

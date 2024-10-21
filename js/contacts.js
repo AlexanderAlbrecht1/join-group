@@ -273,12 +273,16 @@ async function saveEditedContact(id) {
    let index = getCurrentContact(id);
    let newContact = createNewContactObject(id);
    contacts.splice(index, 1);
-   await saveContacts();
+   // await saveContacts();
    contacts.push(newContact);
-   await saveContacts();
+   // await saveContacts();
+   await saveData("Contacts", contacts);
    clearInput();
    closeContactCreation();
    await displayContacts();
+   await loadContacts();
    document.getElementById(`contact${id}`).click();
    closeMobileDialogBackground();
+   document.getElementById('msgBox').innerHTML = 'Contact succesfully created';
+   await msgfly();
 }  

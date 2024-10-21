@@ -181,7 +181,8 @@ async function deleteContact(id) {
       document.getElementById('msgBox').innerHTML = 'Contact succesfully deleted';
       await msgfly();
       if (width <= 840) {
-         backToContactBook();
+         document.getElementById('contactBook').style.display = 'flex';
+         document.getElementById('workingArea').style.display = 'flex';;
          document.getElementById('msgBox').innerHTML = 'Contact succesfully deleted';
          await msgfly();
       }

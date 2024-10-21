@@ -214,6 +214,7 @@ function showHiddenDialog() {
 function backToContactBook() {
     document.getElementById('contactBook').style.display = 'flex';
     document.getElementById('workingArea').style.display = 'flex';
+    document.getElementById('mobileButton').style.display = 'none';
 }
 
 

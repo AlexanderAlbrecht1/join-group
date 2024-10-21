@@ -339,7 +339,13 @@ function getNewContactData(id) {
     let fullname = newName.value;
     let splittedName = fullname.split(' ');
     let newFirstname = splittedName[0];
-    let newLastname = splittedName[1];
+    // let newLastname = splittedName[1];
+    let newLastname
+    if (splittedName[1] == null) {
+        newLastname = ' '
+    } else {
+        newLastname = splittedName[1]
+    };
     let color = generateDarkColor();
     let newContact = {
         id: id,
@@ -367,7 +373,13 @@ function createNewContactObject(id) {
     let fullname = newName.value;
     let splittedName = fullname.split(' ');
     let newFirstname = splittedName[0];
-    let newLastname = splittedName[1];
+    // let newLastname = splittedName[1];
+    let newLastname
+    if (splittedName[1] == null) {
+        newLastname = ' '
+    } else {
+        newLastname = splittedName[1]
+    };
     let index = getCurrentContact(id);
     let color = contacts[index].color
     let newContact = {
@@ -380,3 +392,4 @@ function createNewContactObject(id) {
     }
     return newContact;
  }
+ 

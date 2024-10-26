@@ -41,7 +41,7 @@ details summary {
 
 details summary::after {
    content: "";
-   background-image: url("./assets/img/desktop/dropdown.svg");
+   background-image: url("../assets/img/desktop/dropdown.svg");
    background-repeat: no-repeat;
    background-position: center center;
    display: inline-block;
@@ -151,12 +151,12 @@ details .selectors {
 
 
 .selector .custom-checkbox~.checkbox-design>img {
-   content: url("assets/img/desktop/unchecked.svg");
+   content: url("../assets/img/desktop/unchecked.svg");
 }
 
 
 .selector .custom-checkbox:checked~.checkbox-design>img {
-   content: url("assets/img/desktop/checked.svg");
+   content: url("../assets/img/desktop/checked.svg");
 }
 
 

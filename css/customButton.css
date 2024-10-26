@@ -100,17 +100,17 @@ input[type="radio"] {
 
 
 .priority input[type="radio"]:checked + .button-label.urgent img {
-   content: url("/assets/img/desktop/prio_urgent_white.svg");
+   content: url("../assets/img/desktop/prio_urgent_white.svg");
 }
 
 
 .priority input[type="radio"]:checked + .button-label.low img {
-   content: url("/assets/img/desktop/prio_low_white.svg");
+   content: url("../assets/img/desktop/prio_low_white.svg");
 }
 
 
 .priority input[type="radio"]:checked + .button-label.medium img {
-   content: url("/assets/img/desktop/prio_medium_white.svg");
+   content: url("../assets/img/desktop/prio_medium_white.svg");
 }
 
 

@@ -27,7 +27,7 @@
 
  
 .selectBox::after {
-    content: url("/assets/img/desktop/assign_to_arrow.svg");
+    content: url("../assets/img/desktop/assign_to_arrow.svg");
     color: #2a3647;
     position: absolute;
     right: 20px;

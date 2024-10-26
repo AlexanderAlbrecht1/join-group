@@ -92,17 +92,17 @@ input[type="radio"]:checked + .button-label.urgent {
 
 
 input[type="radio"]:checked + .button-label.urgent img {
-   content: url("/assets/img/desktop/prio_urgent_white.svg");
+   content: url("../assets/img/desktop/prio_urgent_white.svg");
 }
 
 
 input[type="radio"]:checked + .button-label.low img {
-   content: url("/assets/img/desktop/prio_low_white.svg");
+   content: url("../assets/img/desktop/prio_low_white.svg");
 }
 
 
 input[type="radio"]:checked + .button-label.medium img {
-   content: url("/assets/img/desktop/prio_medium_white.svg");
+   content: url("../assets/img/desktop/prio_medium_white.svg");
 }
 
 
@@ -253,12 +253,12 @@ textarea {
 
 
 .whitebutton:hover > img {
-   content: url("/assets/img/desktop/clear-task-icon-blue.svg");
+   content: url("../assets/img/desktop/clear-task-icon-blue.svg");
 }
 
 
 .whitebutton:active > img {
-   content: url("/assets/img/desktop/clear-task-icon-black.svg");
+   content: url("../assets/img/desktop/clear-task-icon-black.svg");
 }
 
 

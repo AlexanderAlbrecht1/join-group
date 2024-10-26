@@ -19,7 +19,7 @@
 .editButtonMobile>div {
     width: 24px;
     height: 24px;
-    background-image: url('/assets/img/desktop/pencil.svg');
+    background-image: url('../assets/img/desktop/pencil.svg');
     background-size: 24px 24px;
 }
 
@@ -38,7 +38,7 @@
 
 
 .editButton:hover div {
-    background-image: url('/assets/img/desktop/pencil_hover.svg');
+    background-image: url('../assets/img/desktop/pencil_hover.svg');
 }
 
 
@@ -54,7 +54,7 @@
 .trashButtonMobile>div {
     width: 24px;
     height: 24px;
-    background-image: url('/assets/img/desktop/trash.svg');
+    background-image: url('../assets/img/desktop/trash.svg');
     background-size: 16px 18px;
     background-repeat: no-repeat;
     background-position: center;
@@ -62,7 +62,7 @@
 
 
 .trashButton:hover div {
-    background-image: url(/assets/img/desktop/trash_hover.svg);
+    background-image: url('../assets/img/desktop/trash_hover.svg');
 }
 
 
@@ -87,7 +87,7 @@
     height: 56px;
     border-radius: 100%;
     background-color: rgba(42, 54, 71, 1);
-    background-image: url("/assets/img/desktop/3_dots_vertical.svg");
+    background-image: url("../assets/img/desktop/3_dots_vertical.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 5px 21px;
@@ -101,7 +101,7 @@
     height: 56px;
     border-radius: 100%;
     background-color: rgba(42, 54, 71, 1);
-    background-image: url("/assets/img/desktop/person_add.svg");
+    background-image: url("../assets/img/desktop/person_add.svg");
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -217,7 +217,7 @@
 
 
 .cancelButton:hover .cancelSVGContainer {
-    background: url('/assets/img/desktop/close_blue.svg');
+    background: url('../assets/img/desktop/close_blue.svg');
     background-size: 10px 10px;
     background-repeat: no-repeat;
     background-position: center;
@@ -247,7 +247,7 @@
     justify-content: center;
     width: 24px;
     height: 24px;
-    background: url('/assets/img/desktop/close.svg');
+    background: url('../assets/img/desktop/close.svg');
     background-size: 10px 10px;
     background-repeat: no-repeat;
     background-position: center;
@@ -314,7 +314,7 @@
     justify-content: center;
     width: 24px;
     height: 24px;
-    background: url('/assets/img/desktop/check.svg');
+    background: url('../assets/img/desktop/check.svg');
     background-size: 15px 11px;
     background-repeat: no-repeat;
     background-position: center;

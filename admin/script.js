@@ -12,7 +12,7 @@ function reset() {
 
 function saveUser() {
     let ul = [
-        {user:"guest",password:"",email:"donotrespond@nodomain.tld"},
+        {user:"guest",password:"",email:"donotreply@nodomain.tld"},
         {user:"Joerg",password:"abc",email:"mail@joergdeymann.de"}
     ]; // Create Guest User 1
     saveData("user",ul); //Create Userlist
@@ -191,5 +191,6 @@ function saveTasks() {
           } 
     ];
     
-    saveData("Tasks",tasks); //Create Userlist
+    // saveData("Tasks",tasks); //Create Userlist
+    saveData("taskstorage",tasks); //Create Userlist
 }

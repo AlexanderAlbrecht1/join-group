@@ -1,0 +1,42 @@
+
+Profil: Jörg Deymann
+====================
+
+1. Entwurf:
+===========
+Hallo, mein Name ist Jörg Deymann und bin 51 Jahre alt.
+Ich habe ausser der Leichtathlethik und das Darten noch ein Hobby.
+Diese Hobby ist das Programmieren, welches ich zu meinen Job machen möchte.
+In meiner Firma setzte ich bereits mit PHP, MYSQL, HTML Bereiche im Backend 
+und in Frontend ein. Ein Rechnungsprogramm ist bereits enstanden und eine 
+eigebe Projektverwaltung, die mit diesem Rechnungsprogramm interagiert ist 
+gerade in arbeit. Die Ausbildung zum Fachinformatiker Fachrichtung Informatik und 
+die Ausbildung in der Developer Akademie sollen meine Fähigkeiten weiter stärken.
+Hier haben wir im Team ein Kanban Projekt erarbeitet nach einer Vorlage namens figma.
+Unser Team hat in einer sehr guten Zusammengearbeitet ein schönes JOIN erstellt.
+Das JOIN ist in Javascript und HTML mit einer firebase als Datenbank geschrieben und es 
+arbeitet mit Sessions und Cookies.
+Wir konnten mehr erfahren über Projektstart, Aufteilung der Arbeiten und Abläufe, wie 
+ein Team funktioniert. Das hat uns zusammengeschweist, und gerne würden wir auch das 
+nächste Projekt zusammen erarbeiten.
+
+2. Entwurf:  nach chatgpt überprüfung und änderungen meinersits
+==============================================================
+Hallo, mein Name ist Jörg Deymann, ich bin 51 Jahre alt.
+Neben der Leichtathletik und dem Darten habe ich noch ein weiteres Hobby: das Programmieren. 
+Dieses Hobby möchte ich zu meinem Beruf machen.
+
+In meiner Firma setze ich bereits Technologien wie PHP, MySQL, HTML im Backend und Frontend ein. 
+Ein Rechnungsprogramm habe ich bereits entwickelt, und aktuell arbeite ich an einer eigenen Projektverwaltung, 
+die mit diesem Rechnungsprogramm interagiert.
+
+Die Ausbildung zum Fachinformatiker in der Fachrichtung Informatik sowie die Weiterbildung an der Developer 
+Akademie sollen meine Fähigkeiten weiter ausbauen. Dort haben wir im Team ein Kanban-Projekt auf Basis einer 
+Vorlage in Figma erarbeitet.
+
+Unser Team hat hervorragend zusammengearbeitet und ein ansprechendes JOIN erstellt. Dieses wurde mit 
+JavaScript und HTML entwickelt und verwendet Firebase als Datenbank. Es arbeitet mit Sessions und Cookies.
+
+Durch dieses Projekt haben wir wertvolle Erfahrungen gesammelt: vom Projektstart über die Arbeitsaufteilung 
+bis hin zu den Abläufen in einem funktionierenden Team. Diese Zusammenarbeit hat uns zusammengeschweißt.
+Ein weiteres Project in diesem Team zu realisieren, wäre eine Freude für mich.

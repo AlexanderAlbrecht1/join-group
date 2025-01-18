@@ -40,3 +40,16 @@ JavaScript und HTML entwickelt und verwendet Firebase als Datenbank. Es arbeitet
 Durch dieses Projekt haben wir wertvolle Erfahrungen gesammelt: vom Projektstart über die Arbeitsaufteilung 
 bis hin zu den Abläufen in einem funktionierenden Team. Diese Zusammenarbeit hat uns zusammengeschweißt.
 Ein weiteres Project in diesem Team zu realisieren, wäre eine Freude für mich.
+
+Entwurf für Alexander
+=====================
+Eine sehr aktiver Partner in dem Team, mit konstruktiven Ideen. Die Umsetzung war schnell und zuverlässig.
+Wer Alexander im Team hat, kann sich darauf verlassen, dass das Projekt gelingt und gut wird.
+Ich hatte viel Spass mit ihm zu programmieren, und würde jederzeit wieder und gerne wieder in einem Team mit ihm gehen.
+
+
+Ein sehr aktiver Partner im Team, der mit konstruktiven Ideen überzeugt. Seine Umsetzungen waren schnell und zuverlässig.
+Wer Alexander im Team hat, kann sicher sein, dass das Projekt nicht nur gelingt, sondern auch gut wird.
+
+Die Zusammenarbeit mit ihm hat mir großen Spaß gemacht, und ich würde jederzeit wieder gerne in einem Team mit ihm arbeiten.
+
